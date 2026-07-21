@@ -156,7 +156,7 @@ PIP.worlds.grove = function () {
             makeLiftRideable();
             PIP.challenge.complete({
               title: 'The lift is fixed!',
-              maths: '8 = 8      double 4 = 8',
+              maths: '8 = 8  ·  double 4 = 8',
               text: 'Same number of teeth means the same speed. The little 4-tooth gear span DOUBLE-fast, the big one only HALF. You found the match!',
               speak: 'Eight teeth equals eight teeth. Same teeth, same speed — a perfectly gentle lift. And remember: double four is eight!'
             }).then(function () {

@@ -101,12 +101,7 @@ PIP.builder = (function () {
     state.cfg.scene.add(m);
     slot.placed = { partId: partId, mesh: m };
     state.stock[partId]--;
-    if (state.stock[partId] <= 0 && state.selected === partId) {
-      // keep selection if more remain, else deselect
-      state.selected = null;
-      for (var i = 0; i < state.cfg.parts.length; i++)
-        if (state.stock[state.cfg.parts[i].id] > 0 && state.cfg.parts[i].id === partId) state.selected = partId;
-    }
+    if (state.stock[partId] <= 0 && state.selected === partId) state.selected = null;
     PIP.audio.play('place');
     if (slot.onPlace) slot.onPlace(partId);
     renderPalette(); updateGhosts();
@@ -144,19 +139,25 @@ PIP.builder = (function () {
     pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
 
-    // raycast placed parts (for removal) AND visible ghosts (for placement),
-    // then act on whichever the tap actually landed on first
+    // Mistake-proof modes: while a part card is held, taps can ONLY place
+    // (a near-miss never yanks out a piece you already placed). With the
+    // card put down, taps take placed parts back.
     var placedMeshes = [];
     state.cfg.slots.forEach(function (s) { if (s.placed) placedMeshes.push(s.placed.mesh); });
-    var placedHits = raycaster.intersectObjects(placedMeshes, true);
-    var ghostHits = raycaster.intersectObjects(state.ghosts.filter(function (g) { return g.visible; }), true);
-    var pd = placedHits.length ? placedHits[0].distance : Infinity;
-    var gd = (ghostHits.length && state.selected) ? ghostHits[0].distance : Infinity;
-    if (gd < pd) {
-      var g = ghostHits[0].object;
-      while (g && !g.userData.slotId) g = g.parent;
-      if (g) { place(slotById(g.userData.slotId), state.selected); return true; }
+    if (state.selected) {
+      var ghostHits = raycaster.intersectObjects(state.ghosts.filter(function (g) { return g.visible; }), true);
+      if (ghostHits.length) {
+        var g = ghostHits[0].object;
+        while (g && !g.userData.slotId) g = g.parent;
+        if (g) { place(slotById(g.userData.slotId), state.selected); return true; }
+      }
+      if (raycaster.intersectObjects(placedMeshes, true).length) {
+        PIP.narrate.callout('Tap the part card again to put it down — then you can take pieces back.');
+        return true;
+      }
+      return false;
     }
+    var placedHits = raycaster.intersectObjects(placedMeshes, true);
     if (placedHits.length) {
       var obj = placedHits[0].object;
       for (var i = 0; i < state.cfg.slots.length; i++) {
@@ -175,7 +176,8 @@ PIP.builder = (function () {
   function update(dt) {
     if (!state) return;
     state.time += dt;
-    var pulse = 0.85 + Math.sin(state.time * 4) * 0.18;
+    // pulse outwards only, so the clickable area never shrinks below full size
+    var pulse = 1.08 + Math.sin(state.time * 4) * 0.12;
     state.ghosts.forEach(function (g) { if (g.visible) g.scale.setScalar(pulse); });
   }
 

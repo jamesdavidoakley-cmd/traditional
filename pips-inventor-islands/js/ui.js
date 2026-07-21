@@ -65,14 +65,13 @@ PIP.ui = (function () {
       showLine();
     });
   }
-  var lineToken = 0;
   function showLine() {
     var text = dlg.lines[dlg.idx];
     U.setText('dlg-text', text);
     U.setText('dlg-next', dlg.idx < dlg.lines.length - 1 ? 'Tap ▶' : 'Tap ✔');
     PIP.audio.play('talk');
-    var tok = ++lineToken;
     PIP.narrate.stop();
+    PIP.narrate.hideSubtitle(); // the dialogue box IS the caption
     PIP.narrate.say(text, { sub: false });
   }
   function advanceDialogue() {

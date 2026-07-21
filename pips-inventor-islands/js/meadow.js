@@ -410,7 +410,7 @@ PIP.worlds.meadow = function () {
     PIP.builder.start({
       scene: world.group,
       parts: parts, slots: slots,
-      tip: 'Tap a part card, then tap a glowing spot. Tap a placed part to take it back.',
+      tip: 'Pick a part card, then tap a glowing spot! Put the card down to take parts back.',
       allowBack: true,
       canTest: function () {
         var c = PIP.builder.counts();
@@ -439,7 +439,7 @@ PIP.worlds.meadow = function () {
             PIP.player.state.frozen = false;
             PIP.challenge.complete({
               title: 'The bridge is strong!',
-              maths: '6 + 4 = 10      4 + 4 = 8',
+              maths: '6 + 4 = 10  ·  4 + 4 = 8',
               text: 'Ten planks across, eight blocks in two towers, and triangles to make it stiff. Three Berrybacks crossed safely!',
               speak: 'Six planks plus four planks made ten. Four blocks and four blocks made two strong towers. Your triangles made it stiff. Bridge built!'
             }).then(function () {

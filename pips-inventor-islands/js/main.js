@@ -80,6 +80,7 @@
   function gotoWorld(id) {
     if (switching) return Promise.resolve();
     switching = true;
+    if (PIP.builder.isActive()) PIP.builder.cancel();
     PIP.challenge.abandon();
     PIP.ui.clearGoal();
     PIP.narrate.stop();

@@ -1,3 +1,10 @@
+# 🎮 Games in this repo
+
+- **🐷 Pig Sports** — this folder's `index.html` (below).
+- **🍃 Pip's Inventor Islands** — a 3D platform-adventure that teaches Year 1
+  maths and Design & Technology: open `pips-inventor-islands/index.html`
+  (see `pips-inventor-islands/README.md`).
+
 # 🐷 PIG SPORTS 🎾🏀
 
 *Grand Slam Trotters & Slam Dunk Hams — made for Max!*

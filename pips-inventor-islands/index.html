@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Pip's Inventor Islands 🍃🔧</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍃</text></svg>">
+<style>
+  :root{
+    --leaf:#67d97a; --leaf-dark:#2fa457; --sky:#8fd8ff; --cream:#fffbef; --ink:#23404f;
+    --sun:#ffd257; --berry:#ff7fb0; --wood:#c98d5a; --cog:#8fa3ff; --panel:rgba(18,42,54,.82);
+    --ui-radius:24px; --font-size-base:clamp(15px,2vw,19px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{width:100%;height:100%;overflow:hidden;background:#123043}
+  body{font-family:"Arial Rounded MT Bold","Quicksand","Trebuchet MS","Comic Sans MS",system-ui,sans-serif;
+    color:var(--cream);user-select:none;-webkit-user-select:none;font-size:var(--font-size-base)}
+  body.big-text{--font-size-base:clamp(18px,2.6vw,24px)}
+  #app{position:fixed;inset:0}
+  #game-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hidden{display:none !important}
+  button{font-family:inherit}
+
+  /* ---------- shared panels & buttons ---------- */
+  .panel{background:var(--panel);border:3px solid rgba(255,255,255,.16);border-radius:var(--ui-radius);
+    padding:22px 28px;backdrop-filter:blur(6px);box-shadow:0 18px 50px rgba(0,0,0,.5);
+    max-width:min(860px,94vw);text-align:center}
+  body.high-contrast .panel{background:rgba(0,0,0,.94);border-color:#fff}
+  .btn{cursor:pointer;border:none;font-weight:bold;color:#fff;
+    font-size:1.15em;padding:13px 34px;border-radius:999px;letter-spacing:.5px;
+    background:linear-gradient(180deg,#7ee48e,#2fa457);box-shadow:0 5px 0 #1c7a3d,0 12px 24px rgba(0,0,0,.4);
+    transition:transform .08s ease,box-shadow .08s ease;text-shadow:0 2px 3px rgba(0,0,0,.3)}
+  .btn:hover{transform:translateY(-2px) scale(1.03)}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 #1c7a3d,0 5px 12px rgba(0,0,0,.4)}
+  .btn.blue{background:linear-gradient(180deg,#7fb8ff,#3e6fd0);box-shadow:0 5px 0 #274a97,0 12px 24px rgba(0,0,0,.4)}
+  .btn.blue:active{box-shadow:0 2px 0 #274a97,0 5px 12px rgba(0,0,0,.4)}
+  .btn.sun{background:linear-gradient(180deg,#ffdf7e,#f0a72c);box-shadow:0 5px 0 #b0741a,0 12px 24px rgba(0,0,0,.4);color:#5b3d07;text-shadow:none}
+  .btn.sun:active{box-shadow:0 2px 0 #b0741a,0 5px 12px rgba(0,0,0,.4)}
+  .btn.small{font-size:.9em;padding:8px 20px}
+  .btn.ghost{background:rgba(255,255,255,.12);box-shadow:0 4px 0 rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.35)}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+  body.reduced-motion *{animation:none !important;transition:none !important}
+
+  /* ---------- title screen ---------- */
+  .screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:16px;padding:20px;z-index:40;overflow-y:auto}
+  #title-screen{background:linear-gradient(180deg,#7fd0ff 0%,#b8ecc9 70%,#8fdd9d 100%)}
+  h1.logo{font-size:clamp(38px,8vw,84px);line-height:1.05;text-align:center;letter-spacing:1px;
+    background:linear-gradient(180deg,#2fa457 0%,#1c7a3d 55%,#0f5c2b 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 4px 0 rgba(255,255,255,.7)) drop-shadow(0 10px 20px rgba(20,80,40,.35));
+    animation:bob 3.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-.5deg)}50%{transform:translateY(-7px) rotate(.5deg)}}
+  .tagline{color:#1b5a37;font-size:1.1em;text-align:center;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+  #title-pip{font-size:clamp(60px,12vw,120px);animation:bob 2.6s ease-in-out infinite}
+
+  /* ---------- loading ---------- */
+  #loading{z-index:60;background:#123043}
+  .spin-leaf{font-size:64px;animation:spinleaf 1.6s ease-in-out infinite}
+  @keyframes spinleaf{0%{transform:rotate(0)}50%{transform:rotate(180deg) scale(1.15)}100%{transform:rotate(360deg)}}
+
+  /* ---------- HUD ---------- */
+  #hud{position:absolute;inset:0;pointer-events:none;z-index:20}
+  #hud .pill{background:rgba(18,42,54,.72);border:2px solid rgba(255,255,255,.22);border-radius:999px;
+    padding:7px 16px;display:flex;align-items:center;gap:8px;font-weight:bold;font-size:1.05em;
+    text-shadow:0 2px 3px rgba(0,0,0,.5)}
+  body.high-contrast #hud .pill{background:rgba(0,0,0,.92);border-color:#fff}
+  #hud-topleft{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  #hud-topright{position:absolute;top:12px;right:12px;display:flex;gap:8px;pointer-events:auto}
+  .icon-btn{pointer-events:auto;cursor:pointer;width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,.3);
+    background:rgba(18,42,54,.78);color:#fff;font-size:26px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 0 rgba(0,0,0,.35)}
+  .icon-btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.35)}
+  body.high-contrast .icon-btn{background:#000;border-color:#fff}
+
+  #goal-banner{position:absolute;top:12px;left:50%;transform:translateX(-50%);max-width:min(640px,86vw);
+    background:rgba(18,42,54,.8);border:2px solid rgba(255,215,90,.65);border-radius:18px;padding:9px 14px;
+    display:flex;align-items:center;gap:10px;pointer-events:auto;text-shadow:0 2px 3px rgba(0,0,0,.5)}
+  body.high-contrast #goal-banner{background:rgba(0,0,0,.94)}
+  #goal-text{font-weight:bold;font-size:1em;line-height:1.25}
+  #goal-banner .mini{cursor:pointer;flex:none;width:40px;height:40px;border-radius:50%;border:none;font-size:20px;
+    background:rgba(255,255,255,.16);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.3)}
+  #goal-banner .mini:active{transform:translateY(2px);box-shadow:none}
+  #hint-btn{background:linear-gradient(180deg,#ffdf7e,#f0a72c) !important;color:#5b3d07 !important}
+
+  #prompt{position:absolute;bottom:24%;left:50%;transform:translateX(-50%);
+    background:rgba(18,42,54,.85);border:2px solid rgba(255,255,255,.35);border-radius:999px;
+    padding:10px 22px;font-weight:bold;font-size:1.15em;display:flex;align-items:center;gap:10px;
+    text-shadow:0 2px 3px rgba(0,0,0,.5);animation:promptpulse 1.4s ease-in-out infinite}
+  @keyframes promptpulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.05)}}
+  #prompt .key{background:var(--sun);color:#5b3d07;border-radius:10px;padding:2px 10px;font-size:.95em;text-shadow:none}
+
+  #subtitle{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);max-width:min(760px,92vw);
+    background:rgba(10,20,28,.82);border-radius:16px;padding:10px 18px;text-align:center;font-size:1.1em;
+    line-height:1.35;text-shadow:0 2px 3px rgba(0,0,0,.6);z-index:26;pointer-events:none}
+  body.high-contrast #subtitle{background:#000;border:2px solid #fff}
+
+  #toast-zone{position:absolute;top:80px;right:14px;display:flex;flex-direction:column;gap:10px;align-items:flex-end;z-index:30;pointer-events:none}
+  .toast{background:rgba(18,42,54,.9);border:2px solid var(--sun);border-radius:16px;padding:10px 16px;
+    font-weight:bold;display:flex;gap:10px;align-items:center;animation:toastin .35s ease;max-width:78vw}
+  @keyframes toastin{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+
+  /* ---------- dialogue ---------- */
+  #dialogue{position:absolute;left:50%;transform:translateX(-50%);bottom:14px;width:min(720px,94vw);z-index:32;
+    background:var(--panel);border:3px solid rgba(255,255,255,.2);border-radius:22px;padding:14px 18px 12px;cursor:pointer}
+  body.high-contrast #dialogue{background:rgba(0,0,0,.95);border-color:#fff}
+  #dlg-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  #dlg-face{width:52px;height:52px;flex:none;border-radius:50%;background:#3a5a4a;display:flex;align-items:center;justify-content:center;font-size:30px;border:2px solid rgba(255,255,255,.3)}
+  #dlg-name{font-weight:bold;color:var(--sun);font-size:1.05em}
+  #dlg-text{font-size:1.15em;line-height:1.4;min-height:2.6em}
+  #dlg-foot{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+  #dlg-replay{cursor:pointer;border:none;border-radius:999px;padding:6px 14px;background:rgba(255,255,255,.14);color:#fff;font-size:.9em}
+  #dlg-next{color:var(--sun);font-weight:bold;animation:promptpulse 1.2s ease-in-out infinite;font-size:1em}
+
+  /* ---------- challenge / number picker ---------- */
+  #challenge-panel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:34;width:min(680px,94vw)}
+  #ch-question{font-size:1.35em;font-weight:bold;line-height:1.35;margin-bottom:12px}
+  #ch-visual{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0 16px;font-size:30px;min-height:40px}
+  #ch-visual .dot{width:34px;height:34px;border-radius:50%;background:var(--sun);box-shadow:inset 0 -6px 0 rgba(0,0,0,.18)}
+  #ch-visual .dot.empty{background:transparent;border:3px dashed rgba(255,255,255,.55)}
+  #ch-options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .num-btn{cursor:pointer;width:76px;height:76px;border-radius:22px;border:none;font-size:34px;font-weight:bold;color:#fff;
+    background:linear-gradient(180deg,#7fb8ff,#3e6fd0);box-shadow:0 6px 0 #274a97,0 10px 20px rgba(0,0,0,.4);
+    font-family:inherit;transition:transform .08s}
+  .num-btn:hover{transform:translateY(-3px) scale(1.05)}
+  .num-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #274a97}
+  .num-btn.correct{background:linear-gradient(180deg,#7ee48e,#2fa457);box-shadow:0 6px 0 #1c7a3d}
+  .num-btn.dim{opacity:.35;pointer-events:none}
+
+  /* ---------- summary card ---------- */
+  #summary-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:36}
+  #sum-title{font-size:1.6em;color:var(--sun);margin-bottom:8px}
+  #sum-maths{font-size:2.2em;font-weight:bold;letter-spacing:2px;margin:10px 0;
+    background:rgba(255,255,255,.1);border-radius:16px;padding:10px 18px;display:inline-block}
+  #sum-text{font-size:1.15em;line-height:1.4;max-width:540px;margin:0 auto}
+  #sum-stars{font-size:40px;margin-top:6px;letter-spacing:6px}
+
+  /* ---------- builder ---------- */
+  #builder-ui{position:absolute;left:0;right:0;bottom:0;z-index:28;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px}
+  #builder-tip{background:rgba(18,42,54,.85);border-radius:14px;padding:7px 16px;font-weight:bold;pointer-events:none;max-width:92vw;text-align:center}
+  #palette{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;pointer-events:none;max-width:96vw}
+  .part-card{cursor:pointer;width:104px;border-radius:18px;padding:8px 6px;text-align:center;border:3px solid rgba(255,255,255,.2);
+    background:rgba(18,42,54,.85);transition:transform .1s,border-color .1s;pointer-events:auto}
+  .part-card:hover{transform:translateY(-4px)}
+  .part-card.selected{border-color:var(--sun);background:rgba(60,70,30,.9);transform:translateY(-4px)}
+  .part-card.empty{opacity:.35;pointer-events:none}
+  .part-icon{font-size:34px;line-height:1.2}
+  .part-name{font-size:.78em;font-weight:bold;line-height:1.15;margin-top:2px}
+  .part-count{margin-top:3px;font-size:.85em;color:var(--sun);font-weight:bold}
+  #builder-btns{display:flex;gap:10px;pointer-events:none;flex-wrap:wrap;justify-content:center}
+  #builder-btns .btn{pointer-events:auto}
+
+  /* ---------- big menus ---------- */
+  .menu-screen{position:absolute;inset:0;z-index:44;background:rgba(10,24,34,.72);display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+  .menu-screen .panel{max-height:92vh;overflow-y:auto}
+  h2.menu-title{font-size:1.7em;color:var(--sun);margin-bottom:12px}
+  .setting-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 4px;
+    border-bottom:1px solid rgba(255,255,255,.12);text-align:left}
+  .setting-row label{font-weight:bold;font-size:1em}
+  .setting-row input[type=range]{width:150px;accent-color:var(--sun)}
+  .switch{cursor:pointer;width:64px;height:34px;border-radius:999px;border:none;background:#43565f;position:relative;transition:background .15s}
+  .switch::after{content:"";position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:50%;background:#fff;transition:left .15s}
+  .switch.on{background:var(--leaf-dark)}
+  .switch.on::after{left:34px}
+  select{font-family:inherit;font-size:1em;border-radius:10px;padding:6px 10px;border:none;background:#2c4654;color:#fff;font-weight:bold}
+
+  /* map panel */
+  .world-row{display:flex;align-items:center;gap:12px;padding:10px 6px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left}
+  .world-row .w-icon{font-size:34px;flex:none}
+  .world-row .w-name{font-weight:bold;font-size:1.05em}
+  .world-row .w-info{font-size:.85em;color:#cfe3d8}
+  .world-row .w-ticks{margin-left:auto;font-size:1.2em;letter-spacing:3px;flex:none}
+
+  /* ---------- adult area ---------- */
+  #adult-hold-ring{width:110px;height:110px;border-radius:50%;margin:12px auto;border:6px solid rgba(255,255,255,.25);
+    display:flex;align-items:center;justify-content:center;font-size:40px;position:relative}
+  #adult-hold-fill{position:absolute;inset:-6px;border-radius:50%;border:6px solid var(--sun);
+    clip-path:polygon(50% 0,50% 0,50% 0,50% 0);pointer-events:none}
+  #adult-check-input{font-size:1.5em;width:120px;text-align:center;border-radius:12px;border:none;padding:8px;font-family:inherit}
+  .adult-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+  .adult-tab{cursor:pointer;border:none;border-radius:999px;padding:8px 18px;font-weight:bold;font-size:.95em;
+    background:rgba(255,255,255,.12);color:#fff}
+  .adult-tab.on{background:var(--sun);color:#5b3d07}
+  .concept-row{display:flex;justify-content:space-between;gap:10px;padding:7px 4px;border-bottom:1px solid rgba(255,255,255,.1);text-align:left;align-items:center}
+  .concept-row .c-state{font-weight:bold;padding:3px 12px;border-radius:999px;font-size:.85em;flex:none}
+  .c-state.secure{background:#2fa457}
+  .c-state.developing{background:#3e6fd0}
+  .c-state.practising{background:#8a6d3b}
+  .c-state.ready{background:#9b59b6}
+  .adult-note{font-size:.9em;color:#cfe3d8;text-align:left;line-height:1.4;margin:8px 0}
+
+  /* ---------- touch controls ---------- */
+  #touch-ui{position:absolute;inset:0;z-index:24;pointer-events:none}
+  #joy{position:absolute;left:26px;bottom:26px;width:150px;height:150px;border-radius:50%;
+    background:rgba(255,255,255,.1);border:3px solid rgba(255,255,255,.25);pointer-events:auto}
+  #joy-knob{position:absolute;left:45px;top:45px;width:60px;height:60px;border-radius:50%;
+    background:rgba(255,255,255,.4);border:3px solid rgba(255,255,255,.6)}
+  .touch-btn{position:absolute;width:82px;height:82px;border-radius:50%;border:3px solid rgba(255,255,255,.4);
+    background:rgba(18,42,54,.6);color:#fff;font-size:15px;font-weight:bold;pointer-events:auto;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+  .touch-btn .tb-ico{font-size:26px}
+  #btn-jump{right:26px;bottom:40px}
+  #btn-act{right:122px;bottom:110px}
+  #btn-grab{right:36px;bottom:150px}
+
+  #fader{position:absolute;inset:0;background:#0a141c;z-index:50;pointer-events:none;opacity:0;transition:opacity .5s}
+  body.reduced-motion #fader{transition:opacity .12s}
+  #fader.dark{opacity:1;pointer-events:auto}
+  .center-col{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .tiny-note{font-size:.8em;color:#bcd6c9}
+  #title-screen .tiny-note{color:#1b5a37;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="game-canvas"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div id="hud-topleft">
+      <div class="pill" id="seed-pill"><span>🌟</span><span id="seed-count">0</span></div>
+      <div class="pill" id="core-pill"><span>💡</span><span id="core-icons">○○○○○</span></div>
+    </div>
+    <div id="goal-banner" class="hidden">
+      <button class="mini" id="goal-replay" title="Hear the goal again">🔊</button>
+      <div id="goal-text"></div>
+      <button class="mini" id="hint-btn" title="Hint">💛</button>
+    </div>
+    <div id="hud-topright">
+      <button class="icon-btn" id="map-btn" title="Progress map">🗺️</button>
+      <button class="icon-btn" id="pause-btn" title="Pause">⏸️</button>
+    </div>
+    <div id="prompt" class="hidden"><span class="key" id="prompt-key">E</span><span id="prompt-text">Talk</span></div>
+  </div>
+
+  <div id="touch-ui" class="hidden">
+    <div id="joy"><div id="joy-knob"></div></div>
+    <button class="touch-btn" id="btn-jump"><span class="tb-ico">🦘</span>JUMP</button>
+    <button class="touch-btn" id="btn-act"><span class="tb-ico">✋</span>DO</button>
+    <button class="touch-btn" id="btn-grab"><span class="tb-ico">🌿</span>VINE</button>
+  </div>
+
+  <div id="subtitle" class="hidden"></div>
+  <div id="toast-zone"></div>
+
+  <!-- dialogue -->
+  <div id="dialogue" class="hidden">
+    <div id="dlg-head"><div id="dlg-face">🪨</div><div id="dlg-name">Professor Pebble</div></div>
+    <div id="dlg-text"></div>
+    <div id="dlg-foot">
+      <button id="dlg-replay">🔊 Say it again</button>
+      <div id="dlg-next">Tap ▶</div>
+    </div>
+  </div>
+
+  <!-- number challenge -->
+  <div id="challenge-panel" class="panel hidden">
+    <div id="ch-question"></div>
+    <div id="ch-visual"></div>
+    <div id="ch-options"></div>
+  </div>
+
+  <!-- summary card -->
+  <div id="summary-card" class="panel hidden">
+    <div id="sum-stars">⭐</div>
+    <div id="sum-title">You did it!</div>
+    <div><span id="sum-maths"></span></div>
+    <div id="sum-text"></div>
+    <div class="btn-row"><button class="btn sun" id="sum-ok">Hooray!</button></div>
+  </div>
+
+  <!-- builder -->
+  <div id="builder-ui" class="hidden">
+    <div id="builder-tip">Pick a part, then tap a glowing spot!</div>
+    <div id="palette"></div>
+    <div id="builder-btns">
+      <button class="btn small sun" id="build-test">▶ Test it!</button>
+      <button class="btn small ghost" id="build-reset">↺ Start again</button>
+      <button class="btn small blue hidden" id="build-back">🚪 Step away</button>
+    </div>
+  </div>
+
+  <!-- pause menu -->
+  <div id="pause-menu" class="menu-screen hidden"><div class="panel center-col">
+    <h2 class="menu-title">Paused 🍃</h2>
+    <button class="btn" id="pm-resume">▶ Keep playing</button>
+    <button class="btn blue" id="pm-instructions">🔊 What do I do?</button>
+    <button class="btn blue" id="pm-settings">⚙️ Settings</button>
+    <button class="btn blue" id="pm-village">🏡 Back to the Village</button>
+    <button class="btn ghost small" id="pm-adult">🔒 Grown-up area</button>
+  </div></div>
+
+  <!-- settings -->
+  <div id="settings-panel" class="menu-screen hidden"><div class="panel" style="width:min(560px,94vw)">
+    <h2 class="menu-title">Settings ⚙️</h2>
+    <div class="setting-row"><label>🎵 Music volume</label><input type="range" id="set-music" min="0" max="100" value="60"></div>
+    <div class="setting-row"><label>🔔 Sound effects</label><input type="range" id="set-sfx" min="0" max="100" value="80"></div>
+    <div class="setting-row"><label>🗣️ Spoken voice</label><button class="switch on" id="set-voice"></button></div>
+    <div class="setting-row"><label>💬 Subtitles</label><button class="switch on" id="set-subtitles"></button></div>
+    <div class="setting-row"><label>🔍 Big text</label><button class="switch" id="set-bigtext"></button></div>
+    <div class="setting-row"><label>◐ High contrast</label><button class="switch" id="set-contrast"></button></div>
+    <div class="setting-row"><label>🐢 Reduce motion</label><button class="switch" id="set-motion"></button></div>
+    <div class="setting-row"><label>🎥 Helpful camera</label><button class="switch on" id="set-assistcam"></button></div>
+    <div class="setting-row"><label>🐦 Character chatter</label><button class="switch on" id="set-chatter"></button></div>
+    <div class="btn-row"><button class="btn" id="set-done">Done ✔</button></div>
+  </div></div>
+
+  <!-- progress map -->
+  <div id="map-panel" class="menu-screen hidden"><div class="panel" style="width:min(620px,94vw)">
+    <h2 class="menu-title">Pip's Progress Map 🗺️</h2>
+    <div id="map-rows"></div>
+    <div class="btn-row"><button class="btn" id="map-done">Back to playing ▶</button></div>
+  </div></div>
+
+  <!-- adult gate -->
+  <div id="adult-gate" class="menu-screen hidden"><div class="panel center-col" style="width:min(480px,94vw)">
+    <h2 class="menu-title">Grown-ups only 🔒</h2>
+    <p>Hold the circle for 3 seconds…</p>
+    <div id="adult-hold-ring">👋<div id="adult-hold-fill"></div></div>
+    <div id="adult-check" class="hidden center-col">
+      <p id="adult-check-q" style="font-size:1.2em;font-weight:bold"></p>
+      <input id="adult-check-input" type="number" inputmode="numeric" placeholder="?">
+      <button class="btn small" id="adult-check-go">Enter</button>
+    </div>
+    <div class="btn-row"><button class="btn ghost small" id="adult-cancel">Back to the game</button></div>
+  </div></div>
+
+  <!-- adult panel -->
+  <div id="adult-panel" class="menu-screen hidden"><div class="panel" style="width:min(720px,96vw);text-align:left">
+    <h2 class="menu-title" style="text-align:center">Grown-up corner 🧑‍🏫</h2>
+    <div class="adult-tabs">
+      <button class="adult-tab on" data-tab="learning">Learning</button>
+      <button class="adult-tab" data-tab="designs">Designs</button>
+      <button class="adult-tab" data-tab="options">Learning options</button>
+      <button class="adult-tab" data-tab="offline">Away from the screen</button>
+    </div>
+    <div id="adult-tab-body"></div>
+    <div class="btn-row"><button class="btn" id="adult-done">Close</button></div>
+  </div></div>
+
+  <!-- title -->
+  <div id="title-screen" class="screen">
+    <div id="title-pip">🍃</div>
+    <h1 class="logo">Pip's<br>Inventor Islands</h1>
+    <p class="tagline">Explore. Count. Build. Test. Make it better!</p>
+    <div class="btn-row">
+      <button class="btn" id="btn-play" style="font-size:1.4em;padding:16px 46px">▶ Play</button>
+      <button class="btn blue hidden" id="btn-new">🌱 Start a new adventure</button>
+    </div>
+    <p class="tiny-note">Move with WASD or arrows · Jump with SPACE · Works with touch too</p>
+    <p class="tiny-note">Made with love for young inventors · No ads, no accounts, saves on this device</p>
+  </div>
+
+  <!-- loading -->
+  <div id="loading" class="screen hidden"><div class="spin-leaf">🍃</div><p>Growing the islands…</p></div>
+
+  <div id="fader"></div>
+</div>
+
+<script src="three.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/save.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/narration.js"></script>
+<script src="js/input.js"></script>
+<script src="js/assets.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/challenge.js"></script>
+<script src="js/builder.js"></script>
+<script src="js/player.js"></script>
+<script src="js/worldkit.js"></script>
+<script src="js/hub.js"></script>
+<script src="js/meadow.js"></script>
+<script src="js/grove.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

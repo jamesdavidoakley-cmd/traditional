@@ -105,6 +105,22 @@ greater challenge* (never clinical grades), hint usage, finished designs, play
 time, offline activity ideas, and learning options (maths/DT emphasis, number
 range, full progress erase).
 
+## Voices
+
+By default the game speaks with your browser's built-in voice — free, private
+and fully offline. Quality varies by browser: **Microsoft Edge** has the most
+natural free voices, Chrome's Google voices are good, Safari's "Enhanced" voices
+are good once downloaded in system settings.
+
+For a **natural, ChatGPT-style storyteller voice**, a grown-up can add an OpenAI
+API key in *Pause → 🔒 Grown-up area → Voice*: paste the key, pick a voice
+(nova, shimmer, fable, …), press Test. It uses OpenAI's neural text-to-speech
+(the same voices ChatGPT uses). Spoken clips are cached in the browser
+(IndexedDB), so repeated lines are instant, replay offline, and cost nothing the
+second time. The key is stored only on the device and sent only to OpenAI; any
+failure (wrong key, offline) silently falls back to the browser voice. Cost is a
+fraction of a penny per new line. The game is fully playable without it.
+
 ## Accessibility
 
 Full voice narration with always-available subtitles, big-text and

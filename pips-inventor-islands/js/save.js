@@ -20,7 +20,9 @@ PIP.save = (function () {
       bigText: false, highContrast: false, reducedMotion: false,
       assistCam: true, chatter: true,
       emphasis: 'balanced',       // 'maths' | 'dt' | 'balanced'
-      numberRange: 'auto'         // 'auto' | 'small' | 'standard' | 'stretch'
+      numberRange: 'auto',        // 'auto' | 'small' | 'standard' | 'stretch'
+      ttsKey: '',                 // optional OpenAI API key for the storyteller voice
+      ttsVoice: 'nova'            // OpenAI voice name
     }
   };
 

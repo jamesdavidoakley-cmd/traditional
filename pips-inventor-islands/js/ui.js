@@ -334,6 +334,49 @@ PIP.ui = (function () {
           PIP.save.reset(); location.reload();
         }
       };
+    } else if (tab === 'voice') {
+      var s = d.settings;
+      body.innerHTML =
+        '<p class="adult-note">By default the game uses your browser’s built-in voice — free, private and works offline. ' +
+        'For a natural, ChatGPT-style storyteller voice, you can add your own OpenAI key below. ' +
+        'Clips are cached on this device, so repeated lines are spoken instantly and cost nothing to replay.</p>' +
+        '<div class="setting-row"><label>Storyteller voice</label><select id="opt-ttsvoice">' +
+        ['nova (warm, bright)', 'shimmer (soft, gentle)', 'fable (storybook)', 'alloy (neutral)', 'coral (friendly)', 'echo (calm)']
+          .map(function (v) { var id = v.split(' ')[0]; return '<option value="' + id + '">' + v + '</option>'; }).join('') +
+        '</select></div>' +
+        '<div class="setting-row"><label>OpenAI API key</label><input id="opt-ttskey" type="password" ' +
+        'placeholder="sk-…" style="width:190px;font-size:.9em;border-radius:10px;border:none;padding:7px 10px;font-family:inherit"></div>' +
+        '<div class="btn-row" style="justify-content:flex-start;gap:10px">' +
+        '<button class="btn small" id="opt-ttstest">🔊 Test voice</button>' +
+        '<button class="btn small ghost" id="opt-ttsclear">Remove key</button></div>' +
+        '<p class="adult-note" id="opt-ttsstatus"></p>' +
+        '<p class="adult-note" style="font-size:.82em;color:#9fb8ab">' +
+        'How to get a key: sign in at platform.openai.com → API keys → “Create new secret key”, then paste it here. ' +
+        'It is stored only in this browser and sent only to OpenAI to make the speech. Typical cost is a fraction of a penny per line, ' +
+        'and cached lines are free. The game stays fully playable without it.</p>';
+      U.el('opt-ttsvoice').value = s.ttsVoice || 'nova';
+      U.el('opt-ttskey').value = s.ttsKey || '';
+      var setStatus = function (msg, ok) {
+        var e = U.el('opt-ttsstatus');
+        e.textContent = msg;
+        e.style.color = ok === true ? '#8ce68a' : ok === false ? '#ffb1a0' : '#cfe3d8';
+      };
+      if (s.ttsKey) setStatus('Storyteller voice is on. Press Test to hear it.', true);
+      U.el('opt-ttsvoice').onchange = function () { s.ttsVoice = this.value; PIP.save.persist(); };
+      U.el('opt-ttskey').oninput = function () { s.ttsKey = this.value.trim(); PIP.save.persist(); };
+      U.el('opt-ttstest').onclick = function () {
+        if (!s.ttsKey || s.ttsKey.length < 10) { setStatus('Please paste an OpenAI API key first.', false); return; }
+        if (!s.voice) { setStatus('Turn on “Spoken voice” in Settings first.', false); return; }
+        setStatus('Speaking… (first time may take a moment to fetch)');
+        PIP.narrate.testPremium('Hello! I am Pip. Let us count and build together!')
+          .then(function () { setStatus('That is the storyteller voice — lovely! It is now on everywhere in the game.', true); })
+          .catch(function (e) { setStatus('That did not work. Check the key is correct and you are online. (' + (e && e.message ? e.message : 'error') + ')', false); });
+      };
+      U.el('opt-ttsclear').onclick = function () {
+        s.ttsKey = ''; PIP.save.persist();
+        U.el('opt-ttskey').value = '';
+        setStatus('Key removed. Back to the browser voice.', true);
+      };
     } else if (tab === 'offline') {
       body.innerHTML = '<p class="adult-note">Ideas that carry the game’s learning into real life:</p>' +
         ['🍽️ Share out snacks so everyone gets the same amount — then check by counting each plate.',

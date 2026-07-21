@@ -10,12 +10,26 @@ PIP.narrate = (function () {
     if (!window.speechSynthesis) return;
     var vs = speechSynthesis.getVoices();
     if (!vs.length) return;
-    // prefer a friendly UK English voice, fall back to any English
+    // Prefer the most natural-sounding English voice the browser offers.
+    // Modern "Natural" / Google / Enhanced voices sound far better than the
+    // basic local synthesiser, so score and pick the best available.
+    function score(v) {
+      var s = 0, n = (v.name || '').toLowerCase(), l = v.lang || '';
+      if (/^en[-_]gb/i.test(l)) s += 4;
+      else if (/^en/i.test(l)) s += 2;
+      else return -1;
+      if (n.indexOf('natural') !== -1) s += 6;
+      if (n.indexOf('google') !== -1) s += 4;
+      if (n.indexOf('enhanced') !== -1 || n.indexOf('premium') !== -1) s += 4;
+      if (n.indexOf('espeak') !== -1) s -= 3;
+      return s;
+    }
     voice = null;
-    var prefer = ['en-GB', 'en_GB', 'en-'];
-    for (var p = 0; p < prefer.length && !voice; p++)
-      for (var i = 0; i < vs.length; i++)
-        if (vs[i].lang && vs[i].lang.indexOf(prefer[p]) === 0) { voice = vs[i]; break; }
+    var best = -1;
+    for (var i = 0; i < vs.length; i++) {
+      var sc = score(vs[i]);
+      if (sc > best) { best = sc; voice = vs[i]; }
+    }
     voiceLoaded = true;
   }
   if (window.speechSynthesis) {
@@ -50,7 +64,8 @@ PIP.narrate = (function () {
       try {
         var u = new SpeechSynthesisUtterance(text);
         if (voice) u.voice = voice;
-        u.rate = 0.92; u.pitch = 1.12; u.volume = 1;
+        // natural voice: normal pitch, just a touch unhurried for young ears
+        u.rate = 0.95; u.pitch = 1.0; u.volume = 1;
         var done = false;
         var finish = function () { if (!done) { done = true; current = null; resolve(); } };
         u.onend = finish; u.onerror = finish;
@@ -71,7 +86,7 @@ PIP.narrate = (function () {
     try {
       var u = new SpeechSynthesisUtterance(text);
       if (voice) u.voice = voice;
-      u.rate = 1.0; u.pitch = 1.2;
+      u.rate = 1.0; u.pitch = 1.0;
       speechSynthesis.speak(u);
     } catch (e) {}
     showSubtitle(text, 1400);

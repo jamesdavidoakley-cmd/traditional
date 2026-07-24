@@ -159,8 +159,8 @@ PIP.worlds.hub = function () {
   var gatePos = [[-16, 19], [-8, 23.5], [0, 25.5], [8, 23.5], [16, 19]];
   var gateInfo = [
     { id: 'meadow', color: 0xff6f9c, name: 'Numberberry Meadow', icon: '🍓', open: function () { return true; } },
-    { id: 'grove', color: 0x8fa3ff, name: 'Gearleaf Grove', icon: '⚙️', open: function () { return PIP.save.hasCore('meadow'); } },
-    { id: 'harbour', color: 0x62c4e8, name: 'Shape Sail Harbour', icon: '⛵', soon: true },
+    { id: 'grove', color: 0x8fa3ff, name: 'Gearleaf Grove', icon: '⚙️', open: function () { return true; } },
+    { id: 'harbour', color: 0x62c4e8, name: 'Shape Sail Harbour', icon: '⛵', open: function () { return true; } },
     { id: 'mountain', color: 0xd8e8f2, name: 'Measure Mountain', icon: '🏔️', soon: true },
     { id: 'factory', color: 0xffb066, name: 'Patternworks Factory', icon: '🏭', soon: true }
   ];

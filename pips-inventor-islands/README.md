@@ -70,6 +70,9 @@ bridge mends, a villager moves in.
   and opens World 2.
 * 8 Spark Seeds, a ravine bounce-mushroom, chatty Berrybacks.
 
+All five travel gates that have worlds behind them are **open from the start** —
+you can dive straight into any built world without finishing the one before.
+
 ### 🟡 World 2 — Gearleaf Grove — partial (by design, per the build plan)
 * **Mission 1 – Fix the tree lift**: choose a partner gear (4 / 8 / 16 teeth)
   for the 8-tooth drive gear. Wrong choices *run* — double-speed rattling or a
@@ -81,7 +84,21 @@ bridge mends, a villager moves in.
 * Mission 3 (delivery cart), the function-machine tree, and the Grove Idea Core
   are signposted in-world as "still being invented".
 
-### 🚧 Worlds 3–5 (Shape Sail Harbour, Measure Mountain, Patternworks Factory)
+### ✅ World 3 — Shape Sail Harbour — short missions
+A gentle water world of wooden boardwalks (every splash is just a swim — never a
+fall). Three quick missions:
+* **Shape lighthouse**: rebuild it by stacking the right solid shapes — a wide
+  cube base, a cylinder tower, a sphere lamp, a cone roof. *(2D/3D shapes,
+  stable structures — the wide base is why it stays up)*
+* **Captain Shell's boat**: choose a hull material and test it in the water. A
+  stone hull sinks, a sponge soaks up the sea and sinks, wood floats — then
+  count the 4 crates you load. *(material properties, floating, counting)*
+* **Crane directions**: work out how many steps forward the crane must travel to
+  drop its parcel on boat 3, then watch it deliver. *(position & counting-on)*
+* **Hidden**: jump onto the shape with exactly 3 sides. *(shape properties)*
+* **Idea Core** appears once all three missions are done.
+
+### 🚧 Worlds 4–5 (Measure Mountain, Patternworks Factory)
 Designed in the plan, gated in the hub as "still being invented".
 
 ## Learning systems

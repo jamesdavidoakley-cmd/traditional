@@ -152,8 +152,8 @@ PIP.ui = (function () {
 
   var WORLD_INFO = [
     { id: 'meadow', icon: '🍓', name: 'Numberberry Meadow', missions: ['meadow.stones', 'meadow.bridge', 'meadow.picnic'], open: true },
-    { id: 'grove', icon: '⚙️', name: 'Gearleaf Grove', missions: ['grove.lift', 'grove.balance'], needsCore: 'meadow', partial: true },
-    { id: 'harbour', icon: '⛵', name: 'Shape Sail Harbour', missions: [], soon: true },
+    { id: 'grove', icon: '⚙️', name: 'Gearleaf Grove', missions: ['grove.lift', 'grove.balance'], partial: true },
+    { id: 'harbour', icon: '⛵', name: 'Shape Sail Harbour', missions: ['harbour.lighthouse', 'harbour.boat', 'harbour.crane'] },
     { id: 'mountain', icon: '🏔️', name: 'Measure Mountain', missions: [], soon: true },
     { id: 'factory', icon: '🏭', name: 'Patternworks Factory', missions: [], soon: true }
   ];

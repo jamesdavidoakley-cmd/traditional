@@ -221,6 +221,7 @@ PIP.worlds.hub = function () {
   world.addAt(A.makeSign('Jump — then jump again!'), 20, -10.5);
   world.addAt(A.makeSign('Hold JUMP to flutter'), 24.5, -20.5);
   world.addAt(A.makeSign('Q = leaf-vine grab!'), 15, -6);
+  world.addAt(A.makeSign('F = 🍃 spin!  G = ✨ sparkle!'), 19, -16.5);
 
   /* ---------- bonds challenge door ---------- */
   var doorGroup = new THREE.Group();

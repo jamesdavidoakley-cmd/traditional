@@ -7,6 +7,7 @@ PIP.input = (function () {
     moveX: 0, moveZ: 0,
     jumpHeld: false, jumpPressed: false,
     actPressed: false, grabPressed: false, stompPressed: false,
+    twirlPressed: false, sparklePressed: false,
     pausePressed: false,
     camDX: 0, camDY: 0,
     touchMode: false
@@ -20,7 +21,8 @@ PIP.input = (function () {
     up: ['KeyW', 'ArrowUp'], down: ['KeyS', 'ArrowDown'],
     left: ['KeyA', 'ArrowLeft'], right: ['KeyD', 'ArrowRight'],
     jump: ['Space'], act: ['KeyE', 'Enter'], grab: ['KeyQ'],
-    stomp: ['KeyX', 'ControlLeft', 'ControlRight'], pause: ['Escape', 'KeyP']
+    stomp: ['KeyX', 'ControlLeft', 'ControlRight'], pause: ['Escape', 'KeyP'],
+    twirl: ['KeyF'], sparkle: ['KeyG']
   };
   function anyDown(list) { for (var i = 0; i < list.length; i++) if (keys[list[i]]) return true; return false; }
 
@@ -31,6 +33,8 @@ PIP.input = (function () {
       if (KEYMAP.act.indexOf(e.code) !== -1) state.actPressed = true;
       if (KEYMAP.grab.indexOf(e.code) !== -1) state.grabPressed = true;
       if (KEYMAP.stomp.indexOf(e.code) !== -1) state.stompPressed = true;
+      if (KEYMAP.twirl.indexOf(e.code) !== -1) state.twirlPressed = true;
+      if (KEYMAP.sparkle.indexOf(e.code) !== -1) state.sparklePressed = true;
       if (KEYMAP.pause.indexOf(e.code) !== -1) state.pausePressed = true;
     }
     keys[e.code] = true;
@@ -80,6 +84,8 @@ PIP.input = (function () {
       function () { touchJumpHeld = false; });
     bindBtn('btn-act', function () { state.actPressed = true; });
     bindBtn('btn-grab', function () { state.grabPressed = true; });
+    if (U.el('btn-twirl')) bindBtn('btn-twirl', function () { state.twirlPressed = true; });
+    if (U.el('btn-sparkle')) bindBtn('btn-sparkle', function () { state.sparklePressed = true; });
   }
 
   /* ---------- camera drag on the canvas ---------- */
@@ -137,6 +143,7 @@ PIP.input = (function () {
   function endFrame() {
     state.jumpPressed = false; state.actPressed = false; state.grabPressed = false;
     state.stompPressed = false; state.pausePressed = false;
+    state.twirlPressed = false; state.sparklePressed = false;
     state.camDX = 0; state.camDY = 0;
     state.jumpHeld = anyDown(KEYMAP.jump) || touchJumpHeld;
   }

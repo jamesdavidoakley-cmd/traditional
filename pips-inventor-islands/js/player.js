@@ -13,7 +13,8 @@ PIP.player = (function () {
     carrying: null, lastSafe: null, safeT: 0, respawning: false,
     anim: { t: 0, squash: 0, land: 0 },
     cam: { yaw: 0, pitch: 0.42, dist: 8.5, idleT: 0 },
-    frozen: false
+    frozen: false,
+    twirlT: 0, spinExtra: 0, sparkleCooldown: 0, particles: []
   };
 
   function create(scene) {
@@ -32,7 +33,77 @@ PIP.player = (function () {
     p.cam.yaw = (angle || 0) + Math.PI;
     p.lastSafe.copy(p.pos);
     p.grounded = true; p.jumps = 0;
+    p.twirlT = 0; p.spinExtra = 0;
+    clearParticles();     // meshes belong to the old world's scene
     syncMesh(0);
+  }
+
+  /* ---------- just-for-fun abilities (cosmetic only) ----------
+     These delight without helping — they change no positions, unlock no
+     routes and touch no challenge, so a six-year-old can spam them freely. */
+  function scene() { return PIP.game && PIP.game.scene; }
+  function clearParticles() {
+    var s = scene();
+    for (var i = 0; i < p.particles.length; i++) if (s) s.remove(p.particles[i].m);
+    p.particles.length = 0;
+  }
+  function spawnParticle(mesh, vx, vy, vz, life, spin) {
+    var s = scene(); if (!s) return;
+    s.add(mesh);
+    p.particles.push({ m: mesh, vx: vx, vy: vy, vz: vz, life: life, max: life, spin: spin || 0 });
+    if (p.particles.length > 160) { s.remove(p.particles[0].m); p.particles.shift(); }
+  }
+  function updateParticles(dt) {
+    var s = scene();
+    for (var i = p.particles.length - 1; i >= 0; i--) {
+      var q = p.particles[i];
+      q.life -= dt;
+      if (q.life <= 0) { if (s) s.remove(q.m); p.particles.splice(i, 1); continue; }
+      q.vy -= 9 * dt;
+      q.m.position.x += q.vx * dt; q.m.position.y += q.vy * dt; q.m.position.z += q.vz * dt;
+      q.m.rotation.y += q.spin * dt; q.m.rotation.x += q.spin * 0.6 * dt;
+      var k = q.life / q.max;
+      q.m.scale.setScalar(q.baseScale ? q.baseScale * (0.4 + k) : (0.4 + k));
+    }
+  }
+
+  // Ability 1: Leaf Tornado — a joyful spin that flings glittering leaves
+  function doTwirl() {
+    if (p.twirlT > 0.2) return;
+    p.twirlT = 1.0;
+    PIP.audio.play('whoosh');
+    PIP.audio.play('chime');
+    if (PIP.save.settings.chatter) PIP.narrate.callout('Wheee! Leaf tornado!');
+    var A = PIP.assets;
+    for (var i = 0; i < 14; i++) {
+      var leaf = A.makeLeaf(U.rand(0.14, 0.24));
+      var a = i / 14 * Math.PI * 2;
+      leaf.position.set(p.pos.x + Math.cos(a) * 0.4, p.pos.y + 0.6, p.pos.z + Math.sin(a) * 0.4);
+      leaf.rotation.z = a;
+      var part = p.particles;
+      spawnParticle(leaf, Math.cos(a) * U.rand(2, 4), U.rand(3, 6), Math.sin(a) * U.rand(2, 4), U.rand(0.9, 1.4), U.rand(6, 12));
+      part[part.length - 1].baseScale = 1;
+    }
+    if (PIP.save.grantBadge && !PIP.save.data.badges.twirl) { /* not a badge, just fun */ }
+  }
+
+  // Ability 2: Sparkle Burst — a fountain of rainbow sparkles + a happy chime
+  function doSparkle() {
+    if (p.sparkleCooldown > 0) return;
+    p.sparkleCooldown = 0.5;
+    PIP.audio.play('success');
+    if (PIP.save.settings.chatter) PIP.narrate.callout('Sparkle blast!');
+    var A = PIP.assets;
+    var cols = [0xff7fb0, 0xffd257, 0x8fd8ff, 0x9be89b, 0xc9a6ff, 0xff9e6b];
+    for (var i = 0; i < 22; i++) {
+      var col = cols[i % cols.length];
+      var m = new THREE.Mesh(A.GEO.sphere, A.mat(col, { emissive: col, emissiveIntensity: 0.85 }));
+      m.scale.setScalar(0.12);
+      m.position.set(p.pos.x + U.rand(-0.3, 0.3), p.pos.y + 0.5, p.pos.z + U.rand(-0.3, 0.3));
+      spawnParticle(m, U.rand(-3, 3), U.rand(5, 9), U.rand(-3, 3), U.rand(0.8, 1.3), 0);
+      p.particles[p.particles.length - 1].baseScale = 0.12;
+    }
+    p.twirlT = Math.max(p.twirlT, 0.35); // a little happy hop-spin too
   }
 
   /* ---------- ground & collision ---------- */
@@ -99,6 +170,9 @@ PIP.player = (function () {
 
   /* ---------- per-frame ---------- */
   function update(dt, world, inp) {
+    updateParticles(dt);
+    if (p.twirlT > 0) p.twirlT = Math.max(0, p.twirlT - dt);
+    if (p.sparkleCooldown > 0) p.sparkleCooldown = Math.max(0, p.sparkleCooldown - dt);
     if (p.frozen) { syncMesh(dt); return; } // build mode / cutscenes steer the camera themselves
     var s = inp.state;
 
@@ -108,7 +182,8 @@ PIP.player = (function () {
     var yaw = p.cam.yaw;
     var wishX = 0, wishZ = 0;
     if (mag > 0.05) {
-      var ang = Math.atan2(mx, -mz) + yaw + Math.PI;
+      // -mx so screen-left/right match the key pressed (was inverted)
+      var ang = Math.atan2(-mx, -mz) + yaw + Math.PI;
       wishX = Math.sin(ang) * Math.min(1, mag);
       wishZ = Math.cos(ang) * Math.min(1, mag);
       p.facing = U.angleLerp(p.facing, ang, Math.min(1, dt * 12));
@@ -211,10 +286,14 @@ PIP.player = (function () {
   function syncMesh(dt) {
     var g = p.group;
     g.position.copy(p.pos);
-    g.rotation.y = p.facing;
+    // Leaf-Tornado twirl: spin fast on top of the normal facing (cosmetic)
+    var twirlSpin = p.twirlT > 0 ? p.twirlT * p.twirlT * 26 : 0;
+    p.spinExtra = (p.spinExtra + twirlSpin * dt) % (Math.PI * 2);
+    g.rotation.y = p.facing + (p.twirlT > 0 ? p.spinExtra : 0);
     var ud = g.userData;
     var moving = Math.hypot(p.vel.x, p.vel.z) > 0.6;
     var bob = moving && p.grounded ? Math.abs(Math.sin(p.anim.t * 9)) * 0.08 : 0;
+    if (p.twirlT > 0) bob += Math.sin((1 - p.twirlT) * Math.PI) * 0.35; // little hop during the twirl
     g.position.y += bob;
     var squash = 1 + p.anim.squash - (p.anim.land > 0 ? 0.22 * (p.anim.land / 0.28) : 0);
     g.scale.set(1 / Math.sqrt(squash), squash, 1 / Math.sqrt(squash));
@@ -269,6 +348,7 @@ PIP.player = (function () {
   return {
     create: create, update: update, teleport: teleport, supportAt: supportAt,
     carry: carry, drop: drop, setNearInteractable: setNearInteractable,
+    doTwirl: doTwirl, doSparkle: doSparkle,
     get state() { return p; }
   };
 })();

@@ -171,6 +171,9 @@
     if (!busy) {
       scanInteractables();
       if (PIP.input.state.grabPressed && game.world && !PIP.player.state.carrying) game.world.vinePull();
+      // just-for-fun abilities (cosmetic — never gated, never affect challenges)
+      if (PIP.input.state.twirlPressed) PIP.player.doTwirl();
+      if (PIP.input.state.sparklePressed) PIP.player.doSparkle();
       PIP.player.update(dt, game.world, PIP.input);
     } else {
       PIP.ui.hidePrompt();

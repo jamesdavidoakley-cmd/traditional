@@ -58,10 +58,12 @@ PIP.worlds.meadow = function () {
      MISSION 1 — the stepping-stone path
      ===================================================================== */
   var lvl1 = PIP.save.levelFor('counting');
-  var GAP_COUNTS = lvl1 === 0 ? [2, 3, 4] : lvl1 === 2 ? [4, 5, 6] : [3, 4, 5];
+  // two short gaps keep this opening mission quick (spec: ~4 min)
+  var GAP_COUNTS = lvl1 === 0 ? [2, 3] : lvl1 === 2 ? [4, 5] : [3, 4];
+  var GAP_TOTAL = GAP_COUNTS.reduce(function (a, b) { return a + b; }, 0);
   var stonesDone = PIP.save.mission('meadow.stones') === 'done';
   var gaps = [
-    { z: 0, need: GAP_COUNTS[0] }, { z: 9, need: GAP_COUNTS[1] }, { z: -9, need: GAP_COUNTS[2] }
+    { z: 2, need: GAP_COUNTS[0] }, { z: -6, need: GAP_COUNTS[1] }
   ];
   var stoneMissionActive = false;
   var totalPlaced = 0;
@@ -100,8 +102,7 @@ PIP.worlds.meadow = function () {
       [-12, 3], [-14, -3], [-11, 7], [-16, 6], [-12, -8], [-15, -12], [-10, 12], [-18, 1],
       [-13, 14], [-20, -7], [-11, -14], [-17, 11], [-21, 5], [-14, -16]
     ];
-    var totalNeed = GAP_COUNTS[0] + GAP_COUNTS[1] + GAP_COUNTS[2];
-    stoneSpots.slice(0, totalNeed + 2).forEach(function (sp, i) {
+    stoneSpots.slice(0, GAP_TOTAL + 2).forEach(function (sp, i) {
       var st = A.makeStone();
       world.addAt(st, sp[0], sp[1], 0.05);
       var stone = { mesh: st, x: sp[0], z: sp[1], carried: false, used: false };
@@ -174,7 +175,7 @@ PIP.worlds.meadow = function () {
     PIP.save.setMission('meadow.stones', 'done');
     world.clearBeacon();
     var counts = GAP_COUNTS.join(' + ');
-    var total = GAP_COUNTS[0] + GAP_COUNTS[1] + GAP_COUNTS[2];
+    var total = GAP_TOTAL;
     if (PIP.save.grantBadge('counter')) PIP.ui.toast('🔢', 'Inventor Badge: Careful Counter!');
     // Berrybacks celebrate by crossing the stones
     hopBerrybacksAcross();
@@ -944,7 +945,7 @@ PIP.worlds.meadow = function () {
       if (!stonesDone) {
         var left = gaps.reduce(function (a, g) { return a + (g.need - g.filled); }, 0);
         PIP.ui.say('Bramble', '🐹', [
-          left === GAP_COUNTS[0] + GAP_COUNTS[1] + GAP_COUNTS[2] ?
+          left === GAP_TOTAL ?
             'The numbers by the stream show how many stones fit in each gap!' :
             'Only ' + left + ' more stones to go! You are so close!'
         ]);

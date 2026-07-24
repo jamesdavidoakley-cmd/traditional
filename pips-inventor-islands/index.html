@@ -202,6 +202,10 @@
   #btn-jump{right:26px;bottom:40px}
   #btn-act{right:122px;bottom:110px}
   #btn-grab{right:36px;bottom:150px}
+  .touch-btn.emote{width:62px;height:62px;font-size:12px;background:rgba(60,50,80,.6)}
+  .touch-btn.emote .tb-ico{font-size:22px}
+  #btn-twirl{right:150px;bottom:30px}
+  #btn-sparkle{right:200px;bottom:96px}
 
   #fader{position:absolute;inset:0;background:#0a141c;z-index:50;pointer-events:none;opacity:0;transition:opacity .5s}
   body.reduced-motion #fader{transition:opacity .12s}
@@ -238,6 +242,8 @@
     <button class="touch-btn" id="btn-jump"><span class="tb-ico">🦘</span>JUMP</button>
     <button class="touch-btn" id="btn-act"><span class="tb-ico">✋</span>DO</button>
     <button class="touch-btn" id="btn-grab"><span class="tb-ico">🌿</span>VINE</button>
+    <button class="touch-btn emote" id="btn-twirl"><span class="tb-ico">🍃</span>SPIN</button>
+    <button class="touch-btn emote" id="btn-sparkle"><span class="tb-ico">✨</span>ZAP</button>
   </div>
 
   <div id="subtitle" class="hidden"></div>
@@ -349,6 +355,7 @@
       <button class="btn blue hidden" id="btn-new">🌱 Start a new adventure</button>
     </div>
     <p class="tiny-note">Move with WASD or arrows · Jump with SPACE · Works with touch too</p>
+    <p class="tiny-note">Fun moves: F = 🍃 Leaf Tornado · G = ✨ Sparkle Blast</p>
     <p class="tiny-note">Made with love for young inventors · No ads, no accounts, saves on this device</p>
   </div>
 

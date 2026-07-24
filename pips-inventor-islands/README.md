@@ -24,8 +24,14 @@ any static server, e.g. `npx http-server`, and open the printed URL.)
 | Talk / pick up / place | E or ENTER | DO |
 | Leaf-vine grab (pull sparkles) | Q | VINE |
 | Ground stomp | X (in the air) | DO in the air |
+| 🍃 Leaf Tornado (fun spin) | F | SPIN |
+| ✨ Sparkle Blast (fun burst) | G | ZAP |
 | Camera | drag the screen | drag the screen |
 | Pause | ESC or P | ⏸ button |
+
+The two "fun moves" are purely cosmetic — a spinning leaf-tornado and a rainbow
+sparkle fountain. They're there for delight and never affect any challenge,
+route or collectible, so children can spam them freely.
 
 Gamepads work too (left stick move, A jump, X do, B vine, right stick camera).
 

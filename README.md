@@ -1,24 +1,30 @@
-# ⚡ HOGWARTS SPEEDSTERS ⚡
+# ⚡ HOGWARTS SPEEDSTERS 3D ⚡
 
-*A magical top-down speed game — made for Max!*
+*A fully 3D magical creature speed-runner — made for Max!*
 
-Open **`hogwarts-speedsters.html`** in any browser — no install, works offline.
+Open **`hogwarts-speedsters.html`** in any browser — no install, works offline
+(keep `three.min.js` next to it; it's the 3D engine).
 
-Pick a creature (werewolf 🐺, hippogriff 🦅, cheetah 🐆, dragon 🐉, owl 🦉 or
-stag 🦌) and go **FAST** through a Hogwarts-style castle: the Great Hall, the
-Forbidden Forest, the Moving Staircases, the Dungeons, the Quidditch sky — or
-all five back-to-back in **THE HOGWARTS CUP** 🏆.
+Pick a creature and go **FAST** through a Hogwarts-style castle in real 3D,
+with a chase camera that zooms wider the faster you go.
 
-- **1 or 2 players on one keyboard** — P1: arrow keys (◀ ▶ steer, ▲ dash-hop,
-  ▼ power) · P2: WASD (A/D steer, W dash-hop, S power). Left means **left**!
-- Grab **⚡ galleons & ⭐ stars** to charge your power bar, then unleash your
-  creature's special move — the werewolf summons a **full moon** that knocks
-  everyone flying! Crash into a bad guy with a full bar and your power fires
-  back automatically. 💥
-- Dodge ghosts, giant spiders and bludgers; hop the staircase gaps; hit the
-  golden boost pads.
-- Procedural stone floors, glowing torches, a castle skyline, particle trails,
-  screen shake, synth music & silly sounds — all in one file, zero dependencies.
+- **Real 3D creatures**, procedurally modelled and fully animated — galloping
+  legs, flapping wings, waving tails: werewolf 🐺, hippogriff 🦅, cheetah 🐆,
+  dragon 🐉, snowy owl 🦉 and stag 🦌. Rotate them in 3D on the picker screen!
+- **Three 3D tracks**: the **Moonlit Battlements** (fly through golden hoops,
+  dodge bludgers & dementors), the **Grand Staircase Hall** (floating candles,
+  portraits, house banners, ghosts) and the **Dungeon Potion Run** (torch-lit
+  tunnels, trolls, barrels and green potion slime).
+- **1 or 2 players on one keyboard**, split-screen — P1: arrow keys
+  (◀ ▶ steer, ▲ jump, **SPACE** power) · P2: WASD (A/D steer, W jump,
+  **S** power). Left means **left** — no funny business!
+- Grab **⚡ galleons** to fill your power bar. When it's full a **giant golden
+  banner tells you exactly which key to press** — werewolf summons a full moon
+  that blasts every bad guy off the wall, dragon breathes fire, hippogriff
+  soars over hazards, owl freezes rivals, cheetah goes lightning-fast, stag
+  smashes through anything. Crash with a full bar and it fires automatically!
+- Dynamic shadows, fog, moonlight, particle bursts, synth sound effects — all
+  procedural, no downloads, powered by the vendored Three.js.
 
 ---
 

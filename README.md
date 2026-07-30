@@ -1,3 +1,27 @@
+# ⚡ HOGWARTS SPEEDSTERS ⚡
+
+*A magical top-down speed game — made for Max!*
+
+Open **`hogwarts-speedsters.html`** in any browser — no install, works offline.
+
+Pick a creature (werewolf 🐺, hippogriff 🦅, cheetah 🐆, dragon 🐉, owl 🦉 or
+stag 🦌) and go **FAST** through a Hogwarts-style castle: the Great Hall, the
+Forbidden Forest, the Moving Staircases, the Dungeons, the Quidditch sky — or
+all five back-to-back in **THE HOGWARTS CUP** 🏆.
+
+- **1 or 2 players on one keyboard** — P1: arrow keys (◀ ▶ steer, ▲ dash-hop,
+  ▼ power) · P2: WASD (A/D steer, W dash-hop, S power). Left means **left**!
+- Grab **⚡ galleons & ⭐ stars** to charge your power bar, then unleash your
+  creature's special move — the werewolf summons a **full moon** that knocks
+  everyone flying! Crash into a bad guy with a full bar and your power fires
+  back automatically. 💥
+- Dodge ghosts, giant spiders and bludgers; hop the staircase gaps; hit the
+  golden boost pads.
+- Procedural stone floors, glowing torches, a castle skyline, particle trails,
+  screen shake, synth music & silly sounds — all in one file, zero dependencies.
+
+---
+
 # 🐷 PIG SPORTS 🎾🏀
 
 *Grand Slam Trotters & Slam Dunk Hams — made for Max!*

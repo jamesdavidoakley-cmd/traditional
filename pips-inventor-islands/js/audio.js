@@ -55,13 +55,16 @@ PIP.audio = (function () {
     hub:     [0, 2, 4, 7, 9, 12, 14, 16],
     grove:   [0, 3, 5, 7, 10, 12, 15, 17],
     harbour: [0, 2, 5, 7, 9, 12, 14, 17],
+    mountain:[0, 2, 3, 7, 9, 10, 12, 14],
     factory: [0, 2, 4, 7, 9, 12, 14, 16]
   };
   var SONGS = {
     hub:     { base: 261.63, bpm: 92,  scale: 'hub',     bassEvery: 4, hatEvery: 2, density: 0.55 },
     meadow:  { base: 293.66, bpm: 104, scale: 'meadow',  bassEvery: 4, hatEvery: 2, density: 0.62 },
     grove:   { base: 246.94, bpm: 84,  scale: 'grove',   bassEvery: 2, hatEvery: 4, density: 0.5 },
-    harbour: { base: 277.18, bpm: 98,  scale: 'harbour', bassEvery: 4, hatEvery: 2, density: 0.5 }
+    harbour: { base: 277.18, bpm: 98,  scale: 'harbour', bassEvery: 4, hatEvery: 2, density: 0.5 },
+    mountain:{ base: 233.08, bpm: 76,  scale: 'mountain',bassEvery: 4, hatEvery: 4, density: 0.42 },
+    factory: { base: 261.63, bpm: 112, scale: 'factory', bassEvery: 2, hatEvery: 1, density: 0.6 }
   };
   var melodyMemory = 0;
 

@@ -154,8 +154,8 @@ PIP.ui = (function () {
     { id: 'meadow', icon: '🍓', name: 'Numberberry Meadow', missions: ['meadow.stones', 'meadow.bridge', 'meadow.picnic'], open: true },
     { id: 'grove', icon: '⚙️', name: 'Gearleaf Grove', missions: ['grove.lift', 'grove.balance'], partial: true },
     { id: 'harbour', icon: '⛵', name: 'Shape Sail Harbour', missions: ['harbour.lighthouse', 'harbour.boat', 'harbour.crane'] },
-    { id: 'mountain', icon: '🏔️', name: 'Measure Mountain', missions: [], soon: true },
-    { id: 'factory', icon: '🏭', name: 'Patternworks Factory', missions: [], soon: true }
+    { id: 'mountain', icon: '🏔️', name: 'Measure Mountain', missions: ['mountain.shelter', 'mountain.cable', 'mountain.sled'] },
+    { id: 'factory', icon: '🏭', name: 'Patternworks Factory', missions: ['factory.conveyor', 'factory.packing', 'factory.machine'] }
   ];
   function renderMap() {
     var box = U.el('map-rows');

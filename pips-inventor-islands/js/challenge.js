@@ -142,9 +142,58 @@ PIP.challenge = (function () {
     });
   }
 
+  /* choicePick — like numberPick but for labelled options (shapes, symbols).
+     opts: {question, options:[{label, correct}], visual, nudge, speak} */
+  function choicePick(opts) {
+    return new Promise(function (resolve) {
+      PIP.ui.pushModal();
+      var panel = U.el('challenge-panel');
+      U.setText('ch-question', opts.question);
+      PIP.narrate.say(opts.question);
+      var vis = U.el('ch-visual');
+      vis.innerHTML = '';
+      (opts.sequence || []).forEach(function (item) {
+        var s = document.createElement('span');
+        s.textContent = item;
+        s.style.fontSize = '34px';
+        vis.appendChild(s);
+      });
+      var optsRow = U.el('ch-options');
+      optsRow.innerHTML = '';
+      var wrong = 0;
+      opts.options.forEach(function (o) {
+        var b = document.createElement('button');
+        b.className = 'num-btn';
+        b.style.fontSize = '38px';
+        b.textContent = o.label;
+        b.addEventListener('click', function () {
+          attempt(!!o.correct);
+          if (o.correct) {
+            b.classList.add('correct');
+            PIP.audio.play('chime');
+            PIP.narrate.callout(opts.speak || praise());
+            setTimeout(function () { panel.classList.add('hidden'); PIP.ui.popModal(); resolve(o.label); }, 900);
+          } else {
+            wrong++;
+            b.classList.add('dim');
+            PIP.narrate.say(notYet());
+            if (wrong === 1 && opts.nudge) PIP.narrate.say(opts.nudge);
+            if (wrong >= 2) {
+              optsRow.querySelectorAll('.num-btn').forEach(function (btn) { if (btn.textContent !== correctLabel()) btn.classList.add('dim'); });
+              if (active) active.hintsUsed++;
+            }
+          }
+        });
+        optsRow.appendChild(b);
+      });
+      function correctLabel() { for (var i = 0; i < opts.options.length; i++) if (opts.options[i].correct) return opts.options[i].label; return ''; }
+      panel.classList.remove('hidden');
+    });
+  }
+
   return {
     begin: begin, requestHint: requestHint, attempt: attempt, record: record,
-    complete: complete, abandon: abandon, numberPick: numberPick,
+    complete: complete, abandon: abandon, numberPick: numberPick, choicePick: choicePick,
     praise: praise, notYet: notYet,
     isActive: function () { return !!active; }
   };

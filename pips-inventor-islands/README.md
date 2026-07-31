@@ -50,7 +50,9 @@ Workshop, practice-jump area with signposted tutorials, progress-map board,
 build table, five travel gates, Professor Pebble, and a **Challenge Door**
 (number bonds to 10, unlocks with the first core). The village visibly repairs
 itself when the first Idea Core returns: fountain flows, lamps light, the pond
-bridge mends, a villager moves in.
+bridge mends, a villager moves in. When all **five** Idea Cores come home, the
+**finale** plays — every gate glows, the islands reconnect, and Professor Pebble
+gives his closing speech.
 
 ### ✅ World 1 — Numberberry Meadow — complete
 * **Mission 1 – The stepping-stone path**: physically carry stones into gaps;
@@ -73,7 +75,7 @@ bridge mends, a villager moves in.
 All five travel gates that have worlds behind them are **open from the start** —
 you can dive straight into any built world without finishing the one before.
 
-### 🟡 World 2 — Gearleaf Grove — partial (by design, per the build plan)
+### ✅ World 2 — Gearleaf Grove — complete
 * **Mission 1 – Fix the tree lift**: choose a partner gear (4 / 8 / 16 teeth)
   for the 8-tooth drive gear. Wrong choices *run* — double-speed rattling or a
   half-speed crawl — and Nutkin explains why. The fixed lift becomes a real
@@ -81,8 +83,12 @@ you can dive straight into any built world without finishing the one before.
 * **Mission 2 – The acorn balance**: make both pans equal by filling a mystery
   bag; the beam tilts live. Ends with `5 + 2 = 4 + 3`. *(equality, missing
   numbers — the □ in □-form)*
-* Mission 3 (delivery cart), the function-machine tree, and the Grove Idea Core
-  are signposted in-world as "still being invented".
+* **Mission 3 – Woodland delivery cart**: work out the missing number of wheels
+  (`2 + □ = 4`), then build the cart. A narrow body tips on the bumps — swap to a
+  wide base and it rolls true. *(missing numbers, stability, test → improve)*
+* **Hidden – the Rule Tree**: a function machine. Numbers go in, doubled numbers
+  come out — find the secret rule. *(function machines, doubles)*
+* **Idea Core** appears once all three missions are done.
 
 ### ✅ World 3 — Shape Sail Harbour — short missions
 A gentle water world of wooden boardwalks (every splash is just a swim — never a
@@ -98,8 +104,37 @@ fall). Three quick missions:
 * **Hidden**: jump onto the shape with exactly 3 sides. *(shape properties)*
 * **Idea Core** appears once all three missions are done.
 
-### 🚧 Worlds 4–5 (Measure Mountain, Patternworks Factory)
-Designed in the plan, gated in the hub as "still being invented".
+### ✅ World 4 — Measure Mountain — short missions
+A snowy world where every job needs a good measurer (nothing is timed):
+* **Mountain shelter**: choose a wall and a blanket and watch the heat meter.
+  Wood walls + a wool blanket keep the Frostling cosy; ice and foil stay cold.
+  *(material properties, insulation)*
+* **Cable carrier**: count the flags to measure the gap (5 units), pick the rope
+  that is exactly long enough, and the pulley whisks the basket across.
+  *(measuring length, pulleys)*
+* **Rescue sled**: each sack is 5 kg and the sled is safe to 15 kg — count in
+  fives to load exactly three. *(mass, counting in fives)*
+* **Hidden – clock climb**: read the clock (hand up = o'clock, hand down = half
+  past). *(simple time)*
+* **Idea Core** after all three missions.
+
+### ✅ World 5 — Patternworks Factory — short missions + finale
+The cheerful, chaotic home of the Mix-Up Machine that started it all:
+* **Pattern conveyor**: finish a repeating colour pattern and a growing number
+  pattern (`1, 3, 5, 7, …`). *(patterns, sequences)*
+* **Packing machine**: equal groups — "2 wings per glider, how many for 3?" and
+  "4 wheels per buggy, how many for 2?". *(equal groups, multiplication)*
+* **Rebuild the Mix-Up Machine**: the integrated finale build. Count the parts
+  (`4 + 2 = 6`), add a gear, lever and wheel, test it — it *wobbles* — add a
+  triangle brace and it works. *(counting, mechanisms, test → improve)*
+* **Hidden – the +2 machine**: a friendly variable. `5 → 7`, then "if n goes in,
+  n + 2 comes out". *(early algebra / variables)*
+* **The fifth Idea Core**. Carrying it home triggers the **finale**: every gate
+  glows, the islands reconnect, and Professor Pebble gives his closing words —
+  *"You did not fix the islands by already knowing every answer. You fixed them
+  by looking carefully, trying ideas, and improving them."*
+
+All five worlds are complete and playable end-to-end.
 
 ## Learning systems
 
@@ -184,6 +219,13 @@ islands slot in without touching the engine.
 
 ## Change log
 
+* **v1.0** — all five worlds complete: Numberberry Meadow, Gearleaf Grove,
+  Shape Sail Harbour, Measure Mountain and Patternworks Factory, each with three
+  missions + a hidden challenge + an Idea Core, plus the all-cores finale
+  (islands reconnect + Professor Pebble's closing speech). All gates open from
+  the start. Optional ChatGPT-style neural narration voice. Two just-for-fun
+  cosmetic abilities. Verified end-to-end in headless Chromium — every mission,
+  hidden challenge, core and the finale complete with zero console errors.
 * **v0.1** — first playable build: hub + complete World 1 + partial World 2,
   movement/camera, challenge framework, snap builder, adaptive difficulty,
   hints, badges, save/load, adult area, accessibility options, procedural
@@ -191,12 +233,12 @@ islands slot in without touching the engine.
 
 ## Known gaps / next steps
 
-* Grove Mission 3 (delivery cart), function-machine tree, Grove Idea Core.
-* Worlds 3–5.
+All five worlds, every mission, both hidden challenges per world, all five Idea
+Cores and the finale are complete and verified playable. Remaining polish ideas:
+
 * Builder is tap/click-driven; a full keyboard-only slot cursor is planned.
 * Finished story missions don't replay yet (the hub Challenge Door is the
   repeatable practice loop for now); a "rebuild it" option at the build table
   is planned.
-* Swimming exists (stream/pond) but no deep-water levels yet; no rideable
-  vehicles yet (the tree lift is the first moving platform).
-* Voice quality depends on the browser's built-in speech voices.
+* Voice quality depends on the browser's built-in speech voices (see **Voices**
+  above for the optional neural storyteller voice).

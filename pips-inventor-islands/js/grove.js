@@ -387,7 +387,8 @@ PIP.worlds.grove = function () {
         speak: LEFT_A + ' plus ' + LEFT_P + ' equals ' + RIGHT_A + ' plus ' + ANSWER + '. Both sides the same. Balanced!'
       }).then(function () {
         world.clearBeacon();
-        PIP.ui.setGoal('Explore beyond the acorn gate! 🌰', false);
+        PIP.ui.say('Nutkin', '🐿️', ['Beautifully balanced! Now — my cousin Cog needs a delivery cart built. Head over to the cart track!'])
+          .then(function () { checkGroveCore(); pointGrove(); });
       });
     } else if (bagCount > ANSWER) {
       PIP.narrate.say('Ooh — now the bag side is heavier. That side went down! Take one out.');
@@ -397,25 +398,234 @@ PIP.worlds.grove = function () {
     }
   }
 
-  /* ---------- coming-soon content, honestly signposted ---------- */
-  world.addAt(A.makeSign('🛒 Cart track — coming soon!'), 12, 14);
-  world.addAt(A.makeSign('🌳 The hollow tree sleeps…'), -16, -14);
-  var sleepyTree = A.makeTree('autumn');
-  sleepyTree.scale.setScalar(1.6);
-  world.addAt(sleepyTree, -18, -17);
-  world.block(-18, -17, 1.1);
+  /* =====================================================================
+     MISSION 3 — Woodland delivery cart (missing number, stability, wheels)
+     ===================================================================== */
+  var cartDone = PIP.save.mission('grove.cart') === 'done';
+  var CART_X0 = 9, CART_X1 = 19, CART_Z = 15;
+  var trackY = terrainFn(CART_X0, CART_Z);
+  // a plank track for the cart to roll along
+  var track = A.mesh(A.GEO.box, A.mat(0xb98a55)); track.scale.set(12, 0.3, 2.2);
+  track.position.set((CART_X0 + CART_X1) / 2, trackY + 0.1, CART_Z);
+  world.group.add(track);
+  world.platform(CART_X0 - 1, CART_X1 + 1, CART_Z - 1.1, CART_Z + 1.1, trackY + 0.25, { noWall: true });
 
+  function wheelMesh() { var w = A.mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.2, 14), A.mat(0x4b4b4b), 0, 0, 0); w.rotation.x = Math.PI / 2; return w; }
+  function cartBody(wide) {
+    var g = new THREE.Group();
+    var hw = wide ? 1.0 : 0.5;
+    var body = A.mesh(A.GEO.box, A.mat(0xd8a869), 0, 0.45, 0); body.scale.set(1.6, 0.5, hw * 2);
+    g.add(body);
+    // three parcels on top
+    for (var i = 0; i < 3; i++) { var p = A.mesh(A.GEO.box, A.mat(0x8a6142), -0.4 + i * 0.4, 0.85, 0); p.scale.set(0.3, 0.3, 0.3); g.add(p); }
+    [[-0.6, -1], [0.6, -1], [-0.6, 1], [0.6, 1]].forEach(function (c) {
+      var w = wheelMesh(); w.position.set(c[0], 0.15, c[1] * (hw + 0.06)); g.add(w);
+    });
+    g.userData.wide = wide;
+    return g;
+  }
+  function buildStaticCart() { var c = cartBody(true); c.position.set(CART_X1 - 1, trackY + 0.35, CART_Z); world.group.add(c); }
+  if (cartDone) buildStaticCart();
+
+  var cog = A.makeSquirrelish();
+  world.addAt(cog, CART_X0 - 1, CART_Z - 2.5);
+  world.block(CART_X0 - 1, CART_Z - 2.5, 0.7);
+  world.addAt(A.makeSign('Delivery Cart'), CART_X0 - 1, CART_Z + 2.5);
+  var cartActive = false;
+  world.interact({
+    x: CART_X0 - 1, z: CART_Z - 2.5, radius: 2.6, prompt: 'Talk to Cog', icon: '🐿️',
+    enabled: function () { return !cartDone; },
+    onInteract: function () {
+      if (cartActive) return;
+      cartActive = true;
+      PIP.ui.say('Cog', '🐿️', [
+        'My delivery cart needs building! Every cart needs 4 wheels.',
+        'This one has 2 wheels on the front. How many more wheels to make 4?'
+      ]).then(function () {
+        PIP.challenge.begin({
+          id: 'grove.cart', concept: 'missing',
+          goal: 'Build a cart that rolls without tipping — then test it!',
+          hints: ['Two wheels on the front, and it needs four in all.', 'Count on from two: three, four. That is two more.',
+            'A narrow cart tips on the bumps. A WIDE base is much steadier — try the wide body!']
+        });
+        PIP.challenge.numberPick({
+          question: 'The cart has 2 wheels. It needs 4. How many more?  2 + □ = 4',
+          answer: 2, options: [1, 2, 3],
+          visual: { total: 4, filled: 2 },
+          nudge: 'Count on from two up to four.',
+          concept: 'missing'
+        }).then(startCartBuild);
+      });
+    }
+  });
+
+  function startCartBuild() {
+    PIP.player.state.frozen = true;
+    world.clearBeacon();
+    PIP.game.tweenCamera(new THREE.Vector3(CART_X1 - 1, trackY + 4, CART_Z + 7), new THREE.Vector3((CART_X0 + CART_X1) / 2, trackY + 0.6, CART_Z));
+    var parts = [
+      { id: 'narrow', name: 'Narrow body', icon: '▭', count: 1, make: function () { return cartBody(false); }, tip: 'A narrow cart… will it wobble?' },
+      { id: 'wide', name: 'Wide body', icon: '▬', count: 1, make: function () { return cartBody(true); }, tip: 'A wide base is nice and steady!' }
+    ];
+    var slots = [{
+      id: 'body', accepts: ['narrow', 'wide'],
+      pos: new THREE.Vector3(CART_X0 + 1, trackY + 0.35, CART_Z),
+      ghost: function () { return new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.8, 2.4), new THREE.MeshBasicMaterial({ color: 0xffe27a, transparent: true, opacity: 0.35, depthWrite: false })); }
+    }];
+    PIP.builder.start({
+      scene: world.group, parts: parts, slots: slots,
+      tip: 'Pick a cart body, tap the glowing spot, then press Test it!',
+      allowBack: true,
+      canTest: function () { return slots[0].placed ? null : 'Choose a cart body first.'; },
+      onTest: function (api) {
+        var wide = api.slots[0].placed.mesh.userData.wide;
+        var mesh = api.slots[0].placed.mesh;
+        PIP.builder.setTesting(true);
+        rollCart(mesh, wide, function (ok) {
+          PIP.builder.setTesting(false);
+          if (ok) {
+            PIP.builder.finish();
+            PIP.player.state.frozen = false;
+            cartDone = true;
+            PIP.save.setMission('grove.cart', 'done');
+            PIP.save.recordAttempt('missing', true, 0);
+            PIP.save.recordAttempt('dtStructure', true, 0);
+            PIP.save.addDesign({ name: 'Delivery Cart', icon: '🛒', note: '4 wheels, wide steady base — rolls straight.' });
+            if (PIP.save.grantBadge('improver')) PIP.ui.toast('🔧', 'Inventor Badge: Clever Improver!');
+            PIP.challenge.complete({
+              title: 'The cart rolls true!',
+              maths: '2 + 2 = 4 wheels',
+              text: 'Two wheels and two more make four. A wide base kept it steady over the bumps — no tipping!',
+              speak: 'Two wheels plus two more makes four. And a wide base rolls without tipping!'
+            }).then(function () { checkGroveCore(); pointGrove(); });
+          } else {
+            PIP.save.recordAttempt('dtStructure', true, 0);
+            PIP.ui.say('Cog', '🐿️', ['Wheee— WHOA! The narrow cart tipped on the bumps!', 'Tap it to take it back and try the WIDE body. A wider base is steadier.']);
+          }
+        });
+      },
+      onExit: function () { PIP.player.state.frozen = false; }
+    });
+  }
+  function rollCart(mesh, wide, done) {
+    var t = 0, x0 = CART_X0 + 1, homeZ = CART_Z;
+    PIP.audio.play('gear');
+    var ticker = function (dt) {
+      t += dt;
+      var prog = Math.min(1, t / 2.2);
+      mesh.position.x = U.lerp(x0, CART_X1 - 1, prog);
+      mesh.position.y = trackY + 0.35 + Math.sin(t * 12) * (wide ? 0.03 : 0.10);
+      mesh.children.forEach(function (c) { if (c.rotation) c.rotation.z -= dt * 6; });
+      if (!wide) mesh.rotation.z = Math.min(1.2, t * 0.9);   // narrow cart tips over
+      if (wide) mesh.rotation.z = Math.sin(t * 8) * 0.04;
+      if (!wide && t > 1.1) { world.updaters.splice(world.updaters.indexOf(ticker), 1); PIP.audio.play('wobble'); mesh.rotation.z = 0; mesh.position.set(x0, trackY + 0.35, homeZ); done(false); }
+      else if (wide && prog >= 1) { world.updaters.splice(world.updaters.indexOf(ticker), 1); mesh.rotation.z = 0; PIP.audio.play('chime'); done(true); }
+    };
+    world.tick(ticker);
+  }
+
+  /* =====================================================================
+     HIDDEN — the function-machine hollow tree (find the rule)
+     ===================================================================== */
+  var funcDone = PIP.save.mission('grove.func') === 'done';
+  var hollow = A.makeTree('autumn'); hollow.scale.setScalar(1.8);
+  world.addAt(hollow, -18, -17);
+  world.block(-18, -17, 1.2);
+  // a mouth-hole + in/out chutes
+  var mouth = A.mesh(A.GEO.sphere, A.mat(0x2b2b2b), -18, terrainFn(-18, -17) + 2.2, -15.4); mouth.scale.set(0.5, 0.6, 0.4);
+  world.group.add(mouth);
+  world.addAt(A.makeSign('The Rule Tree'), -15, -14.5);
+  world.interact({
+    x: -18, z: -15.6, radius: 2.6, prompt: 'The hollow tree', icon: '🌳',
+    onInteract: function () {
+      if (funcDone) { PIP.ui.say('Rule Tree', '🌳', ['Numbers in, doubled numbers out! The rule never changes — that is what makes it a rule.']); return; }
+      PIP.ui.say('Rule Tree', '🌳', [
+        'I am the Rule Tree! Drop a number in my hole and a NEW number pops out.',
+        'I always follow the same secret rule. Can you find it?'
+      ]).then(function () {
+        PIP.challenge.begin({
+          id: 'grove.func', concept: 'patterns',
+          goal: 'Find the tree’s secret rule!',
+          hints: ['Watch what happens: what comes out compared to what went in?', 'In 2, out 4. In 3, out 6. The out number is bigger…', 'The rule is DOUBLE! Out is two lots of in.']
+        });
+        // demonstrate, then ask
+        PIP.narrate.say('In goes 2… out comes 4! In goes 3… out comes 6!');
+        setTimeout(function () {
+          PIP.challenge.numberPick({
+            question: 'The tree doubles! If 4 goes in, what comes out?',
+            answer: 8, options: [6, 7, 8],
+            visual: { emoji: '🌰', count: 4 },
+            nudge: 'Double 4 is 4 and 4 more.',
+            concept: 'doubles'
+          }).then(function () {
+            PIP.challenge.numberPick({
+              question: 'Rule = double. If 5 goes in, what comes out?',
+              answer: 10, options: [10, 9, 7],
+              visual: { emoji: '🌰', count: 5 },
+              nudge: 'Double 5 is 5 and 5 more — count in twos!',
+              concept: 'doubles'
+            }).then(function () {
+              funcDone = true;
+              PIP.save.setMission('grove.func', 'done');
+              PIP.save.recordAttempt('patterns', true, 0);
+              if (PIP.save.grantBadge('pattern')) PIP.ui.toast('🌸', 'Inventor Badge: Pattern Finder!');
+              world.seed('gfunc1', -20, -19, 0.8);
+              world.seed('gfunc2', -16, -19, 0.8);
+              PIP.challenge.complete({
+                title: 'You found the rule!',
+                maths: 'in → double → out',
+                text: 'The secret rule was DOUBLE. Whatever goes in, twice as much comes out — every single time!',
+                speak: 'The rule was double! In two, out four. In five, out ten. A rule always stays the same.'
+              });
+            });
+          });
+        }, 1600);
+      });
+    }
+  });
+
+  /* =====================================================================
+     THE GROVE IDEA CORE
+     ===================================================================== */
+  var coreTaken = PIP.save.hasCore('grove');
   var pedestal = A.mesh(A.GEO.cyl, A.mat(0xd7b356));
   pedestal.scale.set(0.9, 1.2, 0.9);
   world.addAt(pedestal, 0, -20, 0.6);
   world.block(0, -20, 1.1);
-  world.interact({
-    x: 0, z: -20, radius: 2.4, prompt: 'Empty pedestal', icon: '💡',
-    onInteract: function () {
+  world.addAt(A.makeSign('Idea Core'), 2.6, -19);
+  var groveCore = A.makeCore(0x8fa3ff);
+  world.add(groveCore, 0, terrainFn(0, -20) + 1.5, -20);
+  groveCore.visible = false;
+  var gcoreT = 0;
+  world.tick(function (dt) {
+    if (!groveCore.visible) return;
+    gcoreT += dt;
+    groveCore.position.y = terrainFn(0, -20) + 1.5 + Math.sin(gcoreT * 2) * 0.15;
+    groveCore.rotation.y += dt; groveCore.userData.ring.rotation.z += dt * 2;
+  });
+  function checkGroveCore() {
+    if (liftDone && balanceDone && cartDone && !coreTaken && !groveCore.visible) {
+      groveCore.visible = true;
+      PIP.audio.play('unlock');
       PIP.ui.say('Professor Pebble', '🪨', [
-        'The Grove’s Idea Core will return when the delivery cart rolls again.',
-        'That part of the grove is still growing. Even islands need a plan, a build and a test!'
-      ]);
+        'The Grove hums with life again — the lift rides, the gate balances, the cart rolls!',
+        'The Grove Idea Core has returned to its pedestal. Go and collect it, Pip!'
+      ]).then(function () { PIP.ui.setGoal('Collect the Grove Idea Core! 💡', false); world.setBeacon(0, -20); });
+    }
+  }
+  world.interact({
+    x: 0, z: -20, radius: 2.4, prompt: 'Take the Idea Core', icon: '💡',
+    enabled: function () { return groveCore.visible && !coreTaken; },
+    onInteract: function () {
+      coreTaken = true; groveCore.visible = false;
+      PIP.save.grantCore('grove'); PIP.ui.updateHUD(); world.clearBeacon();
+      PIP.audio.play('fanfare');
+      PIP.ui.summary({
+        title: 'IDEA CORE FOUND! 💡',
+        text: 'The Gearleaf Grove Idea Core is safe! Take it home to Inventor Village.',
+        speak: 'You found the Grove Idea Core! Take it back to Inventor Village.',
+        stars: '💡⭐💡'
+      }).then(function () { PIP.ui.setGoal('Return to Inventor Village through the green gate. 🏡', false); world.setBeacon(-26.5, 0); });
     }
   });
 
@@ -447,15 +657,18 @@ PIP.worlds.grove = function () {
         world.setBeacon(13.5, -0.5);
       });
     }
-    if (!liftDone) {
-      PIP.ui.setGoal('Talk to Nutkin about the stuck tree lift. ⚙️', false);
-      world.setBeacon(13.5, -0.5);
-    } else if (!balanceDone) {
-      PIP.ui.setGoal('Find the acorn balance gate to the north. ⚖️', false);
-      world.setBeacon(scalePos.x, scalePos.z);
-    } else PIP.ui.clearGoal();
+    pointGrove();
+    checkGroveCore();
     return Promise.resolve();
   };
+
+  function pointGrove() {
+    if (!liftDone) { PIP.ui.setGoal('Talk to Nutkin about the stuck tree lift. ⚙️', false); world.setBeacon(13.5, -0.5); }
+    else if (!balanceDone) { PIP.ui.setGoal('Find the acorn balance gate to the north. ⚖️', false); world.setBeacon(scalePos.x, scalePos.z); }
+    else if (!cartDone) { PIP.ui.setGoal('Help Cog build a delivery cart. 🛒', false); world.setBeacon(CART_X0 - 1, CART_Z - 2.5); }
+    else if (!PIP.save.hasCore('grove')) { PIP.ui.setGoal('Collect the Grove Idea Core! 💡', false); world.setBeacon(0, -20); }
+    else PIP.ui.clearGoal();
+  }
 
   return world;
 };

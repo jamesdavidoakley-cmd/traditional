@@ -161,8 +161,8 @@ PIP.worlds.hub = function () {
     { id: 'meadow', color: 0xff6f9c, name: 'Numberberry Meadow', icon: '🍓', open: function () { return true; } },
     { id: 'grove', color: 0x8fa3ff, name: 'Gearleaf Grove', icon: '⚙️', open: function () { return true; } },
     { id: 'harbour', color: 0x62c4e8, name: 'Shape Sail Harbour', icon: '⛵', open: function () { return true; } },
-    { id: 'mountain', color: 0xd8e8f2, name: 'Measure Mountain', icon: '🏔️', soon: true },
-    { id: 'factory', color: 0xffb066, name: 'Patternworks Factory', icon: '🏭', soon: true }
+    { id: 'mountain', color: 0xd8e8f2, name: 'Measure Mountain', icon: '🏔️', open: function () { return true; } },
+    { id: 'factory', color: 0xffb066, name: 'Patternworks Factory', icon: '🏭', open: function () { return true; } }
   ];
   var gates = [];
   gateInfo.forEach(function (gi, i) {
@@ -339,6 +339,24 @@ PIP.worlds.hub = function () {
         world.setBeacon(gatePos[0][0], gatePos[0][1]);
       });
     }
+    // ---- THE FINALE: all five Idea Cores recovered ----
+    if (PIP.save.coreCount() === 5 && !PIP.save.mission('hub.finale')) {
+      PIP.save.setMission('hub.finale', 'done');
+      PIP.audio.play('fanfare');
+      gates.forEach(function (g) { g.userData.swirl.material.opacity = 0.75; });
+      ['fin1', 'fin2', 'fin3', 'fin4'].forEach(function (id) { if (!PIP.save.hasSeed('hub', id)) world.seed(id, U.rand(-7, 7), U.rand(2, 9), 0.9); });
+      return PIP.ui.say('Professor Pebble', '🪨', [
+        'Pip… look. All five Idea Cores, home at last.',
+        'Watch — the islands are reconnecting! Bridges, lifts, water, cranes and machines, all working together again.',
+        'You did not fix the islands by already knowing every answer.',
+        'You fixed them by looking carefully, trying ideas, and improving them.',
+        'That is what an inventor does. Thank you, Pip — the Inventor Islands are whole again!'
+      ]).then(function () {
+        PIP.audio.play('success');
+        PIP.ui.toast('🏆', 'All five Idea Cores recovered!');
+        PIP.ui.setGoal('You did it! Explore, replay challenges, or hunt every Spark Seed. 🌟', false);
+      });
+    }
     if (PIP.save.hasCore('meadow') && !PIP.save.mission('hub.core1')) {
       PIP.save.setMission('hub.core1', 'done');
       PIP.audio.play('fanfare');
@@ -354,13 +372,15 @@ PIP.worlds.hub = function () {
     if (!PIP.save.mission('meadow.stones')) {
       PIP.ui.setGoal('Go through the strawberry gate to Numberberry Meadow. 🍓', false);
       world.setBeacon(gatePos[0][0], gatePos[0][1]);
-    } else if (!PIP.save.hasCore('meadow')) {
-      PIP.ui.setGoal('Numberberry Meadow still needs help! 🍓', false);
-      world.setBeacon(gatePos[0][0], gatePos[0][1]);
-    } else if (!PIP.save.hasCore('grove')) {
-      PIP.ui.setGoal('Explore Gearleaf Grove! ⚙️', false);
-      world.setBeacon(gatePos[1][0], gatePos[1][1]);
-    } else PIP.ui.clearGoal();
+    } else {
+      // point at the first world still missing its Idea Core
+      var order = ['meadow', 'grove', 'harbour', 'mountain', 'factory'];
+      var names = ['Numberberry Meadow 🍓', 'Gearleaf Grove ⚙️', 'Shape Sail Harbour ⛵', 'Measure Mountain 🏔️', 'Patternworks Factory 🏭'];
+      var next = -1;
+      for (var i = 0; i < order.length; i++) if (!PIP.save.hasCore(order[i])) { next = i; break; }
+      if (next === -1) { PIP.ui.setGoal('Every island is whole! Explore and collect Spark Seeds. 🌟', false); world.clearBeacon(); }
+      else { PIP.ui.setGoal('Explore ' + names[next] + ' to find its Idea Core.', false); world.setBeacon(gatePos[next][0], gatePos[next][1]); }
+    }
     return Promise.resolve();
   };
 

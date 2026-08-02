@@ -56,7 +56,10 @@ PIP.audio = (function () {
     grove:   [0, 3, 5, 7, 10, 12, 15, 17],
     harbour: [0, 2, 5, 7, 9, 12, 14, 17],
     mountain:[0, 2, 3, 7, 9, 10, 12, 14],
-    factory: [0, 2, 4, 7, 9, 12, 14, 16]
+    factory: [0, 2, 4, 7, 9, 12, 14, 16],
+    falls:   [0, 2, 4, 7, 9, 11, 12, 16],
+    cove:    [0, 2, 4, 5, 7, 9, 12, 14],
+    summit:  [0, 3, 5, 7, 10, 12, 14, 15]
   };
   var SONGS = {
     hub:     { base: 261.63, bpm: 92,  scale: 'hub',     bassEvery: 4, hatEvery: 2, density: 0.55 },
@@ -64,7 +67,10 @@ PIP.audio = (function () {
     grove:   { base: 246.94, bpm: 84,  scale: 'grove',   bassEvery: 2, hatEvery: 4, density: 0.5 },
     harbour: { base: 277.18, bpm: 98,  scale: 'harbour', bassEvery: 4, hatEvery: 2, density: 0.5 },
     mountain:{ base: 233.08, bpm: 76,  scale: 'mountain',bassEvery: 4, hatEvery: 4, density: 0.42 },
-    factory: { base: 261.63, bpm: 112, scale: 'factory', bassEvery: 2, hatEvery: 1, density: 0.6 }
+    factory: { base: 261.63, bpm: 112, scale: 'factory', bassEvery: 2, hatEvery: 1, density: 0.6 },
+    falls:   { base: 293.66, bpm: 90,  scale: 'falls',   bassEvery: 4, hatEvery: 2, density: 0.5 },
+    cove:    { base: 261.63, bpm: 108, scale: 'cove',    bassEvery: 4, hatEvery: 2, density: 0.55 },
+    summit:  { base: 220.00, bpm: 70,  scale: 'summit',  bassEvery: 4, hatEvery: 8, density: 0.38 }
   };
   var melodyMemory = 0;
 

@@ -12,7 +12,7 @@ PIP.ui = (function () {
   /* ---------- HUD ---------- */
   function updateHUD() {
     U.setText('seed-count', String(PIP.save.seedCount()));
-    var order = ['meadow', 'grove', 'harbour', 'mountain', 'factory'];
+    var order = ['meadow', 'grove', 'harbour', 'mountain', 'factory', 'fractionfalls', 'coincove', 'stargazer'];
     var s = '';
     order.forEach(function (w) { s += PIP.save.hasCore(w) ? '●' : '○'; });
     U.setText('core-icons', s);
@@ -155,7 +155,10 @@ PIP.ui = (function () {
     { id: 'grove', icon: '⚙️', name: 'Gearleaf Grove', missions: ['grove.lift', 'grove.balance'], partial: true },
     { id: 'harbour', icon: '⛵', name: 'Shape Sail Harbour', missions: ['harbour.lighthouse', 'harbour.boat', 'harbour.crane'] },
     { id: 'mountain', icon: '🏔️', name: 'Measure Mountain', missions: ['mountain.shelter', 'mountain.cable', 'mountain.sled'] },
-    { id: 'factory', icon: '🏭', name: 'Patternworks Factory', missions: ['factory.conveyor', 'factory.packing', 'factory.machine'] }
+    { id: 'factory', icon: '🏭', name: 'Patternworks Factory', missions: ['factory.conveyor', 'factory.packing', 'factory.machine'] },
+    { id: 'fractionfalls', icon: '💧', name: 'Fraction Falls', missions: ['falls.share', 'falls.channel', 'falls.symmetry'] },
+    { id: 'coincove', icon: '🪙', name: 'Coin Cove', missions: ['cove.stall', 'cove.sorter', 'cove.change'] },
+    { id: 'stargazer', icon: '🔭', name: 'Stargazer Summit', missions: ['star.count', 'star.telescope', 'star.rocket'] }
   ];
   function renderMap() {
     var box = U.el('map-rows');
@@ -241,6 +244,7 @@ PIP.ui = (function () {
     comparing: 'More, fewer and equal',
     patterns: 'Patterns (repeating & growing)',
     missing: 'Missing numbers (□ + 3 = 8)',
+    placevalue: 'Tens and ones (place value)',
     equality: 'Balance & the equals sign',
     doubles: 'Doubles and halves',
     counting2s: 'Counting in twos',

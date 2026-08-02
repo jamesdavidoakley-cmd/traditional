@@ -134,7 +134,25 @@ The cheerful, chaotic home of the Mix-Up Machine that started it all:
   *"You did not fix the islands by already knowing every answer. You fixed them
   by looking carefully, trying ideas, and improving them."*
 
-All five worlds are complete and playable end-to-end.
+All five story worlds are complete and playable end-to-end.
+
+### ✅ Three bonus islands (drift in with fresh maths)
+Three extra islands, open from the start, each with three short missions, a
+hidden challenge and an Idea Core:
+
+* **💧 Fraction Falls** — *fair-share falls* (halving & quartering: half of 8
+  is 4, a quarter is 2), *build a water channel* (DT: joining pieces, make &
+  test), *symmetry garden* (mirror both sides), hidden *halving waterwheel*.
+* **🪙 Coin Cove** — a pretend-pennies market: *shell stall* (recognise coins &
+  make an amount), *coin sorter* (add money totals), *give change* (subtraction:
+  `10p − 6p`), hidden *make 10p* (coin bonds to 10). A gentle intro to UK coins.
+* **🔭 Stargazer Summit** — a starry night world: *count the stars* (tens & ones
+  place value — 3 tens + 4 = 34, not 43), *build & aim the telescope* (DT
+  structure + quarter-turn direction), *launch the rocket* (counting in tens to
+  100), hidden *star circuit* (a simple input → output light).
+
+When **all eight** Idea Cores are home, Professor Pebble gives a grand-finale
+send-off.
 
 ## Learning systems
 
@@ -219,6 +237,12 @@ islands slot in without touching the engine.
 
 ## Change log
 
+* **v1.1** — three bonus islands added, each with three short missions + a
+  hidden challenge + an Idea Core, introducing fresh maths: **fractions**
+  (halves/quarters) & **symmetry** (Fraction Falls), **UK money** (Coin Cove),
+  and **place value / counting to 100** (Stargazer Summit). Hub expanded to
+  eight gates, eight-core HUD, plus a grand finale when every island is whole.
+  All new content verified end-to-end in headless Chromium with zero errors.
 * **v1.0** — all five worlds complete: Numberberry Meadow, Gearleaf Grove,
   Shape Sail Harbour, Measure Mountain and Patternworks Factory, each with three
   missions + a hidden challenge + an Idea Core, plus the all-cores finale

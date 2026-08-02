@@ -155,14 +155,17 @@ PIP.worlds.hub = function () {
     }
   }
 
-  /* ---------- five travel gates (southern arc) ---------- */
-  var gatePos = [[-16, 19], [-8, 23.5], [0, 25.5], [8, 23.5], [16, 19]];
+  /* ---------- travel gates (main southern arc + three bonus islands) ---------- */
+  var gatePos = [[-16, 19], [-8, 23.5], [0, 25.5], [8, 23.5], [16, 19], [-22, 14], [22, 12], [0, -25]];
   var gateInfo = [
     { id: 'meadow', color: 0xff6f9c, name: 'Numberberry Meadow', icon: '🍓', open: function () { return true; } },
     { id: 'grove', color: 0x8fa3ff, name: 'Gearleaf Grove', icon: '⚙️', open: function () { return true; } },
     { id: 'harbour', color: 0x62c4e8, name: 'Shape Sail Harbour', icon: '⛵', open: function () { return true; } },
     { id: 'mountain', color: 0xd8e8f2, name: 'Measure Mountain', icon: '🏔️', open: function () { return true; } },
-    { id: 'factory', color: 0xffb066, name: 'Patternworks Factory', icon: '🏭', open: function () { return true; } }
+    { id: 'factory', color: 0xffb066, name: 'Patternworks Factory', icon: '🏭', open: function () { return true; } },
+    { id: 'fractionfalls', color: 0x6fd8e0, name: 'Fraction Falls', icon: '💧', open: function () { return true; } },
+    { id: 'coincove', color: 0xffd257, name: 'Coin Cove', icon: '🪙', open: function () { return true; } },
+    { id: 'stargazer', color: 0x9b8cff, name: 'Stargazer Summit', icon: '🔭', open: function () { return true; } }
   ];
   var gates = [];
   gateInfo.forEach(function (gi, i) {
@@ -339,8 +342,10 @@ PIP.worlds.hub = function () {
         world.setBeacon(gatePos[0][0], gatePos[0][1]);
       });
     }
-    // ---- THE FINALE: all five Idea Cores recovered ----
-    if (PIP.save.coreCount() === 5 && !PIP.save.mission('hub.finale')) {
+    var storyCores = ['meadow', 'grove', 'harbour', 'mountain', 'factory'];
+    var bonusCores = ['fractionfalls', 'coincove', 'stargazer'];
+    // ---- THE FINALE: all five story Idea Cores recovered ----
+    if (storyCores.every(function (w) { return PIP.save.hasCore(w); }) && !PIP.save.mission('hub.finale')) {
       PIP.save.setMission('hub.finale', 'done');
       PIP.audio.play('fanfare');
       gates.forEach(function (g) { g.userData.swirl.material.opacity = 0.75; });
@@ -350,11 +355,27 @@ PIP.worlds.hub = function () {
         'Watch — the islands are reconnecting! Bridges, lifts, water, cranes and machines, all working together again.',
         'You did not fix the islands by already knowing every answer.',
         'You fixed them by looking carefully, trying ideas, and improving them.',
-        'That is what an inventor does. Thank you, Pip — the Inventor Islands are whole again!'
+        'That is what an inventor does. Thank you, Pip — the Inventor Islands are whole again!',
+        'And look — three NEW islands have drifted in to explore: Fraction Falls, Coin Cove and Stargazer Summit!'
       ]).then(function () {
         PIP.audio.play('success');
         PIP.ui.toast('🏆', 'All five Idea Cores recovered!');
-        PIP.ui.setGoal('You did it! Explore, replay challenges, or hunt every Spark Seed. 🌟', false);
+        PIP.ui.setGoal('Explore the three new islands: Fraction Falls, Coin Cove, Stargazer Summit! 🌟', false);
+      });
+    }
+    // ---- GRAND FINALE: every island (all eight cores) whole ----
+    if (storyCores.concat(bonusCores).every(function (w) { return PIP.save.hasCore(w); }) && !PIP.save.mission('hub.grandfinale')) {
+      PIP.save.setMission('hub.grandfinale', 'done');
+      PIP.audio.play('fanfare');
+      ['gf1', 'gf2', 'gf3', 'gf4', 'gf5'].forEach(function (id) { if (!PIP.save.hasSeed('hub', id)) world.seed(id, U.rand(-8, 8), U.rand(2, 10), 0.9); });
+      return PIP.ui.say('Professor Pebble', '🪨', [
+        'Eight islands, Pip. Every single one, whole and humming.',
+        'Fractions shared, coins counted, stars named — you kept looking, trying and improving to the very end.',
+        'There has never been an inventor like you. The Inventor Islands are yours to enjoy!'
+      ]).then(function () {
+        PIP.audio.play('success');
+        PIP.ui.toast('🏆', 'Every island complete — all eight Idea Cores!');
+        PIP.ui.setGoal('You finished everything! Explore and hunt every Spark Seed. 🌟', false);
       });
     }
     if (PIP.save.hasCore('meadow') && !PIP.save.mission('hub.core1')) {
@@ -374,8 +395,8 @@ PIP.worlds.hub = function () {
       world.setBeacon(gatePos[0][0], gatePos[0][1]);
     } else {
       // point at the first world still missing its Idea Core
-      var order = ['meadow', 'grove', 'harbour', 'mountain', 'factory'];
-      var names = ['Numberberry Meadow 🍓', 'Gearleaf Grove ⚙️', 'Shape Sail Harbour ⛵', 'Measure Mountain 🏔️', 'Patternworks Factory 🏭'];
+      var order = ['meadow', 'grove', 'harbour', 'mountain', 'factory', 'fractionfalls', 'coincove', 'stargazer'];
+      var names = ['Numberberry Meadow 🍓', 'Gearleaf Grove ⚙️', 'Shape Sail Harbour ⛵', 'Measure Mountain 🏔️', 'Patternworks Factory 🏭', 'Fraction Falls 💧', 'Coin Cove 🪙', 'Stargazer Summit 🔭'];
       var next = -1;
       for (var i = 0; i < order.length; i++) if (!PIP.save.hasCore(order[i])) { next = i; break; }
       if (next === -1) { PIP.ui.setGoal('Every island is whole! Explore and collect Spark Seeds. 🌟', false); world.clearBeacon(); }

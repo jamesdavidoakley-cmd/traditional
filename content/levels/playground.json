@@ -1,0 +1,56 @@
+{
+  "id": "playground",
+  "nameKey": "world.hub.name",
+  "music": "hub",
+  "palette": {
+    "sky": ["#5aa2e8", "#ffe6b3"],
+    "fog": "#bcd8f0",
+    "fogNear": 40,
+    "fogFar": 160,
+    "sun": "#fff3d6",
+    "sunIntensity": 2.2,
+    "ambient": "#bfd9ff",
+    "ambientIntensity": 0.9,
+    "ground": "#8a6a4c"
+  },
+  "spawn": [0, 1, 8],
+  "spawnFaceDeg": 180,
+  "killY": -12,
+  "geometry": [
+    { "type": "gen", "gen": "floor", "params": { "shape": "cylinder", "radius": 26, "height": 2, "colour": "#7dc95e", "rimColour": "#c99a5b" } },
+    { "type": "gen", "gen": "stairs", "params": { "from": [6, 0, -2], "angleDeg": 90, "steps": 7, "rise": 0.55, "run": 1.5, "width": 3.4, "colour": "#c9a24a" } },
+    { "type": "box", "pos": [18.5, 3.6, -2], "size": [5, 0.6, 5], "colour": "#c9a24a" },
+    { "type": "gen", "gen": "path", "params": { "points": [[18.5, 4.2, -6], [18.5, 5.4, -20]], "count": 4, "size": [2.4, 0.5, 2.4], "colour": "#e8b96b", "arcHeight": 0.8 } },
+    { "type": "box", "pos": [18.5, 6.2, -25], "size": [4, 0.6, 4], "colour": "#c9a24a" },
+    { "type": "gen", "gen": "wall", "params": { "from": [-26, 0, -8], "to": [-16, 0, -20], "height": 3, "thickness": 1.2, "colour": "#b0805a" } },
+    { "type": "gen", "gen": "ring", "params": { "center": [-12, 0.4, 12], "radius": 6, "count": 6, "size": [2, 0.8, 2], "colour": "#e8b96b", "yStep": 0.5 } },
+    { "type": "ramp", "pos": [-4, 0, -10], "size": [4, 2.2, 6], "colour": "#c99a5b" },
+    { "type": "cylinder", "pos": [-14, 1.5, -14], "size": [2.4, 3, 2.8], "colour": "#b0805a" }
+  ],
+  "decor": [
+    { "type": "sign", "pos": [2.5, 0, 5], "text": "Movement Playground!" },
+    { "type": "cactus", "pos": [-6, 0, 6] },
+    { "type": "palm", "pos": [8, 0, 8] },
+    { "type": "rock", "pos": [10, 0, 2], "scale": 1.4 },
+    { "type": "boneArch", "pos": [0, 0, -18], "rot": [0, 20, 0] },
+    { "type": "flower", "pos": [4, 0, 3] },
+    { "type": "flower", "pos": [5, 0, 4.2], "colour": "#ffd75e" },
+    { "type": "bush", "pos": [-8, 0, 2] }
+  ],
+  "platforms": [
+    { "type": "lift", "pos": [12, 2.5, 10], "size": [3, 0.5, 3], "axis": [0, 1, 0], "range": 2.4, "speed": 0.9, "colour": "#7fb8e0" },
+    { "type": "rotor", "pos": [0, 3.2, -12], "radius": 3.4, "size": [0, 0.5, 0], "speed": 0.7, "colour": "#B8863B" },
+    { "type": "conveyor", "pos": [-6, 0.6, 16], "size": [2.6, 0.5, 9], "direction": [0, 0, -1], "speed": 2.5, "colour": "#7a8aa0" },
+    { "type": "crumble", "pos": [14, 1.2, -12], "size": [2.4, 0.5, 2.4], "colour": "#d0855c" },
+    { "type": "crumble", "pos": [11, 2, -15], "size": [2.4, 0.5, 2.4], "colour": "#d0855c" },
+    { "type": "bounce", "pos": [-18, 0.3, 0] },
+    { "type": "excavation", "pos": [6, 0.15, 14], "size": [2.6, 0.4, 2.6] }
+  ],
+  "collectibles": [
+    { "kind": "chip", "arc": { "center": [0, 0.6, 0], "radius": 5, "from": 0, "to": 300, "count": 8 } },
+    { "kind": "chip", "line": { "from": [18.5, 4.6, -6], "to": [18.5, 6, -20], "count": 4 } },
+    { "kind": "heart", "pos": [-18, 3.4, 0] }
+  ],
+  "fossils": [],
+  "triggers": [{ "id": "pg-check", "kind": "checkpoint", "pos": [18.5, 4.2, -2], "radius": 3 }]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "intro",
+  "skippable": true,
+  "lines": [
+    { "speaker": "kenji", "text": "Terra Nova runs on Star Fossils, Max-kun — crystallised sparks of ancient dinosaur knowledge. And last night… they all vanished." },
+    { "speaker": "vex", "text": "Borrowed! The word is BORROWED. My Know-It-All Engine will do everyone's thinking from now on. Why learn, when my Engine can know it FOR you?" },
+    { "speaker": "max", "text": "But working things out is the FUN bit! That's like eating a sandwich FOR me!" },
+    { "speaker": "vex", "text": "Exactly. So efficient. And to guard the fossils, seven great champions now wear my marvellous Obedience Cogs. They don't think either. Bliss." },
+    { "speaker": "marcus", "text": "Champions?! Forced to serve without honour?! Little rex — this cannot stand!" },
+    { "speaker": "digger", "text": "Righto — new plan, gang! Find the fossils, free the champions, and give that walking cuckoo-clock a lesson he won't forget!" },
+    { "speaker": "vex", "text": "Adorable. Do try. The doors are locked, the champions are loyal, and I have SO much sitting down to do. Ta-ta!" },
+    { "speaker": "kenji", "text": "Then we begin with what we can reach. Fossil Canyon lies through the first door — no fossils needed. Step one of many!" },
+    { "speaker": "max", "text": "Tiny arms… BIG ideas. Let's GO!" }
+  ]
+}

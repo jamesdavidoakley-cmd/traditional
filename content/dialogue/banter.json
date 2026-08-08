@@ -1,0 +1,83 @@
+{
+  "id": "banter",
+  "pairs": [
+    {
+      "id": "muscle-vs-maths",
+      "lines": [
+        { "speaker": "marcus", "text": "Kenji! Which is mightier — the biggest muscle, or the biggest brain?" },
+        { "speaker": "kenji", "text": "The brain, obviously. It is the only muscle that can build a crane to lift the others." },
+        { "speaker": "marcus", "text": "…Marcus will allow it. But ONLY because cranes are magnificent." }
+      ]
+    },
+    {
+      "id": "digger-tease-tools",
+      "lines": [
+        { "speaker": "digger", "text": "Oi Kenji, if your toolbox is so clever, how come it can't fetch?" },
+        { "speaker": "kenji", "text": "Botto retrieves DATA, Digger. Data is like sticks for the mind." },
+        { "speaker": "digger", "text": "Yeah, but can ya bury it in the garden? Didn't think so." }
+      ]
+    },
+    {
+      "id": "max-magnets",
+      "lines": [
+        { "speaker": "max", "text": "Wait — HOW do magnets push without touching?! It's been bothering me ALL day." },
+        { "speaker": "kenji", "text": "An invisible field, Max-kun! We will meet them properly in the Magnet Mines one day. Patience!" },
+        { "speaker": "max", "text": "Invisible. Pushing. Fields. This world is AMAZING." }
+      ]
+    },
+    {
+      "id": "marcus-nonna",
+      "lines": [
+        { "speaker": "marcus", "text": "My nonna always said: measure the flour TWICE, fight the bread NEVER." },
+        { "speaker": "digger", "text": "Wise lady. I fought a loaf once. Lost." },
+        { "speaker": "max", "text": "You LOST? To BREAD?" },
+        { "speaker": "digger", "text": "It had a crust on it, mate. A CRUST." }
+      ]
+    },
+    {
+      "id": "w1-gladiator-fossil",
+      "worlds": ["w1"],
+      "lines": [
+        { "speaker": "marcus", "text": "HOLD! A fallen gladiator of great honour lies here! Bow your heads!" },
+        { "speaker": "max", "text": "Marcus… that's a T-rex fossil. It's a dinosaur like me — its bones turned to stone over millions of years!" },
+        { "speaker": "marcus", "text": "A warrior who trained so hard he became SOLID ROCK? Even more honourable!" },
+        { "speaker": "kenji", "text": "That is… not exactly the science, but the respect is noted." }
+      ]
+    },
+    {
+      "id": "w1-tiny-arms",
+      "worlds": ["w1"],
+      "lines": [
+        { "speaker": "digger", "text": "Max, mate — how'd your lot ever open jam jars with those little arms?" },
+        { "speaker": "max", "text": "We didn't need to! We had jaws that could crunch a CAR. Also there were no jam jars." },
+        { "speaker": "digger", "text": "No jam?! Those poor ancient beasts." }
+      ]
+    },
+    {
+      "id": "w2-kenji-heaven",
+      "worlds": ["w2"],
+      "lines": [
+        { "speaker": "kenji", "text": "Look at these gear trains! The tolerances! The tooth profiles! I could live here." },
+        { "speaker": "marcus", "text": "It is very... clanky. The arena has better acoustics." },
+        { "speaker": "kenji", "text": "Marcus. Every clank is a tiny machine SINGING." }
+      ]
+    },
+    {
+      "id": "w2-ratio-feel",
+      "worlds": ["w2"],
+      "lines": [
+        { "speaker": "kenji", "text": "Feel the maths, Max-kun — a small gear driving a big one trades speed for strength!" },
+        { "speaker": "max", "text": "So if I put a TINY gear on my tail and a HUGE one on my jaws…" },
+        { "speaker": "kenji", "text": "…you would chomp very slowly and VERY powerfully. I will sketch it immediately." }
+      ]
+    },
+    {
+      "id": "vex-weather",
+      "lines": [
+        { "speaker": "max", "text": "Do you think Vex ever learned ANYTHING himself?" },
+        { "speaker": "kenji", "text": "Once, perhaps. Somewhere along the way he decided answers matter more than understanding." },
+        { "speaker": "digger", "text": "Big mistake. Understanding's the tasty part — answers are just the bone at the end." }
+      ]
+    }
+  ]
+}

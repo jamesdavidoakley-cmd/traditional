@@ -1,0 +1,36 @@
+{
+  "id": "hub",
+  "bpm": 92,
+  "root": 60,
+  "mode": "pentMajor",
+  "layers": [
+    {
+      "name": "uke-pluck",
+      "wave": "triangle",
+      "octave": 0,
+      "gain": 0.16,
+      "decay": 0.28,
+      "steps": [0, null, 2, null, 4, null, 2, null, 3, null, 1, null, 2, null, 0, null, 4, null, 5, null, 4, null, 2, null, 1, null, 2, null, 1, null, 0, null]
+    },
+    {
+      "name": "bass",
+      "wave": "sine",
+      "octave": -1,
+      "gain": 0.22,
+      "decay": 0.5,
+      "steps": [0, null, null, null, null, null, null, null, 3, null, null, null, null, null, null, null, 4, null, null, null, null, null, null, null, 3, null, null, null, 1, null, null, null]
+    },
+    {
+      "name": "sparkle",
+      "wave": "sine",
+      "octave": 1,
+      "gain": 0.05,
+      "decay": 0.4,
+      "steps": [null, null, null, null, null, null, null, 7, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 9, null, null, null, null, null, null, null, null, null]
+    }
+  ],
+  "perc": [
+    { "kind": "shaker", "gain": 0.35, "steps": [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1] },
+    { "kind": "kick", "gain": 0.4, "steps": [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0] }
+  ]
+}

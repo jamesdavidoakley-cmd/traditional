@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "bpm", "root", "mode", "layers"],
+  "properties": {
+    "id": { "type": "string" },
+    "bpm": { "type": "number", "minimum": 40, "maximum": 220 },
+    "root": { "type": "number", "minimum": 24, "maximum": 96 },
+    "mode": { "enum": ["major", "minor", "dorian", "mixolydian", "pentMajor", "pentMinor"] },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "wave", "octave", "gain", "decay", "steps"],
+        "properties": {
+          "wave": { "enum": ["sine", "square", "triangle", "sawtooth"] },
+          "steps": { "type": "array", "items": { "type": ["number", "null"] } },
+          "combat": { "type": "boolean" }
+        }
+      }
+    },
+    "perc": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "steps"],
+        "properties": { "kind": { "enum": ["kick", "snare", "hat", "shaker", "woodblock"] } }
+      }
+    }
+  }
+}

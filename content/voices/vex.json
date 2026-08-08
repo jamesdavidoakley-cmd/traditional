@@ -1,0 +1,31 @@
+{
+  "characterId": "vex",
+  "pools": {
+    "taunt": [
+      "Learning? How… quaint. My Engine already knows everything, little lizard.",
+      "You *worked out* the answer? Yourself? Disgusting.",
+      "All that thinking. You'll wear your brain out, you know.",
+      "My champions never think. It saves SO much time.",
+      "Effort is obsolete, dear reptile. Do keep up.",
+      "Adorable. The dinosaur believes practice makes perfect. Perfect is PRE-INSTALLED."
+    ],
+    "gate_locked": [
+      "This gate opens for thirty-eight Star Fossils. You have… fewer. Ha.",
+      "Still collecting? The Engine could simply TELL you where they are. Oh wait — no it couldn't.",
+      "Run along, little scholar. My citadel is not for the unqualified.",
+      "Knock knock. Who's there? Not you, for quite some time."
+    ],
+    "champion_lost": [
+      "Bruno, defeated by HOMEWORK? Unbelievable.",
+      "You freed another one? They were happier obedient. Probably. I never asked.",
+      "Fine. FINE. I have six more champions and INFINITE smugness.",
+      "That cog was expensive, you know."
+    ],
+    "praise_sarcastic": [
+      "Oh, WELL DONE. Would you like a sticker?",
+      "Marvellous. A dinosaur that does long division. The end times.",
+      "Yes yes, very clever. My Engine is cleverer and it never gloats. Much.",
+      "Bravo. I am slow-clapping somewhere far away and very comfortable."
+    ]
+  }
+}

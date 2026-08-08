@@ -1,0 +1,81 @@
+{
+  "movement": {
+    "runSpeed": 7.0,
+    "accelTime": 0.15,
+    "decelTime": 0.12,
+    "airControl": 0.62,
+    "jumpVelocity": 9.6,
+    "doubleJumpVelocity": 8.6,
+    "gravity": -26,
+    "fallGravityMul": 1.45,
+    "lowJumpGravityMul": 1.9,
+    "maxFallSpeed": 26,
+    "coyoteTime": 0.12,
+    "jumpBuffer": 0.15,
+    "turnRate": 14,
+    "spinDuration": 0.5,
+    "spinCooldown": 0.28,
+    "stompHopTime": 0.25,
+    "stompSlamSpeed": 18,
+    "roarStunSecs": 3,
+    "roarRadius": 8,
+    "bouncePadVelocity": 16,
+    "springBootsMul": 1.35
+  },
+  "combat": {
+    "maxHearts": 5,
+    "explorerBonusHearts": 1,
+    "iframesSecs": 0.8,
+    "hitPauseMs": 75,
+    "spinDamage": 1,
+    "stompDamage": 2,
+    "spitDamage": 1,
+    "knockback": 7,
+    "telegraphMinSecs": 0.6,
+    "explorerWindupMul": 1.5,
+    "quizOrbHeal": 1,
+    "contactDamage": 0.5
+  },
+  "camera": {
+    "distances": [4.6, 7.2, 10.5],
+    "height": 1.6,
+    "minPitch": -0.9,
+    "maxPitch": 1.15,
+    "followRate": 7,
+    "rotateSpeed": 2.6,
+    "collisionRadius": 0.35
+  },
+  "economy": {
+    "chipsPerWorld": 100,
+    "bonusChipTarget": 80,
+    "brainPowerSegments": 5,
+    "heartDropChance": 0.35
+  },
+  "education": {
+    "promoteStreak": 3,
+    "demoteMisses": 3,
+    "xpPerCorrect": 10,
+    "xpFirstTryBonus": 5,
+    "masteryStarXp": [30, 80, 160],
+    "quizOrbWeakTopicBias": 0.7
+  },
+  "dialogue": {
+    "banterCooldownSecs": 90,
+    "idleNudgeSecs": 25,
+    "barkCooldownSecs": 8,
+    "subtitleMinMs": 1400
+  },
+  "ai": {
+    "decisionIntervalMin": 0.4,
+    "decisionIntervalMax": 0.8,
+    "softmaxBase": 0.35,
+    "softmaxTrickeryScale": 0.3,
+    "banRepeatCount": 3,
+    "banRepeatAggressionExempt": 0.8,
+    "habitWindow": 12,
+    "threatBudgetWindow": 10,
+    "threatBudgetBase": 3,
+    "rubberbandDamageScale": 0.5,
+    "traitNoise": 0.15
+  }
+}

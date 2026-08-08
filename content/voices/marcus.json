@@ -1,0 +1,115 @@
+{
+  "characterId": "marcus",
+  "pools": {
+    "ask_intro": [
+      "AVE, {playerName}! Today we train the mightiest muscle — the BRAIN!",
+      "The arena of the mind opens! Marcus asks, YOU conquer!",
+      "Hear the challenge, little rex! The crowd holds its breath!",
+      "A drill! Fortuna audaces iuvat — fortune favours the bold!",
+      "Marcus once counted the whole Colosseum crowd. Your turn to count!",
+      "Sharpen your thoughts like a gladius! Question — INCOMING!",
+      "The scoreboard awaits your genius! Show them, champion!",
+      "By my nonna's secret recipes, this is a GOOD one!"
+    ],
+    "correct_first_try": [
+      "GLORIOUS! The crowd goes wild — and the crowd is me!",
+      "VICTORY! First strike, clean hit, perfect answer!",
+      "Magnificus — magnificent! Rome itself applauds!",
+      "HA-HA! Correct! Marcus never doubted you. Not even once!",
+      "A champion's answer! The laurels are yours!"
+    ],
+    "correct_after_hint": [
+      "YES! You dropped your sword, you picked it up, you WON!",
+      "Correct! A true gladiator uses every shield offered!",
+      "The second swing lands true! GLORIOUS!",
+      "That's it! Even Marcus trains with a helper. Mostly nonna."
+    ],
+    "incorrect_gentle": [
+      "Even Marcus once dropped his sword. Pick it up! Want a hint?",
+      "A miss — but misses teach champions! Shall I whisper a clue?",
+      "The crowd gasps… but they LOVE a comeback! Hint, my friend?",
+      "Not this time — yet the arena rewards those who try again! A hint?",
+      "Steady, little rex. Breathe like a gladiator. Care for a clue?"
+    ],
+    "hint_intro": [
+      "Lean close — a tactic from the champions' bench:",
+      "Marcus whispers, quietly, like a very loud person can:",
+      "Here is the secret manoeuvre:",
+      "Strategy time! Consider this:"
+    ],
+    "teach": [
+      "Watch! Marcus shall demonstrate, step by mighty step!",
+      "We train together! Nothing is lost — everything is learned!",
+      "Attend, young champion! Here is how the move is done!"
+    ],
+    "streak_3": [
+      "THREE victories! A combo worthy of the arena!",
+      "Three in a row — the crowd chants your name! Max! Max! Max!",
+      "A triple triumph! Tri-umph! That is arena humour!"
+    ],
+    "streak_5": [
+      "FIVE! FIVE! The emperor rises to applaud!",
+      "Five straight victories — a legend is born this day!",
+      "QUINQUE — that is five in Rome-speak — and it is MAGNIFICENT!"
+    ],
+    "fossil_get": [
+      "A STAR FOSSIL! Raise it high, champion of champions!",
+      "The prize is claimed! Somewhere, my nonna is cheering!",
+      "GLORIOUS! Another star for the bravest little rex in history!",
+      "Victory laps for everyone! The fossil is OURS — I mean, yours!"
+    ],
+    "secret_found": [
+      "A secret! Sneakier than a retiarius with a net!",
+      "Hidden treasure! The dog's nose triumphs again!",
+      "Oho! Even the arena keeps surprises under the sand!",
+      "A discovery worthy of song! I shall compose one. Later."
+    ],
+    "task_complete": [
+      "The challenge falls! ANOTHER triumph for the scroll of honour!",
+      "Task conquered! Salute the champion — that is you!",
+      "Done, and done with STYLE! The arena approves!",
+      "Finished! Vini, vidi, LEARN-I — I came, I saw, I learned it!"
+    ],
+    "quiz_orb": [
+      "A Quiz Orb glimmers! Seize glory AND a heart, champion?",
+      "The orb of questions! A true gladiator never fears a quiz!",
+      "Catch it! Quick minds make quick spears!"
+    ],
+    "boss_intro": [
+      "Shields up, little rex! Watch how they move before you strike!",
+      "The arena calls! Fight with honour — and with EXCELLENT footwork!",
+      "Courage, {playerName}! Patience is also a weapon!"
+    ],
+    "battle_coach": [
+      "Shields up! See how she waits? Wait BETTER!",
+      "Now! Strike now, while they stumble!",
+      "Circle them! Never stand still in the arena!",
+      "That dodge! Beautiful! Nonna would weep with pride!",
+      "Guard high! The big swing is coming!"
+    ],
+    "boss_low_hp": [
+      "They weaken! Finish with honour — one clean move!",
+      "The final round! The crowd is ON ITS FEET!",
+      "Almost done! Strike like thunder, smile like sunshine!"
+    ],
+    "victory": [
+      "VICTORY! And more importantly — a friend set free!",
+      "The cog shatters! Honour to you, champion!",
+      "GLORIA! Write it in the sky: MAX WINS!"
+    ],
+    "idle_nudge": [
+      "The arena of adventure awaits! Perhaps… that direction?",
+      "Marcus stretches. A champion's muscles must never nap!",
+      "When lost, I march somewhere important-looking. It always works!",
+      "Smell that? Adventure. Also possibly Digger.",
+      "Take your moment, little rex. Even gladiators pause for grapes.",
+      "My scoreboard misses you! As do I, ENORMOUSLY!"
+    ],
+    "greeting": [
+      "AVE, {playerName}! The arena salutes you!",
+      "Welcome, champion! Today we train LEGENDS!",
+      "Ho! Come to test your mettle? Or your metal? Both are here!",
+      "Little rex! My favourite student! Do not tell the dummies."
+    ]
+  }
+}

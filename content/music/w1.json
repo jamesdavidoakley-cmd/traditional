@@ -1,0 +1,46 @@
+{
+  "id": "w1",
+  "bpm": 106,
+  "root": 57,
+  "mode": "major",
+  "layers": [
+    {
+      "name": "marimba",
+      "wave": "triangle",
+      "octave": 0,
+      "gain": 0.15,
+      "decay": 0.18,
+      "steps": [0, null, 4, null, 2, null, 4, null, 5, null, 4, null, 2, null, 1, null, 0, null, 4, null, 2, null, 4, null, 6, null, 5, null, 4, null, 2, null]
+    },
+    {
+      "name": "bass-bounce",
+      "wave": "sine",
+      "octave": -1,
+      "gain": 0.24,
+      "decay": 0.3,
+      "steps": [0, null, null, 0, null, null, 4, null, 3, null, null, 3, null, null, 4, null]
+    },
+    {
+      "name": "desert-whistle",
+      "wave": "sine",
+      "octave": 1,
+      "gain": 0.055,
+      "decay": 0.5,
+      "steps": [null, null, null, null, null, null, null, null, null, null, null, null, 9, null, 8, null, null, null, null, null, null, null, null, null, null, null, null, null, 7, null, null, null]
+    },
+    {
+      "name": "combat-drive",
+      "wave": "sawtooth",
+      "octave": 0,
+      "gain": 0.08,
+      "decay": 0.1,
+      "combat": true,
+      "steps": [0, 0, null, 0, null, 0, 0, null, 3, 3, null, 3, null, 4, 4, null]
+    }
+  ],
+  "perc": [
+    { "kind": "kick", "gain": 0.5, "steps": [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1] },
+    { "kind": "woodblock", "gain": 0.4, "steps": [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1] },
+    { "kind": "shaker", "gain": 0.25, "steps": [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1] }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "characterId": "digger",
+  "pools": {
+    "ask_intro": [
+      "G'day! Quick brain-teaser, mate — reckon you'll smash it.",
+      "Oi oi! Got a question rattlin' round like a bone in a bucket.",
+      "Treasure-count time! Help a dog out?",
+      "Fair dinkum, this one's a beauty. Have a listen!",
+      "Sniffed out a puzzle! Your turn, clever-clogs.",
+      "Question incoming — too easy for you, I reckon!",
+      "Ears up, mate! This one's worth a biscuit.",
+      "Riddle o'clock! Let's see those dino brains whir."
+    ],
+    "correct_first_try": [
+      "Too easy, mate! Nailed it first go!",
+      "Ripper! Absolute ripper of an answer!",
+      "That's the stuff! Someone give this rex a biscuit!",
+      "Bang on! You're sharper than my left ear.",
+      "First sniff, right answer. Champion effort!"
+    ],
+    "correct_after_hint": [
+      "There it is! Second sniff always finds the bone.",
+      "Got there! No wukkas about the scenic route, mate.",
+      "Ripper — hint plus brain equals WINNER!",
+      "That's it! Even the best noses need two goes sometimes."
+    ],
+    "incorrect_gentle": [
+      "No wukkas! Even good dogs bury the bone in the wrong yard sometimes. Second sniff?",
+      "Close but no biscuit! Want a little hint, mate?",
+      "Aw, near miss! Happens to the best of us. Fancy a clue?",
+      "Not that one — but you're circling the bone! Hint?",
+      "Hmm, nope! But guessing brave beats not guessing. Clue time?"
+    ],
+    "hint_intro": [
+      "Righto, lean in — here's the whisper:",
+      "Sniff sniff… the clue smells like this:",
+      "Between you, me and the fence post:",
+      "Here's a freebie from ya best mate:"
+    ],
+    "teach": [
+      "Let's dig it up together, nice and slow.",
+      "Watch the paws, mate — here's how it goes.",
+      "No stress! We'll walk it through, step by step."
+    ],
+    "streak_3": [
+      "Three in a row! You little beauty!",
+      "That's three straight — you're on the scent now!",
+      "Hat-trick! Do dinosaurs wear hats? They do NOW."
+    ],
+    "streak_5": [
+      "FIVE straight! Fair dinkum legend behaviour!",
+      "Five! I'd wag my tail off if it weren't attached!",
+      "Five in a row — someone's been eating their brain-biscuits!"
+    ],
+    "fossil_get": [
+      "STAR FOSSIL! You bloomin' beauty!",
+      "Ripper! Shiniest bone I ever did see!",
+      "That's the good stuff! Vex'll be spewin'!",
+      "Fossil secured! Happy dance? Happy dance."
+    ],
+    "secret_found": [
+      "TOLD ya my nose knows! Secret found!",
+      "Ha! Sniffed it from a mile off. Too easy!",
+      "A hidey-hole! Best day EVER. Until tomorrow.",
+      "Secret unlocked, mate! Team nose-and-toes wins again!"
+    ],
+    "task_complete": [
+      "Job's done, mate! Smoko time!",
+      "All wrapped up! You beauty!",
+      "Done and dusted — mostly dusted, this is a dusty game.",
+      "That's a wrap! High paw!"
+    ],
+    "quiz_orb": [
+      "Ooh, Quiz Orb! One quick one and you get a heart, mate!",
+      "Shiny question ball ahead! Worth a crack, reckon?",
+      "Orb ahoy! Easy points for a brainy rex!"
+    ],
+    "boss_intro": [
+      "Watch yourself, mate — this one's got tricks. I'll bark if I spot 'em!",
+      "Big fight! Remember: dodge first, ask questions… also first!",
+      "You've got this! I'll keep me eyes on the sneaky bits!"
+    ],
+    "battle_warn": [
+      "BEHIND YA, mate!",
+      "Heads up — incoming from the side!",
+      "Big swing coming — hop it!",
+      "Watch the floor! Watch the FLOOR!",
+      "They're charging something nasty — move those legs!"
+    ],
+    "boss_low_hp": [
+      "They're wobblin', mate! One more good whack!",
+      "Nearly there! Finish it, you ripper!",
+      "That cog's rattlin' loose — GO GO GO!"
+    ],
+    "victory": [
+      "YOU BEAUTY! That's how it's done!",
+      "Winner winner, no more spinner! Cog's off, mate!",
+      "Too easy! Well… medium easy. GREAT WORK!"
+    ],
+    "idle_nudge": [
+      "Reckon we should have a squiz over there?",
+      "My nose says thataway. My nose is never wrong. Usually.",
+      "Not sure where next? Press H and I'll point me snout!",
+      "Smells like adventure somewhere close…",
+      "I'd nap here, but them fossils won't find themselves!",
+      "Take ya time, mate. The canyon's not going anywhere. Probably."
+    ],
+    "dizzy_rescue": [
+      "Whoa there! Gotcha, mate — back to safety we go. No wukkas!",
+      "Up ya get! Even champions have a lie-down sometimes.",
+      "Easy does it! Nothing lost but a little pride, and I never had any!",
+      "Gotcha! Let's take a breath and go again, hey?"
+    ],
+    "greeting": [
+      "G'day, mate! Smells like a good day for digging!",
+      "Oi! Come see me garden — it grows when YOU grow!",
+      "Mate! I found three secrets before breakfast. Want one?",
+      "Welcome back! Tail's waggin', let's get craclin'!"
+    ]
+  }
+}

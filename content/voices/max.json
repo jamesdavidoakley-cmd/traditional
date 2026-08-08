@@ -1,0 +1,61 @@
+{
+  "characterId": "max",
+  "pools": {
+    "fossil_get": [
+      "STAR FOSSIL! RAAAAAR!",
+      "Did you SEE that?! Fossil GET!",
+      "Sparkly! Shiny! MINE! I mean — ours!",
+      "One more spark of knowledge back home! RAAR!",
+      "Tiny arms, BIG ideas, HUGE fossil!",
+      "That's going straight in my favourites pile!"
+    ],
+    "correct": [
+      "YES! Nailed it!",
+      "Thinking is my second-favourite thing after stomping!",
+      "Ha! My brain did a backflip!",
+      "Got it got it GOT IT!"
+    ],
+    "incorrect": [
+      "Whoops — okay okay, round two!",
+      "Hmm… let me think harder. Thinking cap ON.",
+      "Nope? NOPE. Okay, new plan!",
+      "My brain sneezed. Going again!"
+    ],
+    "roar": [
+      "MEGA ROOOOOAR!",
+      "RAAAAAAAR! Brain power!",
+      "Hear me ROAR — politely but LOUDLY!"
+    ],
+    "dizzy": [
+      "Whoa… the canyon is spinning…",
+      "Dizzy dino… I'm okay! Mostly okay!",
+      "Stars! And not the fossil kind…"
+    ],
+    "boss_intro": [
+      "I'm not scared! I'm EXCITED with extra steps!",
+      "Let's think our way through this — and also STOMP a bit!",
+      "You can be freed the easy way or the AWESOME way!"
+    ],
+    "victory": [
+      "WE DID IT! Tiny arms, BIG win!",
+      "That was AMAZING! Can we do it again? Later. Snack first.",
+      "Another friend freed! Best. Day. EVER!",
+      "RAAAR means 'good game' in dinosaur!"
+    ],
+    "secret_found": [
+      "Ooooooh, SECRET! I love secrets!",
+      "Hidden treasure! Digger, you genius!",
+      "Shhh! It's a secret! I'M WHISPER-ROARING!"
+    ],
+    "idle": [
+      "Hmm… let me think. Thinking is my second-favourite thing after stomping.",
+      "Wait — HOW do magnets push without touching?! I need to know!",
+      "My arms are tiny but my curiosity is ENORMOUS."
+    ],
+    "world_enter": [
+      "Wooooah. Look at THIS place!",
+      "New world, new fossils, new SMELLS!",
+      "Adventure legs: ACTIVATED!"
+    ]
+  }
+}

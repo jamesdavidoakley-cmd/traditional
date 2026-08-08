@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": { "type": "string" },
+    "skippable": { "type": "boolean" },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["speaker", "text"],
+        "properties": {
+          "speaker": { "type": "string" },
+          "text": { "type": "string", "minLength": 1 },
+          "anim": { "type": "string" }
+        }
+      }
+    },
+    "pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "lines"],
+        "properties": {
+          "id": { "type": "string" },
+          "worlds": { "type": "array", "items": { "type": "string" } },
+          "lines": { "type": "array", "items": { "type": "object", "required": ["speaker", "text"] } }
+        }
+      }
+    }
+  }
+}

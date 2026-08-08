@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["finaleGateCost", "worlds"],
+  "properties": {
+    "finaleGateCost": { "type": "number" },
+    "worlds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "doorCost"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+          "name": { "type": "string" },
+          "doorCost": { "type": "number", "minimum": 0 },
+          "level": { "type": "string" },
+          "comingSoon": { "type": "boolean" },
+          "hubDoorAngle": { "type": "number" },
+          "colour": { "type": "string" },
+          "icon": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["movement", "combat", "camera", "economy", "education", "dialogue", "ai"],
+  "properties": {
+    "movement": {
+      "type": "object",
+      "required": ["runSpeed", "jumpVelocity", "gravity", "coyoteTime", "jumpBuffer"],
+      "properties": {
+        "runSpeed": { "type": "number", "minimum": 1 },
+        "coyoteTime": { "type": "number", "minimum": 0, "maximum": 1 },
+        "jumpBuffer": { "type": "number", "minimum": 0, "maximum": 1 },
+        "gravity": { "type": "number", "maximum": 0 }
+      }
+    },
+    "combat": {
+      "type": "object",
+      "required": ["maxHearts", "iframesSecs", "telegraphMinSecs"],
+      "properties": {
+        "maxHearts": { "type": "number", "minimum": 1 },
+        "telegraphMinSecs": { "type": "number", "minimum": 0.6 }
+      }
+    },
+    "camera": { "type": "object", "required": ["distances"] },
+    "economy": {
+      "type": "object",
+      "required": ["chipsPerWorld", "bonusChipTarget", "brainPowerSegments"],
+      "properties": {
+        "bonusChipTarget": { "type": "number", "minimum": 1 }
+      }
+    },
+    "education": { "type": "object", "required": ["promoteStreak", "masteryStarXp"] },
+    "dialogue": { "type": "object", "required": ["banterCooldownSecs"] },
+    "ai": { "type": "object", "required": ["softmaxBase", "banRepeatCount", "habitWindow"] }
+  }
+}

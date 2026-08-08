@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "strand", "topic", "topicNameKey", "questions"],
+  "properties": {
+    "id": { "type": "string" },
+    "strand": { "enum": ["maths", "science", "engineering"] },
+    "topic": { "type": "string" },
+    "topicNameKey": { "type": "string" },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "tier", "type", "template", "askStyles", "hint", "explain"],
+        "properties": {
+          "id": { "type": "string" },
+          "subtopic": { "type": "string" },
+          "tier": { "enum": [1, 2, 3] },
+          "type": { "enum": ["quickfire"] },
+          "template": { "type": "string", "minLength": 3 },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": ["min", "max"],
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" },
+                "step": { "type": "number" },
+                "multipleOf": { "type": "number" }
+              }
+            }
+          },
+          "answerExpr": { "type": "string" },
+          "answer": { "type": "string" },
+          "distractorRules": { "type": "array", "items": { "type": "string" } },
+          "distractors": { "type": "array", "items": { "type": "string" } },
+          "askStyles": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+          "hint": { "type": "string", "minLength": 3 },
+          "explain": { "type": "string", "minLength": 3 },
+          "unit": { "type": "string" }
+        },
+        "anyOf": [{ "required": ["answerExpr"] }, { "required": ["answer"] }]
+      }
+    }
+  }
+}

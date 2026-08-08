@@ -1,0 +1,25 @@
+{
+  "id": "cafe",
+  "bpm": 76,
+  "root": 62,
+  "mode": "pentMajor",
+  "layers": [
+    {
+      "name": "cosy-keys",
+      "wave": "sine",
+      "octave": 0,
+      "gain": 0.14,
+      "decay": 0.5,
+      "steps": [0, null, null, null, 2, null, null, null, 4, null, null, null, 3, null, 2, null, 1, null, null, null, 2, null, null, null, 0, null, null, null, null, null, null, null]
+    },
+    {
+      "name": "warm-bass",
+      "wave": "sine",
+      "octave": -1,
+      "gain": 0.18,
+      "decay": 0.8,
+      "steps": [0, null, null, null, null, null, null, null, 3, null, null, null, null, null, null, null]
+    }
+  ],
+  "perc": [{ "kind": "shaker", "gain": 0.2, "steps": [0, 0, 1, 0, 0, 0, 1, 0] }]
+}

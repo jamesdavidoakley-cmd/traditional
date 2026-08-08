@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "moves"],
+  "properties": {
+    "id": { "type": "string" },
+    "moves": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "tags", "bandWeights", "baseWeight", "windup", "active", "recover"],
+        "properties": {
+          "id": { "type": "string" },
+          "tags": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": ["strike", "heavy", "combo", "ranged", "defend", "reposition", "approach", "retreat", "flourish", "feint", "wait", "summon", "heal"]
+            }
+          },
+          "bandWeights": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number", "minimum": 0 } },
+          "baseWeight": { "type": "number", "minimum": 0 },
+          "windup": { "type": "number", "minimum": 0 },
+          "active": { "type": "number", "minimum": 0 },
+          "recover": { "type": "number", "minimum": 0 },
+          "damage": { "type": "number" },
+          "motion": { "enum": ["lunge", "hold", "stepback", "circle", "jump", "none", "chase"] },
+          "projectile": { "type": "boolean" },
+          "telegraph": { "type": "string" }
+        }
+      }
+    }
+  }
+}

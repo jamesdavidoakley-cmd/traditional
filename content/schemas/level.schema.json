@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "vec3": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } }
+  },
+  "type": "object",
+  "required": ["id", "nameKey", "music", "palette", "spawn", "killY", "geometry", "fossils"],
+  "properties": {
+    "id": { "type": "string" },
+    "nameKey": { "type": "string" },
+    "music": { "type": "string" },
+    "palette": {
+      "type": "object",
+      "required": ["sky", "fog", "fogNear", "fogFar", "sun", "sunIntensity", "ambient", "ambientIntensity", "ground"],
+      "properties": {
+        "sky": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "string" } }
+      }
+    },
+    "spawn": { "$ref": "#/definitions/vec3" },
+    "spawnFaceDeg": { "type": "number" },
+    "killY": { "type": "number" },
+    "geometry": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": { "enum": ["box", "cylinder", "ramp", "gen"] },
+          "pos": { "$ref": "#/definitions/vec3" },
+          "size": { "$ref": "#/definitions/vec3" },
+          "rot": { "$ref": "#/definitions/vec3" },
+          "colour": { "type": "string" },
+          "collide": { "type": "boolean" },
+          "gen": { "type": "string" },
+          "params": { "type": "object" },
+          "segments": { "type": "number" }
+        }
+      }
+    },
+    "decor": { "type": "array" },
+    "platforms": { "type": "array", "items": { "type": "object", "required": ["type", "pos"] } },
+    "hazards": { "type": "array", "items": { "type": "object", "required": ["type", "pos"] } },
+    "collectibles": { "type": "array" },
+    "fossils": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "nameKey", "hintKey", "hintSpeaker"],
+        "properties": {
+          "id": { "type": "string" },
+          "kind": { "enum": ["task", "secret", "platforming", "arena", "boss", "bonus", "garden"] }
+        }
+      }
+    },
+    "npcs": { "type": "array", "items": { "type": "object", "required": ["id", "character", "pos"] } },
+    "doors": { "type": "array", "items": { "type": "object", "required": ["worldId", "pos"] } },
+    "triggers": { "type": "array", "items": { "type": "object", "required": ["id", "kind", "pos", "radius"] } },
+    "enemies": { "type": "array", "items": { "type": "object", "required": ["ref", "pos"] } },
+    "arenas": { "type": "array", "items": { "type": "object", "required": ["id", "bossRef", "fossilId", "center", "radius", "entrance"] } },
+    "tasks": { "type": "array", "items": { "type": "object", "required": ["ref", "pos"] } },
+    "factsKey": { "type": "string" }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "finaleGateCost": 38,
+  "worlds": [
+    { "id": "hub", "name": "world.hub.name", "doorCost": 0, "level": "hub", "comingSoon": true, "colour": "#7EC8E3", "icon": "🌴" },
+    { "id": "w1", "name": "world.w1.name", "doorCost": 0, "level": "w1", "comingSoon": true, "hubDoorAngle": 210, "colour": "#C96F4A", "icon": "🦴" },
+    { "id": "w2", "name": "world.w2.name", "doorCost": 4, "level": "w2", "comingSoon": true, "hubDoorAngle": 250, "colour": "#B8863B", "icon": "⚙️" },
+    { "id": "w3", "name": "world.w3.name", "doorCost": 9, "comingSoon": true, "hubDoorAngle": 290, "colour": "#7B5CD6", "icon": "🧲" },
+    { "id": "w4", "name": "world.w4.name", "doorCost": 14, "comingSoon": true, "hubDoorAngle": 330, "colour": "#3FA34D", "icon": "💧" },
+    { "id": "w5", "name": "world.w5.name", "doorCost": 20, "comingSoon": true, "hubDoorAngle": 30, "colour": "#3d3d7a", "icon": "🔦" },
+    { "id": "w6", "name": "world.w6.name", "doorCost": 26, "comingSoon": true, "hubDoorAngle": 70, "colour": "#2b5d8a", "icon": "🌉" },
+    { "id": "w7", "name": "world.w7.name", "doorCost": 32, "comingSoon": true, "hubDoorAngle": 110, "colour": "#1d7a4f", "icon": "🌋" },
+    { "id": "vex", "name": "world.vex.name", "doorCost": 38, "comingSoon": true, "hubDoorAngle": 150, "colour": "#454f66", "icon": "⚡" }
+  ]
+}

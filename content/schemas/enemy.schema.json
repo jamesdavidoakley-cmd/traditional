@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "nameKey", "behaviour", "hp", "speed", "damage", "radius", "height", "aggroRange", "attackRange", "colour"],
+  "properties": {
+    "id": { "type": "string" },
+    "nameKey": { "type": "string" },
+    "behaviour": { "enum": ["scout", "brute", "tinkerer", "buzzer"] },
+    "hp": { "type": "number", "minimum": 1 },
+    "speed": { "type": "number", "minimum": 0 },
+    "damage": { "type": "number", "minimum": 0 },
+    "radius": { "type": "number", "minimum": 0.1 },
+    "height": { "type": "number", "minimum": 0.2 },
+    "aggroRange": { "type": "number" },
+    "attackRange": { "type": "number" },
+    "colour": { "type": "string" },
+    "accent": { "type": "string" },
+    "scale": { "type": "number" },
+    "fleeAtHp": { "type": "number" },
+    "traits": { "type": "object" },
+    "chipDrop": { "type": "number" }
+  }
+}

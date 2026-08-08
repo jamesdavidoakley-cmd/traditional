@@ -1,0 +1,115 @@
+{
+  "characterId": "kenji",
+  "pools": {
+    "ask_intro": [
+      "Yosh — a calibration check! Listen carefully, Max-kun.",
+      "Hmm, my instruments need one more reading. Help me measure this one?",
+      "Step one: hear the question. Step two: think. Step three: shine!",
+      "Botto has flagged a puzzle. Shall we solve it properly, Max-kun?",
+      "An engineer tests everything twice. Here is our test!",
+      "Ah! A chance for precision. Ready your brilliant brain.",
+      "My sketchbook has a gap exactly the shape of this answer.",
+      "Careful thinking now — good machines are built on good sums."
+    ],
+    "correct_first_try": [
+      "Sugoi! Precision-perfect, first try!",
+      "Yosh! The measurements agree — that is exactly right.",
+      "Beautiful work, Max-kun. Elegant as a well-oiled hinge!",
+      "Correct! Botto is doing his happy hover.",
+      "Ha! You solved it faster than I could sketch it."
+    ],
+    "correct_after_hint": [
+      "There it is! A good engineer uses every tool — hints included.",
+      "Yosh, exactly right! The second test is the one that counts.",
+      "Correct! See how the hint was a blueprint, and YOU did the building?",
+      "That's it, Max-kun! Slow and careful beats fast and wobbly."
+    ],
+    "incorrect_gentle": [
+      "Mm, close! A good engineer tests again. Want a hint?",
+      "Not quite — but every prototype teaches us something. Hint time?",
+      "Ah, that bolt doesn't fit. No matter! Shall I pass you a clue?",
+      "Almost, Max-kun. Even bridges need two tries sometimes. A hint, perhaps?",
+      "Hm! Interesting guess. Let us check the plans together — hint?"
+    ],
+    "hint_intro": [
+      "Here is a clue from my sketchbook:",
+      "Botto whispers a hint:",
+      "Look at it like an engineer:",
+      "Try this thought, Max-kun:"
+    ],
+    "teach": [
+      "Let us build the answer together, step by step.",
+      "No fossil lost! Watch closely — here is how it works.",
+      "Time for a proper demonstration. Every master was once a beginner."
+    ],
+    "streak_3": [
+      "Three in a row! Your brain-machine is warmed up!",
+      "A hat-trick of correct answers — sugoi!",
+      "Three! Like a perfect gear train, tooth after tooth after tooth."
+    ],
+    "streak_5": [
+      "FIVE in a row! Max-kun, you are running like a mag-lev train!",
+      "Five! I must sketch this moment for the record books.",
+      "Incredible — five straight! Even Botto is dizzy with joy."
+    ],
+    "fossil_get": [
+      "A Star Fossil! Measured, earned and utterly deserved.",
+      "Yosh! Another spark of knowledge back where it belongs.",
+      "Magnificent! I shall log this in the sketchbook — page one hundred!",
+      "The fossil hums with everything you just learned. Wonderful."
+    ],
+    "secret_found": [
+      "A hidden compartment! Excellent engineering instincts.",
+      "Oho! Even I did not have this on my blueprints.",
+      "Sugoi — a secret! Digger's nose and your feet, unbeatable.",
+      "Noted and sketched: one very sneaky hiding place."
+    ],
+    "task_complete": [
+      "Project complete! Plan, build, test, improve — you did all four.",
+      "Yosh — task finished and finished WELL.",
+      "Another job done properly. My tool-belt is proud of you.",
+      "Complete! You would make a fine apprentice, Max-kun."
+    ],
+    "quiz_orb": [
+      "A Quiz Orb! Quick thinking recharges mighty legs — want it?",
+      "Orb spotted! One question, one heart. Good trade, yes?",
+      "Botto found a Quiz Orb. A tiny test, a tasty reward!"
+    ],
+    "boss_intro": [
+      "Observe first, Max-kun. Every machine — and every fighter — has a pattern.",
+      "I will analyse their moves. You supply the bravery!",
+      "Remember: watch, wait, then WHAM. Engineering!"
+    ],
+    "battle_analyse": [
+      "Look — the shield arm drops after the third swing!",
+      "Their windup is long. That pause is YOUR window, Max-kun!",
+      "Pattern detected: they repeat after the big attack. Be ready!",
+      "See how they back away when hurt? Press forward — gently but firmly!",
+      "The armour is cracked! One more good stomp!"
+    ],
+    "boss_low_hp": [
+      "Nearly there! The mechanism is failing — keep going!",
+      "One more push, Max-kun! Precision, then victory!",
+      "Their pattern is crumbling. Finish it with a flourish!"
+    ],
+    "victory": [
+      "Yosh! Victory — calculated, then delivered!",
+      "The Obedience Cog is off! Freedom restored, friendship acquired.",
+      "A flawless result. Well fought, well thought!"
+    ],
+    "idle_nudge": [
+      "Hmm — shall we consult the fossil list? Press pause any time.",
+      "Botto suggests exploring that way. He is usually right.",
+      "When stuck, I walk the edges of a problem. And of a canyon!",
+      "Take your time, Max-kun. Good ideas cannot be rushed.",
+      "I am sketching the scenery. It is very sketchable today.",
+      "If you need a hint, Digger's nose is legendary. Press H!"
+    ],
+    "greeting": [
+      "Max-kun! Welcome to the workshop. Mind the sawdust.",
+      "Ah, perfect timing — I was just calibrating something wonderful.",
+      "Yosh! What shall we build today?",
+      "Welcome back! Botto has missed you. I can tell by the hovering."
+    ]
+  }
+}

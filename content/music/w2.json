@@ -1,0 +1,46 @@
+{
+  "id": "w2",
+  "bpm": 138,
+  "root": 55,
+  "mode": "dorian",
+  "layers": [
+    {
+      "name": "clockwork-waltz",
+      "wave": "square",
+      "octave": 0,
+      "gain": 0.07,
+      "decay": 0.14,
+      "steps": [0, null, null, null, 4, null, null, null, 2, null, null, null, 0, null, null, null, 5, null, null, null, 4, null, null, null]
+    },
+    {
+      "name": "oom-pah-bass",
+      "wave": "triangle",
+      "octave": -1,
+      "gain": 0.22,
+      "decay": 0.26,
+      "steps": [0, null, null, null, null, null, null, null, 4, null, null, null, 0, null, null, null, null, null, null, null, 3, null, null, null]
+    },
+    {
+      "name": "music-box",
+      "wave": "sine",
+      "octave": 1,
+      "gain": 0.06,
+      "decay": 0.32,
+      "steps": [null, null, 7, null, null, null, 6, null, null, null, 4, null, null, null, 7, null, null, null, 9, null, null, null, 8, null]
+    },
+    {
+      "name": "combat-gears",
+      "wave": "sawtooth",
+      "octave": 0,
+      "gain": 0.09,
+      "decay": 0.09,
+      "combat": true,
+      "steps": [0, null, 0, null, 3, null, 2, null, 0, null, 0, null, 4, null, 3, null]
+    }
+  ],
+  "perc": [
+    { "kind": "woodblock", "gain": 0.5, "steps": [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0] },
+    { "kind": "hat", "gain": 0.3, "steps": [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1] },
+    { "kind": "kick", "gain": 0.4, "steps": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
+  ]
+}

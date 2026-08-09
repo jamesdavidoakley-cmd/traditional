@@ -32,7 +32,7 @@
     { "type": "box", "pos": [-19, 5.2, 0], "size": [8.6, 0.5, 10.6], "colour": "#c43d3d" },
     { "type": "gen", "gen": "stairs", "params": { "from": [-14.2, 0.2, 0], "angleDeg": -90, "steps": 3, "rise": 0.42, "run": 1.1, "width": 5, "colour": "#c9a37b" } },
 
-    { "type": "gen", "gen": "ring", "params": { "center": [19, 0.8, 0], "radius": 8.4, "count": 13, "size": [1.7, 1.4, 1.7], "colour": "#c9a24a", "angleFrom": 25, "angleTo": 335 } },
+    { "type": "gen", "gen": "ring", "params": { "center": [19, 0.8, 0], "radius": 8.4, "count": 13, "size": [1.7, 1.4, 1.7], "colour": "#c9a24a", "angleFrom": 205, "angleTo": 515 } },
     { "type": "cylinder", "pos": [19, 0.18, 0], "size": [8, 0.3, 8.4], "colour": "#e0c088", "segments": 30 },
 
     { "type": "cylinder", "pos": [0, 0.25, 19], "size": [5.4, 0.4, 5.8], "colour": "#e0c088", "segments": 24 },

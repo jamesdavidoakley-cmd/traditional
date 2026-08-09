@@ -60,6 +60,8 @@ Decisions + progress log, per prime directives 7 and 10. This build delivers the
 
 ## Cross-cutting verification
 
+Screenshots referenced below live in `tools/screenshots/` locally (git-ignored); regenerate any of them with `npm run test:smoke` (golden path) or `node tools/shot.mjs "?level=w1&at=x,y,z,yawDeg" name.png "w:2000"` (any spot in any world). Boss fights verified on-screen headlessly: Quarry Foreman arena (barrier + quiz orbs + fight), Baroness Cogwheel (shield bubble armed, red telegraph ring mid-windup, phase-2 turret support visible). The scripted "7-year-old-shaped" 25-minute W1 playtest of the P4 gate is covered headlessly (task flows + warm loop unit-tested; worlds walked by bot); a human playtest remains the recommended next step before handing to an actual seven-year-old.
+
 - `npm run ci` = typecheck + validate + 19 unit/sim tests, all green.
 - `npm run validate` cross-checks: every ref resolves (tasks/bosses/movesets/voices/levels/music), fossil ids unique + 6 per themed world, ask-styles are companions, §3.6 pool minimums, **no hardcoded world ids in /src** (the content-only expansion invariant, also proven by `tests/content.test.ts`'s drop-in-w9 test).
 - Headless golden-path smoke with screenshots + zero-console-error assertion; `tools/shot.mjs "?level=w2&at=x,y,z"` for eyeballing any spot.

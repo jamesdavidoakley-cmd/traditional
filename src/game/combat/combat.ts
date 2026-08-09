@@ -711,6 +711,7 @@ export class CombatSystem {
   private mouthful = false;
   private gimmickStation: { mesh: THREE.Group; solved: boolean } | null = null;
   private rng = makeRng(1337);
+  private combatBarkT = 6;
 
   constructor(private game: Game) {
     bus.on('PlayerDamaged', ({ amount }) => this.boss?.notePlayerDamaged(amount));
@@ -802,7 +803,7 @@ export class CombatSystem {
       const base = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 1, 1, 10), toonMat('#6e5a3a'));
       base.position.copy(pos).add(new THREE.Vector3(0, 0.5, 0));
       g.add(base);
-      const label = makeTextLabel('⚙️ ' + S('fossil.w2-f6.name'));
+      const label = makeTextLabel('⚙️ ' + S('build.gears.title'));
       label.position.copy(pos).add(new THREE.Vector3(0, 2.6, 0));
       g.add(label);
       C().renderer.scene.add(g);
@@ -1077,6 +1078,18 @@ export class CombatSystem {
 
     if (this.boss) {
       this.boss.update(dt);
+      // companions coach from the sidelines (§6.1)
+      this.combatBarkT -= dt;
+      if (this.combatBarkT <= 0 && this.boss.alive) {
+        this.combatBarkT = 8 + Math.random() * 6;
+        const coaches: [string, string][] = [
+          ['kenji', 'battle_analyse'],
+          ['marcus', 'battle_coach'],
+          ['digger', 'battle_warn'],
+        ];
+        const [who, pool] = coaches[Math.floor(Math.random() * coaches.length)];
+        this.game.voice.bark(who, pool, {}, 2);
+      }
       if (!this.boss.alive && !this.victoryRunning) {
         this.victoryRunning = true;
         void this.victory().finally(() => (this.victoryRunning = false));

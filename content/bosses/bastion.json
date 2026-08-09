@@ -1,0 +1,22 @@
+{
+  "id": "bastion",
+  "nameKey": "char.bastion.name",
+  "titleKey": "boss.bastion.title",
+  "world": "w6",
+  "hp": 20,
+  "phases": 2,
+  "traits": { "aggression": 0.2, "caution": 0.9, "trickery": 0.3, "patience": 0.9, "showmanship": 0.3 },
+  "moveset": "sword_and_board",
+  "abilities": [
+    { "id": "rampart", "trigger": { "type": "onDistanceHeld", "value": 6, "range": "far" }, "effect": "rampart", "once": false, "cooldown": 14 }
+  ],
+  "voicePack": "voices/bastion.json",
+  "colour": "#2b5d8a",
+  "accent": "#c9ccd8",
+  "weapon": "sword_shield",
+  "scale": 1.2,
+  "speed": 3.2,
+  "contactDamage": 0.5,
+  "cafeGameKey": "bridge_load_test",
+  "cafeTopics": ["structures"]
+}

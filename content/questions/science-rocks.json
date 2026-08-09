@@ -1,0 +1,107 @@
+{
+  "id": "science-rocks",
+  "strand": "science",
+  "topic": "rocks",
+  "topicNameKey": "topic.rocks.name",
+  "questions": [
+    {
+      "id": "rk-t1-igneous",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Which rock is made from COOLED LAVA or magma?",
+      "answer": "Igneous",
+      "distractors": ["Sedimentary", "Metamorphic"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "'Igneous' means FIERY — think volcanoes!",
+      "explain": "Igneous rock forms when hot melted rock cools and hardens. Basalt and granite are igneous."
+    },
+    {
+      "id": "rk-t1-layers",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Which rock forms in LAYERS, squashed together over ages?",
+      "answer": "Sedimentary",
+      "distractors": ["Igneous", "Metamorphic"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Think of a sandwich pressed for millions of years!",
+      "explain": "Sediment — sand, mud, tiny shells — settles in layers and gets squashed into sedimentary rock, like sandstone and chalk."
+    },
+    {
+      "id": "rk-t1-fossilrock",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Fossils are usually found in which kind of rock?",
+      "answer": "Sedimentary",
+      "distractors": ["Igneous", "Metamorphic"],
+      "askStyles": ["digger", "kenji"],
+      "hint": "Fossils need gentle layers to hide in — not fiery lava!",
+      "explain": "Creatures get buried in soft sediment; as it turns to rock, they become fossils. Lava would burn them up!"
+    },
+    {
+      "id": "rk-t1-soil",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "What is soil mostly made of?",
+      "answer": "Tiny bits of rock and dead plants",
+      "distractors": ["Only sand", "Melted rock"],
+      "askStyles": ["digger", "marcus"],
+      "hint": "Two ingredients: crumbled rock plus rotted leaves and roots.",
+      "explain": "Soil is crushed rock mixed with organic matter (dead plants and creatures), air and water — a recipe that takes years!"
+    },
+    {
+      "id": "rk-t2-metamorphic",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Rock that has been CHANGED by squeezing and heat deep underground is called…?",
+      "answer": "Metamorphic",
+      "distractors": ["Sedimentary", "Igneous"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "'Metamorphosis' means change — like a caterpillar to a butterfly!",
+      "explain": "Heat and pressure transform old rock into metamorphic rock: limestone becomes marble, mudstone becomes slate."
+    },
+    {
+      "id": "rk-t2-marble",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Marble is made when LIMESTONE is heated and squeezed. What kind of rock is marble?",
+      "answer": "Metamorphic",
+      "distractors": ["Igneous", "Sedimentary"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "It CHANGED from one rock to another…",
+      "explain": "Marble is limestone transformed by heat and pressure — a metamorphic makeover. Roman statues thank it!"
+    },
+    {
+      "id": "rk-t2-permeable",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Water soaks THROUGH some rocks. What do we call rocks that let water through?",
+      "answer": "Permeable",
+      "distractors": ["Impermeable", "Invisible"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Per-me-able — water can 'pass through' it.",
+      "explain": "Permeable rocks like sandstone have tiny gaps that let water through; impermeable rocks like slate block it."
+    },
+    {
+      "id": "rk-t3-fossilsteps",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "What replaces a buried dinosaur's bones to make a fossil?",
+      "answer": "Minerals",
+      "distractors": ["Ice", "Wood"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Rocky stuff dissolved in water, seeping in bit by bit…",
+      "explain": "Over thousands of years, minerals in water slowly replace the bone, leaving a rock copy — a fossil!"
+    },
+    {
+      "id": "rk-t3-cycle",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "Lava cools into igneous rock. That rock wears down into sand, which gets squashed into…?",
+      "answer": "Sedimentary rock",
+      "distractors": ["More lava", "Metal"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Layers of squashed bits make which rock family?",
+      "explain": "Rock keeps changing in a slow loop — the rock cycle! Worn-down bits settle in layers and become sedimentary rock."
+    }
+  ]
+}

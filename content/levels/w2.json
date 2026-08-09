@@ -1,0 +1,155 @@
+{
+  "id": "w2",
+  "nameKey": "world.w2.name",
+  "music": "w2",
+  "factsKey": "facts.w2",
+  "bonusFossilId": "w2-bonus",
+  "palette": {
+    "sky": ["#c9a06a", "#f0e0c0"],
+    "fog": "#d8c9a8",
+    "fogNear": 50,
+    "fogFar": 200,
+    "sun": "#ffe9c4",
+    "sunIntensity": 2.2,
+    "ambient": "#e0c9a0",
+    "ambientIntensity": 0.85,
+    "ground": "#6e5a3a"
+  },
+  "spawn": [-56, 1.6, 0],
+  "spawnFaceDeg": 90,
+  "killY": -14,
+  "geometry": [
+    { "type": "box", "pos": [0, -1.5, 0], "size": [132, 3, 72], "colour": "#a8763f" },
+    { "type": "box", "pos": [0, 6, 35.5], "size": [132, 15, 3], "colour": "#8a5c32" },
+    { "type": "box", "pos": [0, 6, -35.5], "size": [132, 15, 3], "colour": "#8a5c32" },
+    { "type": "box", "pos": [-65.5, 6, 0], "size": [3, 15, 72], "colour": "#8a5c32" },
+    { "type": "box", "pos": [65.5, 6, 0], "size": [3, 15, 72], "colour": "#8a5c32" },
+
+    { "type": "box", "pos": [-30, 0.25, -8], "size": [10, 0.5, 8], "colour": "#b8863b" },
+    { "type": "box", "pos": [-38, 0.25, 8], "size": [10, 0.5, 8], "colour": "#b8863b" },
+    { "type": "cylinder", "pos": [-22, 1, 14], "size": [4, 2, 4.4], "colour": "#a85c32", "segments": 18 },
+
+    { "type": "box", "pos": [3, 0.2, 0], "size": [26, 0.4, 13], "colour": "#9a6a3a" },
+    { "type": "box", "pos": [4, 0.25, 22], "size": [10, 0.5, 8], "colour": "#8a5c32" },
+    { "type": "box", "pos": [-1, 2.5, 22], "size": [1.2, 5, 8], "colour": "#7a4e2c" },
+    { "type": "box", "pos": [9, 2.5, 22], "size": [1.2, 5, 8], "colour": "#7a4e2c" },
+    { "type": "box", "pos": [4, 5.2, 22], "size": [11.4, 0.6, 8.6], "colour": "#7a4e2c" },
+
+    { "type": "box", "pos": [14, 0.25, -12], "size": [9, 0.5, 8], "colour": "#b8863b" },
+    { "type": "box", "pos": [19, 7.4, -20], "size": [5, 0.6, 5], "colour": "#c9a24a" },
+
+    { "type": "gen", "gen": "stairs", "params": { "from": [24, 0.2, 12], "angleDeg": 180, "steps": 4, "rise": 0.55, "run": 1.3, "width": 4, "colour": "#c9a24a" } },
+    { "type": "box", "pos": [24, 2.3, 4], "size": [4.4, 0.5, 4.4], "colour": "#c9a24a" },
+    { "type": "box", "pos": [36, 3.4, -3], "size": [3.6, 0.5, 3.6], "colour": "#c9a24a" },
+    { "type": "box", "pos": [46, 5, -9], "size": [3.6, 0.5, 3.6], "colour": "#c9a24a" },
+    { "type": "box", "pos": [51, 6.3, -15], "size": [4.2, 0.6, 4.2], "colour": "#ffd75e" },
+
+    { "type": "cylinder", "pos": [10, 0.3, 26], "size": [11, 0.6, 11.5], "colour": "#e0c088", "segments": 32 },
+    { "type": "cylinder", "pos": [54, 0.3, 2], "size": [13.5, 0.6, 14], "colour": "#e0c088", "segments": 36 }
+  ],
+  "decor": [
+    { "type": "standGear", "pos": [-48, 0.2, -14], "scale": 1.6, "colour": "#a85c32" },
+    { "type": "standGear", "pos": [-44, 0.2, 16], "scale": 1.2, "colour": "#b8863b" },
+    { "type": "bigGear", "pos": [-24, 0.1, -18], "scale": 1.4 },
+    { "type": "bigGear", "pos": [-52, 0.1, 6], "colour": "#4E9B8F" },
+    { "type": "cogPile", "pos": [-33, 0.4, 0] },
+    { "type": "cogPile", "pos": [16, 0.4, 6] },
+    { "type": "pipe", "pos": [-14, 0.2, -20] },
+    { "type": "pipe", "pos": [0, 0.2, -22], "rot": [0, 90, 0] },
+    { "type": "chimney", "pos": [-8, 0.2, 28] },
+    { "type": "chimney", "pos": [26, 0.2, -28] },
+    { "type": "steamStack", "pos": [-4, 0.2, 10] },
+    { "type": "steamStack", "pos": [10, 0.2, -6] },
+    { "type": "barrel", "pos": [-27, 0.6, 6], "colour": "#6e5a3a" },
+    { "type": "crate", "pos": [-25.5, 0.6, 7.2], "colour": "#a8763f" },
+    { "type": "sign", "pos": [-50, 0.3, 4], "text": "⚙️ The Gear Yard" },
+    { "type": "sign", "pos": [-6, 0.3, 5.6], "text": "♨️ Steamworks — mind the vents!" },
+    { "type": "sign", "pos": [24, 0.3, 16.5], "text": "🏃 Conveyor Gauntlet" },
+    { "type": "sign", "pos": [2, 0.4, 15.5], "text": "⚔️ Tinkerer's Pocket" },
+    { "type": "sign", "pos": [43, 0.4, 6], "text": "👑 The Baroness awaits" },
+    { "type": "standGear", "pos": [58, 0.2, -20], "scale": 1.3, "colour": "#6e5a8a" },
+    { "type": "banner", "pos": [46, 0.3, -4], "colour": "#6e5a8a" },
+    { "type": "banner", "pos": [46, 0.3, 8], "colour": "#6e5a8a" },
+    { "type": "cogPile", "pos": [50, 0.4, 12] },
+    { "type": "lamp", "pos": [-40, 0.3, 0] },
+    { "type": "lamp", "pos": [-12, 0.3, -10] },
+    { "type": "lamp", "pos": [20, 0.3, 10] }
+  ],
+  "platforms": [
+    { "type": "rotor", "pos": [-18, 1.1, -2], "radius": 3.2, "size": [0, 0.5, 0], "speed": 0.55, "colour": "#a85c32" },
+    { "type": "rotor", "pos": [-10, 1.7, -12], "radius": 2.8, "size": [0, 0.5, 0], "speed": -0.7, "colour": "#b8863b" },
+    { "type": "lift", "pos": [16, 3.4, -16], "size": [3, 0.5, 3], "axis": [0, 1, 0], "range": 3.4, "speed": 0.75, "colour": "#7fb8e0" },
+    { "type": "conveyor", "pos": [28, 2.5, 2.4], "size": [2.8, 0.5, 9], "direction": [0, 0, 1], "speed": 2.6, "colour": "#7a8aa0" },
+    { "type": "conveyor", "pos": [32, 2.9, -3], "size": [8, 0.5, 2.8], "direction": [-1, 0, 0], "speed": 2.8, "colour": "#7a8aa0" },
+    { "type": "conveyor", "pos": [41, 4.2, -6], "size": [7, 0.5, 2.8], "direction": [-1, 0, 0], "speed": 3.2, "colour": "#7a8aa0" },
+    { "type": "crumble", "pos": [42, 4.6, -12], "size": [2.5, 0.5, 2.5] },
+    { "type": "crumble", "pos": [48, 5.6, -12.5], "size": [2.5, 0.5, 2.5] },
+    { "type": "bounce", "pos": [-22, 0.4, 20] },
+    { "type": "excavation", "pos": [-46, 0.35, -6], "size": [2.6, 0.4, 2.6] }
+  ],
+  "hazards": [
+    { "type": "steamVent", "pos": [-4, 0.3, 0], "interval": 3.2, "phase": 0 },
+    { "type": "steamVent", "pos": [0, 0.3, -2.5], "interval": 3.2, "phase": 1.1 },
+    { "type": "steamVent", "pos": [4, 0.3, 0.5], "interval": 3.2, "phase": 2.2 },
+    { "type": "steamVent", "pos": [8, 0.3, -2], "interval": 3.4, "phase": 0.6 },
+    { "type": "steamVent", "pos": [1.5, 0.3, 19], "interval": 4, "phase": 0 },
+    { "type": "steamVent", "pos": [6.5, 0.3, 19], "interval": 4, "phase": 2 }
+  ],
+  "collectibles": [
+    { "kind": "chip", "arc": { "center": [-34, 0.8, 0], "radius": 12, "from": 0, "to": 350, "count": 16 } },
+    { "kind": "chip", "line": { "from": [-52, 0.8, 0], "to": [-14, 0.8, 0], "count": 10 } },
+    { "kind": "chip", "line": { "from": [-10, 0.8, -3], "to": [12, 0.8, -3], "count": 8 } },
+    { "kind": "chip", "line": { "from": [16, 7.8, -16], "to": [21, 7.8, -20], "count": 4 } },
+    { "kind": "chip", "line": { "from": [28, 3, 6], "to": [28, 3, -1], "count": 4 } },
+    { "kind": "chip", "line": { "from": [34, 3.4, -3], "to": [46, 5.5, -9], "count": 6 } },
+    { "kind": "chip", "arc": { "center": [51, 7, -15], "radius": 1.7, "from": 0, "to": 300, "count": 4 } },
+    { "kind": "chip", "arc": { "center": [0, 0.8, 0], "radius": 30, "from": 100, "to": 260, "count": 12 } },
+    { "kind": "chip", "arc": { "center": [0, 0.8, 0], "radius": 30, "from": 280, "to": 440, "count": 12 } },
+    { "kind": "chip", "line": { "from": [0, 0.8, 12], "to": [8, 0.8, 18], "count": 6 } },
+    { "kind": "chip", "line": { "from": [40, 0.8, 2], "to": [47, 0.8, 2], "count": 5 } },
+    { "kind": "chip", "arc": { "center": [-22, 2.6, 14], "radius": 2.4, "from": 0, "to": 320, "count": 5 } },
+    { "kind": "chip", "line": { "from": [-45, 0.8, 12], "to": [-31, 0.8, 12], "count": 8 } },
+    { "kind": "heart", "pos": [19, 8.3, -20] },
+    { "kind": "heart", "pos": [-22, 2.9, 14] }
+  ],
+  "fossils": [
+    { "id": "w2-f1", "kind": "task", "nameKey": "fossil.w2-f1.name", "hintKey": "fossil.w2-f1.hint", "hintSpeaker": "kenji", "taskRef": "w2_gear_train" },
+    { "id": "w2-f2", "kind": "task", "nameKey": "fossil.w2-f2.name", "hintKey": "fossil.w2-f2.hint", "hintSpeaker": "kenji", "taskRef": "w2_counterweight" },
+    { "id": "w2-f3", "kind": "secret", "nameKey": "fossil.w2-f3.name", "hintKey": "fossil.w2-f3.hint", "hintSpeaker": "digger", "pos": [4, 1.8, 24] },
+    { "id": "w2-f4", "kind": "platforming", "nameKey": "fossil.w2-f4.name", "hintKey": "fossil.w2-f4.hint", "hintSpeaker": "marcus", "pos": [51, 8, -15] },
+    { "id": "w2-f5", "kind": "arena", "nameKey": "fossil.w2-f5.name", "hintKey": "fossil.w2-f5.hint", "hintSpeaker": "marcus", "bossRef": "tinkerer_prime" },
+    { "id": "w2-f6", "kind": "boss", "nameKey": "fossil.w2-f6.name", "hintKey": "fossil.w2-f6.hint", "hintSpeaker": "kenji", "bossRef": "cogwheel" }
+  ],
+  "doors": [{ "worldId": "hub", "pos": [-61, 1.4, 0], "faceDeg": 90 }],
+  "triggers": [
+    { "id": "w2-zone-yard", "kind": "zoneName", "pos": [-36, 2, 0], "radius": 11, "data": { "nameKey": "zone.w2.yard" } },
+    { "id": "w2-zone-steam", "kind": "zoneName", "pos": [3, 2, 0], "radius": 10, "data": { "nameKey": "zone.w2.steam" } },
+    { "id": "w2-zone-gauntlet", "kind": "zoneName", "pos": [26, 2, 8], "radius": 8, "data": { "nameKey": "zone.w2.gauntlet" } },
+    { "id": "w2-check-yard", "kind": "checkpoint", "pos": [-46, 1, 0], "radius": 3.5 },
+    { "id": "w2-check-steam", "kind": "checkpoint", "pos": [-10, 1, 0], "radius": 3.5 },
+    { "id": "w2-check-gauntlet", "kind": "checkpoint", "pos": [24, 1, 10], "radius": 3.5 },
+    { "id": "w2-f3", "kind": "secretSniff", "pos": [4, 1.5, 23], "radius": 2.6, "data": { "fossilId": "w2-f3" } },
+    { "id": "w2-gate-tinkerer", "kind": "arenaGate", "pos": [7, 1.2, 16.5], "radius": 3, "data": { "arenaId": "w2-arena-tinkerer" } },
+    { "id": "w2-gate-cogwheel", "kind": "arenaGate", "pos": [44, 1.2, 2], "radius": 3.2, "data": { "arenaId": "w2-arena-cogwheel" } }
+  ],
+  "enemies": [
+    { "ref": "cogling_scout", "pos": [-40, 1, -6] },
+    { "ref": "cogling_scout", "pos": [-28, 1, 10] },
+    { "ref": "cogling_tinkerer", "pos": [-34, 1, -4] },
+    { "ref": "cogling_brute", "pos": [-16, 1, 4] },
+    { "ref": "cogling_brute", "pos": [6, 1, -8] },
+    { "ref": "cogling_tinkerer", "pos": [10, 1, -10] },
+    { "ref": "cogling_scout", "pos": [30, 1, 12] },
+    { "ref": "cogling_scout", "pos": [44, 1, -2] }
+  ],
+  "arenas": [
+    { "id": "w2-arena-tinkerer", "bossRef": "tinkerer_prime", "fossilId": "w2-f5", "center": [10, 1, 26], "radius": 10, "entrance": [7, 1.4, 16.5], "quizOrbs": 2 },
+    { "id": "w2-arena-cogwheel", "bossRef": "cogwheel", "fossilId": "w2-f6", "center": [54, 1, 2], "radius": 12.5, "entrance": [44, 1.4, 2], "quizOrbs": 2, "gimmickPos": [[54, 1, 13]] }
+  ],
+  "tasks": [
+    { "ref": "w2_gear_train", "pos": [-30, 0.8, -8], "faceDeg": 0 },
+    { "ref": "w2_symmetry_sort", "pos": [-38, 0.8, 8], "faceDeg": 170 },
+    { "ref": "w2_counterweight", "pos": [13, 0.8, -12], "faceDeg": -30 },
+    { "ref": "w2_times_path", "pos": [26, 0.8, 16], "faceDeg": 10 }
+  ]
+}

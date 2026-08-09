@@ -1,0 +1,23 @@
+{
+  "id": "w2_symmetry_sort",
+  "archetype": "sort",
+  "titleKey": "task.w2_symmetry_sort.title",
+  "topicId": "symmetry",
+  "companion": "kenji",
+  "sort": {
+    "categories": [
+      { "id": "symmetric", "labelKey": "sort.category.symmetric", "colour": "#7fb8e0" },
+      { "id": "asymmetric", "labelKey": "sort.category.asymmetric", "colour": "#e0a87f" }
+    ],
+    "items": [
+      { "id": "roundcog", "label": "Round cog", "category": "symmetric", "shape": "cog", "colour": "#B8863B", "fact": "Even teeth all around — fold it any way through the middle and it matches!" },
+      { "id": "butterflyplate", "label": "Butterfly plate", "category": "symmetric", "shape": "butterfly", "colour": "#8ac9e8", "fact": "One wing mirrors the other — a perfect line of symmetry down the middle." },
+      { "id": "sixcog", "label": "Six-tooth cog", "category": "symmetric", "shape": "cog", "colour": "#a85c32", "fact": "Symmetrical cogs run smoothly — balance stops the wobble!" },
+      { "id": "lopsided", "label": "Lopsided cog", "category": "asymmetric", "shape": "cogAsym", "colour": "#7a8aa0", "fact": "That extra lump means NO fold line matches — it would wobble terribly." },
+      { "id": "bentlever", "label": "Bent lever", "category": "asymmetric", "shape": "cogAsym", "colour": "#6e5a3a", "fact": "Bent out of shape — no mirror halves here." },
+      { "id": "snailspring", "label": "Snail spring", "category": "asymmetric", "shape": "cogAsym", "colour": "#4E9B8F", "fact": "Spirals curl one way only — flip it and it looks different. Not symmetrical!" }
+    ],
+    "itemsPerRound": { "1": 4, "2": 5, "3": 6 }
+  },
+  "reward": { "brainPower": 2 }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "hub_roman_board",
+  "archetype": "quickfire",
+  "titleKey": "task.hub_roman_board.title",
+  "topicId": "roman-numerals",
+  "companion": "marcus",
+  "quickfire": { "count": 3 },
+  "reward": { "fossilId": "hub-f2" }
+}

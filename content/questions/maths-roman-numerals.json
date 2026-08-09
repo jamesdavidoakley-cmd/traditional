@@ -1,0 +1,118 @@
+{
+  "id": "maths-roman-numerals",
+  "strand": "maths",
+  "topic": "roman-numerals",
+  "topicNameKey": "topic.roman-numerals.name",
+  "questions": [
+    {
+      "id": "rn-t1-basic",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Marcus scored VII in the arena. What number is VII?",
+      "answer": "7",
+      "distractors": ["6", "8"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "V is 5, and each I adds one more.",
+      "explain": "VII = V (5) + I + I (2) = 7. Read left to right, adding as you go."
+    },
+    {
+      "id": "rn-t1-nine",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "What number is IX?",
+      "answer": "9",
+      "distractors": ["11", "10"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "A small I BEFORE the X means one LESS than ten.",
+      "explain": "IX = 10 − 1 = 9. When a smaller numeral comes first, subtract it!"
+    },
+    {
+      "id": "rn-t1-twelve",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "The arena clock shows XII. What hour is that?",
+      "answer": "12",
+      "distractors": ["11", "13"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "X is ten, and II adds two more.",
+      "explain": "XII = X (10) + II (2) = 12 — the top of every clock in Rome!"
+    },
+    {
+      "id": "rn-t1-four",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "What number is IV?",
+      "answer": "4",
+      "distractors": ["6", "5"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "I before V takes one away from five.",
+      "explain": "IV = 5 − 1 = 4. Romans loved this subtraction shortcut."
+    },
+    {
+      "id": "rn-t2-write14",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "How do Romans write 14?",
+      "answer": "XIV",
+      "distractors": ["XIIII", "IVX"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "Ten, then four: X then IV.",
+      "explain": "14 = 10 + 4 = X + IV = XIV."
+    },
+    {
+      "id": "rn-t2-xvi",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "The scoreboard shows XVI. What's the score?",
+      "answer": "16",
+      "distractors": ["14", "21"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "X (10) + V (5) + I (1)…",
+      "explain": "XVI = 10 + 5 + 1 = 16. Add left to right when big comes first."
+    },
+    {
+      "id": "rn-t2-xl",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "What number is XL?",
+      "answer": "40",
+      "distractors": ["60", "45"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "L is 50 — and the X before it takes ten AWAY.",
+      "explain": "XL = 50 − 10 = 40. Small before big means subtract."
+    },
+    {
+      "id": "rn-t3-lxx",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "A legion has LXXV soldiers. How many is that?",
+      "answer": "75",
+      "distractors": ["65", "80"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "L (50) + XX (20) + V (5).",
+      "explain": "LXXV = 50 + 10 + 10 + 5 = 75. March through it numeral by numeral!"
+    },
+    {
+      "id": "rn-t3-xc",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "What number is XC?",
+      "answer": "90",
+      "distractors": ["110", "60"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "C is 100. X before C subtracts ten.",
+      "explain": "XC = 100 − 10 = 90. The subtraction trick works for tens too."
+    },
+    {
+      "id": "rn-t3-write99",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "How do Romans write 99?",
+      "answer": "XCIX",
+      "distractors": ["IC", "LXXXXIX"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "Build it in parts: 90 (XC) then 9 (IX).",
+      "explain": "99 = 90 + 9 = XC + IX = XCIX. Never subtract more than one step!"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "w1_placevalue_path",
+  "archetype": "path",
+  "titleKey": "task.w1_placevalue_path.title",
+  "topicId": "place-value",
+  "companion": "digger",
+  "path": {
+    "mode": "sequence",
+    "tiers": {
+      "1": { "start": 110, "step": 10, "length": 5 },
+      "2": { "start": 250, "step": 50, "length": 6 },
+      "3": { "start": 3400, "step": 100, "length": 7 }
+    }
+  },
+  "reward": { "brainPower": 2 }
+}

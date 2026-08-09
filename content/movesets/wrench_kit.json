@@ -1,0 +1,120 @@
+{
+  "id": "wrench_kit",
+  "moves": [
+    {
+      "id": "wrench_bonk",
+      "tags": [
+        "strike"
+      ],
+      "bandWeights": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "baseWeight": 1.0,
+      "windup": 0.75,
+      "active": 0.3,
+      "recover": 0.7,
+      "damage": 1,
+      "motion": "lunge"
+    },
+    {
+      "id": "spanner_throw",
+      "tags": [
+        "ranged"
+      ],
+      "bandWeights": [
+        0.1,
+        0.9,
+        1.0
+      ],
+      "baseWeight": 0.75,
+      "windup": 0.7,
+      "active": 0.3,
+      "recover": 0.5,
+      "damage": 0.5,
+      "motion": "none",
+      "projectile": true
+    },
+    {
+      "id": "tighten_up",
+      "tags": [
+        "defend"
+      ],
+      "bandWeights": [
+        1.0,
+        0.8,
+        0.3
+      ],
+      "baseWeight": 0.5,
+      "windup": 0.1,
+      "active": 1.2,
+      "recover": 0.3,
+      "motion": "hold"
+    },
+    {
+      "id": "scuttle",
+      "tags": [
+        "reposition"
+      ],
+      "bandWeights": [
+        0.8,
+        0.9,
+        0.5
+      ],
+      "baseWeight": 0.6,
+      "windup": 0.0,
+      "active": 0.6,
+      "recover": 0.2,
+      "motion": "circle"
+    },
+    {
+      "id": "lumber",
+      "tags": [
+        "approach"
+      ],
+      "bandWeights": [
+        0.0,
+        0.8,
+        1.0
+      ],
+      "baseWeight": 0.8,
+      "windup": 0.0,
+      "active": 0.8,
+      "recover": 0.1,
+      "motion": "chase"
+    },
+    {
+      "id": "foremans_boast",
+      "tags": [
+        "flourish"
+      ],
+      "bandWeights": [
+        0.4,
+        0.8,
+        1.0
+      ],
+      "baseWeight": 0.45,
+      "windup": 0.2,
+      "active": 0.7,
+      "recover": 0.3,
+      "motion": "none"
+    },
+    {
+      "id": "oil_break",
+      "tags": [
+        "wait"
+      ],
+      "bandWeights": [
+        0.2,
+        0.6,
+        1.0
+      ],
+      "baseWeight": 0.4,
+      "windup": 0.0,
+      "active": 0.8,
+      "recover": 0.1,
+      "motion": "none"
+    }
+  ]
+}

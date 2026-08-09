@@ -1,0 +1,134 @@
+{
+  "id": "w1",
+  "nameKey": "world.w1.name",
+  "music": "w1",
+  "factsKey": "facts.w1",
+  "bonusFossilId": "w1-bonus",
+  "palette": {
+    "sky": ["#6FD5C9", "#ffd98a"],
+    "fog": "#e8c9a0",
+    "fogNear": 55,
+    "fogFar": 210,
+    "sun": "#ffe9c4",
+    "sunIntensity": 2.5,
+    "ambient": "#ffd9a8",
+    "ambientIntensity": 0.85,
+    "ground": "#a05c3a"
+  },
+  "spawn": [0, 1.6, 44],
+  "spawnFaceDeg": 180,
+  "killY": -14,
+  "geometry": [
+    { "type": "gen", "gen": "floor", "params": { "shape": "cylinder", "radius": 58, "height": 3, "colour": "#d0855c", "rimColour": "#8a4a34", "segments": 56 } },
+    { "type": "gen", "gen": "canyon", "params": { "center": [0, 0, 0], "radius": 51, "height": 15, "segments": 26, "colour": "#b0674a", "gapAngles": [90], "gapWidth": 18, "seed": 11 } },
+
+    { "type": "ramp", "pos": [6, 0, 16], "size": [6, 2.4, 8], "rot": [0, 25, 0], "colour": "#dd9468" },
+    { "type": "ramp", "pos": [-9, 0, 4], "size": [5, 1.8, 7], "rot": [0, -140, 0], "colour": "#dd9468" },
+    { "type": "cylinder", "pos": [12, 0.9, 4], "size": [4.5, 1.8, 5], "colour": "#c9784f", "segments": 18 },
+    { "type": "cylinder", "pos": [-14, 1.2, 14], "size": [3.6, 2.4, 4], "colour": "#c9784f", "segments": 16 },
+    { "type": "box", "pos": [2, 3.2, 22], "size": [3, 0.5, 3], "colour": "#e8b96b" },
+
+    { "type": "cylinder", "pos": [-32, 0.5, -16], "size": [14, 1, 14.5], "colour": "#c9885f", "segments": 34 },
+    { "type": "cylinder", "pos": [-32, 1.5, -16], "size": [10, 1, 10.4], "colour": "#d99a6a", "segments": 30 },
+    { "type": "cylinder", "pos": [-32, 2.5, -16], "size": [6.2, 1, 6.5], "colour": "#e8ac78", "segments": 26 },
+    { "type": "gen", "gen": "stairs", "params": { "from": [-20.5, 0.4, -9], "angleDeg": -132, "steps": 5, "rise": 0.55, "run": 1.3, "width": 4, "colour": "#c9a37b" } },
+
+    { "type": "gen", "gen": "ring", "params": { "center": [34, 0, -16], "radius": 8.5, "count": 7, "size": [1.6, 7, 1.6], "colour": "#efe6d8", "yJitter": 1.2, "seed": 5 } },
+    { "type": "gen", "gen": "stairs", "params": { "from": [27, 0.2, -7], "angleDeg": 120, "steps": 6, "rise": 0.8, "run": 1.5, "width": 3.6, "colour": "#e8b96b" } },
+    { "type": "box", "pos": [40, 5.6, -13], "size": [3.4, 0.6, 3.4], "colour": "#e8b96b" },
+    { "type": "box", "pos": [43, 9.8, -19], "size": [3, 0.5, 3], "colour": "#e8b96b" },
+    { "type": "box", "pos": [37, 13.4, -25], "size": [4.4, 0.6, 4.4], "colour": "#ffd75e" },
+
+    { "type": "cylinder", "pos": [30, 0.4, 31], "size": [12.5, 0.8, 13], "colour": "#e0c088", "segments": 34 },
+    { "type": "cylinder", "pos": [-30, 0.4, 32], "size": [13.5, 0.8, 14], "colour": "#e0c088", "segments": 34 },
+
+    { "type": "box", "pos": [-44.5, 2.5, -2.5], "size": [6, 5, 1.2], "rot": [0, 12, 0], "colour": "#9a5a40" },
+    { "type": "box", "pos": [-44.5, 2.5, 3.2], "size": [6, 5, 1.2], "rot": [0, -14, 0], "colour": "#9a5a40" },
+    { "type": "box", "pos": [-46.8, 5.2, 0.4], "size": [6, 1, 6], "rot": [0, 0, 8], "colour": "#9a5a40" }
+  ],
+  "decor": [
+    { "type": "boneArch", "pos": [-9, 0.2, 34], "rot": [0, 30, 0], "scale": 1.4 },
+    { "type": "boneArch", "pos": [7, 0.2, 25], "rot": [0, 60, 0] },
+    { "type": "cactus", "pos": [8, 0.2, 30] },
+    { "type": "cactus", "pos": [-12, 0.2, 22] },
+    { "type": "cactus", "pos": [16, 0.2, 12] },
+    { "type": "rock", "pos": [10, 0.2, 22], "scale": 1.5 },
+    { "type": "rock", "pos": [-4, 0.2, 12], "scale": 1.1 },
+    { "type": "skullRock", "pos": [4, 0.2, 6], "rot": [0, -30, 0] },
+    { "type": "ribs", "pos": [-30, 3.2, -14], "rot": [0, 40, 0], "scale": 1.3 },
+    { "type": "skullRock", "pos": [-27, 3.1, -19], "rot": [0, 70, 0], "scale": 1.4 },
+    { "type": "sign", "pos": [-19, 0.4, -6], "text": "⛏ The Great Dig" },
+    { "type": "sign", "pos": [25.5, 0.3, -5], "text": "🦴 Bonehenge" },
+    { "type": "sign", "pos": [20, 0.3, 20], "text": "⚔️ The Quarry Arena" },
+    { "type": "sign", "pos": [-18, 0.3, 22], "text": "👑 Bruno's Arena" },
+    { "type": "sign", "pos": [-38, 0.3, 6], "text": "🐾 …smells bony here?" },
+    { "type": "cactus", "pos": [30, 0.2, 8] },
+    { "type": "rock", "pos": [-20, 0.2, 6], "scale": 1.2 },
+    { "type": "bush", "pos": [24, 0.3, -28], "colour": "#8a9e4a" },
+    { "type": "rock", "pos": [44, 0.3, 4], "scale": 1.6 },
+    { "type": "skullRock", "pos": [0, 0.3, -34], "rot": [0, 10, 0], "scale": 1.2 },
+    { "type": "ribs", "pos": [8, 0.2, -40], "rot": [0, -30, 0] }
+  ],
+  "platforms": [
+    { "type": "excavation", "pos": [-2, 0.35, 18], "size": [2.6, 0.4, 2.6] },
+    { "type": "excavation", "pos": [14, 0.35, -30], "size": [2.6, 0.4, 2.6] },
+    { "type": "excavation", "pos": [-45.5, 0.35, 0.3], "size": [2.8, 0.4, 2.8], "reveals": "w1-f3" },
+    { "type": "crumble", "pos": [33, 3.4, -6], "size": [2.6, 0.5, 2.6] },
+    { "type": "crumble", "pos": [37, 4.5, -9], "size": [2.6, 0.5, 2.6] },
+    { "type": "lift", "pos": [42, 7.6, -16], "size": [2.8, 0.5, 2.8], "axis": [0, 1, 0], "range": 2.2, "speed": 0.85, "colour": "#7fb8e0" },
+    { "type": "bounce", "pos": [2, 0.5, 27] }
+  ],
+  "hazards": [],
+  "collectibles": [
+    { "kind": "chip", "arc": { "center": [0, 0.8, 12], "radius": 13, "from": 0, "to": 350, "count": 20 } },
+    { "kind": "chip", "arc": { "center": [0, 0.8, 12], "radius": 6, "from": 0, "to": 350, "count": 8 } },
+    { "kind": "chip", "arc": { "center": [-32, 1.4, -16], "radius": 11.5, "from": 0, "to": 350, "count": 14 } },
+    { "kind": "chip", "line": { "from": [-24, 3.2, -12], "to": [-38, 3.2, -20], "count": 6 } },
+    { "kind": "chip", "line": { "from": [29, 1.4, -9], "to": [36, 5.4, -12], "count": 6 } },
+    { "kind": "chip", "line": { "from": [40, 6.4, -13], "to": [37, 14.2, -25], "count": 6 } },
+    { "kind": "chip", "arc": { "center": [37, 14.6, -25], "radius": 1.6, "from": 0, "to": 300, "count": 4 } },
+    { "kind": "chip", "arc": { "center": [0, 0.8, 0], "radius": 41, "from": 15, "to": 345, "count": 24 } },
+    { "kind": "chip", "line": { "from": [20, 0.9, 16], "to": [27, 0.9, 24], "count": 6 } },
+    { "kind": "chip", "line": { "from": [-16, 0.9, 18], "to": [-24, 0.9, 26], "count": 6 } },
+    { "kind": "heart", "pos": [12, 2.4, 4] },
+    { "kind": "heart", "pos": [-32, 3.6, -16] }
+  ],
+  "fossils": [
+    { "id": "w1-f1", "kind": "task", "nameKey": "fossil.w1-f1.name", "hintKey": "fossil.w1-f1.hint", "hintSpeaker": "kenji", "taskRef": "w1_sorting_stones" },
+    { "id": "w1-f2", "kind": "task", "nameKey": "fossil.w1-f2.name", "hintKey": "fossil.w1-f2.hint", "hintSpeaker": "kenji", "taskRef": "w1_skeleton" },
+    { "id": "w1-f3", "kind": "secret", "nameKey": "fossil.w1-f3.name", "hintKey": "fossil.w1-f3.hint", "hintSpeaker": "digger", "pos": [-45.5, 1.6, 0.3] },
+    { "id": "w1-f4", "kind": "platforming", "nameKey": "fossil.w1-f4.name", "hintKey": "fossil.w1-f4.hint", "hintSpeaker": "digger", "pos": [37, 15, -25] },
+    { "id": "w1-f5", "kind": "arena", "nameKey": "fossil.w1-f5.name", "hintKey": "fossil.w1-f5.hint", "hintSpeaker": "marcus", "bossRef": "quarry_foreman" },
+    { "id": "w1-f6", "kind": "boss", "nameKey": "fossil.w1-f6.name", "hintKey": "fossil.w1-f6.hint", "hintSpeaker": "marcus", "bossRef": "bruno" }
+  ],
+  "doors": [{ "worldId": "hub", "pos": [0, 1.6, 52.5], "faceDeg": 180 }],
+  "triggers": [
+    { "id": "w1-zone-gulch", "kind": "zoneName", "pos": [0, 2, 14], "radius": 9, "data": { "nameKey": "zone.w1.gulch" } },
+    { "id": "w1-zone-dig", "kind": "zoneName", "pos": [-32, 3, -16], "radius": 10, "data": { "nameKey": "zone.w1.dig" } },
+    { "id": "w1-zone-henge", "kind": "zoneName", "pos": [34, 2, -16], "radius": 10, "data": { "nameKey": "zone.w1.henge" } },
+    { "id": "w1-check-dig", "kind": "checkpoint", "pos": [-19, 1, -7], "radius": 3.5 },
+    { "id": "w1-check-henge", "kind": "checkpoint", "pos": [26.5, 1, -6], "radius": 3.5 },
+    { "id": "w1-f3", "kind": "secretSniff", "pos": [-45.5, 1.5, 0.3], "radius": 2.5 },
+    { "id": "w1-gate-quarry", "kind": "arenaGate", "pos": [24, 1.2, 24.5], "radius": 3, "data": { "arenaId": "w1-arena-quarry" } },
+    { "id": "w1-gate-bruno", "kind": "arenaGate", "pos": [-21, 1.2, 25], "radius": 3, "data": { "arenaId": "w1-arena-bruno" } }
+  ],
+  "enemies": [
+    { "ref": "cogling_scout", "pos": [6, 1, 18] },
+    { "ref": "cogling_scout", "pos": [-7, 1, 10] },
+    { "ref": "cogling_brute", "pos": [1, 1, 2] },
+    { "ref": "cogling_scout", "pos": [-26, 1.2, -8] },
+    { "ref": "cogling_tinkerer", "pos": [-36, 1.2, -20] },
+    { "ref": "cogling_brute", "pos": [-26, 1.2, -24] },
+    { "ref": "cogling_scout", "pos": [28, 1, -8] },
+    { "ref": "cogling_scout", "pos": [40, 1, -26] }
+  ],
+  "arenas": [
+    { "id": "w1-arena-quarry", "bossRef": "quarry_foreman", "fossilId": "w1-f5", "center": [30, 1, 31], "radius": 11.5, "entrance": [24, 1.4, 24.5], "quizOrbs": 2 },
+    { "id": "w1-arena-bruno", "bossRef": "bruno", "fossilId": "w1-f6", "center": [-30, 1, 32], "radius": 12.5, "entrance": [-21, 1.4, 25], "quizOrbs": 2 }
+  ],
+  "tasks": [
+    { "ref": "w1_sorting_stones", "pos": [-32, 3.2, -12.5], "faceDeg": 165 },
+    { "ref": "w1_skeleton", "pos": [-35.5, 3.2, -18], "faceDeg": 60 },
+    { "ref": "w1_placevalue_path", "pos": [-14, 0.8, -32], "faceDeg": 55 }
+  ]
+}

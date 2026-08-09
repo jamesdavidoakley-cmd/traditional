@@ -65,6 +65,23 @@ try {
       await page.keyboard.press('Space');
       await page.waitForTimeout(800);
       await page.screenshot({ path: join(shotsDir, '04-walk.png') });
+
+      // persistence: reload — the save slot must survive and continue back in
+      await page.reload({ waitUntil: 'load' });
+      await page.waitForTimeout(3500);
+      if (await clickIf('[data-testid="btn-play"]')) {
+        const slot0 = await page.$('[data-testid="slot-0"]');
+        const label = slot0 ? await slot0.textContent() : '';
+        if (!slot0 || /Empty/i.test(label ?? '')) {
+          errors.push('persistence: slot 0 did not survive a reload');
+        } else {
+          console.log(`  persistence OK — slot reads: ${label?.trim()}`);
+          await page.screenshot({ path: join(shotsDir, '05-continue.png') });
+          await slot0.click();
+          await page.waitForTimeout(2600);
+          await page.screenshot({ path: join(shotsDir, '06-restored.png') });
+        }
+      }
     }
   }
 

@@ -1,0 +1,27 @@
+{
+  "id": "w1_sorting_stones",
+  "archetype": "sort",
+  "titleKey": "task.w1_sorting_stones.title",
+  "topicId": "rocks",
+  "companion": "kenji",
+  "sort": {
+    "categories": [
+      { "id": "igneous", "labelKey": "sort.category.igneous", "colour": "#c95a3a" },
+      { "id": "sedimentary", "labelKey": "sort.category.sedimentary", "colour": "#d9b26a" },
+      { "id": "metamorphic", "labelKey": "sort.category.metamorphic", "colour": "#8a7ab8" }
+    ],
+    "items": [
+      { "id": "basalt", "label": "Basalt", "category": "igneous", "shape": "rock", "colour": "#4a4550", "fact": "Basalt is cooled lava — most of the ocean floor is made of it!" },
+      { "id": "granite", "label": "Granite", "category": "igneous", "shape": "shinyRock", "colour": "#d8a8a0", "fact": "Granite cooled slowly underground, growing big sparkly crystals." },
+      { "id": "obsidian", "label": "Obsidian", "category": "igneous", "shape": "shinyRock", "colour": "#2a2440", "fact": "Obsidian is volcano glass — lava that cooled super fast!" },
+      { "id": "sandstone", "label": "Sandstone", "category": "sedimentary", "shape": "layerRock", "colour": "#e0b878", "fact": "Sandstone is squashed sand — you can sometimes see the layers!" },
+      { "id": "chalk", "label": "Chalk", "category": "sedimentary", "shape": "layerRock", "colour": "#f2efe4", "fact": "Chalk is made of squillions of tiny sea-creature shells." },
+      { "id": "limestone", "label": "Limestone", "category": "sedimentary", "shape": "layerRock", "colour": "#d8cfae", "fact": "Limestone often hides fossils — it formed on ancient sea beds." },
+      { "id": "marble", "label": "Marble", "category": "metamorphic", "shape": "shinyRock", "colour": "#eae6f0", "fact": "Marble is limestone that got squeezed and heated — a rock makeover!" },
+      { "id": "slate", "label": "Slate", "category": "metamorphic", "shape": "rock", "colour": "#4a5568", "fact": "Slate splits into flat sheets — perfect for roofs. It used to be mudstone!" },
+      { "id": "quartzite", "label": "Quartzite", "category": "metamorphic", "shape": "rock", "colour": "#d8b8c8", "fact": "Quartzite is sandstone toughened by heat and pressure — super hard!" }
+    ],
+    "itemsPerRound": { "1": 5, "2": 7, "3": 9 }
+  },
+  "reward": { "fossilId": "w1-f1" }
+}

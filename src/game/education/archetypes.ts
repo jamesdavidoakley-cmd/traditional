@@ -116,7 +116,11 @@ class WorldQuickfire implements ActiveTask {
         ctx.origin.y,
         ctx.origin.z + Math.cos(a) * 5.2,
       );
-      const mesh = new THREE.Mesh(new THREE.CylinderGeometry(1.15, 1.3, 0.7, 12), toonMat(['#e86a6a', '#f5a04c', '#7aa8d0'][i]));
+      // own material instance — podium emissive feedback must not leak into the shared cache
+      const mesh = new THREE.Mesh(
+        new THREE.CylinderGeometry(1.15, 1.3, 0.7, 12),
+        new THREE.MeshToonMaterial({ color: ['#e86a6a', '#f5a04c', '#7aa8d0'][i] }),
+      );
       mesh.position.copy(pos);
       mesh.castShadow = true;
       this.group.add(mesh);
@@ -593,7 +597,7 @@ class PathTask implements ActiveTask {
           .add(dir.clone().multiplyScalar(4.5 + r * 3.0))
           .add(side.clone().multiplyScalar((c - 1) * 3.0));
         pos.y = ctx.origin.y + 0.4 + r * 0.28;
-        const mesh = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.4, 2.3), toonMat('#e8d9b0'));
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.4, 2.3), new THREE.MeshToonMaterial({ color: '#e8d9b0' }));
         mesh.position.copy(pos);
         mesh.castShadow = true;
         mesh.receiveShadow = true;
@@ -624,8 +628,9 @@ class PathTask implements ActiveTask {
     if (tile.correct) {
       tile.cleared = true;
       this.row++;
-      (tile.mesh.material as THREE.MeshToonMaterial) = new THREE.MeshToonMaterial({ color: '#9ee89a', emissive: '#1d5a1d' });
-      tile.mesh.material = tile.mesh.material;
+      const m = tile.mesh.material as THREE.MeshToonMaterial;
+      m.color.set('#9ee89a');
+      m.emissive.set('#1d5a1d');
       audio.play('correct');
       C().particles.sparks(tile.mesh.position, '#7dff8a');
       this.ctx.engine.recordRaw(this.ctx.task.topicId, true, this.firstTryRow, this.ctx.task.companion);

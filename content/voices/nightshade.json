@@ -1,0 +1,26 @@
+{
+  "characterId": "nightshade",
+  "pools": {
+    "boss_intro": [
+      "Shhh. The lighthouse sleeps… and I am the dark between its blinks.",
+      "Found me? No, little one. I found you. I always find you."
+    ],
+    "taunt_mid": [
+      "Over here. No… here. Hee hee.",
+      "You chase the shadow and miss the smile.",
+      "Softly, softly. The night is patient."
+    ],
+    "hit_react": [
+      "Ah! Bright little thing, aren't you.",
+      "A touch! How rude. How impressive."
+    ],
+    "low_hp": [
+      "The dark is thinning… how curious…",
+      "You've lit too many corners, clever rex…"
+    ],
+    "defeat_freed": [
+      "The cog slips off like a shadow at noon… and I am my own again. Thank you, bright one.",
+      "Caught — fairly, kindly, cleverly. The night owes you a favour."
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "id": "sword_and_board",
+  "moves": [
+    {
+      "id": "slash",
+      "tags": [
+        "strike"
+      ],
+      "bandWeights": [
+        1.0,
+        0.55,
+        0.05
+      ],
+      "baseWeight": 1.0,
+      "windup": 0.7,
+      "active": 0.3,
+      "recover": 0.5,
+      "damage": 1,
+      "motion": "lunge"
+    },
+    {
+      "id": "triple_slash",
+      "tags": [
+        "strike",
+        "combo",
+        "heavy"
+      ],
+      "bandWeights": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "baseWeight": 0.7,
+      "windup": 0.9,
+      "active": 0.9,
+      "recover": 1.8,
+      "damage": 1,
+      "motion": "lunge"
+    },
+    {
+      "id": "shield_bash",
+      "tags": [
+        "strike"
+      ],
+      "bandWeights": [
+        1.0,
+        0.25,
+        0.0
+      ],
+      "baseWeight": 0.55,
+      "windup": 0.65,
+      "active": 0.25,
+      "recover": 0.6,
+      "damage": 0.5,
+      "motion": "lunge"
+    },
+    {
+      "id": "shield_block",
+      "tags": [
+        "defend"
+      ],
+      "bandWeights": [
+        1.0,
+        0.8,
+        0.3
+      ],
+      "baseWeight": 0.6,
+      "windup": 0.1,
+      "active": 1.4,
+      "recover": 0.3,
+      "motion": "hold"
+    },
+    {
+      "id": "advance",
+      "tags": [
+        "approach"
+      ],
+      "bandWeights": [
+        0.0,
+        0.8,
+        1.0
+      ],
+      "baseWeight": 0.9,
+      "windup": 0.0,
+      "active": 0.8,
+      "recover": 0.1,
+      "motion": "chase"
+    },
+    {
+      "id": "circle_step",
+      "tags": [
+        "reposition"
+      ],
+      "bandWeights": [
+        0.7,
+        0.9,
+        0.3
+      ],
+      "baseWeight": 0.6,
+      "windup": 0.0,
+      "active": 0.7,
+      "recover": 0.2,
+      "motion": "circle"
+    },
+    {
+      "id": "back_step",
+      "tags": [
+        "retreat",
+        "reposition"
+      ],
+      "bandWeights": [
+        1.0,
+        0.4,
+        0.0
+      ],
+      "baseWeight": 0.5,
+      "windup": 0.0,
+      "active": 0.4,
+      "recover": 0.2,
+      "motion": "stepback"
+    },
+    {
+      "id": "taunt",
+      "tags": [
+        "flourish"
+      ],
+      "bandWeights": [
+        0.4,
+        0.8,
+        1.0
+      ],
+      "baseWeight": 0.45,
+      "windup": 0.2,
+      "active": 0.8,
+      "recover": 0.3,
+      "motion": "none"
+    },
+    {
+      "id": "hold_ground",
+      "tags": [
+        "wait"
+      ],
+      "bandWeights": [
+        0.3,
+        0.7,
+        1.0
+      ],
+      "baseWeight": 0.5,
+      "windup": 0.0,
+      "active": 0.8,
+      "recover": 0.1,
+      "motion": "none"
+    },
+    {
+      "id": "feint_strike",
+      "tags": [
+        "feint"
+      ],
+      "bandWeights": [
+        1.0,
+        0.6,
+        0.0
+      ],
+      "baseWeight": 0.4,
+      "windup": 0.45,
+      "active": 0.3,
+      "recover": 0.3,
+      "motion": "none"
+    }
+  ]
+}

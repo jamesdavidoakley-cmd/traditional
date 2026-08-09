@@ -1,0 +1,16 @@
+{
+  "id": "w2_times_path",
+  "archetype": "path",
+  "titleKey": "task.w2_times_path.title",
+  "topicId": "times-tables",
+  "companion": "marcus",
+  "path": {
+    "mode": "multiples",
+    "tiers": {
+      "1": { "table": 3, "length": 5 },
+      "2": { "table": 4, "length": 6 },
+      "3": { "table": 8, "length": 7 }
+    }
+  },
+  "reward": { "brainPower": 2 }
+}

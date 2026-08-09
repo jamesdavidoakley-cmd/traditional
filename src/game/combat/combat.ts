@@ -706,6 +706,7 @@ export class CombatSystem {
   private quizOrbs: { mesh: THREE.Mesh; angle: number; taken: boolean }[] = [];
   private arenaBarrier: THREE.Group | null = null;
   private activeArena: ArenaDef | null = null;
+  private victoryRunning = false;
   private spinId = 0;
   private mouthful = false;
   private gimmickStation: { mesh: THREE.Group; solved: boolean } | null = null;
@@ -1076,8 +1077,9 @@ export class CombatSystem {
 
     if (this.boss) {
       this.boss.update(dt);
-      if (!this.boss.alive) {
-        void this.victory();
+      if (!this.boss.alive && !this.victoryRunning) {
+        this.victoryRunning = true;
+        void this.victory().finally(() => (this.victoryRunning = false));
       }
     }
 

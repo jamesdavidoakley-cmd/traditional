@@ -1,0 +1,30 @@
+{
+  "characterId": "quarry_foreman",
+  "pools": {
+    "boss_intro": [
+      "OI! No visitors in the quarry! Foreman's orders! MY orders!",
+      "Hard hats ON, trespassers OUT! Especially blue ones!",
+      "This arena is a WORKSITE! And you're about to get worked!"
+    ],
+    "taunt_mid": [
+      "Back to work! The work is BONKING YOU!",
+      "I've got a schedule, lizard! Being bonked is ON IT!",
+      "Health and safety says: watch out for MY WRENCH!",
+      "Clock in, clock OUT!"
+    ],
+    "hit_react": [
+      "OI! That's comin' out of your wages!",
+      "Filing a complaint about THAT one!",
+      "Ow! Right in the paperwork!"
+    ],
+    "low_hp": [
+      "Runnin' low on… everything! Where's my tea break?!",
+      "This job doesn't pay enough for tail spins!"
+    ],
+    "defeat_freed": [
+      "Clocking off! The cog's… gone? HA! I QUIT! I always wanted to do pottery!",
+      "You're… not on my list of problems anymore. NOBODY is! Freedom smells like dust. Lovely.",
+      "Fine, FINE! Site's yours, blue foreman! Mind the gap!"
+    ]
+  }
+}

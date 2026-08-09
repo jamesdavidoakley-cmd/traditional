@@ -1,0 +1,16 @@
+{
+  "id": "w2_counterweight",
+  "archetype": "build",
+  "titleKey": "task.w2_counterweight.title",
+  "topicId": "addsub",
+  "companion": "kenji",
+  "build": {
+    "mode": "counterweight",
+    "tiers": {
+      "1": { "target": 135 },
+      "2": { "target": 260 },
+      "3": { "target": 385 }
+    }
+  },
+  "reward": { "fossilId": "w2-f2" }
+}

@@ -1,0 +1,26 @@
+{
+  "characterId": "bastion",
+  "pools": {
+    "boss_intro": [
+      "Welcome, small knight. I am the Wall of the Bay. Walls are in no hurry.",
+      "Approach with patience, little rex. Haste breaks upon me like the tide."
+    ],
+    "taunt_mid": [
+      "A fine swing. The wall remains.",
+      "Patience is also a weapon. Observe me wield it.",
+      "You strike with spirit. Try striking with timing."
+    ],
+    "hit_react": [
+      "Well struck. I shall allow it.",
+      "A worthy blow. There will not be many."
+    ],
+    "low_hp": [
+      "The wall… cracks. Remarkable.",
+      "You have found the loose stone in me, haven't you."
+    ],
+    "defeat_freed": [
+      "The cog falls away… and the wall bows. Honourably done, little architect.",
+      "Freed — and by fair engineering. My shield is yours, whenever you need it."
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "characterId": "cogwheel",
+  "pools": {
+    "boss_intro": [
+      "Ah. The dinosaur. I calculated you would arrive four minutes ago. Tardy.",
+      "Welcome to my workshop. Do mind the turrets — they mind you.",
+      "I am the Method, little reptile. Every swing measured, every step planned. Do try to keep up."
+    ],
+    "taunt_mid": [
+      "Sloppy footwork. I shall deduct marks.",
+      "You attack the shield? The SHIELD? Consult the manual, dear.",
+      "Every move you make is going in my notebook. Under 'needs improvement'.",
+      "Precision, dinosaur. Flailing is not a strategy.",
+      "My gears solved you three moves ago."
+    ],
+    "hit_react": [
+      "Hm. Recalculating.",
+      "Noted. That will not work twice. …Probably.",
+      "An unscheduled dent. How vexing.",
+      "Adequate strike. Do not let it go to your head."
+    ],
+    "low_hp": [
+      "My calculations are… fraying at the edges…",
+      "Systems wobbling. This was NOT in the blueprints.",
+      "You are… persistently educational, aren't you."
+    ],
+    "defeat_freed": [
+      "The cog releases… oh. OH. My mind is my OWN again. How… wonderful. Thank you.",
+      "Fascinating. You defeated the Method with understanding. I must… take notes.",
+      "Freed! And by a student, no less. There is hope for this world after all.",
+      "I concede — graciously, precisely, and with immense relief. Well solved, young rex."
+    ],
+    "ask_intro": [
+      "A ratio problem, dinosaur. Do impress me.",
+      "Gears never lie. Let us see if you understand them.",
+      "Question! Answer as if your marks depend on it. They do not. But answer well.",
+      "My workshop, my quiz. Begin!"
+    ],
+    "correct_first_try": [
+      "Correct. Full marks. Do not gloat — it's unbecoming and I'm already doing it for you.",
+      "Precisely right. I may frame this moment.",
+      "Correct! There — the sound of a mind meshing perfectly."
+    ],
+    "correct_after_hint": [
+      "Correct — with assistance. Engineering IS teamwork, I suppose.",
+      "There we are. A second attempt that lands is worth two firsts that don't.",
+      "Right answer. The hint merely oiled the gears — YOU turned them."
+    ],
+    "incorrect_gentle": [
+      "Not quite. Breathe. Even my best turret misfired on its first day. Hint?",
+      "Incorrect — but tidily so. Shall I lend you a clue?",
+      "Mm, no. But your reasoning had promising bolts in it. A hint, perhaps?"
+    ],
+    "hint_intro": [
+      "From my notebook, page one:",
+      "A professional hint, then:"
+    ],
+    "teach": [
+      "Observe the mechanism, step by step. THIS is how it turns.",
+      "Class is in session. Watch closely — then it is your turn again."
+    ],
+    "cafe_farewell": [
+      "Do return. My gears — and my quizzes — are always calibrated for you.",
+      "Dismissed! Top marks for attendance, dinosaur."
+    ]
+  }
+}

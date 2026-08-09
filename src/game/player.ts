@@ -159,8 +159,13 @@ export class PlayerController {
 
     const busy = this.action === 'stompSlam' || this.action === 'stompHop' || this.action === 'roar' || this.action === 'dizzy';
 
-    // ---- start actions
-    if (!busy && input.spinPressed && this.spinCooldownT <= 0 && this.action !== 'spin') {
+    // ---- start actions (roar outranks spin — both share the attack button)
+    if (!busy && input.roarPressed && this.grounded && this.action === 'none') {
+      this.action = 'roar';
+      this.roarT = 0.9;
+      this.hooks.onRoar?.();
+    }
+    if (!busy && input.spinPressed && !input.roarPressed && this.spinCooldownT <= 0 && this.action !== 'spin' && this.action !== 'roar') {
       this.action = 'spin';
       this.spinT = cfg.spinDuration;
       this.hooks.onSpinStart?.();
@@ -174,11 +179,6 @@ export class PlayerController {
       this.action = 'chomp';
       this.stompT = 0.22;
       this.hooks.onChomp?.();
-    }
-    if (!busy && input.roarPressed && this.grounded && this.action === 'none') {
-      this.action = 'roar';
-      this.roarT = 0.9;
-      this.hooks.onRoar?.();
     }
 
     // ---- horizontal movement

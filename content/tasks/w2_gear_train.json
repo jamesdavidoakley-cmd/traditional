@@ -1,0 +1,16 @@
+{
+  "id": "w2_gear_train",
+  "archetype": "build",
+  "titleKey": "task.w2_gear_train.title",
+  "topicId": "gears",
+  "companion": "kenji",
+  "build": {
+    "mode": "gears",
+    "tiers": {
+      "1": { "driver": 12, "goal": "speed", "slots": 1 },
+      "2": { "driver": 8, "goal": "force", "slots": 1 },
+      "3": { "driver": 8, "goal": "ratio", "targetRatio": 0.5, "slots": 2 }
+    }
+  },
+  "reward": { "fossilId": "w2-f1" }
+}

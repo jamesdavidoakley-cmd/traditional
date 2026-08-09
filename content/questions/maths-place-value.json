@@ -1,0 +1,140 @@
+{
+  "id": "maths-place-value",
+  "strand": "maths",
+  "topic": "place-value",
+  "topicNameKey": "topic.place-value.name",
+  "questions": [
+    {
+      "id": "pv-t1-hundreds",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "In the number {h}{t}{o}, what is the value of the {h}?",
+      "params": { "h": { "min": 2, "max": 9 }, "t": { "min": 1, "max": 9 }, "o": { "min": 1, "max": 9 } },
+      "answerExpr": "h*100",
+      "distractorRules": ["h", "h*10"],
+      "askStyles": ["kenji", "marcus", "digger"],
+      "hint": "The {h} sits in the HUNDREDS column — three places from the right!",
+      "explain": "{h}{t}{o} is {h} hundreds, {t} tens and {o} ones — so the {h} is worth {h}00."
+    },
+    {
+      "id": "pv-t1-tens",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "How many TENS are in {t}{o}?",
+      "params": { "t": { "min": 2, "max": 9 }, "o": { "min": 1, "max": 9 } },
+      "answerExpr": "t",
+      "distractorRules": ["o", "t*10"],
+      "askStyles": ["digger", "marcus"],
+      "hint": "The tens digit is the one on the LEFT in a 2-digit number.",
+      "explain": "{t}{o} is made of {t} tens and {o} ones."
+    },
+    {
+      "id": "pv-t1-more10",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "What is 10 more than {n}?",
+      "params": { "n": { "min": 105, "max": 880 } },
+      "answerExpr": "n+10",
+      "distractorRules": ["n+1", "n+100"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Only the TENS digit changes when you add 10.",
+      "explain": "{n} + 10 = {answer} — the tens digit went up by one."
+    },
+    {
+      "id": "pv-t1-compare",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Which is the BIGGEST: {a}, {a-40} or {a-9}?",
+      "params": { "a": { "min": 320, "max": 960, "multipleOf": 10 } },
+      "answerExpr": "a",
+      "distractorRules": ["a-40", "a-9"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "Compare hundreds first, then tens, then ones!",
+      "explain": "{a} has the most when you check the columns left to right."
+    },
+    {
+      "id": "pv-t2-thousands",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "In {th}{h}{t}{o}, what is the value of the digit {th}?",
+      "params": { "th": { "min": 2, "max": 9 }, "h": { "min": 1, "max": 9 }, "t": { "min": 1, "max": 9 }, "o": { "min": 1, "max": 9 } },
+      "answerExpr": "th*1000",
+      "distractorRules": ["th*100", "th*10"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Four digits means the front one counts THOUSANDS.",
+      "explain": "{th}{h}{t}{o} = {th} thousands, {h} hundreds, {t} tens, {o} ones. The {th} is worth {th}000."
+    },
+    {
+      "id": "pv-t2-round10",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Round {t}{u} to the nearest 10.",
+      "params": { "t": { "min": 2, "max": 8 }, "u": { "min": 1, "max": 4 } },
+      "answerExpr": "t*10",
+      "distractorRules": ["t*10+10", "t*10+u"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Look at the ONES digit — {u} is less than 5, so round DOWN.",
+      "explain": "{t}{u} is closer to {t}0 than to {t+1}0, because the ones digit {u} is under 5."
+    },
+    {
+      "id": "pv-t2-round10up",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Round {t}{u} to the nearest 10.",
+      "params": { "t": { "min": 2, "max": 8 }, "u": { "min": 6, "max": 9 } },
+      "answerExpr": "t*10+10",
+      "distractorRules": ["t*10", "t*10+u"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "The ones digit is {u} — that's 5 or more, so round UP!",
+      "explain": "{t}{u} is closer to {t+1}0, because {u} is 5 or more."
+    },
+    {
+      "id": "pv-t2-1000more",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "What is 1,000 more than {n}?",
+      "params": { "n": { "min": 1200, "max": 8600, "multipleOf": 100 } },
+      "answerExpr": "n+1000",
+      "distractorRules": ["n+100", "n+10"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Only the THOUSANDS digit changes.",
+      "explain": "{n} + 1,000 = {answer}. The thousands digit went up by one; everything else stayed."
+    },
+    {
+      "id": "pv-t3-round100",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "Round {h}{t}{o} to the nearest 100.",
+      "params": { "h": { "min": 2, "max": 8 }, "t": { "min": 6, "max": 9 }, "o": { "min": 0, "max": 9 } },
+      "answerExpr": "h*100+100",
+      "distractorRules": ["h*100", "h*100+t*10"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Check the TENS digit: {t} is 5 or more, so round up to the next hundred.",
+      "explain": "{h}{t}{o} rounds to {answer} because the tens digit {t} pushes it up."
+    },
+    {
+      "id": "pv-t3-partition",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "{th}000 + {h}00 + {o} = ?",
+      "params": { "th": { "min": 2, "max": 9 }, "h": { "min": 1, "max": 9 }, "o": { "min": 1, "max": 9 } },
+      "answerExpr": "th*1000+h*100+o",
+      "distractorRules": ["th*1000+h*100+o*10", "th*1000+h*10+o"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Build it column by column — thousands, hundreds, TENS (empty!), ones.",
+      "explain": "{th} thousands + {h} hundreds + {o} ones = {answer}. The tens column is a zero — don't lose it!"
+    },
+    {
+      "id": "pv-t3-order",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "Which number is closest to {a}000: {a}0{c}0, {a-1}999 or {a}{c}00?",
+      "params": { "a": { "min": 3, "max": 8 }, "c": { "min": 3, "max": 6 } },
+      "answer": "{a-1}999",
+      "distractors": ["{a}0{c}0", "{a}{c}00"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "{a-1}999 is only ONE away from {a}000!",
+      "explain": "{a-1}999 + 1 = {a}000, so it's just one step away — closer than the others."
+    }
+  ]
+}

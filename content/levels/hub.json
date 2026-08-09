@@ -1,0 +1,117 @@
+{
+  "id": "hub",
+  "nameKey": "world.hub.name",
+  "music": "hub",
+  "factsKey": "facts.hub",
+  "palette": {
+    "sky": ["#4f9ee8", "#ffe6b3"],
+    "fog": "#cfe2f0",
+    "fogNear": 45,
+    "fogFar": 190,
+    "sun": "#fff3d6",
+    "sunIntensity": 2.3,
+    "ambient": "#bfd9ff",
+    "ambientIntensity": 0.95,
+    "ground": "#8a6a4c"
+  },
+  "spawn": [0, 1.2, 12],
+  "spawnFaceDeg": 180,
+  "killY": -14,
+  "geometry": [
+    { "type": "gen", "gen": "floor", "params": { "shape": "cylinder", "radius": 34, "height": 2.4, "colour": "#7dc95e", "rimColour": "#c99a5b", "segments": 52 } },
+    { "type": "cylinder", "pos": [0, 0.12, 0], "size": [22, 0.3, 22], "colour": "#e8d9b0", "segments": 44 },
+    { "type": "cylinder", "pos": [0, 0.5, 0], "size": [2.6, 0.8, 2.9], "colour": "#c9b48a", "segments": 20 },
+    { "type": "cylinder", "pos": [0, 0.95, 0], "size": [2.1, 0.25, 2.1], "colour": "#7fb8e0", "segments": 20 },
+    { "type": "gen", "gen": "ring", "params": { "center": [0, 1.4, 0], "radius": 6.8, "count": 8, "size": [2.1, 0.5, 2.1], "colour": "#e8b96b", "yStep": 0.95, "angleFrom": 0, "angleTo": 315 } },
+    { "type": "box", "pos": [0, 8.6, 0], "size": [2.6, 0.4, 2.6], "colour": "#ffd75e" },
+    { "type": "cylinder", "pos": [-2.2, 4.4, 0], "size": [0.35, 8.8, 0.4], "colour": "#efe6d8", "collide": false },
+    { "type": "cylinder", "pos": [2.2, 4.4, 0], "size": [0.35, 8.8, 0.4], "colour": "#efe6d8", "collide": false },
+
+    { "type": "box", "pos": [-19, 1.4, 0], "size": [8, 0.4, 10], "colour": "#c9a37b" },
+    { "type": "box", "pos": [-22.6, 3.2, 0], "size": [1, 3.4, 10], "colour": "#8a5a44" },
+    { "type": "box", "pos": [-19, 5.2, 0], "size": [8.6, 0.5, 10.6], "colour": "#c43d3d" },
+    { "type": "gen", "gen": "stairs", "params": { "from": [-14.2, 0.2, 0], "angleDeg": -90, "steps": 3, "rise": 0.42, "run": 1.1, "width": 5, "colour": "#c9a37b" } },
+
+    { "type": "gen", "gen": "ring", "params": { "center": [19, 0.8, 0], "radius": 8.4, "count": 13, "size": [1.7, 1.4, 1.7], "colour": "#c9a24a", "angleFrom": 25, "angleTo": 335 } },
+    { "type": "cylinder", "pos": [19, 0.18, 0], "size": [8, 0.3, 8.4], "colour": "#e0c088", "segments": 30 },
+
+    { "type": "cylinder", "pos": [0, 0.25, 19], "size": [5.4, 0.4, 5.8], "colour": "#e0c088", "segments": 24 },
+
+    { "type": "box", "pos": [0, 1.1, -20.5], "size": [9, 0.35, 5.5], "colour": "#c9a37b" },
+    { "type": "box", "pos": [0, 2.9, -22.6], "size": [9, 0.3, 1.4], "colour": "#ff7e6a" },
+    { "type": "box", "pos": [-4.2, 1.6, -22.4], "size": [0.4, 2.8, 0.4], "colour": "#7a4a2c" },
+    { "type": "box", "pos": [4.2, 1.6, -22.4], "size": [0.4, 2.8, 0.4], "colour": "#7a4a2c" }
+  ],
+  "decor": [
+    { "type": "sign", "pos": [-14.5, 0.3, 4.2], "text": "🔧 Kenji's Workshop" },
+    { "type": "sign", "pos": [13.2, 0.2, 4.2], "text": "🛡️ Marcus's Arena" },
+    { "type": "sign", "pos": [4.4, 0.3, 16], "text": "🐾 Digger's Dig Site" },
+    { "type": "sign", "pos": [5.6, 0.3, -18.5], "text": "☕ The Fossil Café" },
+    { "type": "cogPile", "pos": [-17, 1.6, -3.6] },
+    { "type": "table", "pos": [-17.5, 1.6, 2.8] },
+    { "type": "barrel", "pos": [-21, 1.6, 3.8] },
+    { "type": "banner", "pos": [14, 0.2, -5.2] },
+    { "type": "banner", "pos": [14, 0.2, 5.2] },
+    { "type": "barrel", "pos": [22, 0.4, -3.5] },
+    { "type": "crate", "pos": [22.5, 0.4, -2] },
+    { "type": "umbrella", "pos": [-3.4, 1.25, -19.5], "colour": "#ffd75e" },
+    { "type": "table", "pos": [-3.4, 1.25, -19.5] },
+    { "type": "umbrella", "pos": [3.4, 1.25, -19], "colour": "#7fe0d4" },
+    { "type": "table", "pos": [3.4, 1.25, -19] },
+    { "type": "fence", "pos": [-6.4, 0.35, 16.4], "rot": [0, 20, 0] },
+    { "type": "flower", "pos": [-4.6, 0.4, 17.6] },
+    { "type": "flower", "pos": [-3.4, 0.4, 18.8], "colour": "#ffd75e" },
+    { "type": "flower", "pos": [-5.2, 0.4, 19.6], "colour": "#c58aff" },
+    { "type": "bush", "pos": [-2, 0.4, 21] },
+    { "type": "palm", "pos": [-10, 0.2, 9] },
+    { "type": "palm", "pos": [10.5, 0.2, 9.5] },
+    { "type": "tree", "pos": [-9, 0.2, -9.5] },
+    { "type": "tree", "pos": [9.5, 0.2, -9] },
+    { "type": "lamp", "pos": [-5.5, 0.2, 5.5] },
+    { "type": "lamp", "pos": [5.5, 0.2, 5.5] },
+    { "type": "lamp", "pos": [-5.5, 0.2, -5.5] },
+    { "type": "lamp", "pos": [5.5, 0.2, -5.5] },
+    { "type": "rock", "pos": [27, 0.2, 8], "scale": 1.3 },
+    { "type": "bush", "pos": [26, 0.3, -8] },
+    { "type": "skullRock", "pos": [-27, 0.4, -6], "rot": [0, 40, 0] }
+  ],
+  "platforms": [
+    { "type": "bounce", "pos": [8.2, 0.5, 13.5] },
+    { "type": "excavation", "pos": [-12, 0.32, 14], "size": [2.4, 0.4, 2.4] }
+  ],
+  "collectibles": [
+    { "kind": "chip", "arc": { "center": [0, 0.6, 0], "radius": 12.5, "from": 0, "to": 350, "count": 10 } },
+    { "kind": "chip", "pos": [0, 2.6, 6.8] },
+    { "kind": "chip", "pos": [0, 5, -6.8] },
+    { "kind": "chip", "pos": [0, 9.6, 0] },
+    { "kind": "chip", "line": { "from": [6, 0.6, 10], "to": [10, 0.6, 14], "count": 3 } }
+  ],
+  "fossils": [
+    { "id": "hub-f1", "kind": "platforming", "nameKey": "fossil.hub-f1.name", "hintKey": "fossil.hub-f1.hint", "hintSpeaker": "digger", "pos": [0, 10, 0] },
+    { "id": "hub-f2", "kind": "task", "nameKey": "fossil.hub-f2.name", "hintKey": "fossil.hub-f2.hint", "hintSpeaker": "marcus", "taskRef": "hub_roman_board" },
+    { "id": "hub-f3", "kind": "garden", "nameKey": "fossil.hub-f3.name", "hintKey": "fossil.hub-f3.hint", "hintSpeaker": "digger", "pos": [-4, 1.6, 19] }
+  ],
+  "npcs": [
+    { "id": "npc-kenji", "character": "kenji", "pos": [-18, 1.6, -1], "faceDeg": 90, "role": "workshop" },
+    { "id": "npc-marcus", "character": "marcus", "pos": [16.5, 0.35, -2.5], "faceDeg": -60, "role": "arena" },
+    { "id": "npc-digger", "character": "digger", "pos": [1.5, 0.5, 17], "faceDeg": -150, "role": "digsite" }
+  ],
+  "doors": [
+    { "worldId": "w1", "pos": [-23.4, 0.15, -13.5], "faceDeg": 60 },
+    { "worldId": "w2", "pos": [-9.2, 0.15, -25.4], "faceDeg": 20 },
+    { "worldId": "w3", "pos": [9.2, 0.15, -25.4], "faceDeg": -20 },
+    { "worldId": "w4", "pos": [23.4, 0.15, -13.5], "faceDeg": -60 },
+    { "worldId": "w5", "pos": [23.4, 0.15, 13.5], "faceDeg": -120 },
+    { "worldId": "w6", "pos": [9.2, 0.15, 25.4], "faceDeg": -160 },
+    { "worldId": "w7", "pos": [-9.2, 0.15, 25.4], "faceDeg": 160 },
+    { "worldId": "vex", "pos": [-23.4, 0.15, 13.5], "faceDeg": 120 }
+  ],
+  "triggers": [
+    { "id": "hub-cafe", "kind": "cafe", "pos": [0, 1.5, -20], "radius": 3.2 }
+  ],
+  "tasks": [
+    { "ref": "hub_roman_board", "pos": [21.5, 0.5, 3.2], "faceDeg": -110 },
+    { "ref": "hub_practice_bench", "pos": [-16.5, 1.6, -3], "faceDeg": 100 },
+    { "ref": "hub_springboots", "pos": [-16.5, 1.6, 3], "faceDeg": 80 }
+  ]
+}

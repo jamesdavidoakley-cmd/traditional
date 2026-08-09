@@ -1,0 +1,24 @@
+{
+  "id": "cogwheel",
+  "nameKey": "char.cogwheel.name",
+  "titleKey": "boss.cogwheel.title",
+  "world": "w2",
+  "hp": 16,
+  "phases": 2,
+  "traits": { "aggression": 0.3, "caution": 0.85, "trickery": 0.5, "patience": 0.8, "showmanship": 0.45 },
+  "moveset": "spanner_lance",
+  "abilities": [
+    { "id": "repair_swarm", "trigger": { "type": "onHpBelow", "value": 0.5 }, "effect": "repair_swarm", "once": true },
+    { "id": "turret_deploy", "trigger": { "type": "onPhaseEnter", "value": 2 }, "effect": "summon_turrets", "once": true }
+  ],
+  "voicePack": "voices/cogwheel.json",
+  "colour": "#6e5a8a",
+  "accent": "#B8863B",
+  "weapon": "spanner_lance",
+  "scale": 1.1,
+  "speed": 3.6,
+  "contactDamage": 0.5,
+  "gimmick": "gear_shield_puzzle",
+  "cafeGameKey": "gear_workshop",
+  "cafeTopics": ["gears", "times-tables"]
+}

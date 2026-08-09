@@ -107,7 +107,7 @@ function eyeTexture(expr: Expression, iris = '#221c33'): THREE.CanvasTexture {
 function makeEye(size: number): THREE.Mesh {
   const m = new THREE.Mesh(
     new THREE.PlaneGeometry(size, size),
-    new THREE.MeshBasicMaterial({ map: eyeTexture('normal'), transparent: true, side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: eyeTexture('normal'), transparent: true }),
   );
   m.renderOrder = 2;
   return m;

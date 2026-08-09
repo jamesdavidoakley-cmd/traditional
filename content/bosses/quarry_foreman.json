@@ -1,0 +1,19 @@
+{
+  "id": "quarry_foreman",
+  "nameKey": "char.quarry_foreman.name",
+  "world": "w1",
+  "hp": 6,
+  "phases": 1,
+  "traits": { "aggression": 0.7, "caution": 0.3, "trickery": 0.3, "patience": 0.3, "showmanship": 0.6 },
+  "moveset": "wrench_kit",
+  "abilities": [],
+  "voicePack": "voices/quarry_foreman.json",
+  "colour": "#7a6a4c",
+  "accent": "#c9a24a",
+  "weapon": "wrench",
+  "scale": 1.0,
+  "speed": 3.4,
+  "contactDamage": 0.5,
+  "miniBoss": true,
+  "randomTraits": true
+}

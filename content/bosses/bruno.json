@@ -1,0 +1,22 @@
+{
+  "id": "bruno",
+  "nameKey": "char.bruno.name",
+  "titleKey": "boss.bruno.title",
+  "world": "w1",
+  "hp": 14,
+  "phases": 2,
+  "traits": { "aggression": 0.9, "caution": 0.15, "trickery": 0.2, "patience": 0.1, "showmanship": 0.5 },
+  "moveset": "sword_and_board",
+  "abilities": [
+    { "id": "fossil_quake", "trigger": { "type": "onTimer", "value": 20 }, "effect": "quake", "once": false, "cooldown": 8 }
+  ],
+  "voicePack": "voices/bruno.json",
+  "colour": "#8a5a34",
+  "accent": "#C96F4A",
+  "weapon": "sword_shield",
+  "scale": 1.25,
+  "speed": 4.4,
+  "contactDamage": 0.5,
+  "cafeGameKey": "rock_sorter",
+  "cafeTopics": ["rocks", "skeletons"]
+}

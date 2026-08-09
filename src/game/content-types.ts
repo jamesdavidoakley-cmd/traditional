@@ -408,6 +408,8 @@ export interface LevelDef {
   id: string;
   nameKey: string;
   music: string;
+  /** Themed worlds: fossil awarded for banking 80 Amber Chips here (§4.3). */
+  bonusFossilId?: string;
   palette: {
     sky: [string, string]; // top, horizon
     fog: string;

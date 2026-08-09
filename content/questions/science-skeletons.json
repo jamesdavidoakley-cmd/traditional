@@ -1,0 +1,96 @@
+{
+  "id": "science-skeletons",
+  "strand": "science",
+  "topic": "skeletons",
+  "topicNameKey": "topic.skeletons.name",
+  "questions": [
+    {
+      "id": "sk-t1-jobs",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Which of these is a job your skeleton does?",
+      "answer": "Protects your organs",
+      "distractors": ["Digests your food", "Grows your hair"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Think of your skull and ribs as armour!",
+      "explain": "Skeletons do three jobs: SUPPORT your body, PROTECT soft parts, and help you MOVE."
+    },
+    {
+      "id": "sk-t1-skull",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Which bones protect your BRAIN?",
+      "answer": "The skull",
+      "distractors": ["The ribs", "The kneecaps"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "It's the helmet you were born wearing!",
+      "explain": "The skull is a bony helmet around the brain. Ribs guard the heart and lungs instead."
+    },
+    {
+      "id": "sk-t1-ribs",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Your ribs make a cage. What do they protect?",
+      "answer": "Heart and lungs",
+      "distractors": ["Brain", "Toes"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "What's beating and breathing inside your chest?",
+      "explain": "The rib cage wraps around the heart and lungs like a fence of bone."
+    },
+    {
+      "id": "sk-t2-muscles",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Muscles move bones by working in…?",
+      "answer": "Pairs",
+      "distractors": ["Threes", "Silence"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "One pulls, its partner relaxes — then they swap!",
+      "explain": "Muscles can only PULL, never push — so they work in pairs, taking turns, like your biceps and triceps."
+    },
+    {
+      "id": "sk-t2-invert",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Animals WITHOUT a backbone are called…?",
+      "answer": "Invertebrates",
+      "distractors": ["Vertebrates", "Reptiles"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "'In-' means NOT — not-a-vertebrate!",
+      "explain": "Vertebrates (like Max!) have backbones; invertebrates like snails and insects don't — some wear skeletons OUTSIDE."
+    },
+    {
+      "id": "sk-t2-joints",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Where two bones meet and let you bend is called a…?",
+      "answer": "Joint",
+      "distractors": ["Muscle", "Tendon"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "Knees and elbows are famous ones!",
+      "explain": "Joints are the bendy meeting points of bones — knees, elbows, ankles and more."
+    },
+    {
+      "id": "sk-t3-exo",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "A crab's hard shell is a skeleton on the OUTSIDE. What's it called?",
+      "answer": "An exoskeleton",
+      "distractors": ["An endoskeleton", "A megaskeleton"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "'Exo' means outside — like exit!",
+      "explain": "Exoskeletons are armour-skeletons on the outside. Ours are endoskeletons — 'endo' means inside."
+    },
+    {
+      "id": "sk-t3-nutrition",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "Which mineral makes bones strong — found in milk and leafy greens?",
+      "answer": "Calcium",
+      "distractors": ["Sugar", "Iron filings"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "Nonna always said: strong bones drink their milk!",
+      "explain": "Calcium builds strong bones and teeth. Animals (and gladiators) get it from food — a balanced diet feeds the skeleton."
+    }
+  ]
+}

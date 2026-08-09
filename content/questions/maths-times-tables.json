@@ -1,0 +1,116 @@
+{
+  "id": "maths-times-tables",
+  "strand": "maths",
+  "topic": "times-tables",
+  "topicNameKey": "topic.times-tables.name",
+  "questions": [
+    {
+      "id": "tt-t1-x3",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "What is {a} × 3?",
+      "params": { "a": { "min": 2, "max": 10 } },
+      "answerExpr": "a*3",
+      "distractorRules": ["a*3+3", "a*3-3"],
+      "askStyles": ["kenji", "marcus", "digger"],
+      "hint": "Double {a}, then add one more {a}!",
+      "explain": "{a} × 3 means three groups of {a}: {a} + {a} + {a} = {answer}."
+    },
+    {
+      "id": "tt-t1-x4",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "What is {a} × 4?",
+      "params": { "a": { "min": 2, "max": 10 } },
+      "answerExpr": "a*4",
+      "distractorRules": ["a*4+4", "a*4-4"],
+      "askStyles": ["kenji", "marcus", "digger"],
+      "hint": "Double it — then double it again!",
+      "explain": "{a} × 4 is {a} doubled twice: {a} → {a*2} → {answer}."
+    },
+    {
+      "id": "tt-t1-count3",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Counting in 3s: 3, 6, 9, … what comes after {a*3}?",
+      "params": { "a": { "min": 3, "max": 9 } },
+      "answerExpr": "a*3+3",
+      "distractorRules": ["a*3+1", "a*3+6"],
+      "askStyles": ["digger", "marcus"],
+      "hint": "Each hop is exactly 3 bigger.",
+      "explain": "{a*3} + 3 = {answer} — counting in 3s is the ×3 table in disguise."
+    },
+    {
+      "id": "tt-t2-x8",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "What is {a} × 8?",
+      "params": { "a": { "min": 2, "max": 10 } },
+      "answerExpr": "a*8",
+      "distractorRules": ["a*8+8", "a*8-8"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Double, double, DOUBLE! {a} → {a*2} → {a*4} → ?",
+      "explain": "{a} × 8 is {a} doubled three times: {a} → {a*2} → {a*4} → {answer}."
+    },
+    {
+      "id": "tt-t2-div4",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "{a*4} ÷ 4 = ?",
+      "params": { "a": { "min": 3, "max": 11 } },
+      "answerExpr": "a",
+      "distractorRules": ["a+1", "a*2"],
+      "askStyles": ["digger", "kenji"],
+      "hint": "How many 4s fit inside {a*4}? Use the ×4 table backwards!",
+      "explain": "Because {a} × 4 = {a*4}, we know {a*4} ÷ 4 = {a}. Dividing undoes multiplying."
+    },
+    {
+      "id": "tt-t2-gears",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "A 4-tooth gear drives a {b}-tooth gear. How many times does the small gear spin for ONE big turn?",
+      "params": { "b": { "min": 8, "max": 16, "multipleOf": 4 } },
+      "answerExpr": "b/4",
+      "distractorRules": ["b/4+1", "b/2"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Share {b} teeth into groups of 4.",
+      "explain": "{b} ÷ 4 = {answer} — the small gear must click past all {b} teeth, 4 at a time. Feel the maths!"
+    },
+    {
+      "id": "tt-t3-mixed",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "What is {a} × {b}?",
+      "params": { "a": { "min": 6, "max": 12 }, "b": { "min": 6, "max": 12 } },
+      "answerExpr": "a*b",
+      "distractorRules": ["a*b+a", "a*b-b"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Break it up: {a} × {b} = {a} × 10 take away {a} × {10-b}… or build up from a fact you know!",
+      "explain": "{a} × {b} = {answer}. Big facts are little facts joined together."
+    },
+    {
+      "id": "tt-t3-missing",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "? × {a} = {a*b}",
+      "params": { "a": { "min": 3, "max": 9 }, "b": { "min": 4, "max": 12 } },
+      "answerExpr": "b",
+      "distractorRules": ["b+1", "b-1"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "Divide! {a*b} ÷ {a} finds the missing warrior.",
+      "explain": "{a*b} ÷ {a} = {b}, so {b} × {a} = {a*b}. Missing-number battles are division in armour."
+    },
+    {
+      "id": "tt-t3-div8",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "{a*8} ÷ 8 = ?",
+      "params": { "a": { "min": 4, "max": 12 } },
+      "answerExpr": "a",
+      "distractorRules": ["a+2", "a-1"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Halve it three times: {a*8} → {a*4} → {a*2} → ?",
+      "explain": "Dividing by 8 is halving three times: {a*8} → {a*4} → {a*2} → {answer}."
+    }
+  ]
+}

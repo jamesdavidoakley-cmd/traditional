@@ -1,0 +1,86 @@
+{
+  "id": "maths-symmetry",
+  "strand": "maths",
+  "topic": "symmetry",
+  "topicNameKey": "topic.symmetry.name",
+  "questions": [
+    {
+      "id": "sym-t1-square",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "How many lines of symmetry does a SQUARE have?",
+      "answer": "4",
+      "distractors": ["2", "1"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Fold it top-to-bottom, side-to-side… and across BOTH diagonals!",
+      "explain": "A square folds perfectly 4 ways: 2 through the middles and 2 through the corners."
+    },
+    {
+      "id": "sym-t1-letterA",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Which capital letter has a line of symmetry: A, F or G?",
+      "answer": "A",
+      "distractors": ["F", "G"],
+      "askStyles": ["digger", "marcus"],
+      "hint": "Imagine folding each letter down the middle — which halves match?",
+      "explain": "A folds left-onto-right perfectly. F and G have no matching fold."
+    },
+    {
+      "id": "sym-t1-circle-ish",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "A rectangle (not a square) has how many lines of symmetry?",
+      "answer": "2",
+      "distractors": ["4", "0"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Middles yes — but the diagonal folds DON'T match!",
+      "explain": "Only the two middle folds work. Diagonal folds tip the halves apart."
+    },
+    {
+      "id": "sym-t2-triangle",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "An equilateral triangle (all sides equal) has how many lines of symmetry?",
+      "answer": "3",
+      "distractors": ["1", "6"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "One fold through each corner to the middle of the opposite side.",
+      "explain": "Three equal sides give three perfect folds — one per corner."
+    },
+    {
+      "id": "sym-t2-letters",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Which letter has TWO lines of symmetry: H, T or L?",
+      "answer": "H",
+      "distractors": ["T", "L"],
+      "askStyles": ["digger", "kenji"],
+      "hint": "T only folds one way. L doesn't fold at all!",
+      "explain": "H folds both left-right AND top-bottom. T folds only left-right; L matches no fold."
+    },
+    {
+      "id": "sym-t3-hexagon",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "A regular hexagon has how many lines of symmetry?",
+      "answer": "6",
+      "distractors": ["3", "12"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Regular shapes have as many fold-lines as sides!",
+      "explain": "Regular polygons hide a rule: lines of symmetry = number of sides. Hexagon → 6."
+    },
+    {
+      "id": "sym-t3-cog",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "A cog has {n} identical teeth spaced evenly. How many lines of symmetry does it have?",
+      "params": { "n": { "min": 5, "max": 9 } },
+      "answerExpr": "n",
+      "distractorRules": ["n*2", "n-1"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Same rule as regular shapes — one line per tooth.",
+      "explain": "Evenly-spaced identical teeth give {n} perfect folds. Symmetry keeps cogs balanced so they don't wobble!"
+    }
+  ]
+}

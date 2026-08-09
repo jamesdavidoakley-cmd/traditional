@@ -424,8 +424,7 @@ export class Screens {
       bonus: '🟡',
     };
     const rows: { id: string }[] = [...fossils.map((f) => ({ id: f.id }))];
-    const bonusId = (level as unknown as { bonusFossilId?: string })?.bonusFossilId;
-    if (bonusId) rows.push({ id: bonusId });
+    if (level?.bonusFossilId) rows.push({ id: level.bonusFossilId });
     for (const f of rows) {
       const got = save?.fossils.includes(f.id) ?? false;
       const def = fossils.find((x) => x.id === f.id);

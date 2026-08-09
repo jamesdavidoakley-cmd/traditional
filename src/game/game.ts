@@ -111,6 +111,14 @@ export class Game implements LevelHost, GameFlow, SpeakerRigControl {
       this.resetHearts();
       this.enterLevel(devLevel);
       this.hud.show(true);
+      const at = params.get('at');
+      if (at) {
+        const [x, y, z, yawDeg] = at.split(',').map(Number);
+        if ([x, y, z].every((v) => Number.isFinite(v))) {
+          this.player.teleport(new THREE.Vector3(x, y, z), Number.isFinite(yawDeg) ? (yawDeg * Math.PI) / 180 : 0);
+          this.cameraRig.snapBehind(this.player.yaw, this.player.position);
+        }
+      }
     } else {
       this.showTitle();
     }
@@ -315,6 +323,23 @@ export class Game implements LevelHost, GameFlow, SpeakerRigControl {
     const save = C().save.current;
     if (save) {
       save.lastWorld = id;
+    }
+    this.toaster.toast(S(def.nameKey), 2400);
+    this.pendingGardenCheck = true; // garden fossil may have been earned elsewhere
+    // fun fact on entry — instant loads, so the "loading screen fact" (§2.5)
+    // arrives as a toast a moment after the world name
+    if (def.factsKey) {
+      const facts: string[] = [];
+      for (let i = 1; i <= 9; i++) {
+        const key = `${def.factsKey}.${i}`;
+        if (C().content.strings[key]) facts.push(S(key));
+      }
+      if (facts.length > 0) {
+        const fact = facts[Math.floor(Math.random() * facts.length)];
+        window.setTimeout(() => {
+          if (this.levelId === id) this.toaster.toast(`💡 ${fact}`, 5200);
+        }, 2800);
+      }
     }
     bus.emit('WorldEntered', { worldId: id });
   }
@@ -697,7 +722,7 @@ export class Game implements LevelHost, GameFlow, SpeakerRigControl {
     this.hud.setChips(list.length);
     bus.emit('ChipCollected', { worldId: this.levelId, worldTotal: list.length });
     const target = C().content.config.economy.bonusChipTarget;
-    const bonusId = (this.level?.def as unknown as { bonusFossilId?: string })?.bonusFossilId;
+    const bonusId = this.level?.def.bonusFossilId;
     if (bonusId && list.length >= target && !save.fossils.includes(bonusId)) {
       this.toaster.toast(S('ui.bonusFossilToast'));
       bus.emit('BonusFossilEarned', { worldId: this.levelId });

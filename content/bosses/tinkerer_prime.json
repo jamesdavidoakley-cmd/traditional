@@ -1,0 +1,21 @@
+{
+  "id": "tinkerer_prime",
+  "nameKey": "char.tinkerer_prime.name",
+  "world": "w2",
+  "hp": 7,
+  "phases": 1,
+  "traits": { "aggression": 0.25, "caution": 0.8, "trickery": 0.6, "patience": 0.6, "showmanship": 0.3 },
+  "moveset": "wrench_kit",
+  "abilities": [
+    { "id": "drone_call", "trigger": { "type": "onTimer", "value": 16 }, "effect": "summon_turrets", "once": false, "cooldown": 12 }
+  ],
+  "voicePack": "voices/tinkerer_prime.json",
+  "colour": "#4E9B8F",
+  "accent": "#B8863B",
+  "weapon": "wrench",
+  "scale": 1.0,
+  "speed": 3.8,
+  "contactDamage": 0.5,
+  "miniBoss": true,
+  "randomTraits": true
+}

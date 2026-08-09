@@ -37,7 +37,10 @@ export interface Decision {
 /** Tag families each trait amplifies (§6.3). */
 const TRAIT_TAG_AFFINITY: Record<keyof TraitVector, Partial<Record<string, number>>> = {
   aggression: { strike: 1.0, heavy: 0.8, combo: 0.9, approach: 0.7, ranged: 0.3 },
-  caution: { defend: 1.0, reposition: 0.7, retreat: 0.8, heal: 0.6, ranged: 0.4 },
+  // NB: caution's defend affinity is deliberately moderate — a cautious boss
+  // WALLS UP reactively (habit reading, player streaks) rather than blocking
+  // on a timer. Keeps the adaptation signal visible (§6.6.3).
+  caution: { defend: 0.55, reposition: 0.75, retreat: 0.8, heal: 0.6, ranged: 0.4 },
   trickery: { feint: 1.0, reposition: 0.4, ranged: 0.3, summon: 0.3 },
   patience: { wait: 1.0, defend: 0.35, ranged: 0.25 },
   showmanship: { flourish: 1.0, summon: 0.4, heavy: 0.2 },

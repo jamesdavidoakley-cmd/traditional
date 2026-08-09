@@ -1,0 +1,17 @@
+{
+  "id": "hub_practice_bench",
+  "archetype": "measure",
+  "titleKey": "task.hub_practice_bench.title",
+  "topicId": "addsub",
+  "companion": "kenji",
+  "measure": {
+    "mode": "jug",
+    "prompts": [
+      { "tier": 1, "target": 250, "unit": "ml", "text": "Kenji's cooling tank needs exactly 250 ml. Pour it in!", "hint": "Two big pours of 100, then five little 10s.", "explain": "100 + 100 + 10 + 10 + 10 + 10 + 10 = 250 ml. Adding in easy jumps!" },
+      { "tier": 1, "target": 320, "unit": "ml", "text": "Botto drinks exactly 320 ml of oil. Fill him up!", "hint": "Three 100s, then two 10s.", "explain": "100 + 100 + 100 + 10 + 10 = 320 ml." },
+      { "tier": 2, "target": 470, "unit": "ml", "text": "The glue pot wants 470 ml — precision, please!", "hint": "Four 100s… then how many 10s make 70?", "explain": "400 + 70 = 470. Seven 10s make the 70." },
+      { "tier": 3, "target": 730, "unit": "ml", "text": "Mix 730 ml of shine-polish for the fossils.", "hint": "Seven 100s make 700, then three 10s.", "explain": "700 + 30 = 730 ml. Big jumps first, little jumps last." }
+    ]
+  },
+  "reward": { "brainPower": 2 }
+}

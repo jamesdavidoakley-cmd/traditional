@@ -1,0 +1,116 @@
+{
+  "id": "maths-addsub",
+  "strand": "maths",
+  "topic": "addsub",
+  "topicNameKey": "topic.addsub.name",
+  "questions": [
+    {
+      "id": "as-t1-add2",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "{a} + {b} = ?",
+      "params": { "a": { "min": 24, "max": 68 }, "b": { "min": 11, "max": 29 } },
+      "answerExpr": "a+b",
+      "distractorRules": ["a+b+10", "a+b-1"],
+      "askStyles": ["digger", "marcus", "kenji"],
+      "hint": "Add the tens first, then the ones!",
+      "explain": "{a} + {b}: tens make {floor(a/10)*10+floor(b/10)*10}, ones make {a%10+b%10} — together {answer}."
+    },
+    {
+      "id": "as-t1-sub2",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "{a} − {b} = ?",
+      "params": { "a": { "min": 45, "max": 99 }, "b": { "min": 12, "max": 34 } },
+      "answerExpr": "a-b",
+      "distractorRules": ["a-b+10", "a-b-2"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "Take away the tens first, then the ones.",
+      "explain": "{a} − {b} = {answer}. Jump back {floor(b/10)*10}, then {b%10} more."
+    },
+    {
+      "id": "as-t1-bonds",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "{a} + ? = 100",
+      "params": { "a": { "min": 15, "max": 85, "multipleOf": 5 } },
+      "answerExpr": "100-a",
+      "distractorRules": ["100-a+10", "90-a"],
+      "askStyles": ["digger", "kenji"],
+      "hint": "How far from {a} up to 100? Jump to the next ten first!",
+      "explain": "{a} + {answer} = 100 — number bonds to 100 are treasure-counting gold."
+    },
+    {
+      "id": "as-t2-add3",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "{a} + {b} = ?",
+      "params": { "a": { "min": 140, "max": 460, "multipleOf": 10 }, "b": { "min": 120, "max": 380, "multipleOf": 10 } },
+      "answerExpr": "a+b",
+      "distractorRules": ["a+b+100", "a+b-10"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Hundreds with hundreds, tens with tens!",
+      "explain": "{a} + {b} = {answer}. Add hundreds, then tens — column by column, nice and calm."
+    },
+    {
+      "id": "as-t2-sub3",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "{a} − {b} = ?",
+      "params": { "a": { "min": 350, "max": 890, "multipleOf": 5 }, "b": { "min": 110, "max": 240, "multipleOf": 5 } },
+      "answerExpr": "a-b",
+      "distractorRules": ["a-b+100", "a-b-10"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "Subtract the hundreds first, then the tens, then the ones.",
+      "explain": "{a} − {b} = {answer}, taking away piece by piece like clearing arena sand."
+    },
+    {
+      "id": "as-t2-missing",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "{a} + ? = {a+b}",
+      "params": { "a": { "min": 130, "max": 450, "multipleOf": 10 }, "b": { "min": 40, "max": 160, "multipleOf": 10 } },
+      "answerExpr": "b",
+      "distractorRules": ["b+10", "b+100"],
+      "askStyles": ["digger", "kenji"],
+      "hint": "Work BACKWARDS: {a+b} take away {a}.",
+      "explain": "The missing jump is {a+b} − {a} = {answer}. Addition and subtraction are opposite moves!"
+    },
+    {
+      "id": "as-t3-add4",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "{a} + {b} = ?",
+      "params": { "a": { "min": 1250, "max": 4600, "multipleOf": 50 }, "b": { "min": 1150, "max": 3300, "multipleOf": 50 } },
+      "answerExpr": "a+b",
+      "distractorRules": ["a+b+100", "a+b-50"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Thousands, hundreds, tens — one column at a time.",
+      "explain": "{a} + {b} = {answer}. Four-digit numbers are just more columns, same rules."
+    },
+    {
+      "id": "as-t3-diff",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "What is the difference between {a} and {b}?",
+      "params": { "a": { "min": 2100, "max": 5200, "multipleOf": 100 }, "b": { "min": 900, "max": 1900, "multipleOf": 100 } },
+      "answerExpr": "a-b",
+      "distractorRules": ["a-b+100", "a+b"],
+      "askStyles": ["marcus", "digger"],
+      "hint": "'Difference' means subtract the smaller from the bigger.",
+      "explain": "{a} − {b} = {answer}. Difference is the gap between two numbers."
+    },
+    {
+      "id": "as-t3-estimate",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "Estimate: {a} + {b} is CLOSEST to…?",
+      "params": { "a": { "min": 380, "max": 420 }, "b": { "min": 180, "max": 220 } },
+      "answer": "600",
+      "distractors": ["500", "700"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Round {a} to 400 and {b} to 200 first!",
+      "explain": "{a} ≈ 400 and {b} ≈ 200, so the total is close to 600. Estimating checks our answers!"
+    }
+  ]
+}

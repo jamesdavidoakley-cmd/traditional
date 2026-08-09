@@ -1,0 +1,27 @@
+{
+  "id": "w1_skeleton",
+  "archetype": "sort",
+  "titleKey": "task.w1_skeleton.title",
+  "topicId": "skeletons",
+  "companion": "kenji",
+  "sort": {
+    "categories": [
+      { "id": "skull", "labelKey": "sort.category.skull", "colour": "#e8dcc8" },
+      { "id": "spine", "labelKey": "sort.category.spine", "colour": "#c8d8e8" },
+      { "id": "legs", "labelKey": "sort.category.legs", "colour": "#d8e8c8" }
+    ],
+    "items": [
+      { "id": "skullbone", "label": "Skull", "category": "skull", "shape": "skull", "colour": "#efe6d8", "fact": "The skull PROTECTS the brain — a built-in helmet!" },
+      { "id": "jaw", "label": "Jawbone", "category": "skull", "shape": "bone", "colour": "#efe6d8", "fact": "T-rex jaws could crunch with the force of three cars stacked up!" },
+      { "id": "teethrow", "label": "Tooth row", "category": "skull", "shape": "bone", "colour": "#fffdf4", "fact": "Dinosaur teeth grew back all through their lives. Lucky them!" },
+      { "id": "backbone", "label": "Backbone", "category": "spine", "shape": "bone", "colour": "#e8e0d0", "fact": "The backbone SUPPORTS the whole body — animals with one are vertebrates." },
+      { "id": "ribs", "label": "Ribs", "category": "spine", "shape": "bone", "colour": "#e8e0d0", "fact": "Ribs make a cage that protects the heart and lungs." },
+      { "id": "tailbones", "label": "Tail bones", "category": "spine", "shape": "bone", "colour": "#e8e0d0", "fact": "Max's tail is a chain of bones — great for balance AND tail spins." },
+      { "id": "thigh", "label": "Thigh bone", "category": "legs", "shape": "bone", "colour": "#f2ead8", "fact": "The thigh bone is the biggest bone — it helps you MOVE!" },
+      { "id": "shin", "label": "Shin bone", "category": "legs", "shape": "bone", "colour": "#f2ead8", "fact": "Muscles pull on leg bones in pairs to walk, run and STOMP." },
+      { "id": "toes", "label": "Toe bones", "category": "legs", "shape": "bone", "colour": "#f2ead8", "fact": "T-rex walked on its toes — sneaky-quick for something so huge!" }
+    ],
+    "itemsPerRound": { "1": 5, "2": 7, "3": 9 }
+  },
+  "reward": { "fossilId": "w1-f2" }
+}

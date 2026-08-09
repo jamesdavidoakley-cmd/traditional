@@ -1,0 +1,20 @@
+{
+  "id": "nightshade",
+  "nameKey": "char.nightshade.name",
+  "titleKey": "boss.nightshade.title",
+  "world": "w5",
+  "hp": 16,
+  "phases": 2,
+  "traits": { "aggression": 0.6, "caution": 0.6, "trickery": 0.95, "patience": 0.7, "showmanship": 0.4 },
+  "moveset": "twin_daggers",
+  "abilities": [
+    { "id": "cloak", "trigger": { "type": "onHpBelow", "value": 0.4 }, "effect": "invisible", "counter": "lighthouse_beam_shadow", "once": true }
+  ],
+  "voicePack": "voices/nightshade.json",
+  "colour": "#3d3d7a",
+  "accent": "#c0b8e8",
+  "weapon": "daggers",
+  "speed": 4.6,
+  "contactDamage": 0.5,
+  "cafeGameKey": "shadow_theatre"
+}

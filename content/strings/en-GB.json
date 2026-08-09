@@ -105,7 +105,7 @@
   "hud.chips": "Amber Chips",
   "hud.fossils": "Star Fossils",
   "hud.brain": "Brain Power",
-  "hud.roarReady": "MEGA ROAR ready! Hold {key}!",
+  "hud.roarReady": "MEGA ROAR ready! Press {key}!",
 
   "controls.move": "Move — WASD or Arrow Keys (or gamepad stick)",
   "controls.jump": "Jump / Double Jump — Space (A)",
@@ -194,6 +194,7 @@
   "task.w2_gear_train.title": "The Great Gear Train",
   "task.w2_counterweight.title": "The Counterweight Lift",
   "task.w2_times_path.title": "The Multiples Walkway",
+  "task.w2_symmetry_sort.title": "The Cog Symmetry Bench",
   "task.hub_roman_board.title": "Marcus's Scoreboard",
   "task.hub_springboots.title": "Build: Spring Boots",
   "task.hub_practice_bench.title": "Kenji's Practice Bench",
@@ -303,5 +304,16 @@
   "place.cafe": "the Fossil Café",
   "place.arena": "Marcus's Arena",
 
-  "intro.title": "The Know-It-All Engine"
+  "intro.title": "The Know-It-All Engine",
+
+  "zone.w1.gulch": "🌵 Dust Gulch",
+  "zone.w1.dig": "⛏ The Great Dig",
+  "zone.w1.henge": "🦴 Bonehenge",
+  "zone.w2.yard": "⚙️ The Gear Yard",
+  "zone.w2.steam": "♨️ The Steamworks",
+  "zone.w2.gauntlet": "🏃 The Conveyor Gauntlet",
+
+  "enemy.cogling_scout.name": "Cogling Scout",
+  "enemy.cogling_brute.name": "Cogling Brute",
+  "enemy.cogling_tinkerer.name": "Cogling Tinkerer"
 }

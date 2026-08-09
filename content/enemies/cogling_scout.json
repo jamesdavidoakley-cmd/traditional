@@ -1,0 +1,16 @@
+{
+  "id": "cogling_scout",
+  "nameKey": "enemy.cogling_scout.name",
+  "behaviour": "scout",
+  "hp": 2,
+  "speed": 3.2,
+  "damage": 0.5,
+  "radius": 0.4,
+  "height": 1.0,
+  "aggroRange": 11,
+  "attackRange": 13,
+  "colour": "#9aa3b8",
+  "accent": "#c9a24a",
+  "fleeAtHp": 1,
+  "chipDrop": 1
+}

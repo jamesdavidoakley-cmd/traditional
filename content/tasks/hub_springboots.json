@@ -1,0 +1,16 @@
+{
+  "id": "hub_springboots",
+  "archetype": "build",
+  "titleKey": "task.hub_springboots.title",
+  "topicId": "gears",
+  "companion": "kenji",
+  "build": {
+    "mode": "springs",
+    "tiers": {
+      "1": { "target": 4, "wobbleAbove": 6 },
+      "2": { "target": 4.5, "wobbleAbove": 6 },
+      "3": { "target": 6, "wobbleAbove": 6.5 }
+    }
+  },
+  "reward": { "gadgetId": "springboots", "brainPower": 1 }
+}

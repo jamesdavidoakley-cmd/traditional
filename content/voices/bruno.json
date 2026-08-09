@@ -1,0 +1,67 @@
+{
+  "characterId": "bruno",
+  "pools": {
+    "boss_intro": [
+      "HA! A little blue visitor! Bruno was just about to flatten something — how lucky you came!",
+      "Welcome to the quarry, tiny rex! Everything here gets flattened eventually. Ha ha! Tradition!",
+      "The cog says CRUSH, so Bruno crushes! Nothing personal, small friend!"
+    ],
+    "taunt_mid": [
+      "Bruno is a LANDSLIDE! Landslides do not stop for lizards!",
+      "Still standing? Ha! I like you! CRUSH TIME anyway!",
+      "Forward! Forward is Bruno's favourite direction! Also his only one!",
+      "You dodge well, tiny one! Dodge THIS next!",
+      "Ha ha ha! This is the most fun Bruno has had all week!"
+    ],
+    "hit_react": [
+      "Oof! Good bonk!",
+      "Ha! Bruno FELT that one!",
+      "The little rex has BIG bonks!",
+      "Again! No wait — don't!"
+    ],
+    "low_hp": [
+      "Bruno is… wobbling?! Landslides do not wobble!",
+      "The cog is rattling… my head feels… strange…",
+      "One more like that and Bruno takes an unscheduled nap!"
+    ],
+    "defeat_freed": [
+      "The cog is OFF! Bruno's head is Bruno's again! Ha… haha… THANK YOU, tiny rex!",
+      "Whoa. Bruno was being STEERED. Never again! You bonked me FREE!",
+      "Free! FREE! First stop: the café. Second stop: apologising to everyone Bruno flattened!",
+      "You fight with the brain AND the tail. Bruno respects both. FRIENDS NOW!"
+    ],
+    "ask_intro": [
+      "Rock quiz! Bruno LOVES rocks. Bruno was a quarry-master before the cog, you know!",
+      "Which rock is which, little rex? Show Bruno you were listening!",
+      "Bruno holds up a rock. YOU tell Bruno what it is!",
+      "Rocks are like friends: know their names! Ready?"
+    ],
+    "correct_first_try": [
+      "YES! You know your rocks! Bruno is SO PROUD!",
+      "Ha! Correct! You would make a fine quarry-master!",
+      "RIGHT! The rock approves. Bruno also approves!"
+    ],
+    "correct_after_hint": [
+      "There it is! Second swings count double in Bruno's book!",
+      "Correct! See — rocks make sense once you know their story!",
+      "That's the one! Ha ha! Knew you'd get there!"
+    ],
+    "incorrect_gentle": [
+      "Not that one — but no crushing worries! Want Bruno's hint?",
+      "Hmm, nope! Even Bruno once mixed up marble and granite. Hint?",
+      "Close! Rocks are tricky rascals. Bruno can give a clue!"
+    ],
+    "hint_intro": [
+      "Bruno whispers, which for Bruno is quite loud:",
+      "Quarry-master's secret coming up:"
+    ],
+    "teach": [
+      "Watch Bruno! Here is how the rock story goes, step by step.",
+      "No frowns! Bruno will show you — then YOU show Bruno!"
+    ],
+    "cafe_farewell": [
+      "Come back any time, tiny rex! Bruno saves you the comfy seat!",
+      "Ha ha! Best quiz of the day! Off you go — fossils wait for no rex!"
+    ]
+  }
+}

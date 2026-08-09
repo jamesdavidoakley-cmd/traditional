@@ -1,0 +1,108 @@
+{
+  "id": "eng-gears",
+  "strand": "engineering",
+  "topic": "gears",
+  "topicNameKey": "topic.gears.name",
+  "questions": [
+    {
+      "id": "gr-t1-small-fast",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "A SMALL gear drives a BIG gear. The big gear turns…?",
+      "answer": "Slower but stronger",
+      "distractors": ["Faster but weaker", "Exactly the same"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Big gears have more teeth to click past — that takes time!",
+      "explain": "Small driving big trades speed for strength: the big gear turns slower but with more force."
+    },
+    {
+      "id": "gr-t1-lever",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "A see-saw is a simple machine. Which one?",
+      "answer": "A lever",
+      "distractors": ["A pulley", "A gear"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "A stiff beam tipping on a middle point…",
+      "explain": "A see-saw is a lever: a beam balancing on a pivot (the fulcrum). Levers help lift heavy things!"
+    },
+    {
+      "id": "gr-t1-pulley",
+      "tier": 1,
+      "type": "quickfire",
+      "template": "Which machine uses a WHEEL and a ROPE to lift things?",
+      "answer": "A pulley",
+      "distractors": ["A lever", "A cam"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Flag poles and cranes use them!",
+      "explain": "A pulley turns a hard lift into an easy pull — the rope runs over a wheel and changes direction."
+    },
+    {
+      "id": "gr-t2-ratio",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "A {a}-tooth gear drives a {a*3}-tooth gear. How many times does the small one turn for ONE big turn?",
+      "params": { "a": { "min": 4, "max": 8, "multipleOf": 2 } },
+      "answerExpr": "3",
+      "distractors": ["2", "6"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Divide the big teeth by the small teeth: {a*3} ÷ {a}.",
+      "explain": "{a*3} ÷ {a} = 3, so the small gear spins 3 times per big turn — a 3:1 ratio. That's the times tables driving real machines!"
+    },
+    {
+      "id": "gr-t2-direction",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "Two gears mesh together. The first turns clockwise. The second turns…?",
+      "answer": "Anticlockwise",
+      "distractors": ["Clockwise", "Not at all"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Teeth push each other in OPPOSITE directions where they meet.",
+      "explain": "Meshing gears always swap direction: clockwise drives anticlockwise, tick drives tock."
+    },
+    {
+      "id": "gr-t2-fulcrum",
+      "tier": 2,
+      "type": "quickfire",
+      "template": "To lift a heavy rock with a lever more easily, push…?",
+      "answer": "Further from the pivot",
+      "distractors": ["Closer to the pivot", "On the pivot itself"],
+      "askStyles": ["marcus", "kenji"],
+      "hint": "A longer arm means a mightier push!",
+      "explain": "The further from the fulcrum you push, the more lifting power you get — long levers move mountains (and mine carts)."
+    },
+    {
+      "id": "gr-t3-train",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "An 8-tooth gear drives a 24-tooth gear. The 24 drives another 8. How fast does the LAST gear spin compared to the first?",
+      "answer": "The same speed",
+      "distractors": ["3 times faster", "3 times slower"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "×3 slower, then ×3 faster… what do they make together?",
+      "explain": "8→24 divides speed by 3; 24→8 multiplies by 3. They cancel out — the ends match, though the middle turns slowly and strongly."
+    },
+    {
+      "id": "gr-t3-cam",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "A CAM is a wobbly wheel that turns spinning into…?",
+      "answer": "Up-and-down motion",
+      "distractors": ["Light", "More spinning"],
+      "askStyles": ["kenji", "digger"],
+      "hint": "Think of an egg-shaped wheel lifting a rod as it turns.",
+      "explain": "Cams are lumpy wheels: as they spin, their bump pushes a follower up and lets it drop — hello, bouncing toys!"
+    },
+    {
+      "id": "gr-t3-design",
+      "tier": 3,
+      "type": "quickfire",
+      "template": "In the design loop, what comes right after you BUILD something?",
+      "answer": "Test it",
+      "distractors": ["Sell it", "Paint it"],
+      "askStyles": ["kenji", "marcus"],
+      "hint": "Plan → build → ??? → improve!",
+      "explain": "Plan, build, TEST, improve — then loop again. Every great machine failed its first test and got better."
+    }
+  ]
+}

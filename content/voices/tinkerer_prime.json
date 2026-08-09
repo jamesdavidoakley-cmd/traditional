@@ -1,0 +1,30 @@
+{
+  "characterId": "tinkerer_prime",
+  "pools": {
+    "boss_intro": [
+      "Ooooh, a specimen! Drones — prepare the welcome! It's pointy!",
+      "I fix things! You look… breaky! Stay still for repairs!",
+      "Tinkerer Prime online! Warranty void where dinosaurs occur!"
+    ],
+    "taunt_mid": [
+      "Drones! Drones drones drones! I love drones!",
+      "You can't hit what's constantly being repaired!",
+      "Tick tock, everything I own goes tick tock!",
+      "Ooh, you're persistent! I'll add that to your file!"
+    ],
+    "hit_react": [
+      "Eep! A dent! An UNAUTHORISED dent!",
+      "My warranty! MY WARRANTY!",
+      "Bad lizard! Bad, well-aimed lizard!"
+    ],
+    "low_hp": [
+      "Critical! Critical! Someone repair the REPAIRER!",
+      "Screws loose! Literally! Metaphorically! BOTH!"
+    ],
+    "defeat_freed": [
+      "The cog popped! I can… think my OWN thoughts! First thought: I like hats!",
+      "Systems free! Rebooting personality… oh, I'm DELIGHTFUL!",
+      "You broke me open and set me loose! Er — thanks! I think! YES, thanks!"
+    ]
+  }
+}

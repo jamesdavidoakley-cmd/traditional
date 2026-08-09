@@ -254,7 +254,7 @@ export class FossilEntity {
     this.mesh = makeFossilMesh();
     this.mesh.position.copy(pos);
     parent.add(this.mesh);
-    this.revealed = def.kind !== 'secret';
+    this.revealed = def.kind !== 'secret' && def.kind !== 'garden';
     this.mesh.visible = this.revealed;
     if (alreadyCollected) {
       // collected fossils stay as faint ghosts so kids can revisit them
@@ -309,8 +309,8 @@ export class NpcEntity {
     this.root.rotation.y = (def.faceDeg ?? 0) * DEG;
     this.root.add(this.rig.root);
     const label = makeTextLabel(S(cd?.nameKey ?? def.character));
-    label.position.y = 2.4;
-    label.scale.multiplyScalar(0.65);
+    label.position.y = 2.75;
+    label.scale.multiplyScalar(0.48);
     this.root.add(label);
     parent.add(this.root);
     C().renderer.addOutline(this.rig.root);

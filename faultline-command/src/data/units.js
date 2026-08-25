@@ -504,6 +504,19 @@ const FACTION_MODS = {
  * and cannot be intercepted.
  */
 const ERA_MODS = {
+  // The 1990s uses the base statistics: this block is artwork only, so the era
+  // looks like cold-war armour without playing any differently.
+  nineties: {
+    mbt:   { art: { body: 'tank90' } },
+    ifv:   { art: { body: 'ifv90' } },
+    apc:   { art: { body: 'apc90' } },
+    spg:   { art: { body: 'spg90' } },
+    mlrs:  { art: { body: 'mlrs90' } },
+    himars: { art: { body: 'mlrs90' } },
+    phl16: { art: { body: 'mlrs90' } },
+    aa:    { art: { body: 'aa90' } },
+    eng:   { art: { body: 'apc90' } },
+  },
   interwar: {
     _all: { speed: 0.70, cost: 0.88, buildTime: 0.90 },
     rifle:   { hp: 0.92, w: [{ name: 'Rifle and Lewis gun', range: 3.9, damage: 11, rof: 0.75 }] },

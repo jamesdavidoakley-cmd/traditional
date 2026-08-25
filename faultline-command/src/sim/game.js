@@ -100,6 +100,12 @@ export class Game {
     // Neutral oil infrastructure and strategic objectives.
     for (const o of this.mapData.oil) {
       const n = makeNeutral(this.world, o.type, o.x, o.y, o.id);
+      // A site the map hands to a starting position belongs to whoever deploys
+      // there: the field refinery outside each base is yours from the first tick.
+      if (o.owner !== undefined) {
+        const holder = this.players.find((p) => p.startIndex === o.owner);
+        if (holder) { n.owner = holder.index; holder.neutrals = (holder.neutrals || 0) + 1; }
+      }
       this.world.stampBuilding(n, true);
     }
     for (const ob of this.mapData.objectives) {

@@ -8,6 +8,10 @@ export const NEUTRAL_TYPES = {
   derrick:   { name: 'Oil Derrick', income: 9, hp: 900, size: 2, radius: 1.4, captureTime: 6.5 },
   refinery:  { name: 'Refinery', income: 15, hp: 1500, size: 3, radius: 2.0, captureTime: 9 },
   port:      { name: 'Port Facility', income: 12, hp: 1200, size: 3, radius: 1.9, captureTime: 8 },
+  // Every base starts with one of these just outside its perimeter, already its
+  // own. A modest, guaranteed income so losing the race for the open oil does
+  // not leave a commander with nothing but the headquarters budget.
+  fieldrefinery: { name: 'Field Refinery', income: 7, hp: 1000, size: 2, radius: 1.6, captureTime: 7 },
   // The richest capturable site in the game, and the hardest to keep: the yards
   // sit in the contested middle of the European map rather than beside a base.
   railyard:  { name: 'Marshalling Yard', income: 22, hp: 1700, size: 3, radius: 2.0, captureTime: 11 },

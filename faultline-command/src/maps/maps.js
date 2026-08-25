@@ -98,6 +98,22 @@ const FORWARD_OFF = [
 ];
 export const BASE_RADIUS = 15;
 
+/**
+ * One field refinery just outside every base, already owned by whoever starts
+ * there. Placed on the line from the base toward the middle of the map, so it is
+ * close enough to defend but exposed enough to raid. The four bases are related
+ * by the same rotation as everything else, so this stays exactly symmetric.
+ */
+function baseRefineries(centres, oil) {
+  const OUT = 20;
+  centres.forEach(([bx, by], i) => {
+    const dx = C - bx, dy = C - by;
+    const len = Math.hypot(dx, dy) || 1;
+    oil.push({ x: Math.round(bx + (dx / len) * OUT), y: Math.round(by + (dy / len) * OUT),
+      type: 'fieldrefinery', owner: i });
+  });
+}
+
 function layBase(cv, cx, cy, index, out, opts = {}) {
   const fill = opts.fill !== undefined ? opts.fill : T.GRASS;
   // Level anything unusable inside the perimeter, then lay an access-road grid and
@@ -234,6 +250,7 @@ function buildArdenne() {
     // faster, and it can only be taken by holding the middle.
     oil.push(Object.assign(tf(74, 52), { type: 'railyard' }));
   });
+  baseRefineries(centres, oil);
   const objectives = [];
   fourfold((tf) => objectives.push(tf(64, 42)));
 
@@ -287,6 +304,7 @@ function buildKhazir() {
     oil.push(Object.assign(tf(52, 48), { type: 'derrick' }));
     oil.push(Object.assign(tf(56, 72), { type: 'refinery' }));
   });
+  baseRefineries(centres, oil);
   const objectives = [];
   fourfold((tf) => objectives.push(tf(64, 46)));
 
@@ -355,6 +373,7 @@ function buildCoral() {
     oil.push(Object.assign(tf(56, 56), { type: 'derrick' }));
   });
   portPts.forEach((p) => oil.push({ x: p.x, y: p.y, type: 'port' }));
+  baseRefineries(centres, oil);
   const objectives = [];
   fourfold((tf) => objectives.push(tf(64, 44)));
 
@@ -442,7 +461,7 @@ export function loadMap(key) {
     width: N, height: N,
     tiles: r.canvas.t, bridge: r.canvas.bridge, decor: r.canvas.decor,
     starts: r.starts,
-    oil: r.oil.map((o, i) => ({ id: i, x: Math.round(o.x), y: Math.round(o.y), type: o.type })),
+    oil: r.oil.map((o, i) => ({ id: i, x: Math.round(o.x), y: Math.round(o.y), type: o.type, owner: o.owner })),
     objectives: r.objectives.map((o) => ({ x: Math.round(o.x), y: Math.round(o.y) })),
   };
   sanitise(data);

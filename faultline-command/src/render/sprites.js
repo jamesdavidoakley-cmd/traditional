@@ -40,6 +40,12 @@ export function drawUnit(ctx, view, u, colour, time) {
     case 'squad': return drawSquad(ctx, view, u, p, a, time);
     case 'tank': return drawTank(ctx, view, u, p, a);
     case 'ifv': return drawIFV(ctx, view, u, p, a);
+    case 'tank90': return drawTank90(ctx, view, u, p, a);
+    case 'ifv90': return drawIFV90(ctx, view, u, p, a);
+    case 'apc90': return drawAPC90(ctx, view, u, p, a);
+    case 'spg90': return drawSPG90(ctx, view, u, p, a);
+    case 'mlrs90': return drawMLRS90(ctx, view, u, p, a);
+    case 'aa90': return drawAA90(ctx, view, u, p, a);
     case 'rhomboid': return drawRhomboid(ctx, view, u, p, a);
     case 'heavygun': return drawHeavyGun(ctx, view, u, p, a);
     case 'apc': return drawAPC(ctx, view, u, p, a);
@@ -207,6 +213,137 @@ function drawHeavyGun(ctx, view, u, p, a) {
   // long high-angle barrel with a counterweight at the breech
   barrel(ctx, view, u, p, a.len * 0.24, a.len * 1.55, 2.4, 0.44);
   isoEllipse(ctx, view, u.x - c * a.len * 0.26, u.y - s * a.len * 0.26, 0.15, 0.15, p.dark, 0.42);
+}
+
+// ---------------------------------------------------------- 1990s bodies
+// Cold-war armour reads differently from a modern vehicle: welded slab turrets
+// rather than faceted wedges, stowage racks and side skirts rather than applique
+// blocks, dish radars rather than flat panels, and boxed launchers rather than
+// exposed rails. These are drawn as their own silhouettes, not recoloured ones.
+
+function skirts(ctx, view, u, p, a) {
+  const fc = Math.cos(u.facing), fs = Math.sin(u.facing);
+  for (const side of [-1, 1]) {
+    isoQuad(ctx, view, u.x - fs * side * a.wid * 0.94, u.y + fc * side * a.wid * 0.94,
+      a.len * 0.9, 0.06, u.facing, p.dark, 0.19);
+  }
+}
+
+function stowage(ctx, view, u, p, a, back) {
+  const c = Math.cos(u.turret), s = Math.sin(u.turret);
+  isoBox(ctx, view, u.x - c * a.len * back, u.y - s * a.len * back,
+    a.len * 0.18, a.wid * 0.5, 0.17, u.turret, boxCols(p, '#55564c'), 0.31);
+}
+
+function drawTank90(ctx, view, u, p, a) {
+  const c = Math.cos(u.turret), s = Math.sin(u.turret);
+  shadow(ctx, view, u.x, u.y, a.len * 1.3, a.wid * 2.0);
+  tracks(ctx, view, u, p, a.len, a.wid);
+  skirts(ctx, view, u, p, a);
+  hullPlate(ctx, view, u, p, a.len * 0.94, a.wid * 0.88, 0.30);
+  teamStripe(ctx, view, u, p, a.len * 0.94, a.wid * 0.88, 0.30);
+  // squat welded turret, wider than it is long
+  isoBox(ctx, view, u.x, u.y, a.len * 0.40, a.wid * 0.62, 0.26, u.turret, boxCols(p), 0.30);
+  stowage(ctx, view, u, p, a, 0.50);
+  // gun with a thermal sleeve over the inner half and a fume extractor
+  barrel(ctx, view, u, p, a.len * 0.38, a.len * 1.12, 1.8, 0.48);
+  isoLine(ctx, view, u.x + c * a.len * 0.46, u.y + s * a.len * 0.46, 0.48,
+    u.x + c * a.len * 0.86, u.y + s * a.len * 0.86, 0.48, '#3c3a34', Math.max(1.3, 2.9 * view.zoom));
+  isoEllipse(ctx, view, u.x + c * a.len * 1.0, u.y + s * a.len * 1.0, 0.09, 0.09, '#2a2823', 0.48);
+  // commander's cupola, offset, with a pintle machine gun
+  const ox = -s * 0.2, oy = c * 0.2;
+  isoBox(ctx, view, u.x + ox, u.y + oy, 0.15, 0.15, 0.13, u.turret, boxCols(p), 0.56);
+  isoLine(ctx, view, u.x + ox, u.y + oy, 0.70, u.x + ox + c * 0.34, u.y + oy + s * 0.34, 0.70,
+    '#2f2c27', Math.max(1, 1.2 * view.zoom));
+}
+
+function drawIFV90(ctx, view, u, p, a) {
+  const c = Math.cos(u.turret), s = Math.sin(u.turret);
+  shadow(ctx, view, u.x, u.y, a.len * 1.2, a.wid * 1.85);
+  tracks(ctx, view, u, p, a.len, a.wid);
+  skirts(ctx, view, u, p, a);
+  // tall sloped hull
+  hullPlate(ctx, view, u, p, a.len * 0.9, a.wid * 0.84, 0.40);
+  teamStripe(ctx, view, u, p, a.len * 0.9, a.wid * 0.84, 0.40);
+  // small one-man turret set forward
+  isoBox(ctx, view, u.x + Math.cos(u.facing) * a.len * 0.12, u.y + Math.sin(u.facing) * a.len * 0.12,
+    a.len * 0.24, a.wid * 0.38, 0.20, u.turret, boxCols(p), 0.40);
+  barrel(ctx, view, u, p, a.len * 0.26, a.len * 0.74, 1.0, 0.54);
+  // twin ATGM tubes bolted to the turret flank
+  const mx = c * 0.1 - s * 0.24, my = s * 0.1 + c * 0.24;
+  isoBox(ctx, view, u.x + mx, u.y + my, 0.15, 0.09, 0.12, u.turret, boxCols(p, '#4a4b42'), 0.52);
+  isoBox(ctx, view, u.x + mx, u.y + my, 0.15, 0.09, 0.10, u.turret, boxCols(p, '#3f4038'), 0.64);
+}
+
+function drawAPC90(ctx, view, u, p, a) {
+  shadow(ctx, view, u.x, u.y, a.len * 1.2, a.wid * 1.8);
+  if (a.tracks) tracks(ctx, view, u, p, a.len, a.wid);
+  else wheels(ctx, view, u, p, a.len, a.wid * 0.92, 4);
+  // tall boxy troop compartment with a sloped glacis
+  hullPlate(ctx, view, u, p, a.len * 0.86, a.wid * 0.82, 0.44);
+  teamStripe(ctx, view, u, p, a.len * 0.86, a.wid * 0.82, 0.44);
+  isoQuad(ctx, view, u.x + Math.cos(u.facing) * a.len * 0.5, u.y + Math.sin(u.facing) * a.len * 0.5,
+    a.len * 0.2, a.wid * 0.78, u.facing, p.top, 0.30);
+  // open cupola with a pintle gun
+  isoBox(ctx, view, u.x, u.y, 0.15, 0.15, 0.12, u.turret, boxCols(p), 0.44);
+  const c = Math.cos(u.turret), s = Math.sin(u.turret);
+  isoLine(ctx, view, u.x, u.y, 0.58, u.x + c * 0.38, u.y + s * 0.38, 0.58, '#2f2c27', Math.max(1, 1.2 * view.zoom));
+}
+
+function drawSPG90(ctx, view, u, p, a) {
+  const c = Math.cos(u.turret), s = Math.sin(u.turret);
+  shadow(ctx, view, u.x, u.y, a.len * 1.3, a.wid * 1.95);
+  tracks(ctx, view, u, p, a.len, a.wid);
+  hullPlate(ctx, view, u, p, a.len * 0.88, a.wid * 0.86, 0.30);
+  teamStripe(ctx, view, u, p, a.len * 0.88, a.wid * 0.86, 0.30);
+  // enormous slab-sided turret that overhangs the hull at the back
+  isoBox(ctx, view, u.x - c * a.len * 0.14, u.y - s * a.len * 0.14,
+    a.len * 0.54, a.wid * 0.66, 0.40, u.turret, boxCols(p), 0.30);
+  // long howitzer with a bore evacuator and a muzzle brake
+  barrel(ctx, view, u, p, a.len * 0.46, a.len * 1.5, 2.1, 0.62);
+  isoEllipse(ctx, view, u.x + c * a.len * 0.95, u.y + s * a.len * 0.95, 0.12, 0.12, '#3a3730', 0.62);
+  isoBox(ctx, view, u.x + c * a.len * 1.6, u.y + s * a.len * 1.6, 0.1, 0.13, 0.13, u.turret,
+    boxCols(p, '#3f3c35'), 0.56);
+  // spade folded on the rear plate
+  isoQuad(ctx, view, u.x - c * a.len * 0.72, u.y - s * a.len * 0.72, 0.1, a.wid * 0.5, u.turret, p.dark, 0.24);
+}
+
+function drawMLRS90(ctx, view, u, p, a) {
+  const c = Math.cos(u.turret), s = Math.sin(u.turret);
+  shadow(ctx, view, u.x, u.y, a.len * 1.3, a.wid * 1.95);
+  if (a.tracks) tracks(ctx, view, u, p, a.len, a.wid); else wheels(ctx, view, u, p, a.len, a.wid * 0.9, 3);
+  hullPlate(ctx, view, u, p, a.len * 0.9, a.wid * 0.84, 0.34);
+  teamStripe(ctx, view, u, p, a.len * 0.9, a.wid * 0.84, 0.34);
+  // armoured cab forward
+  isoBox(ctx, view, u.x + Math.cos(u.facing) * a.len * 0.56, u.y + Math.sin(u.facing) * a.len * 0.56,
+    a.len * 0.24, a.wid * 0.7, 0.34, u.facing, boxCols(p), 0.34);
+  // a boxed launcher, elevated — not exposed rails
+  const px = u.x - c * a.len * 0.22, py = u.y - s * a.len * 0.22;
+  isoBox(ctx, view, px, py, a.len * 0.42, a.wid * 0.6, 0.40, u.turret, boxCols(p, '#4a4b42'), 0.36);
+  // the two pods of tubes in the box face
+  for (const side of [-1, 1]) {
+    isoQuad(ctx, view, px + c * a.len * 0.34 - s * side * a.wid * 0.26,
+      py + s * a.len * 0.34 + c * side * a.wid * 0.26, 0.06, a.wid * 0.22, u.turret, '#2f2d28', 0.60);
+  }
+}
+
+function drawAA90(ctx, view, u, p, a) {
+  const c = Math.cos(u.turret), s = Math.sin(u.turret);
+  shadow(ctx, view, u.x, u.y, a.len * 1.25, a.wid * 1.9);
+  if (a.tracks) tracks(ctx, view, u, p, a.len, a.wid); else wheels(ctx, view, u, p, a.len, a.wid * 0.9, 3);
+  hullPlate(ctx, view, u, p, a.len * 0.88, a.wid * 0.86, 0.32);
+  teamStripe(ctx, view, u, p, a.len * 0.88, a.wid * 0.86, 0.32);
+  isoBox(ctx, view, u.x, u.y, a.len * 0.36, a.wid * 0.56, 0.26, u.turret, boxCols(p), 0.32);
+  // twin missile boxes either side of the turret
+  for (const side of [-1, 1]) {
+    isoBox(ctx, view, u.x - s * side * a.wid * 0.5, u.y + c * side * a.wid * 0.5,
+      a.len * 0.22, 0.09, 0.16, u.turret, boxCols(p, '#4a4b42'), 0.50);
+  }
+  // rotating dish search radar on a mast behind the turret — the period giveaway
+  const rx = u.x - c * a.len * 0.34, ry = u.y - s * a.len * 0.34;
+  isoLine(ctx, view, rx, ry, 0.56, rx, ry, 0.96, '#4c4740', Math.max(1, 1.4 * view.zoom));
+  isoQuad(ctx, view, rx, ry, 0.30, 0.05, u.turret + 1.2, '#8c8578', 0.98);
+  isoQuad(ctx, view, rx, ry, 0.10, 0.10, u.turret + 1.2, p.dark, 1.0);
 }
 
 function drawAPC(ctx, view, u, p, a) {
@@ -578,6 +715,19 @@ export function drawNeutral(ctx, view, n, colour, time) {
     }
     isoEllipse(ctx, view, n.x + 0.8, n.y + 0.8, 0.7, 0.7, '#7f7768', 0.02);
     isoBox(ctx, view, n.x + 0.8, n.y + 0.8, 0.5, 0.5, 0.5, 0, { top: '#b0a695', side: '#948b7c', dark: '#6c645a', line: c.line });
+  } else if (n.type === 'fieldrefinery') {
+    // Small skid-mounted plant: one still, a squat tank and a flare.
+    isoQuad(ctx, view, n.x, n.y, 1.1, 0.9, 0, '#736c5e');
+    isoBox(ctx, view, n.x - 0.35, n.y + 0.1, 0.5, 0.45, 0.38, 0, c);
+    isoBox(ctx, view, n.x + 0.15, n.y - 0.15, 0.18, 0.18, 1.15, 0,
+      { top: '#a49a8b', side: '#8a8073', dark: '#655d53', line: c.line });
+    isoEllipse(ctx, view, n.x + 0.65, n.y + 0.55, 0.42, 0.42, '#7f7768', 0.02);
+    isoBox(ctx, view, n.x + 0.65, n.y + 0.55, 0.32, 0.32, 0.34, 0,
+      { top: '#b0a695', side: '#948b7c', dark: '#6c645a', line: c.line });
+    // the flare burns whether or not anyone owns it
+    const flare = 0.55 + Math.sin(time * 5.5) * 0.18;
+    isoLine(ctx, view, n.x + 0.15, n.y - 0.15, 1.15, n.x + 0.15, n.y - 0.15, 1.15 + flare * 0.4,
+      'rgba(255,168,72,0.85)', Math.max(1.4, 2.4 * view.zoom));
   } else if (n.type === 'railyard') {
     // Marshalling yard: ballast, two sidings, goods wagons and a water tower.
     isoQuad(ctx, view, n.x, n.y, 1.5, 1.2, 0, '#6a6355');

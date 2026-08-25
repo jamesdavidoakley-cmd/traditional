@@ -788,10 +788,11 @@ export class AI {
    */
   escalation() {
     const t = this.game.time;
-    // Past thirty-five minutes two entrenched commanders can grind each other
-    // indefinitely, each rebuilding faster than the other can break through.
-    // At that point both stop holding anything back and go for the headquarters.
-    if (t > 2100) return 3;
+    // Past half an hour two entrenched commanders can grind each other
+    // indefinitely, each rebuilding faster than the other can break through. At
+    // that point both stop holding anything back and go for the headquarters.
+    // Thirty-five minutes left too little road to cross the largest map on.
+    if (t > 1800) return 3;
     if (t > 1500) return 2;
     if (t > 1080) return 1;
     return 0;

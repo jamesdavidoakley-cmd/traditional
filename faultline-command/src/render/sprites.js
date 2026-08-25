@@ -318,7 +318,7 @@ function drawIFV90(ctx, view, u, p, a) {
 
 function drawAPC90(ctx, view, u, p, a) {
   shadow(ctx, view, u.x, u.y, a.len * 1.2, a.wid * 1.8);
-  if (a.tracks) tracks(ctx, view, u, p, a.len, a.wid);
+  if (a.tracks) roadwheels(ctx, view, u, p, a.len, a.wid, 5);
   else wheels(ctx, view, u, p, a.len, a.wid * 0.92, 4);
   // tall boxy troop compartment with a sloped glacis
   hullPlate(ctx, view, u, p, a.len * 0.86, a.wid * 0.82, 0.44);
@@ -353,7 +353,8 @@ function drawSPG90(ctx, view, u, p, a) {
 function drawMLRS90(ctx, view, u, p, a) {
   const c = Math.cos(u.turret), s = Math.sin(u.turret);
   shadow(ctx, view, u.x, u.y, a.len * 1.3, a.wid * 1.95);
-  if (a.tracks) tracks(ctx, view, u, p, a.len, a.wid); else wheels(ctx, view, u, p, a.len, a.wid * 0.9, 3);
+  if (a.tracks) roadwheels(ctx, view, u, p, a.len, a.wid, 6);
+  else wheels(ctx, view, u, p, a.len, a.wid * 0.9, 3);
   hullPlate(ctx, view, u, p, a.len * 0.9, a.wid * 0.84, 0.34);
   teamStripe(ctx, view, u, p, a.len * 0.9, a.wid * 0.84, 0.34);
   // armoured cab forward
@@ -373,7 +374,8 @@ function drawMLRS90(ctx, view, u, p, a) {
 function drawAA90(ctx, view, u, p, a) {
   const c = Math.cos(u.turret), s = Math.sin(u.turret);
   shadow(ctx, view, u.x, u.y, a.len * 1.25, a.wid * 1.9);
-  if (a.tracks) tracks(ctx, view, u, p, a.len, a.wid); else wheels(ctx, view, u, p, a.len, a.wid * 0.9, 3);
+  if (a.tracks) roadwheels(ctx, view, u, p, a.len, a.wid, 6);
+  else wheels(ctx, view, u, p, a.len, a.wid * 0.9, 3);
   hullPlate(ctx, view, u, p, a.len * 0.88, a.wid * 0.86, 0.32);
   teamStripe(ctx, view, u, p, a.len * 0.88, a.wid * 0.86, 0.32);
   isoBox(ctx, view, u.x, u.y, a.len * 0.36, a.wid * 0.56, 0.26, u.turret, boxCols(p), 0.32);

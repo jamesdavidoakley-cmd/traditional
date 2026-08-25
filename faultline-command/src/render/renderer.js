@@ -7,7 +7,10 @@ import { makeView, syncView, sx, sy, screenToWorld, tileDiamond, isoQuad, isoEll
 import { drawUnit, drawBuilding, drawNeutral, buildingHeight, pal } from './sprites.js';
 import { makeRng } from '../core/util.js';
 
-const MIN_ZOOM = 0.45, MAX_ZOOM = 2.2;
+// Zooming out is nearly free — the terrain is cached per chunk — so the outer
+// limit is generous. Zooming in past ~1.75 rebuilds the tile atlas at a size
+// that costs a third of the frame rate, so the inner limit stays where it is.
+const MIN_ZOOM = 0.45, MAX_ZOOM = 1.75;
 const CHUNK = 8;   // tiles per cached terrain chunk
 
 export class Renderer {

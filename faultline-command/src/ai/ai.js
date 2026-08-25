@@ -625,11 +625,14 @@ export class AI {
       if (role === 'artillery' || role === 'rocketArtillery' || role === 'navalArtillery') { g.artillery.push(u); continue; }
       army.push(u);
     }
-    // Scouting is a luxury. A commander down to a handful of troops needs every
-    // one of them at home: a lone raider parked in an undefended base will kill
-    // each new unit as it leaves the factory, and the match never moves again.
-    const wantScouts = army.length <= 3 ? 0
-      : clamp(Math.round(1 + this.c.build.expandUrgency * 2), 1, Math.min(4, Math.floor(army.length / 3)));
+    // Scouting is a luxury a beaten commander cannot afford. The quota is taken
+    // off the top of the army, so a force down to one or two units sent every one
+    // of them wandering and left nothing at home — and a lone enemy raider parked
+    // by the factory then killed each replacement as it rolled out, for the rest
+    // of the match. Never let scouting take the last two defenders.
+    const wantScouts = Math.min(
+      clamp(Math.round(1 + this.c.build.expandUrgency * 2), 1, 4),
+      Math.max(0, army.length - 2));
     const scouts = army.filter((u) => u.def.role === 'scout');
     for (let i = 0; i < Math.min(wantScouts, scouts.length); i++) g.scout.push(scouts[i]);
 

@@ -578,6 +578,26 @@ export function drawNeutral(ctx, view, n, colour, time) {
     }
     isoEllipse(ctx, view, n.x + 0.8, n.y + 0.8, 0.7, 0.7, '#7f7768', 0.02);
     isoBox(ctx, view, n.x + 0.8, n.y + 0.8, 0.5, 0.5, 0.5, 0, { top: '#b0a695', side: '#948b7c', dark: '#6c645a', line: c.line });
+  } else if (n.type === 'railyard') {
+    // Marshalling yard: ballast, two sidings, goods wagons and a water tower.
+    isoQuad(ctx, view, n.x, n.y, 1.5, 1.2, 0, '#6a6355');
+    for (const off of [-0.45, 0.45]) {
+      isoLine(ctx, view, n.x - 1.35, n.y + off, 0.02, n.x + 1.35, n.y + off, 0.02, '#4a4640', Math.max(1, 1.5 * view.zoom));
+    }
+    const wagons = [[-0.85, -0.45], [0.15, -0.45], [-0.35, 0.45], [0.75, 0.45]];
+    const tint = ['#6e6a5c', '#7a6b57', '#66705f', '#7a7060'];
+    wagons.forEach(([wx, wy], i) => {
+      isoBox(ctx, view, n.x + wx, n.y + wy, 0.42, 0.2, 0.34, 0,
+        { top: shadeHex(tint[i], 0.18), side: tint[i], dark: shadeHex(tint[i], -0.3), line: c.line }, 0.02);
+    });
+    // water tower over the shed
+    isoBox(ctx, view, n.x + 1.0, n.y - 0.95, 0.45, 0.4, 0.5, 0, c);
+    for (const [ax, ay] of [[0.28, 0.28], [0.28, -0.28], [-0.28, -0.28], [-0.28, 0.28]]) {
+      isoLine(ctx, view, n.x - 1.0 + ax, n.y + 0.95 + ay, 0, n.x - 1.0 + ax * 0.4, n.y + 0.95 + ay * 0.4, 1.15, '#585349', Math.max(0.8, view.zoom));
+    }
+    isoEllipse(ctx, view, n.x - 1.0, n.y + 0.95, 0.42, 0.42, '#8b8275', 1.15);
+    isoBox(ctx, view, n.x - 1.0, n.y + 0.95, 0.34, 0.34, 0.34, 0,
+      { top: '#9b9284', side: '#7f7669', dark: '#5c554c', line: c.line }, 1.15);
   } else if (n.type === 'port') {
     isoQuad(ctx, view, n.x, n.y, 1.4, 1.1, 0, '#75705f');
     isoBox(ctx, view, n.x - 0.5, n.y, 0.5, 0.6, 0.5, 0, c);

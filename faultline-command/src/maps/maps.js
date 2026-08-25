@@ -230,7 +230,9 @@ function buildArdenne() {
   fourfold((tf) => {
     oil.push(Object.assign(tf(48, 18), { type: 'derrick' }));
     oil.push(Object.assign(tf(18, 48), { type: 'derrick' }));
-    oil.push(Object.assign(tf(74, 52), { type: 'refinery' }));
+    // The marshalling yards at Villers-sur-Faille: this map's own way to earn
+    // faster, and it can only be taken by holding the middle.
+    oil.push(Object.assign(tf(74, 52), { type: 'railyard' }));
   });
   const objectives = [];
   fourfold((tf) => objectives.push(tf(64, 42)));
@@ -391,10 +393,11 @@ export const MAPS = {
   ardenne: {
     key: 'ardenne', name: 'Ardenne Line', region: 'Verrand Frontier',
     subtitle: 'European countryside — roads, woodland, farms, rivers and a small town',
-    blurb: 'Four rivers spiral out from the town of Villers-sur-Faille, and the bridges decide who moves where. The town itself is heavy cover, terrible ground for armour, and the fastest road link between every base. Woodland along the trunk roads gives infantry everything they need to ruin an armoured column.',
+    blurb: 'Four rivers spiral out from the town of Villers-sur-Faille, and the bridges decide who moves where. There is less oil here than anywhere else, but the four marshalling yards ringing the town are the richest sites in the game — so the money is in the middle, and the middle is heavy cover, terrible ground for armour and the fastest road link between every base.',
     naval: false, hasWater: true, navigable: false,
     tips: [
       'Roads cut movement time by nearly 40% — and every commander knows exactly where they run.',
+      'The four marshalling yards around the town pay more than any other site in the game.',
       'Woodland and the town give infantry heavy cover. Sending tanks in unescorted is how you lose them.',
       'The bridges are the real chokepoints. Hold one and you hold a quarter of the map.',
     ],

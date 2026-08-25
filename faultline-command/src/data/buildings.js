@@ -81,13 +81,13 @@ export const BUILDINGS = {
   mg: B({
     key: 'mg', name: 'Machine-Gun Defence', short: 'MG', cost: 350, buildTime: 6, hp: 790, size: 2,
     power: -2, category: 'defence', art: 'mg', padType: 'defence',
-    weapons: [DW({ name: 'Sustained-fire MG', range: 5.6, damage: 15, type: 'small', rof: 0.35, burst: 4 })],
+    weapons: [DW({ name: 'Sustained-fire MG', range: 6.0, damage: 20, type: 'small', rof: 0.32, burst: 4 })],
     desc: 'Cheap infantry deterrent. Will not scratch a tank.',
   }),
   atgun: B({
     key: 'atgun', name: 'Anti-Tank Defence', short: 'ATG', cost: 720, buildTime: 10, hp: 1000, size: 2,
     power: -5, category: 'defence', art: 'atgun', padType: 'defence', prereq: ['barracks'], ammoMax: 12,
-    weapons: [DW({ name: 'Emplaced ATGM', range: 7.8, damage: 96, type: 'heat', rof: 3.0, projectile: 'missile', ammoCost: 1 })],
+    weapons: [DW({ name: 'Emplaced ATGM', range: 8.2, damage: 118, type: 'heat', rof: 2.9, projectile: 'missile', ammoCost: 1 })],
     desc: 'Emplaced anti-tank missiles. Excellent value against armour, useless against a rifle section that walks around it.',
   }),
   sam: B({

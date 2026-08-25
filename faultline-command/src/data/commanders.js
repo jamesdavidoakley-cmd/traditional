@@ -32,9 +32,9 @@ export const COMMANDERS = {
     },
     army: {
       weights: { rifle: 3.0, at: 3.2, engineer: 1.0, recon: 1.0, manpads: 1.6, sf: 0.4, mbt: 2.2, ifv: 2.0, apc: 0.6, scout: 0.9, spg: 2.4, mlrs: 1.0, aa: 2.0, eng: 1.6, himars: 1.0, phl16: 1.0 },
-      firstAttackAt: 470, attackInterval: 185, attackSize: 14, attackGrowth: 3,
+      firstAttackAt: 430, attackInterval: 170, attackSize: 13, attackGrowth: 3,
       harassRatio: 0.10, retreatThreshold: 0.44, artilleryBias: 0.7, abilityBias: 0.9,
-      counterAttack: 1.0, decisiveOffensiveAt: 860, garrisonRatio: 0.42, formationDepth: 1.2,
+      counterAttack: 1.0, decisiveOffensiveAt: 700, garrisonRatio: 0.42, formationDepth: 1.2,
     },
     targeting: ['army', 'defence', 'artillery', 'power', 'production', 'hq'],
   },
@@ -155,8 +155,8 @@ export const COMMANDERS = {
       powerBuffer: 40, secondFactory: 0.3, protectCritical: 1.0, airDefenceBias: 1.0,
     },
     army: {
-      weights: { rifle: 1.6, at: 1.6, engineer: 1.0, recon: 2.0, manpads: 2.6, sf: 0.6, mbt: 2.0, ifv: 2.0, apc: 0.8, scout: 1.6, spg: 1.2, mlrs: 1.4, aa: 3.2, eng: 1.2, himars: 1.4, phl16: 1.4 },
-      firstAttackAt: 455, attackInterval: 165, attackSize: 12, attackGrowth: 3.0,
+      weights: { rifle: 1.8, at: 1.8, engineer: 1.0, recon: 1.8, manpads: 2.4, sf: 0.6, mbt: 2.8, ifv: 2.6, apc: 0.9, scout: 1.4, spg: 1.6, mlrs: 1.6, aa: 2.8, eng: 1.4, himars: 1.6, phl16: 1.6 },
+      firstAttackAt: 420, attackInterval: 158, attackSize: 12, attackGrowth: 3.0,
       harassRatio: 0.18, retreatThreshold: 0.40, artilleryBias: 0.5, abilityBias: 3.0,
       counterAttack: 0.6, garrisonRatio: 0.32, formationDepth: 1.0, seadFirst: 1.0,
     },

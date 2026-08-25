@@ -631,7 +631,9 @@ export class AI {
 
     const rest = army.filter((u) => !g.scout.includes(u));
     const total = rest.length;
-    const wantDefence = Math.round(total * this.c.army.garrisonRatio);
+    const e = this.escalation();
+    const garrison = this.c.army.garrisonRatio * (e === 2 ? 0.25 : e === 1 ? 0.55 : 1);
+    const wantDefence = Math.round(total * garrison);
     const wantHarass = Math.round(total * this.c.army.harassRatio);
 
     // Keep previous assignments where possible so groups do not churn every tick.
@@ -764,6 +766,18 @@ export class AI {
     return true;
   }
 
+  /**
+   * How committed every commander is by now. Two cautious doctrines facing each
+   * other would otherwise trade bombardments forever, so past eighteen minutes
+   * the thresholds fall and the garrisons come off the wall.
+   */
+  escalation() {
+    const t = this.game.time;
+    if (t > 1500) return 2;
+    if (t > 1080) return 1;
+    return 0;
+  }
+
   requiredAttackSize() {
     const a = this.c.army;
     // Waves grow, but never to the point where the commander just hoards.
@@ -771,6 +785,9 @@ export class AI {
     n /= clamp(this.diff.aggression, 0.6, 1.5);
     if (this.decisive) n *= 1.25;
     if (this.dominant()) n *= 0.6;
+    const e = this.escalation();
+    if (e === 1) n *= 0.6;
+    else if (e === 2) n *= 0.35;
     return Math.max(3, Math.round(n));
   }
 
@@ -798,7 +815,9 @@ export class AI {
   endAttack(withdraw) {
     this.attackState = 'building';
     this.waveNumber++;
-    this.nextAttackAt = this.game.time + this.c.army.attackInterval / clamp(this.diff.aggression, 0.6, 1.6);
+    const e = this.escalation();
+    const interval = this.c.army.attackInterval * (e === 2 ? 0.4 : e === 1 ? 0.65 : 1);
+    this.nextAttackAt = this.game.time + interval / clamp(this.diff.aggression, 0.6, 1.6);
     this.attackTarget = null;
     if (withdraw) {
       const home = this.rallyPoint();
@@ -871,7 +890,7 @@ export class AI {
     if (!home) return null;
     // Once we are clearly on top — or the match has run long — go for the throat.
     let priorities = this.c.targeting;
-    if (this.dominant() || this.game.time > 1250 || this.decisive) {
+    if (this.dominant() || this.escalation() > 0 || this.decisive) {
       priorities = ['hq'].concat(priorities.filter((c) => c !== 'hq'));
     }
 

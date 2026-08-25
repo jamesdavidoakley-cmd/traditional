@@ -442,6 +442,13 @@ export function getUnit(faction, era, key) {
     }
     if (mods.range && def.interceptor) def.interceptor.range = +(def.interceptor.range * mods.range).toFixed(2);
   }
+  // Global pacing scalars, applied after the coalition modifiers. Durability keeps
+  // engagements from resolving in two volleys; the movement scalar lengthens every
+  // approach, reinforcement and withdrawal so position and terrain carry weight.
+  // (A build-time scalar was tried here and removed: it thinned out the fighting
+  // without measurably changing how long a match ran.)
+  def.hp = Math.round(def.hp * 1.15);
+  def.speed = +(def.speed * 0.85).toFixed(3);
   def.hpMax = def.hp;
   cache.set(id, def);
   return def;

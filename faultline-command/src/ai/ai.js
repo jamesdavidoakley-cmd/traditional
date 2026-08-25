@@ -448,9 +448,14 @@ export class AI {
     // A commander saving for a big building still has to keep an army in the field.
     const floor = 7 + this.waveNumber * 1.5 + Math.round(this.c.army.attackSize * 0.35);
     const starving = p.units.length < floor;
+    // An engineer is how a commander gets its economy back. One that has lost its
+    // engineers must never hold money back for a building: it ends up buying rifle
+    // sections it can afford instead of the engineer it cannot, so it never takes
+    // another oil site, never earns more, and stays broke for the rest of the match.
+    const mustRecover = this.wantUnit === 'engineer' && !this.groups.engineer.length;
     // Even a commander short of troops keeps something back for the next building.
-    let budget = p.credits - (starving ? reserve * 0.35 : reserve);
-    if (budget <= 120) return;
+    let budget = p.credits - (mustRecover ? 0 : starving ? reserve * 0.35 : reserve);
+    if (budget <= (mustRecover ? 0 : 120)) return;
 
     const weights = this.currentWeights();
     let totalW = 0;

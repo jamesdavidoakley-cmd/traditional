@@ -109,14 +109,15 @@ do.
 |---|---|
 | Select / box-select | Left-click, drag |
 | Add or remove from selection | Shift-click |
-| Select nearby units of a type | Double-click |
+| Select nearby units of a type | Double-click a unit |
+| Contextual order without a right button | Double-click the map |
 | Contextual order | Right-click (move, attack, capture, embark, repair) |
 | Attack-move | `A` then click |
 | Stop / hold / unload | `S` / `G` / `U` |
 | Rally point | `R` then click |
 | Control groups | `Ctrl`+`1`–`9` to assign, `1`–`9` to recall |
 | Camera | `WASD`, arrows, screen-edge scroll, middle-drag |
-| Zoom | Mouse wheel |
+| Zoom | Mouse wheel, two-finger pinch, or `-` / `=` |
 | Centre on HQ / range rings | `H` / `T` |
 | Pause / speed / menu | `Space` or `P` / `[` `]` / `Esc` |
 | Minimap | Click to jump, right-click to order units there |

@@ -415,7 +415,9 @@ export class Setup {
             <li><b>Left-click</b> select a unit or building</li>
             <li><b>Drag</b> box-select multiple units</li>
             <li><b>Shift-click</b> add or remove from the selection</li>
-            <li><b>Double-click</b> select all nearby units of the same type</li>
+            <li><b>Double-click a unit</b> select all nearby units of the same type</li>
+            <li><b>Double-click the map</b> same order as a right-click — move, attack, capture,
+                repair, embark. No right button needed on a trackpad</li>
             <li><span class="kbd">Ctrl</span>+<span class="kbd">1</span>–<span class="kbd">9</span> assign a control group</li>
             <li><span class="kbd">1</span>–<span class="kbd">9</span> recall a control group</li>
             <li><span class="kbd">&#96;</span> select the whole army</li>
@@ -436,7 +438,8 @@ export class Setup {
           <ul>
             <li><span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span> or arrow keys — scroll</li>
             <li>Push the mouse to a screen edge — edge scroll</li>
-            <li><b>Mouse wheel</b> zoom · <b>middle-drag</b> pan</li>
+            <li><b>Mouse wheel or two-finger pinch</b> zoom · <b>middle-drag</b> pan</li>
+            <li><b>−</b> and <b>=</b> zoom out and in from the keyboard</li>
             <li><b>Click the minimap</b> to jump · <b>right-click it</b> to order units there</li>
             <li><span class="kbd">H</span> centre on your headquarters</li>
             <li><span class="kbd">T</span> toggle weapon and interception range rings</li>

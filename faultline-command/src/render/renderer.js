@@ -7,7 +7,7 @@ import { makeView, syncView, sx, sy, screenToWorld, tileDiamond, isoQuad, isoEll
 import { drawUnit, drawBuilding, drawNeutral, buildingHeight, pal } from './sprites.js';
 import { makeRng } from '../core/util.js';
 
-const MIN_ZOOM = 0.68, MAX_ZOOM = 1.75;
+const MIN_ZOOM = 0.45, MAX_ZOOM = 2.2;
 const CHUNK = 8;   // tiles per cached terrain chunk
 
 export class Renderer {
@@ -263,6 +263,8 @@ export class Renderer {
 
   zoomBy(f, anchorX, anchorY) {
     const v = this.view;
+    // No anchor (keyboard zoom) means zoom about the middle of the view.
+    if (anchorX === undefined || anchorY === undefined) { anchorX = v.w * 0.5; anchorY = v.h * 0.5; }
     const before = screenToWorld(v, anchorX, anchorY);
     v.zoom = clamp(v.zoom * f, MIN_ZOOM, MAX_ZOOM);
     syncView(v);

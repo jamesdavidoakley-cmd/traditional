@@ -16,6 +16,7 @@ export class Input {
     this.dragging = false;
     this.panStart = null;
     this.lastClickAt = 0;
+    this.preClickSelection = [];
     this.lastClickPos = { x: 0, y: 0 };
     this.pendingCommand = null;   // 'attackmove' | 'rally' | 'ability'
     this.edgeScroll = true;
@@ -161,6 +162,21 @@ export class Input {
       s.selectSameTypeNear(hit);
       return;
     }
+    // A double-click anywhere else gives the same order a right-click would — move,
+    // attack, capture, repair, embark — so the whole game is playable from a
+    // trackpad without reaching for the right button. The first click of the pair
+    // has usually just cleared the selection, so put it back before ordering.
+    if (isDouble) {
+      const live = (u) => u && !u.dead && u.kind === 'unit' && u.owner === s.game.humanIndex;
+      let mine = s.selection.filter(live);
+      if (!mine.length) mine = (this.preClickSelection || []).filter(live);
+      if (mine.length) {
+        s.setSelection(mine, false);
+        this.issueAt(w.x, w.y, e.shiftKey);
+        return;
+      }
+    }
+    this.preClickSelection = s.selection.slice();
     s.clickSelect(hit, e.shiftKey);
   }
 
@@ -233,7 +249,15 @@ export class Input {
   onWheel(e) {
     e.preventDefault();
     const p = this.localPos(e);
-    this.s.renderer.zoomBy(e.deltaY > 0 ? 0.9 : 1.111, p.x, p.y);
+    // Trackpads send a stream of small deltas, and a two-finger pinch arrives as
+    // ctrl+wheel. Scaling the zoom by the actual delta makes a pinch smooth and
+    // continuous instead of jumping a whole mouse-wheel notch per event.
+    let d = e.deltaY;
+    if (e.deltaMode === 1) d *= 16;         // delta in lines
+    else if (e.deltaMode === 2) d *= 100;   // delta in pages
+    d = Math.max(-260, Math.min(260, d));
+    const strength = e.ctrlKey ? 0.021 : 0.00105;
+    this.s.renderer.zoomBy(Math.exp(-d * strength), p.x, p.y);
   }
 
   // ------------------------------------------------------------ keyboard
@@ -283,6 +307,9 @@ export class Input {
       case 'Space': s.togglePause(); e.preventDefault(); break;
       case 'KeyP': s.togglePause(); break;
       case 'Backquote': s.selectAllArmy(); break;
+      // Keyboard zoom, for trackpads where a pinch is awkward.
+      case 'Minus': case 'NumpadSubtract': s.renderer.zoomBy(0.82); break;
+      case 'Equal': case 'NumpadAdd': s.renderer.zoomBy(1.22); break;
       case 'BracketLeft': s.setSpeed(s.game.speed - 0.5); break;
       case 'BracketRight': s.setSpeed(s.game.speed + 0.5); break;
       case 'F2': s.hud.setTab('build'); e.preventDefault(); break;

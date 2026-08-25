@@ -218,14 +218,18 @@ function drawHeavyGun(ctx, view, u, p, a) {
 /** Visible road wheels, drive sprocket and idler along the track run. */
 function roadwheels(ctx, view, u, p, len, wid, n) {
   const c = Math.cos(u.facing), sn = Math.sin(u.facing);
-  isoQuad(ctx, view, u.x, u.y, len * 1.02, wid * 1.14, u.facing, 'rgba(22,20,18,0.9)');
+  // The track run is near-black so the wheels on top of it actually read; without
+  // that contrast the whole assembly disappears into one dark slab.
+  isoQuad(ctx, view, u.x, u.y, len * 1.02, wid * 1.16, u.facing, 'rgba(16,15,13,0.94)');
   for (const side of [-1, 1]) {
     for (let i = 0; i < n; i++) {
       const t = (i / (n - 1) - 0.5) * 2 * len * 0.78;
-      const wx = u.x + t * c - side * wid * 1.02 * sn;
-      const wy = u.y + t * sn + side * wid * 1.02 * c;
-      const big = i === 0 || i === n - 1;             // sprocket and idler sit higher
-      isoEllipse(ctx, view, wx, wy, big ? 0.15 : 0.12, big ? 0.15 : 0.12, big ? '#3a3630' : '#2b2824', 0.04);
+      const wx = u.x + t * c - side * wid * 1.06 * sn;
+      const wy = u.y + t * sn + side * wid * 1.06 * c;
+      const big = i === 0 || i === n - 1;             // sprocket and idler are larger
+      const r = big ? 0.17 : 0.13;
+      isoEllipse(ctx, view, wx, wy, r, r, big ? '#5b544a' : '#4a443c', 0.05);
+      isoEllipse(ctx, view, wx, wy, r * 0.45, r * 0.45, '#25221e', 0.06);
     }
   }
 }
@@ -256,8 +260,8 @@ function deckGrille(ctx, view, u, p, len, wid, h) {
 function skirts(ctx, view, u, p, a) {
   const fc = Math.cos(u.facing), fs = Math.sin(u.facing);
   for (const side of [-1, 1]) {
-    isoQuad(ctx, view, u.x - fs * side * a.wid * 0.94, u.y + fc * side * a.wid * 0.94,
-      a.len * 0.9, 0.06, u.facing, p.dark, 0.19);
+    isoQuad(ctx, view, u.x - fs * side * a.wid * 0.86, u.y + fc * side * a.wid * 0.86,
+      a.len * 0.9, 0.055, u.facing, p.dark, 0.22);
   }
 }
 

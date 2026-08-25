@@ -15,7 +15,7 @@ const DW = (o) => Object.assign({
 
 export const BUILDINGS = {
   hq: B({
-    key: 'hq', name: 'Command Headquarters', short: 'HQ', cost: 0, buildTime: 0, hp: 7400, size: 4,
+    key: 'hq', name: 'Command Headquarters', short: 'HQ', cost: 0, buildTime: 0, hp: 10500, size: 4,
     power: 0, category: 'core', art: 'hq', unique: true, limit: 1, critical: true,
     buildsStructures: true, produces: ['engineer'], baseIncome: 11,
     desc: 'The fortified nerve centre. Authorises all construction, draws the national defence budget and runs on its own generator set. Lose it and the battle is over.',

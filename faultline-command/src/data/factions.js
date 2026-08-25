@@ -2,6 +2,7 @@
 // only the real equipment designations are borrowed, as briefed.
 
 export const ERAS = {
+  interwar: { key: 'interwar', name: '1926', short: '26', year: '1926', blurb: 'Interwar armies: rhomboid tanks, massed guns, wireless telegraphy and biplanes.' },
   nineties: { key: 'nineties', name: '1990s', short: '90s', year: '1994', blurb: 'Cold-war stockpiles, analogue fire control and mechanised mass.' },
   modern:   { key: 'modern',   name: 'Modern Day', short: 'MOD', year: '2027', blurb: 'Networked sensors, precision fires and layered missile defence.' },
 };

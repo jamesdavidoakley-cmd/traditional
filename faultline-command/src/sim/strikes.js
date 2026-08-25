@@ -19,7 +19,12 @@ export function abilityState(game, p, key) {
   }
   for (const req of a.requires.units || []) {
     const has = p.units.some((u) => !u.dead && u.key === req);
-    if (!has) return { ok: false, reason: 'Requires a ' + req === 'destroyer' ? 'Requires a missile destroyer at sea' : 'Requires ' + req };
+    if (!has) {
+      const label = req === 'destroyer'
+        ? (p.era === 'interwar' ? 'a capital ship at sea' : 'a missile destroyer at sea')
+        : 'a ' + req;
+      return { ok: false, reason: 'Requires ' + label };
+    }
   }
   if (a.requires.power && p.lowPower) return { ok: false, reason: 'Insufficient power' };
   if (a.requires.data) {
@@ -113,7 +118,7 @@ function makeStrike(game, p, a, entry, tx, ty, harmless) {
     damage: harmless ? 0 : a.payload.damage,
     damageType: a.payload.type || 'cruise',
     splash: harmless ? 0 : (a.payload.splash || 1.5),
-    speed, threat: a.threat, interceptable: true,
+    speed, threat: a.threat, interceptable: a.interceptable !== false && !!a.threat,
     arc: a.threat === THREAT.BALLISTIC ? 0 : 0,
     life: 0, maxLife: dist(entry.x, entry.y, tx, ty) / speed + 1.2,
     hit: true, engaged: null, trail: [],

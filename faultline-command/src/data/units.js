@@ -221,6 +221,28 @@ export const UNIT_ORDER = {
 // the coalitions play differently without breaking the counter system.
 const EQ = {
   arc: {
+    interwar: {
+      rifle: ['Rifle Platoon', 'Lee-Enfield sections with a Lewis gun apiece, drilled on 1918 doctrine.'],
+      at: ['Anti-Tank Rifle Team', '13.2mm anti-tank rifles and rifle grenades. Very short range: armour has to come to them.'],
+      engineer: ['Field Engineer Section', 'Sappers with demolition charges, capture parties and bridging stores.'],
+      recon: ['Scout Patrol', 'Dismounted scouts and cyclists working well ahead of the column.'],
+      manpads: ['AA Machine-Gun Team', 'Lewis guns on high-angle mountings against low-flying aircraft.'],
+      sf: ['Storm Detachment', 'Trench-raiding specialists with bangalores and demolition charges.'],
+      mbt: ['Vickers Medium Mk I', 'A revolving turret, a 3-pounder and eight miles an hour. The most modern tank in service anywhere.'],
+      ifv: ['Mark V* Heavy Tank', 'Lengthened rhomboid hull with sponson guns and room for a machine-gun section.'],
+      apc: ['Armoured Lorry', 'Sheet steel over a three-ton chassis. Gets a section forward alive, provided the road holds.'],
+      scout: ['Rolls-Royce Armoured Car', 'Fast on a metalled road, useless off it, and the eyes of every column.'],
+      spg: ['Birch Gun', 'An 18-pounder on a tracked mounting — the first self-propelled gun in any army.'],
+      mlrs: ['BL 8-inch Howitzer Group', 'Corps heavy artillery. A registered barrage from these erases a position rather than damaging it.'],
+      aa: ['QF 3-inch AA Lorry', 'High-angle gun on a lorry mounting, with a sound-locator crew alongside.'],
+      eng: ['Holt Recovery Tractor', 'Winch, workshop and a crew who can patch a tank in the field.'],
+      patrol: ['Coastal Motor Boat', 'Plywood torpedo boat that does forty knots and cannot take a hit.'],
+      landing: ['Landing Barge', 'Powered lighter. Puts a company on a beach with no port.'],
+      frigate: ['V-class Destroyer', 'Fast escort with torpedoes and 4-inch guns.'],
+      destroyer: ['Queen Elizabeth-class Battleship', 'Fifteen-inch guns, and the naval gunfire authority that comes with them.'],
+      support: ['Erebus-class Monitor', 'Shallow-draught hull carrying a 15-inch turret purely for shore bombardment.'],
+      himars: ['BL 9.2-inch Railway Gun', 'Rail-mounted siege gun. Fires, then is hauled to another siding before counter-battery lands.'],
+    },
     nineties: {
       rifle: ['Rifle Section', 'M16A2 / M249 section, well drilled and well supplied.'],
       at: ['TOW Anti-Tank Team', 'Tube-launched wire-guided missiles on a dismounted tripod.'],
@@ -266,6 +288,27 @@ const EQ = {
     },
   },
   esd: {
+    interwar: {
+      rifle: ['Rifle Company', 'Mosin-Nagant sections in depth, and a great many of them.'],
+      at: ['Anti-Tank Rifle Team', 'Captured Mauser anti-tank rifles and 37mm trench guns.'],
+      engineer: ['Sapper Section', 'Combat engineers with demolition stores and capture parties.'],
+      recon: ['Razvedka Patrol', 'Divisional reconnaissance working on foot and horseback.'],
+      manpads: ['AA Maxim Team', 'Quadruple Maxim mounting on a cart, thrown up over the column.'],
+      sf: ['Shock Detachment', 'Assault troops trained on rear-area raiding.'],
+      mbt: ['Renault Russkiy Light Tank', 'A licence-built Renault FT: one man in the turret, one 37mm gun and no wireless.'],
+      ifv: ['Ricardo Heavy Tank', 'Captured rhomboid hulls pressed back into service, sponsons and all.'],
+      apc: ['Armoured Lorry', 'Riveted plate on a lorry chassis. Crude, and it works.'],
+      scout: ['Austin-Putilov Armoured Car', 'Twin turrets on a Putilov chassis, the workhorse of the civil war.'],
+      spg: ['Putilov Gun Tractor', '76mm divisional gun on a tracked tractor mounting.'],
+      mlrs: ['152mm Howitzer Group', 'Corps howitzers massed on one map square and fired until it stops being a map square.'],
+      aa: ['76mm AA Lorry Mounting', 'High-angle gun and a searchlight section on lorries.'],
+      eng: ['Recovery Tractor', 'Tracked tractor with winch and field workshop.'],
+      patrol: ['Coastal Torpedo Boat', 'Small, fast and armed with one serious weapon.'],
+      landing: ['Landing Barge', 'Powered lighter for a beach assault.'],
+      frigate: ['Novik-class Destroyer', 'Fast, heavily gunned and getting old.'],
+      destroyer: ['Gangut-class Battleship', 'Twelve-inch guns in four triple turrets.'],
+      support: ['Shkval-class Monitor', 'River monitor with heavy guns and almost no draught.'],
+    },
     nineties: {
       rifle: ['Motor Rifle Squad', 'Conscript-heavy squad, cheap and numerous.'],
       at: ['Konkurs Anti-Tank Team', 'Wire-guided missiles from a dug-in position.'],
@@ -310,6 +353,28 @@ const EQ = {
     },
   },
   pdc: {
+    interwar: {
+      rifle: ['Rifle Company', 'Type 38 rifles and Type 3 machine guns, and the numbers to use them.'],
+      at: ['37mm Infantry Gun Team', 'Type 11 gun manhandled forward to fire over open sights.'],
+      engineer: ['Engineer Section', 'Pioneers with demolition charges and capture parties.'],
+      recon: ['Reconnaissance Patrol', 'Light scouts working ahead of the advance.'],
+      manpads: ['AA Machine-Gun Team', 'High-angle machine guns against low-flying aircraft.'],
+      sf: ['Raiding Detachment', 'Night-raiding specialists with demolition charges.'],
+      mbt: ['Renault Ko-Gata', 'Imported Renault FT. Slow, cramped and the first tank the Compact ever fielded.'],
+      ifv: ['Vickers Medium C', 'Imported British medium with room for a dismount team.'],
+      apc: ['Armoured Lorry', 'Plated lorry that keeps a section out of the rain and most of the fire.'],
+      scout: ['Vickers Crossley Armoured Car', 'Imported six-wheeler, fast on a road and prized by every commander.'],
+      spg: ['Type 38 Gun Tractor', '12cm howitzer on a tracked tractor mounting.'],
+      mlrs: ['24cm Howitzer Group', 'Siege howitzers of the type that reduced Port Arthur.'],
+      aa: ['Type 11 AA Gun Lorry', 'High-angle gun on a lorry, with a listening crew.'],
+      eng: ['Recovery Tractor', 'Tracked tractor with winch and workshop.'],
+      patrol: ['Motor Torpedo Boat', 'Fast coastal craft carrying two torpedoes and no armour.'],
+      landing: ['Landing Barge', 'Purpose-built beaching lighter — the Compact was first to take these seriously.'],
+      frigate: ['Minekaze-class Destroyer', 'Long-legged escort with a heavy torpedo armament.'],
+      destroyer: ['Kongo-class Battlecruiser', 'Fourteen-inch guns on a hull fast enough to choose its own fight.'],
+      support: ['Kuma-class Light Cruiser', 'Fast cruiser told off for inshore gunfire support.'],
+      phl16: ['Type 7 30cm Siege Howitzer', 'Super-heavy howitzer broken down for transport and reassembled in the firing position.'],
+    },
     nineties: {
       rifle: ['Rifle Squad', 'Large, cheap and quickly replaced.'],
       at: ['HJ-8 Anti-Tank Team', 'Tripod-mounted wire-guided missiles.'],
@@ -355,6 +420,28 @@ const EQ = {
     },
   },
   mrl: {
+    interwar: {
+      rifle: ['Rifle Company', 'Carcano sections with Fiat-Revelli machine guns.'],
+      at: ['Anti-Tank Gun Team', '37mm Puteaux guns dug into prepared positions.'],
+      engineer: ['Combat Engineer Section', 'Sappers with demolition charges and capture parties.'],
+      recon: ['Reconnaissance Patrol', 'Mountain-trained scouts who go where lorries cannot.'],
+      manpads: ['AA Machine-Gun Team', 'High-angle machine guns on lorry and cart mountings.'],
+      sf: ['Arditi Detachment', 'Assault troops with grenades, daggers and demolition charges.'],
+      mbt: ['Fiat 3000', 'An improved Renault FT built at Turin. Lighter, faster, and still barely a tank.'],
+      ifv: ['Fiat 2000 Heavy Tank', 'A forty-ton steel house with a turret and seven machine guns.'],
+      apc: ['Armoured Lorry', 'Plated lorry, and the fastest way to move a section that is not a road march.'],
+      scout: ['Lancia 1ZM Armoured Car', 'Twin machine-gun turrets and a wire-cutting rail on the bow.'],
+      spg: ['Ansaldo Gun Tractor', '75/27 gun on a tracked mounting.'],
+      mlrs: ['Skoda 149mm Howitzer Group', 'Corps howitzers with the best fire control in the Mediterranean.'],
+      aa: ['75/46 AA Lorry Mounting', 'High-angle gun on a lorry with a sound locator.'],
+      eng: ['Recovery Tractor', 'Tracked tractor with winch and field workshop.'],
+      patrol: ['MAS Torpedo Boat', 'Fast attack craft with a reputation out of all proportion to its size.'],
+      landing: ['Landing Barge', 'Powered lighter for coastal landings.'],
+      frigate: ['Leone-class Destroyer', 'Large destroyer with an oversized gun armament.'],
+      destroyer: ['Conte di Cavour-class Battleship', 'Thirteen 12-inch guns and a great deal of national pride.'],
+      support: ['Faa di Bruno Monitor', 'A barge with two 15-inch guns bolted to it. Ugly, and it works.'],
+      phl16: ['Skoda 305mm Siege Mortar', 'The gun that broke the Belgian forts, still the heaviest thing on any battlefield.'],
+    },
     nineties: {
       rifle: ['Rifle Squad', 'Reservist-heavy but very well trained.'],
       at: ['MILAN Anti-Tank Team', 'Compact wire-guided anti-tank missiles.'],
@@ -408,6 +495,89 @@ const FACTION_MODS = {
   mrl: { mbt: { hp: 1.16, speed: 0.94, cost: 1.06 }, at: { range: 1.10 }, manpads: { damage: 1.15 }, aa: { damage: 1.1 } },
 };
 
+
+/**
+ * Era adjustments applied on top of the archetype. 1926 armies are slower and
+ * shorter-ranged than their descendants, anti-tank work is done by rifles and
+ * field guns rather than guided missiles, and nothing on the battlefield can
+ * shoot down an artillery shell — so interwar bombardment carries no threat tag
+ * and cannot be intercepted.
+ */
+const ERA_MODS = {
+  interwar: {
+    _all: { speed: 0.70, cost: 0.88, buildTime: 0.90 },
+    rifle:   { hp: 0.92, w: [{ name: 'Rifle and Lewis gun', range: 3.9, damage: 11, rof: 0.75 }] },
+    at:      { cost: 0.82, ammoMax: 10, w: [{ name: 'Anti-tank rifle', range: 4.6, damage: 60, type: 'ap', rof: 2.4, projectile: 'bullet', accuracy: 0.82 }] },
+    engineer: {},
+    recon:   { vision: 0.86, w: [{ range: 3.6, damage: 8 }] },
+    manpads: { cost: 0.88, ammoMax: 12, interceptor: { ballistic: 0, cruise: 0, rocket: 0, loiter: 0.30, aircraft: 0.34, range: 6.4, reload: 3.2, needsData: false },
+               w: [{ name: 'High-angle machine gun', range: 6.4, damage: 95, projectile: 'bullet', rof: 2.6 }] },
+    sf:      { w: [{ range: 4.2, damage: 15 }, {}] },
+    mbt:     { cost: 0.62, hp: 0.56, speed: 0.52, frontalArc: 0.34, turretRate: 0.55, ammoMax: 12,
+               w: [{ name: 'Turret gun', range: 5.0, damage: 64, rof: 5.4, accuracy: 0.80 }, { range: 3.6, damage: 7 }],
+               art: { len: 0.70, wid: 0.50 } },
+    ifv:     { cost: 0.90, hp: 0.92, speed: 0.44, cargo: 4, ammoMax: 14, turretRate: 0.7,
+               w: [{ name: 'Sponson gun', range: 4.6, damage: 34, type: 'he', rof: 2.6, projectile: 'shell', burst: 1, splash: 0.5 }],
+               dropWeapons: 1, art: { body: 'rhomboid', len: 0.92, wid: 0.46 } },
+    apc:     { hp: 0.74, speed: 0.82, art: { len: 0.74, wid: 0.46 } },
+    scout:   { cost: 0.95, hp: 0.70, speed: 1.05, vision: 0.90, art: { len: 0.64, wid: 0.40 } },
+    spg:     { cost: 0.95, hp: 0.86, speed: 0.55, ammoMax: 12,
+               w: [{ name: 'Field battery', range: 13.5, damage: 108, rof: 7.5, spread: 1.5, accuracy: 0.62 }] },
+    mlrs:    { cost: 0.92, hp: 0.86, speed: 0.50, ammoMax: 5,
+               w: [{ name: 'Heavy battery barrage', range: 16.5, minRange: 6, damage: 96, type: 'he', rof: 20,
+                     projectile: 'arc', salvo: 4, spread: 2.4, accuracy: 0.55, threat: null }],
+               art: { body: 'heavygun', len: 0.84, wid: 0.48, tracks: false } },
+    aa:      { cost: 0.90, hp: 0.80, speed: 0.76, ammoMax: 14,
+               interceptor: { ballistic: 0, cruise: 0, rocket: 0, loiter: 0.38, aircraft: 0.44, range: 7.8, reload: 3.0, needsData: false },
+               w: [{ name: 'High-angle gun', range: 7.8, damage: 140, projectile: 'bullet', rof: 2.6 }, { range: 3.6 }] },
+    eng:     { hp: 0.82, speed: 0.82 },
+    patrol:  { hp: 0.82, w: [{ name: 'Deck gun and torpedoes', range: 6.0, damage: 40, rof: 2.0 }] },
+    landing: { hp: 0.90 },
+    frigate: { hp: 0.86, interceptor: { ballistic: 0, cruise: 0, rocket: 0, loiter: 0.22, aircraft: 0.30, range: 6.5, reload: 4.0, needsData: false },
+               w: [{ name: 'Main battery', range: 10, damage: 96, rof: 3.6 }, { name: 'AA guns', range: 6.5, damage: 110, projectile: 'bullet' }] },
+    destroyer: { cost: 1.10, hp: 1.30, speed: 0.74, ammoMax: 22, missilePlatform: true,
+               interceptor: { ballistic: 0, cruise: 0, rocket: 0, loiter: 0.26, aircraft: 0.36, range: 8, reload: 3.4, needsData: false },
+               w: [{ name: 'Main battery', range: 15.5, damage: 205, rof: 5.2, splash: 2.1 }, { name: 'AA battery', range: 8, damage: 150, projectile: 'bullet' }] },
+    support: { w: [{ name: 'Monitor turret', range: 15.5, damage: 190, rof: 8.5, spread: 1.4 }] },
+    himars:  { cost: 1.05, hp: 1.10, speed: 0.40, ammoMax: 4, needsData: 0,
+               w: [{ name: 'Railway gun', range: 26, minRange: 9, damage: 270, type: 'he', rof: 22,
+                     projectile: 'arc', salvo: 2, spread: 1.2, accuracy: 0.70, threat: null }],
+               art: { body: 'heavygun', len: 1.02, wid: 0.52, tracks: false } },
+    phl16:   { hp: 1.05, speed: 0.34, ammoMax: 4, needsData: 0,
+               w: [{ name: 'Siege mortar', range: 22, minRange: 8, damage: 320, type: 'he', rof: 24,
+                     projectile: 'arc', salvo: 2, spread: 1.8, accuracy: 0.60, threat: null }],
+               art: { body: 'heavygun', len: 0.96, wid: 0.54, tracks: false } },
+  },
+};
+
+/** Apply one era modifier block to a resolved unit definition. */
+function applyEraMod(def, mod) {
+  if (!mod) return;
+  for (const k of ['hp', 'speed', 'vision', 'turretRate', 'turnRate']) {
+    if (mod[k] !== undefined) def[k] = +(def[k] * mod[k]).toFixed(3);
+  }
+  // Period equipment is priced against what it can actually do: a Vickers Medium
+  // is not a Leopard 2 and must not cost like one, or armour is never worth
+  // building and 1926 collapses into an infantry stalemate.
+  if (mod.cost !== undefined) def.cost = Math.round(def.cost * mod.cost / 10) * 10;
+  if (mod.buildTime !== undefined) def.buildTime = +(def.buildTime * mod.buildTime).toFixed(1);
+  for (const k of ['ammoMax', 'cargo', 'frontalArc', 'needsData', 'missilePlatform']) {
+    if (mod[k] !== undefined) def[k] = mod[k];
+  }
+  if (mod.interceptor) def.interceptor = Object.assign({}, def.interceptor, mod.interceptor);
+  if (mod.art) Object.assign(def.art, mod.art);
+  if (mod.dropWeapons) def.weapons.length = Math.max(1, def.weapons.length - mod.dropWeapons);
+  if (mod.w) {
+    mod.w.forEach((patch, i) => {
+      if (!def.weapons[i]) return;
+      for (const key of Object.keys(patch)) {
+        if (patch[key] === null) delete def.weapons[i][key];
+        else def.weapons[i][key] = patch[key];
+      }
+    });
+  }
+}
+
 const cache = new Map();
 
 /** Merge archetype + equipment naming + coalition modifiers into a concrete unit definition. */
@@ -428,6 +598,9 @@ export function getUnit(faction, era, key) {
   def.name = eq[0];
   def.flavour = eq[1];
   def.colour = FACTIONS[faction].colour;
+
+  const eraSet = ERA_MODS[era];
+  if (eraSet) { applyEraMod(def, eraSet._all); applyEraMod(def, eraSet[key]); }
 
   const mods = (FACTION_MODS[faction] || {})[key];
   if (mods) {

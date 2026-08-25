@@ -603,7 +603,10 @@ export class HUD {
       if (a.type === 'objective' && a.owner !== g.humanIndex) continue;
       const spec = this.ALERT_TEXT[a.type];
       if (!spec) continue;
-      this.pushAlert(spec[0], spec[1], a.x, a.y);
+      // Name the inbound for what it actually is: an air raid is not a missile,
+      // and a 1926 siege shell cannot be intercepted by anything at all.
+      const text = a.type === 'incoming' ? this.incomingText(a.key) : spec[0];
+      this.pushAlert(text, spec[1], a.x, a.y);
     }
     // radio log
     while (this.shownMessages < g.messages.length) {
@@ -615,6 +618,18 @@ export class HUD {
       this.el.radio.appendChild(d);
       setTimeout(() => d.remove(), 9000);
       while (this.el.radio.children.length > 7) this.el.radio.firstChild.remove();
+    }
+  }
+
+  incomingText(key) {
+    const ab = ABILITIES[key];
+    switch (ab && ab.threat) {
+      case 'aircraft': return 'ENEMY AIRCRAFT INBOUND — AIR DEFENCE ENGAGING';
+      case 'loiter':   return 'LOITERING MUNITIONS INBOUND — AIR DEFENCE ENGAGING';
+      case 'rocket':   return 'ROCKET SALVO INBOUND — INTERCEPTORS ENGAGING';
+      case 'ballistic':
+      case 'cruise':   return 'INCOMING MISSILE — INTERCEPTORS ENGAGING';
+      default:         return 'HEAVY BOMBARDMENT INBOUND — NO INTERCEPTION POSSIBLE';
     }
   }
 

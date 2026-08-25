@@ -17,6 +17,7 @@ export const COMMANDERS = {
     strengths: ['Layered, mutually supporting static defences', 'Deadly artillery-backed counterattacks'],
     weakness: 'Slow to expand and slow to contest neutral ground — the early map is yours if you take it.',
     signature: ['Patriot / S-400 / HQ-9 interceptor batteries', 'Air & Missile Defence sites', 'Self-propelled artillery in prepared kill zones'],
+    signatureInterwar: ['Heavy anti-aircraft sectors over the generators', 'Dug-in gun emplacements and machine-gun redoubts', 'Registered artillery kill zones on every approach'],
     voice: {
       open: ['Positions prepared. Let them come to us.', 'Dig in. Nothing moves through this sector.'],
       attack: ['They are overextended. Counterattack.', 'The line holds. Now we advance.'],
@@ -48,6 +49,7 @@ export const COMMANDERS = {
     strengths: ['Overwhelming concentrated armoured punch', 'Repairs and re-commits damaged vehicles quickly'],
     weakness: 'Enormously expensive. Cut the power to the vehicle factory or starve the munitions plant and the fist stops closing.',
     signature: ['Massed main battle tanks with mobile air defence', 'Repair depots and recovery vehicles', 'Self-propelled artillery once its armour is checked'],
+    signatureInterwar: ['Massed light tanks screened by armoured cars', 'Recovery tractors and a field workshop behind the line', 'Gun tractors brought up once its armour is checked'],
     voice: {
       open: ['Factory first. Everything else is decoration.', 'Get the armour moving.'],
       attack: ['Battalion, advance. Line abreast.', 'Concentrate. We break them in one place.'],
@@ -79,6 +81,7 @@ export const COMMANDERS = {
     strengths: ['Relentless early pressure on your economy', 'Finds and exploits undefended approaches'],
     weakness: 'Feeds units piecemeal into prepared defences. Survive the first ten minutes intact and the initiative is yours.',
     signature: ['Reconnaissance vehicles and light armour', 'Special-forces raids on artillery and munitions', 'Cheap infantry pressure on oil infrastructure'],
+    signatureInterwar: ['Armoured cars and infantry raids on oil sites', 'Storm detachments against gun lines and shell plants', 'Cheap rifle companies applied continuously'],
     voice: {
       open: ['Do not wait. Move now.', 'Two sections out. Find their oil.'],
       attack: ['Hit them where they are thin.', 'Again. Do not let them build.'],
@@ -110,6 +113,7 @@ export const COMMANDERS = {
     strengths: ['Devastating, well-informed precision fires', 'Retargets faster than any other commander'],
     weakness: 'The whole apparatus is expensive and brittle. Kill the data centre or the generators and the strikes simply stop.',
     signature: ['Networked reconnaissance and loitering munitions', 'Storm Shadow / Iskander-M precision strikes', 'HIMARS and PHL-16 guided rocket artillery'],
+    signatureInterwar: ['Signals posts and sound-ranging counter-battery', 'Observation and reconnaissance flights', 'Long-range bombardment onto whatever they have just found'],
     voice: {
       open: ['Sensors first. The shooting follows.', 'Bring the network up.'],
       attack: ['Target identified. Executing.', 'Their picture is worse than ours. Proceed.'],
@@ -141,6 +145,7 @@ export const COMMANDERS = {
     strengths: ['Constant, heavy off-map fires', 'Very well defended against your strikes in return'],
     weakness: 'Long cooldowns and total dependence on radar, data and power. A thick SAM belt forces them into a ground fight they are not built for.',
     signature: ['Precision air strikes from the map edge', 'Tomahawk and Storm Shadow cruise missiles', 'A heavy Patriot / S-400 screen over its own base'],
+    signatureInterwar: ['Night bomber raids and ground-attack flights', 'Heavy anti-aircraft sectors over its own base', 'Balloon barrages against low-level attack'],
     voice: {
       open: ['Get the command centre up. Everything else waits.'],
       attack: ['Strike package inbound.', 'Suppress their air defences.'],
@@ -172,6 +177,7 @@ export const COMMANDERS = {
     strengths: ['Punishing long-range bombardment', 'Displaces launchers before counter-battery lands'],
     weakness: 'The guns are thin-skinned and slow. A fast raid or a special-forces team in the gun line ends the bombardment immediately.',
     signature: ['M270 MLRS, HIMARS and PHL-16 rocket artillery', 'Self-propelled howitzers with forward spotters', 'Counter-battery displacement after every salvo'],
+    signatureInterwar: ['Corps heavy artillery groups firing in concert', 'Railway guns and super-heavy siege howitzers', 'Forward observation posts to spot for them'],
     voice: {
       open: ['Guns first. We will need them.'],
       attack: ['Fire mission. Danger close is their problem.', 'Advance behind the barrage.'],
@@ -203,6 +209,7 @@ export const COMMANDERS = {
     strengths: ['Replaces losses faster than you can inflict them', 'Grows more dangerous every minute the match continues'],
     weakness: 'Buys warehouses before it buys weapons. Hit the oil sites early and the whole model stalls.',
     signature: ['Balanced combined arms in depth', 'Multiple oil administration facilities', 'Whatever the situation actually calls for'],
+    signatureInterwar: ['Petroleum administration built early and often', 'Several tank works and depot barracks', 'Whatever the situation actually calls for'],
     voice: {
       open: ['Secure the oil. All of it.'],
       attack: ['Wave two is already building.', 'Push. There is more behind them.'],
@@ -234,6 +241,7 @@ export const COMMANDERS = {
     strengths: ['Attacks from bearings your land defences do not cover', 'Very heavy naval gunfire support'],
     weakness: 'A fleet is a great deal of money that is not defending the base. Push inland hard while the ships are away.',
     signature: ['Missile destroyers and Tomahawk naval strike', 'Coastal defence batteries and frigates', 'Landing craft for amphibious envelopment'],
+    signatureInterwar: ['Battleship gunfire support and monitors inshore', 'Coastal gun batteries protecting the dockyard', 'Landing barges for an amphibious envelopment'],
     voice: {
       open: ['Get the yard laid down.'],
       attack: ['Landing force away.', 'Bombard the shoreline, then put them ashore.'],

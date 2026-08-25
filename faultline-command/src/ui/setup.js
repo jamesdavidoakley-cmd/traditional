@@ -4,6 +4,7 @@
 import { FACTIONS, FACTION_KEYS, TEAM_COLOURS, ERAS } from '../data/factions.js';
 import { COMMANDERS, COMMANDER_KEYS, DIFFICULTIES, DIFFICULTY_KEYS, resolveCommander } from '../data/commanders.js';
 import { MAPS, MAP_KEYS, loadMap } from '../maps/maps.js';
+import { SIGNATURE_SYSTEMS_BY_ERA } from '../data/abilities.js';
 import { SIGNATURE_SYSTEMS } from '../data/abilities.js';
 
 import { drawPortrait, doctrineIconCanvas } from './portraits.js';
@@ -88,7 +89,7 @@ export class Setup {
   randomise() {
     const rng = makeRng((Date.now() & 0xffffff) ^ 0x5eed);
     const c = this.config;
-    c.era = rng.pick(['modern', 'nineties']);
+    c.era = rng.pick(['modern', 'modern', 'nineties', 'interwar']);
     c.map = rng.pick(MAP_KEYS);
     c.format = rng.pick(Object.keys(FORMATS));
     const facs = rng.shuffle(FACTION_KEYS.slice());
@@ -136,7 +137,8 @@ export class Setup {
       const e = ERAS[k];
       const b = document.createElement('button');
       b.className = 'chip' + (c.era === k ? ' on' : '');
-      b.innerHTML = `${e.name}<span style="color:var(--ink-faint);margin-left:6px;font-size:10px">${e.year}</span>`;
+      b.innerHTML = e.year === e.name ? e.name
+        : `${e.name}<span style="color:var(--ink-faint);margin-left:6px;font-size:10px">${e.year}</span>`;
       b.title = e.blurb;
       b.addEventListener('click', () => { c.era = k; this.renderSetup(); this.s.audio.click(); });
       eraRow.appendChild(b);
@@ -321,6 +323,8 @@ export class Setup {
 
   // ------------------------------------------------------------ dossiers
   renderDossiers() {
+    const era = this.config.era;
+    const sig = (c) => (era === 'interwar' ? c.signatureInterwar : c.signature);
     const host = document.getElementById('dossier-body');
     host.innerHTML = `<div style="font-size:12.5px;color:var(--ink-dim);max-width:820px;line-height:1.65;margin-bottom:16px">
       Doctrine and difficulty are independent settings. Difficulty changes planning quality, reaction time and aggression;
@@ -351,7 +355,8 @@ export class Setup {
         ${c.dossier}
         <div style="margin-top:7px"><b class="tagline-good">Strengths</b><br>${c.strengths.map((s) => '▸ ' + s).join('<br>')}</div>
         <div style="margin-top:6px"><b class="tagline-bad">Exploitable weakness</b><br>▸ ${c.weakness}</div>
-        <div style="margin-top:6px"><b style="color:var(--accent2)">Preferred systems</b><br>${(c.signature || []).map((x) => '▸ ' + x).join('<br>')}</div>
+        <div style="margin-top:6px"><b style="color:var(--accent2)">Preferred systems</b>
+          <span style="color:var(--ink-faint);font-size:10px"> · ${ERAS[this.config.era].name}</span><br>${(sig(c) || []).map((x) => '▸ ' + x).join('<br>')}</div>
         ${c.landlockedFallback ? '<div style="margin-top:6px;color:var(--ink-faint)">On a landlocked map this commander switches to a mobile combined-arms doctrine.</div>' : ''}`;
       card.appendChild(body);
       grid.appendChild(card);
@@ -362,24 +367,36 @@ export class Setup {
 
   // ------------------------------------------------------------- systems
   renderSystems() {
+    const era = this.config.era;
+    const interwar = era === 'interwar';
+    const list = SIGNATURE_SYSTEMS_BY_ERA[interwar ? 'interwar' : 'modern'];
     const host = document.getElementById('systems-body');
     host.innerHTML = `<div class="panel" style="max-width:1000px">
-      <div class="panel-h">Ten Signature Systems</div>
+      <div class="panel-h">Ten Signature Systems <span style="font-size:11px;color:var(--ink-faint)">${ERAS[era].name} theatre</span></div>
       <div style="font-size:12.5px;color:var(--ink-dim);line-height:1.65;margin-bottom:12px">
-        Each behaves differently in flight and is defeated differently. Interception is always a roll, never a certainty,
-        and every launcher needs the right buildings, spare power, a live data link and ammunition in the magazine.</div>
-      <ul class="sys-list">${SIGNATURE_SYSTEMS.map((s) => `<li>
-        <b>${s.id}. ${s.name}</b> <span style="color:var(--ink-faint)">— ${s.kind}</span><br>
-        <span class="who">${s.who} · ${s.era}</span><br>${s.note}</li>`).join('')}</ul>
+        Each behaves differently in flight and is defeated differently. Interception is always a roll, never a
+        certainty, and every launcher needs the right buildings, spare power, a live command link and ammunition
+        in the magazine. Change the era in the deployment screen to see the other set — 1926 fights the same ten
+        roles with guns, balloons and biplanes.</div>
+      <ul class="sys-list">${list.map((x) => `<li>
+        <b>${x.id}. ${x.name}</b> <span style="color:var(--ink-faint)">— ${x.kind}</span><br>
+        <span class="who">${x.who} · ${x.era}</span><br>${x.note}</li>`).join('')}</ul>
       </div>
       <div class="panel" style="max-width:1000px;margin-top:14px">
         <div class="panel-h">Interception Matrix</div>
         <div style="font-size:12.5px;color:var(--ink-dim);line-height:1.7">
+        ${interwar ? `
+          <b style="color:var(--ink)">Heavy Anti-Aircraft Sector</b> — long reach, strong against bombers and observation aircraft; the backbone of any air defence.<br>
+          <b style="color:var(--ink)">Balloon Barrage &amp; Gun Section</b> — short reach, ruinous to low-level attack flights, irrelevant to anything flying high.<br>
+          <b style="color:var(--ink)">Anti-Aircraft Battery</b> — the general-purpose middle ground; needs the observation post, current and a live telephone line.<br>
+          <b style="color:var(--ink)">Motorised AA and machine-gun teams</b> — travel with the army, work with the generators down, and are the only air defence you have while attacking.<br>
+          <span style="color:var(--warn)">Nothing in 1926 can shoot down an artillery shell. Siege guns, railway guns and naval gunfire have no counter but killing the gun.</span><br>
+          <span style="color:var(--warn)">Lose the Signals Corps Headquarters and every directed engagement drops to roughly a third of its hit probability.</span>` : `
           <b style="color:var(--ink)">Patriot / S-400 / HQ-9</b> — long reach, strong against ballistic missiles, cruise missiles and air strikes; nearly useless against a cheap rocket salvo.<br>
           <b style="color:var(--ink)">Iron Dome-style interception</b> — short reach, superb against rockets and loitering munitions, poor against ballistic missiles.<br>
           <b style="color:var(--ink)">Air &amp; Missile Defence site</b> — the general-purpose middle ground; needs radar, power and a data link.<br>
           <b style="color:var(--ink)">Mobile AA and MANPADS</b> — travel with the army, work with the power grid down, and are the only air defence you have while attacking.<br>
-          <span style="color:var(--warn)">Lose your data centre and every networked interceptor drops to roughly a third of its hit probability.</span>
+          <span style="color:var(--warn)">Lose your data centre and every networked interceptor drops to roughly a third of its hit probability.</span>`}
         </div>
       </div>`;
   }
@@ -546,7 +563,7 @@ export class Setup {
           <span style="color:var(--ink-faint)"> · ${FACTIONS[p.faction].abbr} · ${DIFFICULTIES[p.difficultyKey].name}</span><br>
           <span style="color:var(--ink-dim)">${cmd.dossier}</span><br>
           <span class="tagline-bad">Weakness:</span> <span style="color:var(--ink-dim)">${cmd.weakness}</span>
-          <br><span style="color:var(--accent2)">Prefers:</span> <span style="color:var(--ink-dim)">${(cmd.signature || []).join(' · ')}</span>
+          <br><span style="color:var(--accent2)">Prefers:</span> <span style="color:var(--ink-dim)">${((cfg.era === 'interwar' ? cmd.signatureInterwar : cmd.signature) || []).join(' · ')}</span>
           ${cmd.fallbackActive ? '<br><span style="color:var(--warn)">No navigable water here — switching to a mobile combined-arms doctrine.</span>' : ''}
           ${DIFFICULTIES[p.difficultyKey].disclosed ? '<br><span style="color:var(--warn)">' + DIFFICULTIES[p.difficultyKey].disclosed + '</span>' : ''}`;
         div.appendChild(d);
@@ -600,8 +617,15 @@ export class Setup {
     ];
     if (map.naval) lines.push('This map has navigable water. A naval yard opens up patrol craft, landing craft, frigates, coastal support ships and missile destroyers.');
     else lines.push('No navigable water here, so naval units and coastal batteries are unavailable to everyone.');
-    if (era === 'nineties') lines.push('1990s theatre: no Iron Dome, HIMARS, S-400 or Storm Shadow. You have M270, Patriot PAC-2, Tomahawk, S-300, Tochka and drone reconnaissance instead.');
-    else lines.push('Modern theatre: the full precision-strike and interception set is available once the Advanced Weapons Command is up.');
+    if (era === 'interwar') {
+      lines.push('1926 theatre: no radar, no computers, no guided weapons. The Signals & Observation Post and the Signals Corps Headquarters do that work instead, and they are just as fragile.');
+      lines.push('Nothing this decade can shoot down a shell. Railway guns, siege guns and naval gunfire have no counter except finding and killing the gun.');
+      lines.push('Anti-tank work is done by anti-tank rifles and field guns at very short range, so armour has to be stopped at a chokepoint, not out in the open.');
+    } else if (era === 'nineties') {
+      lines.push('1990s theatre: no Iron Dome, HIMARS, S-400 or Storm Shadow. You have M270, Patriot PAC-2, Tomahawk, S-300, Tochka and drone reconnaissance instead.');
+    } else {
+      lines.push('Modern theatre: the full precision-strike and interception set is available once the Advanced Weapons Command is up.');
+    }
     const hard = cfg.players.some((p) => p.difficultyKey === 'marshal');
     if (hard) lines.push('One opponent is set to Marshal — it receives a disclosed +25% income and +15% construction speed on top of its better planning.');
     return lines.map((l) => '▸ ' + l).join('<br>');

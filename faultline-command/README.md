@@ -1,7 +1,7 @@
 # FAULTLINE COMMAND
 
 An original isometric real-time strategy game for the browser. Four fictional
-coalitions, two eras of recognisable real-world equipment, three balanced maps
+coalitions, three eras of recognisable real-world equipment, three balanced maps
 and eight AI commanders whose doctrines genuinely change how they play.
 
 **No install, no build step, no account.** Open `dist/index.html` in any modern
@@ -14,8 +14,9 @@ The objective is simple and absolute: destroy every opposing **Command
 Headquarters**. Lose your own and the battle ends immediately.
 
 * Formats: 1v1, 1v2, 1v3, 2v2 and free-for-all.
-* Two eras — **1990s** and **Modern Day** — with era-appropriate equipment.
-  No Iron Dome or HIMARS in a 1994 battle.
+* Three eras — **1926**, **1990s** and **Modern Day** — with era-appropriate
+  equipment. No Iron Dome or HIMARS in a 1994 battle, and no guided anything in
+  a 1926 one.
 * A normal battle runs roughly 15–25 minutes.
 * Two-player local multiplayer is marked *Coming later* and is not implemented.
 
@@ -31,6 +32,20 @@ Headquarters**. Lose your own and the battle ends immediately.
 All coalitions, commanders, flags, geography and conflicts are fictional.
 Equipment designations are real; performance figures are gameplay
 approximations, not simulations.
+
+### The three eras
+
+| Era | Reads as | Anti-tank | Air defence | Bombardment |
+|---|---|---|---|---|
+| **1926** | Rhomboid tanks, massed guns, wireless telegraphy, biplanes | Anti-tank rifles and field guns at knife range | Heavy AA guns and balloon barrages — aircraft only | Uninterceptable: heavy howitzers, railway guns, siege mortars |
+| **1990s** | Cold-war stockpiles, analogue fire control, mechanised mass | Wire-guided ATGMs | Patriot, S-400, HQ-9 | MLRS, Iskander, Tomahawk — interceptable |
+| **Modern Day** | Networked sensors, precision fires, layered missile defence | Top-attack ATGMs and loitering munitions | Layered, data-linked, and blinded when the data centre dies | Precision everything, and everything can be shot down |
+
+Period naming runs all the way through: in 1926 the Data Centre is a **Signals
+Corps Headquarters**, the Radar Station is a **Signals & Observation Post**, and
+the Advanced Weapons Command is an **Ordnance Experimental Command**. Structures
+are brick, sandbag and corrugated iron rather than hardened concrete, and take
+damage accordingly.
 
 ### Infrastructure is the game
 
@@ -49,13 +64,29 @@ approximations, not simulations.
 
 ### Ten signature systems
 
-Patriot · Iron Dome-style interception · Storm Shadow · HIMARS · M270 MLRS ·
-S-400 · Iskander-M · Tomahawk · PHL-16 · Networked reconnaissance and loitering
-munitions.
+**1990s and Modern Day** — Patriot · Iron Dome-style interception · Storm
+Shadow · HIMARS · M270 MLRS · S-400 · Iskander-M · Tomahawk · PHL-16 ·
+Networked reconnaissance and loitering munitions.
+
+**1926** — the same ten roles, resolved with what the decade actually had:
+heavy anti-aircraft sectors · balloon barrages · night bomber raids · ground
+attack flights · corps heavy artillery groups · railway guns · super-heavy
+siege howitzers · battleship gunfire support · sound-ranging counter-battery ·
+observation and reconnaissance flights.
 
 Each has a distinct flight profile and is defeated differently. Interception is
 always a roll, never a certainty, and every attempt is drawn as a real
 interceptor leaving the launcher.
+
+The 1926 era changes the shape of the battle rather than reskinning it.
+Nothing in the decade can shoot a shell out of the air, so heavy artillery and
+railway guns arrive **uninterceptable** — the only answer is to reach the guns.
+Air defence is guns and balloons, effective against aircraft and useless
+against everything else. Anti-tank work is done by anti-tank rifles and field
+guns at very short range, so armour is genuinely frightening again until it
+outruns its infantry. Ranges, speeds and turret traverse are all shorter and
+slower, and every piece of period equipment is priced against what it can
+actually do.
 
 ### Eight AI commanders
 

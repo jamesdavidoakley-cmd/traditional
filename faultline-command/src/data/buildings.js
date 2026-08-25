@@ -106,6 +106,24 @@ export const BUILDINGS = {
   }),
 
   // --------------------------------------------- signature interceptor sites
+  heavyaa: B({
+    key: 'heavyaa', name: 'Heavy Anti-Aircraft Sector', short: 'HAA', cost: 1900, buildTime: 20, hp: 980, size: 3,
+    power: -20, category: 'signature', art: 'sam', padType: 'defence', prereq: ['awc'], needsPower: true,
+    dataUse: 2, ammoMax: 16, signature: 'heavyaa',
+    interceptor: { ballistic: 0, cruise: 0, rocket: 0, loiter: 0.42, aircraft: 0.72, range: 16, reload: 3.2, needsData: true },
+    weapons: [DW({ name: 'QF 3-inch high-angle gun', range: 16, damage: 320, type: 'aa', rof: 3.0, projectile: 'shell', targets: ['air'], ammoCost: 1 })],
+    desc: 'Heavy high-angle guns tied to sound locators and searchlights. The only thing in 1926 that reliably brings down a bomber — and it cannot touch an artillery shell.',
+    eraNames: { interwar: 'Heavy Anti-Aircraft Sector' },
+  }),
+  balloons: B({
+    key: 'balloons', name: 'Balloon Barrage & Gun Section', short: 'BAL', cost: 900, buildTime: 13, hp: 820, size: 3,
+    power: -8, category: 'signature', art: 'irondome', padType: 'defence', prereq: ['radar'], needsPower: true,
+    dataUse: 0, ammoMax: 10, signature: 'balloons',
+    interceptor: { ballistic: 0, cruise: 0, rocket: 0, loiter: 0.70, aircraft: 0.34, range: 11, reload: 1.8, needsData: false },
+    weapons: [DW({ name: 'Balloon cables and light AA', range: 11, damage: 180, type: 'aa', rof: 1.6, projectile: 'missile', targets: ['air'], ammoCost: 1 })],
+    desc: 'Cabled balloons flown over the position with a light gun section beneath. Murder on anything trying to come in low; a high-flying bomber sails straight over the top.',
+    eraNames: { interwar: 'Balloon Barrage & Gun Section' },
+  }),
   patriot: B({
     key: 'patriot', name: 'Patriot Missile Battery', short: 'PAT', cost: 2400, buildTime: 24, hp: 1030, size: 3,
     power: -28, category: 'signature', art: 'patriot', padType: 'defence', prereq: ['awc'], needsPower: true,
@@ -151,14 +169,39 @@ export const BUILD_ORDER = [
   'power', 'barracks', 'factory', 'artillery', 'repair', 'radar', 'data', 'awc',
   'oiladmin', 'navalyard',
 ];
-export const DEFENCE_ORDER = ['mg', 'atgun', 'sam', 'coastal', 'patriot', 's400', 'hq9', 'irondome'];
+export const DEFENCE_ORDER = ['mg', 'atgun', 'sam', 'coastal', 'balloons', 'heavyaa', 'patriot', 's400', 'hq9', 'irondome'];
 
 // Which signature interceptor each coalition fields, per era.
 export const SIGNATURE_DEFENCE = {
-  arc: { nineties: ['patriot'], modern: ['patriot'] },
-  esd: { nineties: ['s400'], modern: ['s400'] },
-  pdc: { nineties: ['hq9'], modern: ['hq9'] },
-  mrl: { nineties: ['patriot'], modern: ['patriot', 'irondome'] },
+  arc: { interwar: ['balloons', 'heavyaa'], nineties: ['patriot'], modern: ['patriot'] },
+  esd: { interwar: ['heavyaa'], nineties: ['s400'], modern: ['s400'] },
+  pdc: { interwar: ['heavyaa'], nineties: ['hq9'], modern: ['hq9'] },
+  mrl: { interwar: ['balloons', 'heavyaa'], nineties: ['patriot'], modern: ['patriot', 'irondome'] },
+};
+
+/**
+ * 1926 has no radar, no computers and no guided weapons, so the infrastructure
+ * spine keeps its function under period names: wireless and observation instead
+ * of radar, a cipher and telephone office instead of a data centre.
+ */
+const ERA_BUILDING = {
+  interwar: {
+    hq:        ['General Headquarters', 'The fortified staff headquarters. Authorises all construction, draws the national defence estimate and runs its own generator set. Lose it and the campaign is over.'],
+    power:     ['Generator Station', 'Drives the workshops, the searchlights and the wireless sets. Without surplus current, production crawls and the observation network goes deaf.'],
+    barracks:  ['Depot Barracks', 'Trains infantry. Cheap, quick, and the only way to take an oil field intact.'],
+    factory:   ['Tank Works', 'Builds the armoured fleet. Needs steady current; output halves in a brown-out.'],
+    artillery: ['Ordnance Works & Shell-Filling Plant', 'Builds heavy artillery AND fills replacement shell. Lose it and every gun you own fires what it is already carrying, then stops.'],
+    repair:    ['Field Workshop', 'Repairs and re-ammunitions vehicles parked nearby, and puts thrown tracks back on.'],
+    radar:     ['Signals & Observation Post', 'Wireless masts, observation balloons and a sound-ranging section. Required by every co-ordinated shoot and every air-defence engagement you make.'],
+    data:      ['Signals Corps Headquarters', 'Telephone exchange, cipher office and the artillery fire-direction staff. Co-ordinated bombardment and directed air defence both die with it.'],
+    awc:       ['Ordnance Experimental Command', 'Releases the theatre-level weapons: bomber raids, siege guns, naval gunfire and the heavy anti-aircraft sectors.'],
+    oiladmin:  ['Petroleum Administration', 'Administers four more oil sites at full yield and raises their output by 35%. Sites past your administrative capacity produce only 42%.'],
+    navalyard: ['Naval Dockyard', 'Builds and berths warships. Only where there is a shoreline to build it on.'],
+    mg:        ['Machine-Gun Redoubt', 'Sandbagged emplacement with interlocking arcs. Cheap, and it will not scratch a tank.'],
+    atgun:     ['Anti-Tank Gun Emplacement', 'A field gun dug in to fire over open sights. Excellent value against armour; a rifle section simply walks around it.'],
+    sam:       ['Anti-Aircraft Battery', 'The general-purpose high-angle battery. Needs the observation post, current and a live telephone line to engage anything at all.'],
+    coastal:   ['Coastal Gun Battery', 'Long-range naval guns in concrete. Makes a whole stretch of coastline unusable to enemy shipping.'],
+  },
 };
 
 export function buildingAvailable(key, faction, era, coastal) {
@@ -172,6 +215,23 @@ export function buildingAvailable(key, faction, era, coastal) {
   return true;
 }
 
+/**
+ * Structure toughness by era. A 1926 installation is brick, sandbags and
+ * corrugated iron; a modern one is hardened concrete. Without this the era's
+ * heaviest shell cannot crack a headquarters and matches never resolve.
+ */
+const ERA_STRUCTURE_HP = { interwar: 0.58 };
+
+/*
+ * Construction cost by era. A 1926 "data centre" is a signals office with a
+ * switchboard and a cipher room, not a networked command node, and it must be
+ * priced like one — otherwise the tech tree eats an interwar economy alive and
+ * neither side ever reaches its oil administration or its gun works.
+ */
+const ERA_STRUCTURE_COST = {
+  interwar: { _all: 0.88, radar: 0.65, data: 0.65, awc: 0.75 },
+};
+
 const bcache = new Map();
 
 /** Building definition resolved for a coalition and era (names + interceptor tuning). */
@@ -184,12 +244,22 @@ export function getBuilding(key, faction, era) {
   const def = JSON.parse(JSON.stringify(base));
   def.id = id;
   if (def.eraNames && def.eraNames[era]) def.name = def.eraNames[era];
+  const eraEntry = (ERA_BUILDING[era] || {})[key];
+  if (eraEntry) { def.name = eraEntry[0]; def.desc = eraEntry[1]; }
   const es = def.eraStats && def.eraStats[era];
   if (es && def.interceptor) {
     for (const k of Object.keys(es)) {
       if (k === 'range') { def.interceptor.range += es.range; def.weapons.forEach((w) => { w.range += es.range; }); }
       else def.interceptor[k] = Math.max(0, def.interceptor[k] + es[k]);
     }
+  }
+  const hpScale = ERA_STRUCTURE_HP[era];
+  if (hpScale) def.hp = Math.round(def.hp * hpScale);
+  const costSet = ERA_STRUCTURE_COST[era];
+  if (costSet && def.cost) {
+    const mult = (costSet._all || 1) * (costSet[key] || 1);
+    def.cost = Math.round(def.cost * mult / 10) * 10;
+    def.buildTime = +(def.buildTime * (0.5 + mult * 0.5)).toFixed(1);
   }
   def.hpMax = def.hp;
   bcache.set(id, def);

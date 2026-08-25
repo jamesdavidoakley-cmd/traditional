@@ -40,6 +40,8 @@ export function drawUnit(ctx, view, u, colour, time) {
     case 'squad': return drawSquad(ctx, view, u, p, a, time);
     case 'tank': return drawTank(ctx, view, u, p, a);
     case 'ifv': return drawIFV(ctx, view, u, p, a);
+    case 'rhomboid': return drawRhomboid(ctx, view, u, p, a);
+    case 'heavygun': return drawHeavyGun(ctx, view, u, p, a);
     case 'apc': return drawAPC(ctx, view, u, p, a);
     case 'scout': return drawScout(ctx, view, u, p, a);
     case 'spg': return drawSPG(ctx, view, u, p, a);
@@ -151,6 +153,60 @@ function drawIFV(ctx, view, u, p, a) {
   // ATGM box on the turret cheek
   const c = Math.cos(u.turret + 1.35), s = Math.sin(u.turret + 1.35);
   isoQuad(ctx, view, u.x + c * 0.22, u.y + s * 0.22, 0.12, 0.07, u.turret, p.dark, 0.38);
+}
+
+// 1926: the lozenge heavy tank. Tracks run all the way round the hull, the guns
+// sit in side sponsons and nothing rotates — it fights whichever way it drives.
+function drawRhomboid(ctx, view, u, p, a) {
+  const c = Math.cos(u.facing), s = Math.sin(u.facing);
+  shadow(ctx, view, u.x, u.y, a.len * 1.45, a.wid * 2.1);
+  // all-round track run: one long quad plus raised nose and tail plates
+  isoQuad(ctx, view, u.x, u.y, a.len * 1.18, a.wid * 1.32, u.facing, 'rgba(24,22,20,0.88)');
+  isoQuad(ctx, view, u.x + c * a.len * 0.86, u.y + s * a.len * 0.86, a.len * 0.30, a.wid * 1.12, u.facing, 'rgba(20,18,16,0.9)', 0.20);
+  isoQuad(ctx, view, u.x - c * a.len * 0.86, u.y - s * a.len * 0.86, a.len * 0.30, a.wid * 1.12, u.facing, 'rgba(20,18,16,0.9)', 0.16);
+  // riveted hull, low and long
+  hullPlate(ctx, view, u, p, a.len * 1.02, a.wid * 0.82, 0.30);
+  teamStripe(ctx, view, u, p, a.len * 1.02, a.wid * 0.82, 0.30);
+  // commander's cupola on the roof
+  isoBox(ctx, view, u.x + c * a.len * 0.10, u.y + s * a.len * 0.10, a.len * 0.22, a.wid * 0.34, 0.16, u.facing, boxCols(p), 0.30);
+  // sponson guns, one each flank, firing across the beam
+  const recoil = (u.recoil || 0) * 0.12;
+  for (const side of [-1, 1]) {
+    const bx = u.x - s * side * a.wid * 0.72, by = u.y + c * side * a.wid * 0.72;
+    isoBox(ctx, view, bx, by, a.len * 0.24, a.wid * 0.22, 0.20, u.facing, boxCols(p, '#4a4b42'), 0.24);
+    const gx = -s * side, gy = c * side;
+    isoLine(ctx, view, bx + gx * (0.06 - recoil), by + gy * (0.06 - recoil), 0.36,
+      bx + gx * (a.len * 0.62 - recoil), by + gy * (a.len * 0.62 - recoil), 0.36,
+      '#2a2823', Math.max(1, 1.5 * view.zoom));
+  }
+  // exhaust silencer along the spine
+  isoQuad(ctx, view, u.x - c * a.len * 0.24, u.y - s * a.len * 0.24, a.len * 0.34, a.wid * 0.12, u.facing, p.dark, 0.47);
+}
+
+// 1926: a heavy piece on a wheeled carriage — gun shield, split trail, and a
+// barrel that elevates rather than a turret that spins.
+function drawHeavyGun(ctx, view, u, p, a) {
+  const c = Math.cos(u.turret), s = Math.sin(u.turret);
+  const fc = Math.cos(u.facing), fs = Math.sin(u.facing);
+  shadow(ctx, view, u.x, u.y, a.len * 1.2, a.wid * 1.8);
+  // trail legs dug in behind the piece
+  for (const side of [-1, 1]) {
+    isoLine(ctx, view, u.x - c * 0.10, u.y - s * 0.10, 0.10,
+      u.x - c * a.len * 0.9 - s * side * a.wid * 0.5, u.y - s * a.len * 0.9 + c * side * a.wid * 0.5, 0.02,
+      p.dark, Math.max(1, 2.2 * view.zoom));
+  }
+  // carriage wheels, large and spoked
+  for (const side of [-1, 1]) {
+    isoEllipse(ctx, view, u.x - fs * side * a.wid * 0.72, u.y + fc * side * a.wid * 0.72, 0.21, 0.21, '#1c1a17', 0.02);
+    isoEllipse(ctx, view, u.x - fs * side * a.wid * 0.72, u.y + fc * side * a.wid * 0.72, 0.11, 0.11, p.dark, 0.05);
+  }
+  // cradle and gun shield
+  isoBox(ctx, view, u.x, u.y, a.len * 0.30, a.wid * 0.62, 0.24, u.turret, boxCols(p), 0.10);
+  isoQuad(ctx, view, u.x + c * a.len * 0.22, u.y + s * a.len * 0.22, 0.06, a.wid * 0.86, u.turret, p.side, 0.50);
+  teamStripe(ctx, view, u, p, a.len * 0.30, a.wid * 0.62, 0.34);
+  // long high-angle barrel with a counterweight at the breech
+  barrel(ctx, view, u, p, a.len * 0.24, a.len * 1.55, 2.4, 0.44);
+  isoEllipse(ctx, view, u.x - c * a.len * 0.26, u.y - s * a.len * 0.26, 0.15, 0.15, p.dark, 0.42);
 }
 
 function drawAPC(ctx, view, u, p, a) {

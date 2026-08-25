@@ -296,7 +296,7 @@ export class Setup {
           const diff = DIFFICULTIES[p.difficultyKey];
           d.style.cssText = 'font-size:11.5px;color:var(--ink-dim);line-height:1.55';
           d.innerHTML = `<b style="color:var(--ink)">${cmd.codename}</b> · ${cmd.name}<br>
-            <span style="color:${cmd.accent}">${cmd.doctrine.toUpperCase()} DOCTRINE</span><br>${cmd.dossier.split('.')[0]}.
+            <span style="color:${cmd.accent}">${cmd.doctrine.toUpperCase()} DOCTRINE</span><br>${((c.era === 'interwar' && cmd.dossierInterwar) || cmd.dossier).split('.')[0]}.
             <div style="margin-top:5px;color:var(--ink-faint)">${diff.name}: ${diff.note}</div>`;
           info.appendChild(d);
         }
@@ -325,6 +325,9 @@ export class Setup {
   renderDossiers() {
     const era = this.config.era;
     const sig = (c) => (era === 'interwar' ? c.signatureInterwar : c.signature);
+    // Period vocabulary: a 1926 briefing must not talk about drones or SAM belts.
+    const dos = (c) => (era === 'interwar' && c.dossierInterwar ? c.dossierInterwar : c.dossier);
+    const weak = (c) => (era === 'interwar' && c.weaknessInterwar ? c.weaknessInterwar : c.weakness);
     const host = document.getElementById('dossier-body');
     host.innerHTML = `<div style="font-size:12.5px;color:var(--ink-dim);max-width:820px;line-height:1.65;margin-bottom:16px">
       Doctrine and difficulty are independent settings. Difficulty changes planning quality, reaction time and aggression;
@@ -352,9 +355,9 @@ export class Setup {
       const body = document.createElement('div');
       body.className = 'cmd-body';
       body.innerHTML = `<div style="color:var(--ink-faint);font-style:italic;margin-bottom:6px">${c.background}</div>
-        ${c.dossier}
+        ${dos(c)}
         <div style="margin-top:7px"><b class="tagline-good">Strengths</b><br>${c.strengths.map((s) => '▸ ' + s).join('<br>')}</div>
-        <div style="margin-top:6px"><b class="tagline-bad">Exploitable weakness</b><br>▸ ${c.weakness}</div>
+        <div style="margin-top:6px"><b class="tagline-bad">Exploitable weakness</b><br>▸ ${weak(c)}</div>
         <div style="margin-top:6px"><b style="color:var(--accent2)">Preferred systems</b>
           <span style="color:var(--ink-faint);font-size:10px"> · ${ERAS[this.config.era].name}</span><br>${(sig(c) || []).map((x) => '▸ ' + x).join('<br>')}</div>
         ${c.landlockedFallback ? '<div style="margin-top:6px;color:var(--ink-faint)">On a landlocked map this commander switches to a mobile combined-arms doctrine.</div>' : ''}`;
@@ -517,12 +520,12 @@ export class Setup {
           <div class="panel-h" style="margin-top:16px">Your Command</div>
           <div style="font-size:12.5px;color:var(--ink-dim);line-height:1.7">
             <b style="color:${TEAM_COLOURS.find((c) => c.key === human.colourKey).hex}">${FACTIONS[human.faction].name}</b><br>
-            ${FACTIONS[human.faction].doctrineNote}<br>
+            ${(cfg.era === 'interwar' && FACTIONS[human.faction].doctrineNoteInterwar) || FACTIONS[human.faction].doctrineNote}<br>
             <span style="color:var(--ink-faint)">Motto: ${FACTIONS[human.faction].motto} · ${FACTIONS[human.faction].homeland}</span>
           </div>
           <div style="margin-top:10px;font-size:12px;line-height:1.7">
-            <span class="tagline-good">Strengths:</span> ${FACTIONS[human.faction].strengths.join('; ')}<br>
-            <span class="tagline-bad">Weakness:</span> ${FACTIONS[human.faction].weakness}
+            <span class="tagline-good">Strengths:</span> ${((cfg.era === 'interwar' && FACTIONS[human.faction].strengthsInterwar) || FACTIONS[human.faction].strengths).join('; ')}<br>
+            <span class="tagline-bad">Weakness:</span> ${(cfg.era === 'interwar' && FACTIONS[human.faction].weaknessInterwar) || FACTIONS[human.faction].weakness}
           </div>
         </div>
         <div class="panel">
@@ -561,8 +564,8 @@ export class Setup {
         d.innerHTML = `<b style="color:var(--ink)">${cmd.codename}</b> · ${cmd.name}<br>
           <span style="color:${cmd.accent};letter-spacing:.1em;font-size:10.5px;text-transform:uppercase">${cmd.doctrine} doctrine</span>
           <span style="color:var(--ink-faint)"> · ${FACTIONS[p.faction].abbr} · ${DIFFICULTIES[p.difficultyKey].name}</span><br>
-          <span style="color:var(--ink-dim)">${cmd.dossier}</span><br>
-          <span class="tagline-bad">Weakness:</span> <span style="color:var(--ink-dim)">${cmd.weakness}</span>
+          <span style="color:var(--ink-dim)">${(cfg.era === 'interwar' && cmd.dossierInterwar) || cmd.dossier}</span><br>
+          <span class="tagline-bad">Weakness:</span> <span style="color:var(--ink-dim)">${(cfg.era === 'interwar' && cmd.weaknessInterwar) || cmd.weakness}</span>
           <br><span style="color:var(--accent2)">Prefers:</span> <span style="color:var(--ink-dim)">${((cfg.era === 'interwar' ? cmd.signatureInterwar : cmd.signature) || []).join(' · ')}</span>
           ${cmd.fallbackActive ? '<br><span style="color:var(--warn)">No navigable water here — switching to a mobile combined-arms doctrine.</span>' : ''}
           ${DIFFICULTIES[p.difficultyKey].disclosed ? '<br><span style="color:var(--warn)">' + DIFFICULTIES[p.difficultyKey].disclosed + '</span>' : ''}`;

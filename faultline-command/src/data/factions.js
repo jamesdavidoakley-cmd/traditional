@@ -20,6 +20,9 @@ export const FACTIONS = {
     homeland: 'The Atlantic Charter states of Verrand, Calmar and the Aldermere Isles.',
     strengths: ['Best-in-class main battle tanks', 'Deep precision fires and naval strike'],
     weakness: 'Expensive high-end formations; heavily dependent on the data link.',
+    doctrineNoteInterwar: 'Expeditionary force built around heavy tanks, corps artillery and the reach of a battle fleet.',
+    strengthsInterwar: ['Best-protected heavy and medium tanks', 'Railway guns and capital-ship gunfire'],
+    weaknessInterwar: 'Expensive formations; the fleet is a great deal of money that is not defending the base.',
     flag: { bars: ['#123a6b', '#ffffff', '#3d7ddb'], emblem: 'star' },
   },
   esd: {
@@ -34,6 +37,9 @@ export const FACTIONS = {
     homeland: 'The Directorate oblasts of Sever, Kamenna and the Tolvan corridor.',
     strengths: ['Overwhelming rocket and tube artillery', 'Layered long-range air defence'],
     weakness: 'Individual vehicles are thinner-skinned; poor at sustained sieges.',
+    doctrineNoteInterwar: 'Mass, echeloned guns and the deepest magazine of shells on the board.',
+    strengthsInterwar: ['Overwhelming massed howitzer groups', 'Super-heavy siege guns nothing can intercept'],
+    weaknessInterwar: 'Individual vehicles are thinner-skinned; slow to concentrate against a mobile enemy.',
     flag: { bars: ['#7a1414', '#cf3a3a', '#f0d060'], emblem: 'gear' },
   },
   pdc: {
@@ -48,6 +54,9 @@ export const FACTIONS = {
     homeland: 'The Compact provinces of Hanzhou, Nakasu and the Coral Approaches.',
     strengths: ['Fast, cheap production echelons', 'Reconnaissance-strike networking'],
     weakness: 'Mid-tier armour quality; the network collapses without its data centre.',
+    doctrineNoteInterwar: 'Industrial tempo, cheap replacement echelons and aggressive aerial observation.',
+    strengthsInterwar: ['Fast, cheap production echelons', 'Naval bombers and battlecruiser gunfire'],
+    weaknessInterwar: 'Mid-tier armour quality; the guns go blind if the observation post falls.',
     flag: { bars: ['#0d5744', '#2fae86', '#ffffff'], emblem: 'wave' },
   },
   mrl: {
@@ -62,6 +71,9 @@ export const FACTIONS = {
     homeland: 'The League cantons of Ostia Nova, Tarshan and the Kessaran littoral.',
     strengths: ['Superb short-range missile interception', 'Very survivable armoured vehicles'],
     weakness: 'Smaller industrial base; struggles to replace losses quickly.',
+    doctrineNoteInterwar: 'Tough armour, dense gun defences and the heaviest siege ordnance in service.',
+    strengthsInterwar: ['Balloon barrages and heavy anti-aircraft sectors', 'Skoda siege mortars and monitor gunfire'],
+    weaknessInterwar: 'Smaller industrial base; struggles to replace losses quickly.',
     flag: { bars: ['#8a5a08', '#e0a02a', '#2b2b2b'], emblem: 'sun' },
   },
 };

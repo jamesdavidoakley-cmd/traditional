@@ -32,7 +32,7 @@ export const ABILITIES = {
   airrecon: {
     key: 'airrecon', name: 'Observation & Reconnaissance Flight', short: 'OBS', icon: 'drone',
     eras: ['interwar'], factions: ['arc', 'esd', 'pdc', 'mrl'],
-    cost: 380, cooldown: 65, targeting: 'point', threat: THREAT.LOITER,
+    cost: 380, cooldown: 65, targeting: 'point', threat: THREAT.AIRCRAFT,
     requires: { buildings: ['radar', 'data'], data: 1, power: true, ammo: 0 },
     flight: { speed: 4.2, altitude: 'medium', approach: 'edge' },
     payload: { count: 0, damage: 0, reveal: 13, revealTime: 36 },

@@ -18,6 +18,7 @@ export const COMMANDERS = {
     weakness: 'Slow to expand and slow to contest neutral ground — the early map is yours if you take it.',
     signature: ['Patriot / S-400 / HQ-9 interceptor batteries', 'Air & Missile Defence sites', 'Self-propelled artillery in prepared kill zones'],
     signatureInterwar: ['Heavy anti-aircraft sectors over the generators', 'Dug-in gun emplacements and machine-gun redoubts', 'Registered artillery kill zones on every approach'],
+    dossierInterwar: 'Expect layered defences early: machine-gun redoubts and anti-tank gun emplacements around every generator, signals headquarters and shell-filling plant, with heavy anti-aircraft sectors added the moment the ordnance works allows. Korrin invites overextension and punishes it with pre-registered artillery. Expect no serious attack in the opening ten minutes — and a fully assembled, well-escorted offensive after that.',
     voice: {
       open: ['Positions prepared. Let them come to us.', 'Dig in. Nothing moves through this sector.'],
       attack: ['They are overextended. Counterattack.', 'The line holds. Now we advance.'],
@@ -50,6 +51,8 @@ export const COMMANDERS = {
     weakness: 'Enormously expensive. Cut the power to the vehicle factory or starve the munitions plant and the fist stops closing.',
     signature: ['Massed main battle tanks with mobile air defence', 'Repair depots and recovery vehicles', 'Self-propelled artillery once its armour is checked'],
     signatureInterwar: ['Massed light tanks screened by armoured cars', 'Recovery tractors and a field workshop behind the line', 'Gun tractors brought up once its armour is checked'],
+    dossierInterwar: 'Bruhn will build the tank works early and rarely stop. Expect massed battalions of medium and heavy tanks with armoured cars, motorised anti-aircraft and recovery tractors moving as one body, on the most open ground available. They will attempt to destroy anti-tank rifle teams and gun lines before the main body advances. If your anti-tank screen repeatedly stops them, expect field guns to appear behind the armour within minutes.',
+    weaknessInterwar: 'Enormously expensive. Cut the current to the tank works or starve the shell-filling plant and the fist stops closing.',
     voice: {
       open: ['Factory first. Everything else is decoration.', 'Get the armour moving.'],
       attack: ['Battalion, advance. Line abreast.', 'Concentrate. We break them in one place.'],
@@ -114,6 +117,8 @@ export const COMMANDERS = {
     weakness: 'The whole apparatus is expensive and brittle. Kill the data centre or the generators and the strikes simply stop.',
     signature: ['Networked reconnaissance and loitering munitions', 'Storm Shadow / Iskander-M precision strikes', 'HIMARS and PHL-16 guided rocket artillery'],
     signatureInterwar: ['Signals posts and sound-ranging counter-battery', 'Observation and reconnaissance flights', 'Long-range bombardment onto whatever they have just found'],
+    dossierInterwar: 'Vasq builds the signals chain before the army: generators, observation post, signals headquarters, ordnance experimental command. Expect registered bombardment, sound-ranging counter-battery and observation flights rather than mass. Targets are chosen by value, not by proximity, and change the moment the observers find something better — your signals headquarters, your observation post, your anti-aircraft sectors and your generators, in that order.',
+    weaknessInterwar: 'The whole apparatus is expensive and brittle. Kill the signals headquarters or the generators and the bombardment simply stops.',
     voice: {
       open: ['Sensors first. The shooting follows.', 'Bring the network up.'],
       attack: ['Target identified. Executing.', 'Their picture is worse than ours. Proceed.'],
@@ -146,6 +151,8 @@ export const COMMANDERS = {
     weakness: 'Long cooldowns and total dependence on radar, data and power. A thick SAM belt forces them into a ground fight they are not built for.',
     signature: ['Precision air strikes from the map edge', 'Tomahawk and Storm Shadow cruise missiles', 'A heavy Patriot / S-400 screen over its own base'],
     signatureInterwar: ['Night bomber raids and ground-attack flights', 'Heavy anti-aircraft sectors over its own base', 'Balloon barrages against low-level attack'],
+    dossierInterwar: 'Ryn rushes the Ordnance Experimental Command and lives on off-map fires: night bomber raids, ground-attack flights and observation aircraft arriving from the map edge. Expect a deliberate campaign against your anti-aircraft guns first, then against your generators, works and headquarters. Their own base will carry an unusually heavy gun and balloon screen. Every one of these raids is visible the whole way in and can be shot down.',
+    weaknessInterwar: 'Long turnarounds and total dependence on the observation post, the signals headquarters and current. A thick anti-aircraft belt forces them into a ground fight they are not built for.',
     voice: {
       open: ['Get the command centre up. Everything else waits.'],
       attack: ['Strike package inbound.', 'Suppress their air defences.'],
@@ -178,6 +185,7 @@ export const COMMANDERS = {
     weakness: 'The guns are thin-skinned and slow. A fast raid or a special-forces team in the gun line ends the bombardment immediately.',
     signature: ['M270 MLRS, HIMARS and PHL-16 rocket artillery', 'Self-propelled howitzers with forward spotters', 'Counter-battery displacement after every salvo'],
     signatureInterwar: ['Corps heavy artillery groups firing in concert', 'Railway guns and super-heavy siege howitzers', 'Forward observation posts to spot for them'],
+    dossierInterwar: 'Kelsang builds the ordnance works and shell-filling plant early and defends it obsessively. Expect heavy howitzer groups and railway guns firing from behind a screen of armour and infantry, with observation pushed forward to spot for them, and the guns displacing after each salvo to defeat counter-battery. Sustained bombardment precedes any ground advance. Nothing in this decade can intercept those shells — your anti-aircraft sectors and your shell-filling plant will simply be near the top of their target list.',
     voice: {
       open: ['Guns first. We will need them.'],
       attack: ['Fire mission. Danger close is their problem.', 'Advance behind the barrage.'],
@@ -210,6 +218,7 @@ export const COMMANDERS = {
     weakness: 'Buys warehouses before it buys weapons. Hit the oil sites early and the whole model stalls.',
     signature: ['Balanced combined arms in depth', 'Multiple oil administration facilities', 'Whatever the situation actually calls for'],
     signatureInterwar: ['Petroleum administration built early and often', 'Several tank works and depot barracks', 'Whatever the situation actually calls for'],
+    dossierInterwar: 'Quintaine seizes oil infrastructure fast and builds a petroleum administration almost immediately, then doubles up on production works. Expect balanced combined-arms formations rather than specialists, and expect every loss to be replaced within a minute. Early pressure is comparatively light, but the size of each successive wave grows faster than any other commander on the board.',
     voice: {
       open: ['Secure the oil. All of it.'],
       attack: ['Wave two is already building.', 'Push. There is more behind them.'],
@@ -242,6 +251,7 @@ export const COMMANDERS = {
     weakness: 'A fleet is a great deal of money that is not defending the base. Push inland hard while the ships are away.',
     signature: ['Missile destroyers and Tomahawk naval strike', 'Coastal defence batteries and frigates', 'Landing craft for amphibious envelopment'],
     signatureInterwar: ['Battleship gunfire support and monitors inshore', 'Coastal gun batteries protecting the dockyard', 'Landing barges for an amphibious envelopment'],
+    dossierInterwar: 'On any map with water, Verenna builds a naval yard early and coastal batteries to protect it. Expect capital ships and monitors bombarding your coastal positions, torpedo boats hunting your shipping, and landing barges putting an infantry force ashore behind your defensive line, usually near your oil infrastructure. On a landlocked map this commander reverts to a fast combined-arms mobile doctrine instead.',
     voice: {
       open: ['Get the yard laid down.'],
       attack: ['Landing force away.', 'Bombard the shoreline, then put them ashore.'],

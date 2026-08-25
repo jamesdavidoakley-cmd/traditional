@@ -623,6 +623,9 @@ export class HUD {
 
   incomingText(key) {
     const ab = ABILITIES[key];
+    // Some fires simply cannot be engaged — a 1926 siege shell above all. Say so
+    // rather than promising interceptors that are not coming.
+    if (ab && ab.interceptable === false) return 'HEAVY BOMBARDMENT INBOUND — NO INTERCEPTION POSSIBLE';
     switch (ab && ab.threat) {
       case 'aircraft': return 'ENEMY AIRCRAFT INBOUND — AIR DEFENCE ENGAGING';
       case 'loiter':   return 'LOITERING MUNITIONS INBOUND — AIR DEFENCE ENGAGING';

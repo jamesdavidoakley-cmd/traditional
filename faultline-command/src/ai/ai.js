@@ -632,7 +632,7 @@ export class AI {
     const rest = army.filter((u) => !g.scout.includes(u));
     const total = rest.length;
     const e = this.escalation();
-    const garrison = this.c.army.garrisonRatio * (e === 2 ? 0.25 : e === 1 ? 0.55 : 1);
+    const garrison = this.c.army.garrisonRatio * (e >= 3 ? 0.06 : e === 2 ? 0.25 : e === 1 ? 0.55 : 1);
     const wantDefence = Math.round(total * garrison);
     const wantHarass = Math.round(total * this.c.army.harassRatio);
 
@@ -773,6 +773,10 @@ export class AI {
    */
   escalation() {
     const t = this.game.time;
+    // Past thirty-five minutes two entrenched commanders can grind each other
+    // indefinitely, each rebuilding faster than the other can break through.
+    // At that point both stop holding anything back and go for the headquarters.
+    if (t > 2100) return 3;
     if (t > 1500) return 2;
     if (t > 1080) return 1;
     return 0;
@@ -788,6 +792,7 @@ export class AI {
     const e = this.escalation();
     if (e === 1) n *= 0.6;
     else if (e === 2) n *= 0.35;
+    else if (e >= 3) n *= 0.2;
     return Math.max(3, Math.round(n));
   }
 
@@ -890,7 +895,8 @@ export class AI {
     if (!home) return null;
     // Once we are clearly on top — or the match has run long — go for the throat.
     let priorities = this.c.targeting;
-    if (this.dominant() || this.escalation() > 0 || this.decisive) {
+    const forTheThroat = this.dominant() || this.escalation() > 0 || this.decisive;
+    if (forTheThroat) {
       priorities = ['hq'].concat(priorities.filter((c) => c !== 'hq'));
     }
 
@@ -905,10 +911,18 @@ export class AI {
         if (m.kind === 'neutral' && (m.owner < 0 || !this.targetValid(m))) continue;
         if (m.kind === 'building' && m.ref && m.ref.dead) continue;
         const d = dist(home.x, home.y, m.x, m.y);
-        let s = weight - d * 1.4;
+        const guarded = this.defenceNear(m.x, m.y);
+        // Distance normally decides between targets of similar value. But once a
+        // commander has decided to go for the headquarters, distance must not
+        // quietly send the army off to a nearer oil derrick instead — on a large
+        // map the enemy HQ is always the furthest thing away, and that is exactly
+        // where the battle is won. An HQ sitting behind a ring of emplacements is
+        // a different proposition: strip the base first rather than marching the
+        // whole army across the map into prepared fire.
+        const throat = forTheThroat && cat === 'hq' && (guarded < 2 || this.escalation() >= 3);
+        let s = weight - d * (throat ? 0.35 : 1.4);
         s += (m.cost || 200) / 60;
         // Avoid walking straight into a wall of known defences unless we brought guns.
-        const guarded = this.defenceNear(m.x, m.y);
         s -= guarded * (this.groups.artillery.length > 1 ? 12 : 34);
         if (s > bestScore) { bestScore = s; best = m; }
       }

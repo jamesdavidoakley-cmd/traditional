@@ -224,8 +224,8 @@ function roadwheels(ctx, view, u, p, len, wid, n) {
   for (const side of [-1, 1]) {
     for (let i = 0; i < n; i++) {
       const t = (i / (n - 1) - 0.5) * 2 * len * 0.78;
-      const wx = u.x + t * c - side * wid * 1.06 * sn;
-      const wy = u.y + t * sn + side * wid * 1.06 * c;
+      const wx = u.x + t * c - side * wid * 1.02 * sn;
+      const wy = u.y + t * sn + side * wid * 1.02 * c;
       const big = i === 0 || i === n - 1;             // sprocket and idler are larger
       const r = big ? 0.17 : 0.13;
       isoEllipse(ctx, view, wx, wy, r, r, big ? '#5b544a' : '#4a443c', 0.05);
@@ -274,7 +274,7 @@ function stowage(ctx, view, u, p, a, back) {
 function drawTank90(ctx, view, u, p, a) {
   const c = Math.cos(u.turret), s = Math.sin(u.turret);
   shadow(ctx, view, u.x, u.y, a.len * 1.3, a.wid * 2.0);
-  roadwheels(ctx, view, u, p, a.len, a.wid * 0.86, 7);
+  roadwheels(ctx, view, u, p, a.len, a.wid, 7);
   skirts(ctx, view, u, p, a);
   hullPlate(ctx, view, u, p, a.len * 0.94, a.wid * 0.88, 0.30);
   teamStripe(ctx, view, u, p, a.len * 0.94, a.wid * 0.88, 0.30);
@@ -299,7 +299,7 @@ function drawTank90(ctx, view, u, p, a) {
 function drawIFV90(ctx, view, u, p, a) {
   const c = Math.cos(u.turret), s = Math.sin(u.turret);
   shadow(ctx, view, u.x, u.y, a.len * 1.2, a.wid * 1.85);
-  roadwheels(ctx, view, u, p, a.len, a.wid * 0.84, 6);
+  roadwheels(ctx, view, u, p, a.len, a.wid, 6);
   skirts(ctx, view, u, p, a);
   // tall sloped hull
   hullPlate(ctx, view, u, p, a.len * 0.9, a.wid * 0.84, 0.40);
@@ -334,7 +334,7 @@ function drawAPC90(ctx, view, u, p, a) {
 function drawSPG90(ctx, view, u, p, a) {
   const c = Math.cos(u.turret), s = Math.sin(u.turret);
   shadow(ctx, view, u.x, u.y, a.len * 1.3, a.wid * 1.95);
-  roadwheels(ctx, view, u, p, a.len, a.wid * 0.84, 7);
+  roadwheels(ctx, view, u, p, a.len, a.wid, 7);
   hullPlate(ctx, view, u, p, a.len * 0.88, a.wid * 0.86, 0.30);
   teamStripe(ctx, view, u, p, a.len * 0.88, a.wid * 0.86, 0.30);
   // enormous slab-sided turret that overhangs the hull at the back

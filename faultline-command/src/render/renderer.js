@@ -367,6 +367,7 @@ export class Renderer {
   setDetail(on) { QUALITY.detail = !!on; this._slow = on ? 0 : 30; }
 
   gradeScene() {
+    if (this._noGrade) return;
     const ctx = this.ctx, v = this.view;
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     if (!this._grade || this._gradeW !== v.w || this._gradeH !== v.h) {

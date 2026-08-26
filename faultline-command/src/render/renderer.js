@@ -340,8 +340,36 @@ export class Renderer {
     this.drawProjectiles();
     this.drawParticles();
     this.drawFog(dt);
+    this.gradeScene();
     this.drawOverlays();
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+  }
+
+  /**
+   * Scene grade, applied under the interface: a warm key over the sunlit side
+   * falling to a cool shadow, and a vignette to settle the frame. Two cached
+   * gradients and two composited fills — the cheapest realism in the renderer.
+   */
+  gradeScene() {
+    const ctx = this.ctx, v = this.view;
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    if (!this._grade || this._gradeW !== v.w || this._gradeH !== v.h) {
+      const warm = ctx.createLinearGradient(0, 0, v.w * 0.85, v.h);
+      warm.addColorStop(0, 'rgba(255,226,178,0.085)');
+      warm.addColorStop(0.55, 'rgba(255,238,214,0.012)');
+      warm.addColorStop(1, 'rgba(28,42,72,0.10)');
+      const vig = ctx.createRadialGradient(
+        v.w * 0.5, v.h * 0.47, Math.min(v.w, v.h) * 0.34,
+        v.w * 0.5, v.h * 0.47, Math.max(v.w, v.h) * 0.78);
+      vig.addColorStop(0, 'rgba(0,0,0,0)');
+      vig.addColorStop(1, 'rgba(0,0,0,0.34)');
+      this._grade = warm; this._vignette = vig;
+      this._gradeW = v.w; this._gradeH = v.h;
+    }
+    ctx.fillStyle = this._grade;
+    ctx.fillRect(0, 0, v.w, v.h);
+    ctx.fillStyle = this._vignette;
+    ctx.fillRect(0, 0, v.w, v.h);
   }
 
   visibleTileBounds() {

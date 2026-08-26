@@ -130,6 +130,16 @@ function wheels(ctx, view, u, p, len, wid, count) {
 
 function hullPlate(ctx, view, u, p, len, wid, h) {
   isoBox(ctx, view, u.x, u.y, len, wid, h, u.facing, boxCols(p));
+  // The deck is the largest surface in an isometric view and a single flat fill
+  // across it is most of what reads as "cardboard". Panel joints break it up.
+  if (view.zoom < 0.8) return;
+  const c = Math.cos(u.facing), s = Math.sin(u.facing);
+  for (const t of [-0.34, 0.16]) {
+    isoQuad(ctx, view, u.x + c * len * t, u.y + s * len * t, 0.028, wid * 0.94, u.facing,
+      'rgba(0,0,0,0.16)', h + 0.003);
+  }
+  isoQuad(ctx, view, u.x + c * len * 0.44, u.y + s * len * 0.44, len * 0.13, wid * 0.34, u.facing,
+    'rgba(255,250,235,0.07)', h + 0.003);
 }
 
 function teamStripe(ctx, view, u, p, len, wid, h) {

@@ -367,7 +367,9 @@ export class Renderer {
   setDetail(on) { QUALITY.detail = !!on; this._slow = on ? 0 : 30; }
 
   gradeScene() {
-    if (this._noGrade) return;
+    // A full-screen alpha blit is cheap on a GPU and not cheap in software, so it
+    // goes with the rest of the detail when frames get tight.
+    if (this._noGrade || !QUALITY.detail) return;
     const ctx = this.ctx, v = this.view;
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     // Baked once into a bitmap. Rasterising two full-screen gradients every frame

@@ -1,7 +1,7 @@
 // Procedural isometric artwork. Everything is drawn from primitives so turrets
 // rotate, barrels recoil and every coalition's buildings look subtly different.
 
-import { isoBox, isoQuad, isoEllipse, isoLine, sx, sy } from './iso.js';
+import { isoBox, isoQuad, isoEllipse, isoLine, sx, sy, SUN, litColour } from './iso.js';
 import { mixHex, shadeHex, TAU } from '../core/util.js';
 
 const cache = new Map();
@@ -28,8 +28,13 @@ function boxCols(p, tint) {
   return { top: shadeHex(tint, 0.2), side: tint, dark: shadeHex(tint, -0.25), line: p.line };
 }
 
+// A cast shadow thrown away from the sun, plus a tight dark contact patch right
+// under the hull. One symmetric blob under everything is what made vehicles look
+// like stickers laid on the ground.
 function shadow(ctx, view, x, y, rx, ry) {
-  isoEllipse(ctx, view, x, y, rx, ry, 'rgba(0,0,0,0.22)');
+  const off = 0.42;
+  isoEllipse(ctx, view, x - SUN.nx * off, y - SUN.ny * off, rx * 1.06, ry * 1.06, 'rgba(0,0,0,0.20)');
+  isoEllipse(ctx, view, x, y, rx * 0.72, ry * 0.72, 'rgba(0,0,0,0.24)');
 }
 
 // ------------------------------------------------------------------- units

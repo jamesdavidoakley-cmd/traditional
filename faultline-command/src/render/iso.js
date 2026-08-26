@@ -1,4 +1,38 @@
 // Isometric projection helpers and the primitive solids everything is drawn from.
+//
+// Solids are lit by a single directional sun. Every vertical face gets its own
+// tone from the angle between its normal and the light, so a box reads as a
+// solid object rather than a flat sticker, and a turret visibly catches the
+// light differently as it traverses. Shaded colours are cached by tone bucket:
+// the shading is a string lookup in the hot path, not a per-face gradient.
+
+import { shadeHex } from '../core/util.js';
+
+// Sun direction in world (tile) space, and how hard it is.
+export const SUN = { x: -0.6, y: -0.8, ambient: 0.42, diffuse: 0.62 };
+const SUN_LEN = Math.hypot(SUN.x, SUN.y) || 1;
+SUN.nx = SUN.x / SUN_LEN;
+SUN.ny = SUN.y / SUN_LEN;
+
+const shadeCache = new Map();
+/** Shade a base colour by a signed amount, memoised in coarse buckets. */
+export function litColour(hex, amount) {
+  const bucket = Math.round(amount * 24);
+  const key = hex + '|' + bucket;
+  let v = shadeCache.get(key);
+  if (v === undefined) {
+    v = shadeHex(hex, bucket / 24);
+    shadeCache.set(key, v);
+  }
+  return v;
+}
+
+/** Lambert term for a world-space face normal, in 0..1. */
+function lambert(nx, ny) {
+  const d = nx * SUN.nx + ny * SUN.ny;
+  return d > 0 ? d : 0;
+}
+
 
 export const BASE_TW = 64;   // tile width in screen pixels at zoom 1
 export const BASE_TH = 32;   // tile height in screen pixels at zoom 1
@@ -47,18 +81,28 @@ export function isoBox(ctx, view, wx, wy, halfLen, halfWid, height, rot, cols, w
     return { wx: px, wy: py, x: sx(view, px, py), yb: sy(view, px, py, wz || 0), yt: sy(view, px, py, (wz || 0) + height) };
   });
 
+  // Outward normal of each face in the box's own frame, rotated into the world.
+  const LOCAL_N = [[1, 0], [0, -1], [-1, 0], [0, 1]];
   const faces = [];
   for (let i = 0; i < 4; i++) {
     const a = corners[i], b = corners[(i + 1) % 4];
-    faces.push({ a, b, depth: (a.wx + a.wy + b.wx + b.wy) * 0.5 });
+    const ln = LOCAL_N[i];
+    faces.push({
+      a, b,
+      depth: (a.wx + a.wy + b.wx + b.wy) * 0.5,
+      nx: ln[0] * c - ln[1] * s,
+      ny: ln[0] * s + ln[1] * c,
+    });
   }
   faces.sort((p, q) => p.depth - q.depth);
 
+  const detail = view.zoom > 0.75;
   for (let i = 0; i < 4; i++) {
     const f = faces[i];
-    // Only the two nearest faces are actually visible; drawing all four in depth
-    // order costs little and avoids seams.
-    ctx.fillStyle = i < 2 ? cols.dark : cols.side;
+    // Every face is lit on its own merits. Drawing all four in depth order costs
+    // little and avoids seams where they meet.
+    const l = SUN.ambient + SUN.diffuse * lambert(f.nx, f.ny);
+    ctx.fillStyle = litColour(cols.side, l - 0.72);
     ctx.beginPath();
     ctx.moveTo(f.a.x, f.a.yb);
     ctx.lineTo(f.b.x, f.b.yb);
@@ -66,8 +110,22 @@ export function isoBox(ctx, view, wx, wy, halfLen, halfWid, height, rot, cols, w
     ctx.lineTo(f.a.x, f.a.yt);
     ctx.closePath();
     ctx.fill();
+    // Ambient occlusion where the face meets the ground, so it sits in the scene
+    // instead of floating on it.
+    if (detail) {
+      const ha = (f.a.yb - f.a.yt) * 0.34, hb = (f.b.yb - f.b.yt) * 0.34;
+      ctx.fillStyle = 'rgba(0,0,0,0.20)';
+      ctx.beginPath();
+      ctx.moveTo(f.a.x, f.a.yb);
+      ctx.lineTo(f.b.x, f.b.yb);
+      ctx.lineTo(f.b.x, f.b.yb - hb);
+      ctx.lineTo(f.a.x, f.a.yb - ha);
+      ctx.closePath();
+      ctx.fill();
+    }
   }
-  ctx.fillStyle = cols.top;
+  // The upward face takes the full sun.
+  ctx.fillStyle = litColour(cols.top, 0.06);
   ctx.beginPath();
   ctx.moveTo(corners[0].x, corners[0].yt);
   for (let i = 1; i < 4; i++) ctx.lineTo(corners[i].x, corners[i].yt);
@@ -77,6 +135,20 @@ export function isoBox(ctx, view, wx, wy, halfLen, halfWid, height, rot, cols, w
     ctx.strokeStyle = cols.line;
     ctx.lineWidth = Math.max(0.6, view.zoom * 0.8);
     ctx.stroke();
+  }
+  // A bright edge where the roof meets the sunlit side: the highlight that makes
+  // a shape look like metal rather than paper.
+  if (detail) {
+    ctx.strokeStyle = 'rgba(255,250,235,0.30)';
+    ctx.lineWidth = Math.max(0.7, view.zoom * 0.9);
+    for (let i = 0; i < 4; i++) {
+      const f = faces[i];
+      if (lambert(f.nx, f.ny) < 0.55) continue;
+      ctx.beginPath();
+      ctx.moveTo(f.a.x, f.a.yt);
+      ctx.lineTo(f.b.x, f.b.yt);
+      ctx.stroke();
+    }
   }
   return corners;
 }

@@ -12,6 +12,7 @@ import { makeRng } from '../core/util.js';
 // that costs a third of the frame rate, so the inner limit stays where it is.
 const MIN_ZOOM = 0.45, MAX_ZOOM = 1.75;
 const CHUNK = 8;   // tiles per cached terrain chunk
+const TILE_VARIANTS = 6;
 
 export class Renderer {
   constructor(canvas, game) {
@@ -111,16 +112,22 @@ export class Renderer {
       const t = +key;
       const def = TERRAIN[t];
       sprites[t] = [];
-      for (let v = 0; v < 3; v++) {
+      // Six variants rather than three, and the spread between them pulled in:
+      // ground should vary, not alternate. Drawn at full tile size, because a
+      // diamond inset by two pixels leaves the background showing through as a
+      // grid and that is what made the whole map read as a board game.
+      for (let v = 0; v < TILE_VARIANTS; v++) {
         const c = document.createElement('canvas');
         c.width = tw; c.height = th;
         const g = c.getContext('2d');
         const cx = tw / 2, cy = th / 2;
-        const base = v === 0 ? def.colour : (v === 1 ? def.alt : mixHex(def.colour, def.alt, 0.5));
-        tileDiamond(g, cx, cy, tw - 2, th - 2);
+        const mix = (v / (TILE_VARIANTS - 1)) * 0.72;
+        const base = shadeHex(mixHex(def.colour, def.alt, mix), (rng() - 0.5) * 0.07);
+        tileDiamond(g, cx, cy, tw + 1, th + 1);
         g.fillStyle = base;
         g.fill();
         this.textureTile(g, t, cx, cy, tw, th, v, rng);
+        this.grainTile(g, t, cx, cy, tw, th, rng);
         sprites[t].push(c);
       }
     }
@@ -169,7 +176,10 @@ export class Renderer {
         if (tx >= w.width) continue;
         const i = ty * w.width + tx;
         const t = w.bridge[i] ? T.CONCRETE : w.tiles[i];
-        const variant = ((tx * 7 + ty * 13) % 3);
+        // Hashed, not linear: a linear index lays down visible diagonal banding.
+        let hsh = (tx * 73856093) ^ (ty * 19349663);
+        hsh = (hsh ^ (hsh >>> 13)) >>> 0;
+        const variant = hsh % TILE_VARIANTS;
         const lx = (tx - ty) * halfW, ly = (tx + ty + 1) * halfH;
         g.drawImage(this.tileSprites[t][variant], lx - minX - sw * 0.5, ly - minY - sh * 0.5);
       }
@@ -184,9 +194,34 @@ export class Renderer {
     return entry;
   }
 
+  /** Fine grain so ground reads as a surface rather than a flat fill. */
+  grainTile(g, t, cx, cy, tw, th, rng) {
+    if (t === T.WATER || t === T.SHALLOW) return;
+    g.save();
+    tileDiamond(g, cx, cy, tw + 1, th + 1);
+    g.clip();
+    const n = Math.max(8, Math.round(tw * th / 90));
+    for (let i = 0; i < n; i++) {
+      const a = rng() * Math.PI * 2, r = Math.sqrt(rng());
+      const px = cx + Math.cos(a) * r * tw * 0.46;
+      const py = cy + Math.sin(a) * r * th * 0.46;
+      const dark = rng() < 0.5;
+      g.fillStyle = dark ? 'rgba(0,0,0,0.10)' : 'rgba(255,252,240,0.075)';
+      const sz = Math.max(1, tw * 0.022 * (0.6 + rng()));
+      g.fillRect(px, py, sz, Math.max(1, sz * 0.5));
+    }
+    // A gentle across-tile gradient in the sun direction gives the ground form.
+    const grad = g.createLinearGradient(cx - tw * 0.5, cy - th * 0.5, cx + tw * 0.5, cy + th * 0.5);
+    grad.addColorStop(0, 'rgba(255,248,225,0.055)');
+    grad.addColorStop(1, 'rgba(0,0,0,0.055)');
+    g.fillStyle = grad;
+    g.fillRect(cx - tw * 0.5, cy - th * 0.5, tw, th);
+    g.restore();
+  }
+
   textureTile(g, t, cx, cy, tw, th, v, rng) {
     g.save();
-    tileDiamond(g, cx, cy, tw - 2, th - 2);
+    tileDiamond(g, cx, cy, tw + 1, th + 1);
     g.clip();
     const scale = tw / BASE_TW;
     if (t === T.GRASS || t === T.FARM) {

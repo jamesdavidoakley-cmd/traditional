@@ -121,7 +121,7 @@ export class Renderer {
         c.width = tw; c.height = th;
         const g = c.getContext('2d');
         const cx = tw / 2, cy = th / 2;
-        const mix = (v / (TILE_VARIANTS - 1)) * 0.72;
+        const mix = (v / (TILE_VARIANTS - 1)) * 0.34;
         const base = shadeHex(mixHex(def.colour, def.alt, mix), (rng() - 0.5) * 0.07);
         tileDiamond(g, cx, cy, tw + 1, th + 1);
         g.fillStyle = base;
@@ -210,12 +210,6 @@ export class Renderer {
       const sz = Math.max(1, tw * 0.022 * (0.6 + rng()));
       g.fillRect(px, py, sz, Math.max(1, sz * 0.5));
     }
-    // A gentle across-tile gradient in the sun direction gives the ground form.
-    const grad = g.createLinearGradient(cx - tw * 0.5, cy - th * 0.5, cx + tw * 0.5, cy + th * 0.5);
-    grad.addColorStop(0, 'rgba(255,248,225,0.055)');
-    grad.addColorStop(1, 'rgba(0,0,0,0.055)');
-    g.fillStyle = grad;
-    g.fillRect(cx - tw * 0.5, cy - th * 0.5, tw, th);
     g.restore();
   }
 
@@ -234,11 +228,14 @@ export class Renderer {
         g.stroke();
       }
     } else if (t === T.ROAD || t === T.CONCRETE) {
-      g.fillStyle = 'rgba(255,255,255,0.06)';
-      g.fillRect(0, 0, tw, th * 0.5);
-      g.strokeStyle = 'rgba(0,0,0,0.16)';
-      g.lineWidth = Math.max(0.5, scale * 0.8);
-      g.beginPath(); g.moveTo(cx - tw * 0.5, cy); g.lineTo(cx + tw * 0.5, cy); g.stroke();
+      // Expansion joints run along the slab edges. A fixed highlight over the top
+      // half of every tile just repeats into diagonal stripes.
+      g.strokeStyle = 'rgba(0,0,0,0.13)';
+      g.lineWidth = Math.max(0.5, scale * 0.7);
+      g.beginPath();
+      g.moveTo(cx - tw * 0.5, cy); g.lineTo(cx, cy - th * 0.5);
+      g.moveTo(cx, cy + th * 0.5); g.lineTo(cx + tw * 0.5, cy);
+      g.stroke();
     } else if (t === T.WATER || t === T.SHALLOW) {
       g.strokeStyle = t === T.WATER ? 'rgba(140,190,235,0.16)' : 'rgba(180,225,245,0.24)';
       g.lineWidth = Math.max(0.6, scale);

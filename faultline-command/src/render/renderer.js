@@ -1001,6 +1001,12 @@ export class Renderer {
 
   // -------------------------------------------------------------- minimap
   drawMinimap(canvas) {
+    // The minimap does not need sixty updates a second. It was redrawing every
+    // frame and shading the fog with two nested loops over the whole map —
+    // thousands of fillRect calls per frame, which was the single largest cost
+    // in the frame, far larger than drawing the battlefield itself.
+    if (this._miniAt !== undefined && this.time - this._miniAt < 0.1) return;
+    this._miniAt = this.time;
     const g = this.game, me = g.humanIndex;
     const ctx = canvas.getContext('2d');
     const W = canvas.width, H = canvas.height;
@@ -1022,24 +1028,23 @@ export class Renderer {
     ctx.drawImage(this._miniTerrain, 0, 0, W, H);
 
     const sxr = W / w.width, syr = H / w.height;
-    // Unexplored ground stays dark.
+    // Fog as one image at map resolution, blitted scaled: a single pass over the
+    // typed arrays instead of thousands of rectangles.
     if (me >= 0) {
+      if (!this._miniFog || this._miniFog.width !== w.width) {
+        this._miniFog = document.createElement('canvas');
+        this._miniFog.width = w.width; this._miniFog.height = w.height;
+        this._miniFogCtx = this._miniFog.getContext('2d');
+        this._miniFogImg = this._miniFogCtx.createImageData(w.width, w.height);
+      }
+      const d = this._miniFogImg.data;
       const exp = g.fog.explored[me], vis = g.fog.visible[me];
-      ctx.save();
-      ctx.fillStyle = 'rgba(6,9,13,0.94)';
-      for (let y = 0; y < w.height; y += 2) {
-        for (let x = 0; x < w.width; x += 2) {
-          if (!exp[y * w.width + x]) ctx.fillRect(x * sxr, y * syr, sxr * 2 + 0.5, syr * 2 + 0.5);
-        }
+      for (let i = 0, j = 0; i < exp.length; i++, j += 4) {
+        d[j] = 6; d[j + 1] = 9; d[j + 2] = 13;
+        d[j + 3] = exp[i] ? (vis[i] ? 0 : 90) : 240;
       }
-      ctx.fillStyle = 'rgba(6,9,13,0.35)';
-      for (let y = 0; y < w.height; y += 2) {
-        for (let x = 0; x < w.width; x += 2) {
-          const i = y * w.width + x;
-          if (exp[i] && !vis[i]) ctx.fillRect(x * sxr, y * syr, sxr * 2 + 0.5, syr * 2 + 0.5);
-        }
-      }
-      ctx.restore();
+      this._miniFogCtx.putImageData(this._miniFogImg, 0, 0);
+      ctx.drawImage(this._miniFog, 0, 0, W, H);
     }
 
     for (const n of g.world.neutrals) {

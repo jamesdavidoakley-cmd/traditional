@@ -1,7 +1,7 @@
 // Procedural isometric artwork. Everything is drawn from primitives so turrets
 // rotate, barrels recoil and every coalition's buildings look subtly different.
 
-import { isoBox, isoQuad, isoEllipse, isoLine, sx, sy, SUN, litColour } from './iso.js';
+import { isoBox, isoQuad, isoEllipse, isoLine, sx, sy, SUN, litColour, QUALITY } from './iso.js';
 import { mixHex, shadeHex, TAU } from '../core/util.js';
 
 const cache = new Map();
@@ -132,7 +132,7 @@ function hullPlate(ctx, view, u, p, len, wid, h) {
   isoBox(ctx, view, u.x, u.y, len, wid, h, u.facing, boxCols(p));
   // The deck is the largest surface in an isometric view and a single flat fill
   // across it is most of what reads as "cardboard". Panel joints break it up.
-  if (view.zoom < 0.8) return;
+  if (!QUALITY.detail || view.zoom < 0.8) return;
   const c = Math.cos(u.facing), s = Math.sin(u.facing);
   for (const t of [-0.34, 0.16]) {
     isoQuad(ctx, view, u.x + c * len * t, u.y + s * len * t, 0.028, wid * 0.94, u.facing,

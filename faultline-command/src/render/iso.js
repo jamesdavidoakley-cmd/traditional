@@ -14,6 +14,12 @@ const SUN_LEN = Math.hypot(SUN.x, SUN.y) || 1;
 SUN.nx = SUN.x / SUN_LEN;
 SUN.ny = SUN.y / SUN_LEN;
 
+// Scene detail. The lit faces are cheap; the per-face occlusion band, the
+// specular edge and the deck panelling are not, and they are what a large
+// battle cannot afford. The renderer drops this automatically when frames run
+// long, and restores it when they do not.
+export const QUALITY = { detail: true };
+
 const shadeCache = new Map();
 /** Shade a base colour by a signed amount, memoised in coarse buckets. */
 export function litColour(hex, amount) {
@@ -96,7 +102,7 @@ export function isoBox(ctx, view, wx, wy, halfLen, halfWid, height, rot, cols, w
   }
   faces.sort((p, q) => p.depth - q.depth);
 
-  const detail = view.zoom > 0.75;
+  const detail = QUALITY.detail && view.zoom > 0.75;
   for (let i = 0; i < 4; i++) {
     const f = faces[i];
     // Every face is lit on its own merits. Drawing all four in depth order costs

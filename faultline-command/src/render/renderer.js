@@ -3,7 +3,7 @@
 
 import { clamp, dist, lerp, TAU, mixHex, shadeHex } from '../core/util.js';
 import { T, TERRAIN } from '../core/terrain.js';
-import { makeView, syncView, sx, sy, screenToWorld, tileDiamond, isoQuad, isoEllipse, isoLine, isoBox, BASE_TW, BASE_TH } from './iso.js';
+import { makeView, syncView, sx, sy, screenToWorld, tileDiamond, isoQuad, isoEllipse, isoLine, isoBox, BASE_TW, BASE_TH, QUALITY } from './iso.js';
 import { drawUnit, drawBuilding, drawNeutral, buildingHeight, pal } from './sprites.js';
 import { makeRng } from '../core/util.js';
 
@@ -333,6 +333,7 @@ export class Renderer {
       ctx.translate((Math.random() - 0.5) * s, (Math.random() - 0.5) * s);
     }
 
+    this.autoDetail(dt);
     this.drawTerrain();
     this.drawDecals();
     this.buildDrawList();
@@ -350,6 +351,21 @@ export class Renderer {
    * falling to a cool shadow, and a vignette to settle the frame. Two cached
    * gradients and two composited fills — the cheapest realism in the renderer.
    */
+  /**
+   * Keep the frame budget honest. Detail is the first thing to go when a battle
+   * gets big — a smooth 60 with plain solids beats 15 with occlusion bands on
+   * every face. Hysteresis either side so it does not flicker on the threshold.
+   */
+  autoDetail(dt) {
+    this._slow = this._slow || 0;
+    if (dt > 0.028) this._slow = Math.min(30, this._slow + 1);
+    else if (dt < 0.019) this._slow = Math.max(0, this._slow - 1);
+    if (QUALITY.detail && this._slow >= 24) QUALITY.detail = false;
+    else if (!QUALITY.detail && this._slow <= 3) QUALITY.detail = true;
+  }
+
+  setDetail(on) { QUALITY.detail = !!on; this._slow = on ? 0 : 30; }
+
   gradeScene() {
     const ctx = this.ctx, v = this.view;
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);

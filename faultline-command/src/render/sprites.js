@@ -51,6 +51,9 @@ export function drawUnit(ctx, view, u, colour, time) {
     case 'spg90': return drawSPG90(ctx, view, u, p, a);
     case 'mlrs90': return drawMLRS90(ctx, view, u, p, a);
     case 'aa90': return drawAA90(ctx, view, u, p, a);
+    // The period light tank shares the isometric silhouette; it is the 3D
+    // battlefield that models its riveted hull and cupola separately.
+    case 'earlytank': return drawTank(ctx, view, u, p, a);
     case 'rhomboid': return drawRhomboid(ctx, view, u, p, a);
     case 'heavygun': return drawHeavyGun(ctx, view, u, p, a);
     case 'apc': return drawAPC(ctx, view, u, p, a);

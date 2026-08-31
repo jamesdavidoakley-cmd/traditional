@@ -137,7 +137,7 @@ export class Renderer3D {
         if (t === T.WOOD) {
           if (rng() > 0.34) continue;
           push('tree', x + rng(), y + rng(), rng() * TAU, 0.85 + rng() * 0.6);
-        } else if (t === T.URBAN && rng() < 0.34) {
+        } else if (t === T.URBAN && rng() < 0.20) {
           push('house', x + 0.25 + rng() * 0.5, y + 0.25 + rng() * 0.5,
             Math.round(rng() * 4) * Math.PI / 2, 0.85 + rng() * 0.45);
         }
@@ -148,17 +148,25 @@ export class Renderer3D {
       else if (dec.type === 'farm') push('barn', dec.x, dec.y, dec.rot || 0, 1);
       else if (dec.type === 'refinery') push('stack', dec.x, dec.y, 0, 1);
     }
-    const TINT = { tree: 0x6b9150, house: 0xc0b2a0, barn: 0xa87c52, stack: 0x93908a };
+    // Two shades per family, drifted per instance, so a wood is not one green
+    // and a village is not one rendered block repeated eighty times.
+    const TINT = {
+      tree: ['#4f7a3c', '#7ba055'], house: ['#a4907a', '#cabaa6'],
+      barn: ['#8d6742', '#b98a5c'], stack: ['#7f7c76', '#9d9a94'],
+    };
     const mats = new Map();
+    const a = new THREE.Color(), b = new THREE.Color(), c = new THREE.Color();
     for (const { type, list } of groups.values()) {
       if (!mats.has(type)) {
         mats.set(type, new THREE.MeshStandardMaterial({
           vertexColors: true, roughness: 0.94, metalness: 0.02,
-          color: new THREE.Color(TINT[type] || 0x9a9184),
         }));
       }
+      const pair = TINT[type] || ['#8d8a84', '#a5a29b'];
+      a.set(pair[0]); b.set(pair[1]);
       const mesh = new THREE.InstancedMesh(propGeometry(type).hull, mats.get(type), list.length);
       mesh.castShadow = true; mesh.receiveShadow = true;
+      mesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(list.length * 3), 3);
       list.forEach((p, i) => {
         this._e.set(0, p.rot, 0);
         this._q.setFromEuler(this._e);
@@ -166,8 +174,12 @@ export class Renderer3D {
         this._v.set(p.x, this.groundAt(p.x, p.z), p.z);
         this._m.compose(this._v, this._q, this._s);
         mesh.setMatrixAt(i, this._m);
+        const t = ((((p.x * 977) | 0) ^ (((p.z * 631) | 0) << 3)) >>> 0) % 1000 / 1000;
+        c.copy(a).lerp(b, t);
+        mesh.instanceColor.setXYZ(i, c.r, c.g, c.b);
       });
       mesh.instanceMatrix.needsUpdate = true;
+      mesh.instanceColor.needsUpdate = true;
       mesh.computeBoundingSphere();
       this.scene.add(mesh);
     }

@@ -528,7 +528,7 @@ const ERA_MODS = {
     sf:      { w: [{ range: 4.2, damage: 15 }, {}] },
     mbt:     { cost: 0.62, hp: 0.56, speed: 0.52, frontalArc: 0.34, turretRate: 0.55, ammoMax: 12,
                w: [{ name: 'Turret gun', range: 5.0, damage: 64, rof: 5.4, accuracy: 0.80 }, { range: 3.6, damage: 7 }],
-               art: { len: 0.70, wid: 0.50 } },
+               art: { body: 'earlytank', len: 0.70, wid: 0.50 } },
     ifv:     { cost: 0.90, hp: 0.92, speed: 0.44, cargo: 4, ammoMax: 14, turretRate: 0.7,
                w: [{ name: 'Sponson gun', range: 4.6, damage: 34, type: 'he', rof: 2.6, projectile: 'shell', burst: 1, splash: 0.5 }],
                dropWeapons: 1, art: { body: 'rhomboid', len: 0.92, wid: 0.46 } },

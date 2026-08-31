@@ -208,6 +208,22 @@ const BUILDERS = {
     ];
     return { hull, turret };
   },
+  /** A riveted box hull on short tracks: the light tank of the twenties. */
+  earlytank(a) {
+    const L = a.len, W = a.wid;
+    const hull = [
+      ...running(L, W * 0.70, 5, 0.30),
+      box(L * 1.45, 0.50, W * 1.30, -L * 0.05, 0.58, 0, BODY),
+      box(L * 0.55, 0.34, W * 1.10, L * 0.55, 0.52, 0, DARK),   // stepped nose
+      box(L * 1.50, 0.08, W * 1.36, -L * 0.05, 0.84, 0, STEEL), // riveted deck strip
+    ];
+    const turret = [
+      cyl(W * 0.52, W * 0.58, 0.40, 0, 0.22, 0, BODY, 0, 0, 0),
+      cyl(W * 0.30, W * 0.30, 0.10, 0, 0.46, 0, HIGH),          // cupola
+      cyl(0.05, 0.045, L * 0.95, L * 0.52, 0.20, 0, STEEL, Math.PI / 2),
+    ];
+    return { hull, turret };
+  },
   rhomboid(a) {
     const L = a.len, W = a.wid;
     const hull = [

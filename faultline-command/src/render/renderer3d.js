@@ -19,6 +19,17 @@ const MIN_ZOOM = 0.45, MAX_ZOOM = 3.2;
 const REF_DIST = 46;           // camera distance at zoom 1
 const START_CAP = 48;          // instances allocated per pool before it grows
 
+// Structures are built of concrete and steel, not painted in faction colours;
+// the shade varies by role so a base is not one repeated block.
+const CONCRETE = {
+  _: '#8a8781',
+  hq: '#93908a', power: '#83837e', barracks: '#7f8272', factory: '#7c7a74',
+  artillery: '#7a786f', repair: '#85837a', radar: '#8e8d88', data: '#8b8a86',
+  awc: '#8d8a84', oiladmin: '#8a8175', navalyard: '#7f8286',
+  mg: '#7d7b73', atgun: '#7d7b73', sam: '#82817b', coastal: '#7f7e78',
+  patriot: '#82817b', s400: '#82817b', hq9: '#82817b', irondome: '#82817b',
+};
+
 export class Renderer3D {
   constructor(canvas, game) {
     this.canvas = canvas;
@@ -126,8 +137,9 @@ export class Renderer3D {
         if (t === T.WOOD) {
           if (rng() > 0.34) continue;
           push('tree', x + rng(), y + rng(), rng() * TAU, 0.85 + rng() * 0.6);
-        } else if (t === T.URBAN && rng() < 0.14) {
-          push('house', x + 0.5, y + 0.5, Math.round(rng() * 4) * Math.PI / 2, 0.85 + rng() * 0.3);
+        } else if (t === T.URBAN && rng() < 0.34) {
+          push('house', x + 0.25 + rng() * 0.5, y + 0.25 + rng() * 0.5,
+            Math.round(rng() * 4) * Math.PI / 2, 0.85 + rng() * 0.45);
         }
       }
     }
@@ -136,7 +148,7 @@ export class Renderer3D {
       else if (dec.type === 'farm') push('barn', dec.x, dec.y, dec.rot || 0, 1);
       else if (dec.type === 'refinery') push('stack', dec.x, dec.y, 0, 1);
     }
-    const TINT = { tree: 0x6b9150, house: 0xb0a494, barn: 0xa07f5c, stack: 0x93908a };
+    const TINT = { tree: 0x6b9150, house: 0xc0b2a0, barn: 0xa87c52, stack: 0x93908a };
     const mats = new Map();
     for (const { type, list } of groups.values()) {
       if (!mats.has(type)) {
@@ -382,8 +394,8 @@ export class Renderer3D {
     if (!p) {
       const mat = new THREE.MeshStandardMaterial({
         vertexColors: true,
-        roughness: opts && opts.roughness !== undefined ? opts.roughness : 0.62,
-        metalness: opts && opts.metalness !== undefined ? opts.metalness : 0.24,
+        roughness: opts && opts.roughness !== undefined ? opts.roughness : 0.68,
+        metalness: opts && opts.metalness !== undefined ? opts.metalness : 0.16,
       });
       p = { geo, mat, mesh: null, cap: 0, n: 0 };
       this.pools.set(key, p);
@@ -458,16 +470,22 @@ export class Renderer3D {
       if (b.dead || !explored(b.x, b.y)) continue;
       const h = buildingHeight(b.key) * 1.25 + 0.35;
       const geo = buildingGeometry(b.key, b.def.size, h);
-      const col = b.state === 'active' ? this.livery(g.players[b.owner].colour) : '#6f6c64';
       const key = 'b|' + b.key + '|' + b.def.size;
       const z = this.groundAt(b.x, b.y);
       // Under construction a structure rises out of the ground rather than
       // growing sideways, so only the vertical axis is scaled.
-      const rise = b.state === 'active' ? 1 : clamp(0.16 + b.progress * 0.84, 0.16, 1);
-      this.place(this.pool(key, geo.hull, { roughness: 0.88, metalness: 0.08 }), b.x, b.y, z, 0, col, 1, rise);
-      if (geo.turret && b.state === 'active') {
-        this.place(this.pool(key + '|t', geo.turret, { roughness: 0.7, metalness: 0.3 }),
-          b.x, b.y, z, b.turret || 0, col);
+      const done = b.state === 'active';
+      const rise = done ? 1 : clamp(0.16 + b.progress * 0.84, 0.16, 1);
+      const body = done ? CONCRETE[b.key] || CONCRETE._ : '#5f5c55';
+      const team = done ? g.players[b.owner].colour : '#77736a';
+      this.place(this.pool(key, geo.hull, { roughness: 0.9, metalness: 0.06 }), b.x, b.y, z, 0, body, 1, rise);
+      if (geo.trim) {
+        this.place(this.pool(key + '|m', geo.trim, { roughness: 0.7, metalness: 0.14 }),
+          b.x, b.y, z, 0, team, 1, rise);
+      }
+      if (geo.turret && done) {
+        this.place(this.pool(key + '|t', geo.turret, { roughness: 0.66, metalness: 0.3 }),
+          b.x, b.y, z, b.turret || 0, this.livery(team));
       }
     }
 
@@ -479,7 +497,7 @@ export class Renderer3D {
       const key = this.unitKey(art);
       const naval = u.def.class === 'naval';
       const z = naval ? -0.24 : this.groundAt(u.x, u.y);
-      const sc = u.def.class === 'infantry' ? 1.2 : naval ? 1.1 : 1.18;
+      const sc = u.def.class === 'infantry' ? 1.1 : naval ? 1.0 : 1.0;
       if (geo.hull) this.place(this.pool('u|' + key, geo.hull), u.x, u.y, z, u.facing, col, sc);
       if (geo.turret) this.place(this.pool('t|' + key, geo.turret), u.x, u.y, z, u.turret, col, sc);
     }
@@ -504,7 +522,7 @@ export class Renderer3D {
   livery(colour) {
     if (!this._livery) this._livery = new Map();
     let v = this._livery.get(colour);
-    if (!v) { v = mixHex(colour, '#8c8676', 0.34); this._livery.set(colour, v); }
+    if (!v) { v = mixHex(colour, '#6f6a5c', 0.26); this._livery.set(colour, v); }
     return v;
   }
 

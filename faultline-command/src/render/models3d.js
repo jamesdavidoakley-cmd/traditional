@@ -8,7 +8,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
-const TRACK = 0.22, DARK = 0.47, BODY = 1.0, HIGH = 1.32, GLASS = 0.62, STEEL = 0.78;
+const TRACK = 0.22, DARK = 0.46, BODY = 0.94, HIGH = 1.12, GLASS = 0.58, STEEL = 0.74;
 
 function tinted(geo, v) {
   const n = geo.attributes.position.count;
@@ -25,12 +25,20 @@ function box(w, h, d, x, y, z, shade, rotY) {
   return tinted(g, shade);
 }
 
-function cyl(r1, r2, h, x, y, z, shade, rotZ, rotY) {
+// A cylinder stands on its Y axis by default: rotZ lays it along the hull (for
+// gun barrels), rotX lays it across the hull (for road wheels).
+function cyl(r1, r2, h, x, y, z, shade, rotZ, rotY, rotX) {
   const g = new THREE.CylinderGeometry(r1, r2, h, 10);
   if (rotZ) g.rotateZ(rotZ);
+  if (rotX) g.rotateX(rotX);
   if (rotY) g.rotateY(rotY);
   g.translate(x, y, z);
   return tinted(g, shade);
+}
+
+/** A road wheel or roadwheel-sized tyre, lying on its axle across the hull. */
+function wheel(r, thick, x, y, z, shade) {
+  return cyl(r, r, thick, x, y, z, shade, 0, 0, Math.PI / 2);
 }
 
 function sph(r, x, y, z, shade) {
@@ -39,15 +47,21 @@ function sph(r, x, y, z, shade) {
   return tinted(g, shade);
 }
 
-/** Road wheels down both sides of a tracked hull. */
+/**
+ * Track runs down both sides of a hull, with road wheels turning on their axles
+ * inside them. `wid` is the centre-line of each run.
+ */
 function running(len, wid, n, y) {
   const parts = [];
   for (const side of [-1, 1]) {
-    parts.push(box(len * 2.05, 0.34, 0.30, 0, y, side * wid, TRACK));
+    parts.push(box(len * 1.78, 0.32, 0.24, 0, y, side * wid, TRACK));
+    parts.push(box(len * 1.62, 0.10, 0.26, 0, y + 0.17, side * wid, DARK));   // track guard
     for (let i = 0; i < n; i++) {
-      const t = (i / (n - 1) - 0.5) * len * 1.7;
-      parts.push(cyl(0.20, 0.20, 0.16, t, y - 0.02, side * wid, DARK, 0, Math.PI / 2));
+      const t = (i / (n - 1) - 0.5) * len * 1.42;
+      parts.push(wheel(0.17, 0.20, t, y - 0.02, side * wid, DARK));
     }
+    parts.push(wheel(0.11, 0.20, len * 0.82, y + 0.09, side * wid, STEEL));   // idler
+    parts.push(wheel(0.11, 0.20, -len * 0.82, y + 0.09, side * wid, STEEL));  // sprocket
   }
   return parts;
 }
@@ -55,46 +69,78 @@ function running(len, wid, n, y) {
 // --------------------------------------------------------------- unit hulls
 // Each returns { hull, turret }, where the turret is modelled about its own
 // pivot so it can traverse independently of the hull.
+/** One rifleman, facing +X, standing at (x, z). Appends to `out`. */
+function soldier(out, x, z, turn) {
+  // A man is roughly a quarter of a tank's length; the figure is modelled at a
+  // comfortable size and scaled down to that.
+  const K = 0.62;
+  const put = (g) => { g.scale(K, K, K); if (turn) g.rotateY(turn); g.translate(x, 0, z); out.push(g); };
+  const bx = (w, h, d, ox, oy, oz, sh) => put(box(w, h, d, ox, oy, oz, sh));
+  bx(0.11, 0.30, 0.09, 0, 0.15, -0.06, DARK);      // legs
+  bx(0.11, 0.30, 0.09, 0, 0.15, 0.06, DARK);
+  bx(0.17, 0.30, 0.24, 0, 0.45, 0, BODY);          // torso
+  bx(0.13, 0.20, 0.09, 0.02, 0.44, -0.16, BODY);   // arms
+  bx(0.13, 0.20, 0.09, 0.02, 0.44, 0.16, BODY);
+  bx(0.11, 0.22, 0.20, -0.13, 0.48, 0, DARK);      // pack
+  bx(0.15, 0.10, 0.15, 0, 0.65, 0, HIGH);          // helmet
+  put(cyl(0.018, 0.018, 0.42, 0.17, 0.44, -0.09, STEEL, Math.PI / 2));   // rifle
+}
+
 const BUILDERS = {
   tank(a) {
     const L = a.len, W = a.wid;
     const hull = [
-      ...running(L, W * 0.92, 7, 0.30),
-      box(L * 1.85, 0.42, W * 1.55, 0, 0.56, 0, BODY),
-      box(L * 0.95, 0.20, W * 1.35, L * 0.42, 0.80, 0, HIGH),   // glacis
+      ...running(L, W * 0.66, 7, 0.28),
+      box(L * 1.72, 0.40, W * 1.42, 0, 0.54, 0, BODY),
+      box(L * 0.90, 0.18, W * 1.24, L * 0.40, 0.76, 0, HIGH),   // glacis
+      box(L * 1.5, 0.22, 0.05, 0, 0.46, W * 0.80, DARK),        // side skirts
+      box(L * 1.5, 0.22, 0.05, 0, 0.46, -W * 0.80, DARK),
+      box(L * 0.30, 0.16, W * 1.2, -L * 0.78, 0.86, 0, DARK),   // engine deck grille
+      cyl(0.07, 0.07, 0.34, -L * 0.9, 0.62, W * 0.7, DARK, Math.PI / 2),  // exhaust
     ];
     const turret = [
       box(L * 0.95, 0.38, W * 1.15, -0.05, 0.20, 0, BODY),
-      box(L * 0.34, 0.26, W * 0.95, -L * 0.52, 0.18, 0, DARK),  // bustle
+      box(L * 0.34, 0.30, W * 0.95, -L * 0.52, 0.20, 0, DARK),  // stowage bustle
+      box(L * 0.24, 0.20, W * 0.30, L * 0.34, 0.42, 0, HIGH),   // mantlet
       cyl(0.075, 0.075, L * 1.5, L * 0.82, 0.20, 0, STEEL, Math.PI / 2),
-      cyl(0.11, 0.11, 0.26, L * 1.42, 0.20, 0, DARK, Math.PI / 2),
-      cyl(0.16, 0.16, 0.14, -0.1, 0.44, W * 0.34, HIGH),
+      cyl(0.11, 0.11, 0.26, L * 1.42, 0.20, 0, DARK, Math.PI / 2),   // muzzle brake
+      cyl(0.16, 0.16, 0.12, -0.10, 0.45, W * 0.34, HIGH),       // commander's hatch
+      cyl(0.14, 0.14, 0.10, -0.10, 0.44, -W * 0.34, HIGH),      // loader's hatch
+      cyl(0.028, 0.028, 0.30, 0.02, 0.56, W * 0.34, STEEL, Math.PI / 2),  // pintle MG
+      box(0.10, 0.16, 0.05, L * 0.1, 0.42, W * 0.68, DARK),     // smoke dischargers
+      box(0.10, 0.16, 0.05, L * 0.1, 0.42, -W * 0.68, DARK),
+      cyl(0.016, 0.016, 0.55, -L * 0.4, 0.52, -W * 0.55, STEEL),  // aerial
     ];
     return { hull, turret };
   },
   ifv(a) {
     const L = a.len, W = a.wid;
     const hull = [
-      ...running(L, W * 0.9, 6, 0.28),
-      box(L * 1.7, 0.56, W * 1.45, 0, 0.62, 0, BODY),
+      ...running(L, W * 0.64, 6, 0.26),
+      box(L * 1.62, 0.52, W * 1.34, 0, 0.58, 0, BODY),
       box(L * 0.55, 0.22, W * 1.2, L * 0.62, 0.92, 0, HIGH),
+      box(L * 1.36, 0.20, 0.05, 0, 0.44, W * 0.78, DARK),       // skirts
+      box(L * 1.36, 0.20, 0.05, 0, 0.44, -W * 0.78, DARK),
+      box(L * 0.34, 0.30, W * 1.1, -L * 0.72, 0.90, 0, DARK),  // rear ramp
+      cyl(0.015, 0.015, 0.5, -L * 0.5, 1.1, W * 0.5, STEEL),   // aerial
     ];
     const turret = [
       box(L * 0.52, 0.30, W * 0.72, 0, 0.18, 0, BODY),
       cyl(0.045, 0.045, L * 0.95, L * 0.5, 0.18, 0, STEEL, Math.PI / 2),
-      box(0.22, 0.16, 0.13, 0, 0.24, W * 0.42, DARK),
+      box(0.22, 0.16, 0.13, 0, 0.24, W * 0.42, DARK),          // ATGM box
+      box(0.14, 0.12, 0.10, -L * 0.16, 0.32, 0, HIGH),         // sight
     ];
     return { hull, turret };
   },
   apc(a) {
     const L = a.len, W = a.wid;
     const hull = [
-      box(L * 1.7, 0.68, W * 1.4, 0, 0.62, 0, BODY),
-      box(L * 0.5, 0.24, W * 1.2, L * 0.6, 1.02, 0, HIGH),
+      box(L * 1.62, 0.62, W * 1.32, 0, 0.58, 0, BODY),
+      box(L * 0.48, 0.22, W * 1.14, L * 0.58, 0.96, 0, HIGH),
     ];
-    if (a.tracks) hull.push(...running(L, W * 0.9, 5, 0.28));
+    if (a.tracks) hull.push(...running(L, W * 0.64, 5, 0.26));
     else for (const side of [-1, 1]) for (let i = 0; i < 4; i++) {
-      hull.push(cyl(0.26, 0.26, 0.2, (i / 3 - 0.5) * L * 1.5, 0.26, side * W * 1.02, TRACK, 0, Math.PI / 2));
+      hull.push(wheel(0.24, 0.18, (i / 3 - 0.5) * L * 1.35, 0.24, side * W * 0.66, TRACK));
     }
     const turret = [box(0.3, 0.22, 0.3, 0, 0.14, 0, DARK),
       cyl(0.035, 0.035, 0.5, 0.28, 0.2, 0, STEEL, Math.PI / 2)];
@@ -103,17 +149,17 @@ const BUILDERS = {
   scout(a) {
     const L = a.len, W = a.wid;
     const hull = [
-      box(L * 1.5, 0.5, W * 1.3, 0, 0.5, 0, BODY),
-      box(L * 0.6, 0.34, W * 1.05, -L * 0.2, 0.86, 0, GLASS),
+      box(L * 1.46, 0.46, W * 1.20, 0, 0.46, 0, BODY),
+      box(L * 0.58, 0.32, W * 0.98, -L * 0.18, 0.80, 0, GLASS),
     ];
     for (const side of [-1, 1]) for (let i = 0; i < 2; i++) {
-      hull.push(cyl(0.24, 0.24, 0.18, (i - 0.5) * L * 1.15, 0.24, side * W * 0.95, TRACK, 0, Math.PI / 2));
+      hull.push(wheel(0.22, 0.16, (i - 0.5) * L * 1.05, 0.22, side * W * 0.62, TRACK));
     }
     return { hull, turret: [box(0.22, 0.16, 0.22, 0, 0.12, 0, DARK)] };
   },
   spg(a) {
     const L = a.len, W = a.wid;
-    const hull = [...running(L, W * 0.9, 7, 0.28), box(L * 1.75, 0.46, W * 1.45, 0, 0.58, 0, BODY)];
+    const hull = [...running(L, W * 0.66, 7, 0.26), box(L * 1.66, 0.44, W * 1.34, 0, 0.54, 0, BODY)];
     const turret = [
       box(L * 1.05, 0.60, W * 1.25, -L * 0.15, 0.34, 0, BODY),
       cyl(0.075, 0.065, L * 2.1, L * 1.05, 0.42, 0, STEEL, Math.PI / 2),
@@ -127,9 +173,9 @@ const BUILDERS = {
       a.tracks ? box(L * 1.8, 0.4, W * 1.45, 0, 0.5, 0, BODY) : box(L * 1.8, 0.4, W * 1.4, 0, 0.55, 0, BODY),
       box(L * 0.5, 0.42, W * 1.25, L * 0.62, 0.9, 0, HIGH),
     ];
-    if (a.tracks) hull.push(...running(L, W * 0.9, 6, 0.26));
+    if (a.tracks) hull.push(...running(L, W * 0.66, 6, 0.26));
     else for (const side of [-1, 1]) for (let i = 0; i < 3; i++) {
-      hull.push(cyl(0.24, 0.24, 0.2, (i / 2 - 0.5) * L * 1.5, 0.24, side * W * 1.0, TRACK, 0, Math.PI / 2));
+      hull.push(wheel(0.23, 0.18, (i / 2 - 0.5) * L * 1.32, 0.23, side * W * 0.66, TRACK));
     }
     const turret = [
       box(L * 0.75, 0.5, W * 1.1, -L * 0.2, 0.42, 0, DARK),
@@ -139,10 +185,10 @@ const BUILDERS = {
   },
   aa(a) {
     const L = a.len, W = a.wid;
-    const hull = [box(L * 1.7, 0.46, W * 1.4, 0, 0.55, 0, BODY)];
-    if (a.tracks) hull.push(...running(L, W * 0.9, 6, 0.28));
+    const hull = [box(L * 1.62, 0.44, W * 1.32, 0, 0.52, 0, BODY)];
+    if (a.tracks) hull.push(...running(L, W * 0.66, 6, 0.26));
     else for (const side of [-1, 1]) for (let i = 0; i < 3; i++) {
-      hull.push(cyl(0.24, 0.24, 0.2, (i / 2 - 0.5) * L * 1.4, 0.24, side * W, TRACK, 0, Math.PI / 2));
+      hull.push(wheel(0.23, 0.18, (i / 2 - 0.5) * L * 1.3, 0.23, side * W * 0.66, TRACK));
     }
     const turret = [
       box(L * 0.6, 0.34, W * 0.8, 0, 0.2, 0, BODY),
@@ -155,7 +201,7 @@ const BUILDERS = {
   },
   engv(a) {
     const L = a.len, W = a.wid;
-    const hull = [...running(L, W * 0.9, 6, 0.28), box(L * 1.7, 0.5, W * 1.4, 0, 0.58, 0, BODY)];
+    const hull = [...running(L, W * 0.66, 6, 0.26), box(L * 1.62, 0.48, W * 1.32, 0, 0.56, 0, BODY)];
     const turret = [
       box(L * 0.5, 0.4, W * 0.9, -L * 0.1, 0.25, 0, BODY),
       cyl(0.06, 0.06, L * 1.6, L * 0.6, 0.62, 0, STEEL, Math.PI / 3),
@@ -179,8 +225,8 @@ const BUILDERS = {
     const L = a.len, W = a.wid;
     const hull = [
       box(L * 0.9, 0.22, W * 1.1, -L * 0.3, 0.3, 0, DARK),
-      cyl(0.4, 0.4, 0.14, 0, 0.4, W * 1.1, TRACK, 0, Math.PI / 2),
-      cyl(0.4, 0.4, 0.14, 0, 0.4, -W * 1.1, TRACK, 0, Math.PI / 2),
+      wheel(0.36, 0.12, 0, 0.36, W * 0.86, TRACK),
+      wheel(0.36, 0.12, 0, 0.36, -W * 0.86, TRACK),
     ];
     const turret = [
       box(L * 0.5, 0.4, W * 0.9, 0, 0.5, 0, BODY),
@@ -190,13 +236,11 @@ const BUILDERS = {
     return { hull, turret };
   },
   squad() {
+    // A shallow wedge, all facing the way the section is facing, so a squad
+    // reads as men on the ground rather than a cluster of markers.
     const parts = [];
-    for (let i = 0; i < 4; i++) {
-      const a = (i / 4) * Math.PI * 2;
-      const x = Math.cos(a) * 0.34, z = Math.sin(a) * 0.34;
-      parts.push(cyl(0.11, 0.13, 0.5, x, 0.3, z, BODY));
-      parts.push(sph(0.11, x, 0.62, z, HIGH));
-    }
+    const posts = [[0.30, 0.02, 0], [-0.08, -0.34, 0.18], [-0.08, 0.34, -0.18], [-0.40, 0.0, 0.06]];
+    for (const [x, z, turn] of posts) soldier(parts, x, z, turn);
     return { hull: parts, turret: [] };
   },
   boat(a) {
@@ -275,23 +319,29 @@ export function buildingGeometry(key, size, height) {
     const emplacement = [
       box(s * 2, 0.22, s * 2, 0, 0.11, 0, DARK),
       box(s * 1.55, def.pit, s * 1.55, 0, 0.11 + def.pit / 2, 0, BODY),
-      box(s * 1.75, 0.14, s * 1.75, 0, 0.11 + def.pit + 0.05, 0, HIGH),
       // Sandbag revetment on the two forward corners.
       box(s * 0.5, 0.2, s * 1.9, -s * 0.85, 0.21, 0, STEEL),
       box(s * 1.9, 0.2, s * 0.5, 0, 0.21, -s * 0.85, STEEL),
     ];
+    const trim = [box(s * 1.75, 0.14, s * 1.75, 0, 0.11 + def.pit + 0.05, 0, HIGH)];
     const t = def.turret();
     for (const g of t) g.translate(0, 0.11 + def.pit + 0.12, 0);
-    hit = { hull: mergeGeometries(emplacement), turret: mergeGeometries(t) };
+    hit = { hull: mergeGeometries(emplacement), trim: mergeGeometries(trim), turret: mergeGeometries(t) };
     cache.set(ck, hit);
     return hit;
   }
   const top = 0.12 + height;
+  // The body is concrete and steel; only the roof cap and a waist band carry
+  // the owner's colour, which is what a real installation looks like from the
+  // air — and it keeps four coalitions on one map from reading as one hue.
+  const trim = [
+    box(s * 1.94, 0.16, s * 1.94, 0, top + 0.06, 0, BODY),           // roof cap
+    box(s * 1.84, 0.12, s * 1.84, 0, 0.29 + height * 0.34, 0, BODY), // waist band
+  ];
   const parts = [
     box(s * 2, 0.24, s * 2, 0, 0.12, 0, DARK),                       // apron
     box(s * 1.86, 0.18, s * 1.86, 0, 0.29, 0, STEEL),                // plinth
     box(s * 1.8, height, s * 1.8, 0, 0.12 + height / 2, 0, BODY),
-    box(s * 1.94, 0.16, s * 1.94, 0, top + 0.06, 0, HIGH),           // roof cap
     box(s * 1.2, 0.1, s * 1.2, 0, top + 0.18, 0, STEEL),             // roof deck
   ];
   // Corner pilasters and a shadow line under the eaves, so a big slab of wall
@@ -322,7 +372,7 @@ export function buildingGeometry(key, size, height) {
     parts.push(box(s * 1.95, 0.3, s * 0.5, 0, 0.12 + height + 0.2, -s * 0.6, STEEL));
     parts.push(box(s * 1.95, 0.3, s * 0.5, 0, 0.12 + height + 0.2, s * 0.6, STEEL));
   }
-  hit = { hull: mergeGeometries(parts), turret: null };
+  hit = { hull: mergeGeometries(parts), trim: mergeGeometries(trim), turret: null };
   cache.set(ck, hit);
   return hit;
 }
@@ -390,9 +440,29 @@ export function propGeometry(type) {
     top.translate(0.16, 1.9, 0.08);
     parts = [tinted(trunk, 0.45), tinted(crown, 0.95), tinted(top, 1.12)];
   } else if (type === 'house') {
-    parts = [box(1.5, 1.1, 1.3, 0, 0.55, 0, 1.0), box(1.7, 0.24, 1.5, 0, 1.2, 0, 1.25)];
+    // Walls, a hipped roof and a chimney: enough massing that a village reads
+    // as buildings from above rather than as scattered pale slabs.
+    const roof = new THREE.ConeGeometry(0.62, 0.34, 4);
+    roof.rotateY(Math.PI / 4);
+    roof.scale(1.15, 1, 0.95);
+    roof.translate(0, 0.72, 0);
+    parts = [
+      box(0.72, 0.56, 0.60, 0, 0.28, 0, 0.92),
+      box(0.78, 0.06, 0.66, 0, 0.55, 0, 0.7),        // eaves
+      tinted(roof, 0.62),
+      box(0.10, 0.30, 0.10, -0.20, 0.86, 0.14, 0.5), // chimney
+    ];
   } else if (type === 'barn') {
-    parts = [box(2.2, 1.2, 1.5, 0, 0.6, 0, 1.0), box(2.3, 0.3, 1.7, 0, 1.32, 0, 0.7)];
+    const roof = new THREE.ConeGeometry(0.85, 0.42, 4);
+    roof.rotateY(Math.PI / 4);
+    roof.scale(1.35, 1, 0.78);
+    roof.translate(0, 0.92, 0);
+    parts = [
+      box(1.45, 0.72, 0.86, 0, 0.36, 0, 0.86),
+      box(1.52, 0.07, 0.94, 0, 0.72, 0, 0.62),
+      tinted(roof, 0.55),
+      box(0.34, 0.5, 0.06, 0.2, 0.25, 0.45, 0.4),    // barn doors
+    ];
   } else if (type === 'stack') {
     parts = [cyl(0.22, 0.3, 2.6, 0, 1.3, 0, 0.85)];
   } else {

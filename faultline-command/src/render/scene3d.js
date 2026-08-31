@@ -38,7 +38,7 @@ export function makeScene(canvas) {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.02;
+  renderer.toneMappingExposure = 0.94;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
@@ -64,7 +64,7 @@ export function makeScene(canvas) {
   const env = pmrem.fromScene(sky, 0, 0.1, 100).texture;
   pmrem.dispose();
   scene.environment = env;
-  scene.environmentIntensity = 0.42;
+  scene.environmentIntensity = 0.34;
   scene.background = env;
   scene.backgroundBlurriness = 0.6;
   scene.fog = new THREE.Fog(0xb9bcb4, 130, 300);
@@ -73,7 +73,7 @@ export function makeScene(canvas) {
 
   // Key light. The shadow camera is deliberately tight: a wide one over a 128
   // tile map gives shadows so coarse they read as noise.
-  const sun = new THREE.DirectionalLight(SUN_COLOUR, 2.7);
+  const sun = new THREE.DirectionalLight(SUN_COLOUR, 2.45);
   sun.castShadow = true;
   sun.shadow.mapSize.set(1024, 1024);
   sun.shadow.camera.near = 1;

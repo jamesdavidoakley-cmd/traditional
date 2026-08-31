@@ -23,21 +23,31 @@ export class Input {
     this.attach();
   }
 
-  attach() {
+  /** Re-point canvas-bound listeners after the battlefield element is swapped. */
+  rebind(canvas) {
+    this.canvas = canvas;
+    this.attachCanvas();
+  }
+
+  attachCanvas() {
     const c = this.canvas;
     c.addEventListener('mousedown', (e) => this.onDown(e));
-    window.addEventListener('mouseup', (e) => this.onUp(e));
-    window.addEventListener('mousemove', (e) => this.onMove(e));
     c.addEventListener('contextmenu', (e) => e.preventDefault());
     c.addEventListener('wheel', (e) => this.onWheel(e), { passive: false });
     c.addEventListener('mouseleave', () => { this.mouse.inside = false; });
     c.addEventListener('mouseenter', () => { this.mouse.inside = true; });
+  }
+
+  attach() {
+    this.attachCanvas();
+    window.addEventListener('mouseup', (e) => this.onUp(e));
+    window.addEventListener('mousemove', (e) => this.onMove(e));
     window.addEventListener('keydown', (e) => this.onKeyDown(e));
     window.addEventListener('keyup', (e) => this.keys.delete(e.code));
     window.addEventListener('blur', () => this.keys.clear());
-
     const mm = document.getElementById('minimap');
     let mmDown = false;
+    window.addEventListener('mouseup', () => { mmDown = false; });
     const mmGo = (e, order) => {
       const r = mm.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width * mm.width;
@@ -52,7 +62,6 @@ export class Input {
       mmDown = true; mmGo(e, false);
     });
     mm.addEventListener('mousemove', (e) => { if (mmDown) mmGo(e, false); });
-    window.addEventListener('mouseup', () => { mmDown = false; });
     mm.addEventListener('contextmenu', (e) => e.preventDefault());
   }
 
@@ -111,7 +120,7 @@ export class Input {
     if (this.panStart) {
       const dx = p.x - this.panStart.x, dy = p.y - this.panStart.y;
       s.renderer.view.camX = this.panStart.camX; s.renderer.view.camY = this.panStart.camY;
-      s.renderer.pan(-dx, -dy);
+      s.renderer.pan(-dx, -dy, this.panStart.x, this.panStart.y);
       return;
     }
     if (s.placement) {
@@ -348,13 +357,11 @@ export class Input {
     }
     if (dx || dy) {
       const len = Math.hypot(dx, dy) || 1;
-      const speed = (k.has('ShiftLeft') || k.has('ShiftRight') ? 1.9 : 1) * (this.mouse.inside ? EDGE_SPEED : KEY_SPEED) / r.view.zoom;
-      const sx = (dx / len) * speed * dt, sy = (dy / len) * speed * dt;
-      // Screen-space movement converted into world tiles.
-      const a = sx * 2 / r.view.tw * r.view.zoom * 32, b = sy * 2 / r.view.th * r.view.zoom * 16;
-      r.view.camX += (a + b) * 0.5;
-      r.view.camY += (b - a) * 0.5;
-      r.clampCamera();
+      const boost = k.has('ShiftLeft') || k.has('ShiftRight') ? 1.9 : 1;
+      // Screen pixels per second, handed to the renderer to turn into world
+      // movement — the two renderers project very differently.
+      const speed = boost * (this.mouse.inside ? EDGE_SPEED : KEY_SPEED) * 32;
+      r.pan((dx / len) * speed * dt, (dy / len) * speed * dt);
     }
   }
 }

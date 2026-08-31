@@ -3,6 +3,7 @@
 import { Game } from './sim/game.js';
 import { createAIs } from './ai/ai.js';
 import { Renderer } from './render/renderer.js';
+import { Renderer3D, webglAvailable } from './render/renderer3d.js';
 import { Audio } from './audio/audio.js';
 import { HUD } from './ui/hud.js';
 import { Input } from './ui/input.js';
@@ -29,7 +30,7 @@ class Session {
     this.abilityArmed = null;
     this.menuOpen = false;
     this.lastFrame = performance.now();
-    this.settings = { master: 0.75, sfx: 0.85, music: 0.5, muted: false, edgeScroll: true };
+    this.settings = { master: 0.75, sfx: 0.85, music: 0.5, muted: false, edgeScroll: true, renderer3d: true };
     this.loadSettings();
     this.setup = new Setup(this);
     this.bindGlobal();
@@ -90,9 +91,57 @@ class Session {
 
   prepareAI() { createAIs(this.game); }
 
+  /**
+   * The 3D renderer where WebGL is available, the isometric one where it is not.
+   * A machine without WebGL still gets the whole game, just drawn flat.
+   */
+  makeRenderer() {
+    if (this.settings.renderer3d !== false && webglAvailable()) {
+      try { return new Renderer3D(this.canvas, this.game); }
+      catch (e) {
+        console.warn('3D renderer unavailable, falling back to isometric:', e);
+        // A canvas that has held a WebGL context can never hand out a 2D one.
+        this.replaceCanvas();
+      }
+    }
+    const overlay = document.getElementById('battlefield-overlay');
+    if (overlay) overlay.remove();
+    return new Renderer(this.canvas, this.game);
+  }
+
+  /** Swap in a clean <canvas> and re-point everything that holds the old one. */
+  replaceCanvas() {
+    const old = this.canvas;
+    const fresh = document.createElement('canvas');
+    fresh.id = old.id;
+    fresh.className = old.className;
+    old.parentNode.replaceChild(fresh, old);
+    this.canvas = fresh;
+    if (this.input) this.input.rebind(fresh);
+  }
+
+  /** Switch between the 3D and isometric battlefields without leaving the match. */
+  switchRenderer(want3d) {
+    this.settings.renderer3d = want3d;
+    this.saveSettings();
+    if (!this.game || this.screen !== 'game') return;
+    const keep = this.renderer ? { x: this.renderer.view.camX, y: this.renderer.view.camY } : null;
+    if (this.renderer && this.renderer.dispose) this.renderer.dispose();
+    this.replaceCanvas();
+    this.renderer = this.makeRenderer();
+    this.renderer.resize();
+    if (keep) this.renderer.panWorld(keep.x, keep.y); else this.renderer.centreOnPlayer();
+    this.renderer.placement = this.placement;
+    this.audio.view = this.renderer.view;
+  }
+
   beginBattle() {
     this.show('game');
-    this.renderer = new Renderer(this.canvas, this.game);
+    if (this.renderer && this.renderer.dispose) this.renderer.dispose();
+    // A canvas keeps whichever context type it was first given, so every battle
+    // starts from a clean element.
+    this.replaceCanvas();
+    this.renderer = this.makeRenderer();
     this.renderer.resize();
     this.renderer.centreOnPlayer();
     this.audio.init();
@@ -408,7 +457,9 @@ class Session {
       <div class="ov-actions" style="margin-bottom:8px">
         <button class="btn small" id="v-mute">${s.muted ? '🔇 Unmute' : '🔊 Mute All'}</button>
         <button class="btn small" id="v-edge">Edge scrolling: ${s.edgeScroll ? 'On' : 'Off'}</button>
+        <button class="btn small" id="v-view">Battlefield: ${s.renderer3d === false ? 'Isometric' : '3D'}</button>
       </div>
+      <div class="ov-sub" style="margin:-4px 0 8px">The isometric battlefield is lighter on older machines.</div>
       <div class="ov-actions"><button class="btn primary" id="v-close">${fromGame ? 'Back' : 'Close'}</button></div>`, (card) => {
       const wire = (id, key, apply) => {
         const el = card.querySelector('#v-' + id), out = card.querySelector('#vv-' + id);
@@ -427,6 +478,10 @@ class Session {
         s.edgeScroll = !s.edgeScroll; this.saveSettings();
         if (this.input) this.input.edgeScroll = s.edgeScroll;
         e.target.textContent = 'Edge scrolling: ' + (s.edgeScroll ? 'On' : 'Off');
+      };
+      card.querySelector('#v-view').onclick = (e) => {
+        this.switchRenderer(s.renderer3d === false);
+        e.target.textContent = 'Battlefield: ' + (s.renderer3d === false ? 'Isometric' : '3D');
       };
       card.querySelector('#v-close').onclick = () => { if (fromGame) this.openMenu(); else this.closeOverlay(); };
     });

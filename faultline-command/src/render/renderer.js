@@ -279,6 +279,9 @@ export class Renderer {
 
   // ----------------------------------------------------------------- camera
   pan(dx, dy) {
+    // The third and fourth arguments (the drag anchor) matter only under
+    // perspective; an isometric projection is affine, so a drag moves the world
+    // by the same amount wherever it started.
     const v = this.view;
     // Convert a screen-space drag into world tiles.
     const a = dx * 2 / v.tw, b = dy * 2 / v.th;
